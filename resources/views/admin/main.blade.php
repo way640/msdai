@@ -7,7 +7,7 @@
     <meta name="renderer" content="webkit">
 
     <title> hAdmin- 主页</title>
-    <base href="/admin/">
+    <base href="{{URL::asset('')}}admin/">
     <meta name="keywords" content="">
     <meta name="description" content="">
 
