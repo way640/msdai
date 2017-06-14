@@ -39,7 +39,7 @@ class GeetestLib {
         $this->success_process($challenge);
         return 1;
     }
-
+	
     /**
      * @param $challenge
      */
