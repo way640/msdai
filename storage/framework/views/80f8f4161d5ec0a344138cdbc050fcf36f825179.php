@@ -12,12 +12,12 @@
 <link href="https://www.jimu.com/favicon.ico?1496827969552" rel="shortcut icon" type="image/x-icon">
 <link href="../../css/general-541378b38b.css" rel="stylesheet">
 <link href="../../css/register_main-286e89e052.css" rel="stylesheet">
-	
-	
+    
+    
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>账号注册</title>
+    <title>账号登录</title>
     <style>
         body {
             margin: 50px 0;
@@ -49,8 +49,8 @@
         }
         #notice {
             color: red;
-        }
-    </style>
+        }     
+</style>
 </head>
 <body style="height:100%">
 <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
@@ -60,52 +60,48 @@
         </a>
     </div>
     <div class="register-main">
-        <h2>免费注册账户</h2>
+        <h2>登录账户</h2>
         <form class="popup">
-		<?php echo e(csrf_field()); ?>
+        <?php echo e(csrf_field()); ?>
 
             <input type="hidden" name="redirectUrl" value="">
             <div class="input-wrap">
-                <span class="input-tip">用户名</span>
-                <input type="text" class="username" id="username" style="width:302px" placeholder="用户名" data-left="340" tabindex="1" id="UserName" name="UserName" autocomplete="off" data-val="true" data-val-regex="用户名只允许字母、数字、下划线、横线组成，首位只能为字母，且至少需要 6 个字符。" data-val-regex-pattern="(?!^\d[A-Za-z0-9_-]*$)^[A-Za-z0-9_-]{6,25}$" data-val-remote="用户名已存在。" data-val-remote-additionalfields="*.UserName" data-val-remote-url="/User/CheckUserName" data-val-required="请填写用户名。">
-                <span class="help-block">
-                    <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true">
-                    </span>
-                </span>
-            </div>
+                        <span class="input-tip">用户名</span>
+                        <input data-val="true" placeholder="用户名/手机/邮箱" data-left="100" data-val-regex="用户名错误。" data-val-regex-pattern="[A-Za-z0-9_@.-]{6,100}" data-val-required="请填写用户名/手机号/邮箱。" id="username" name="username" tabindex="1" type="text" value="" onfocus="this.parentNode.className=&#39;input-wrap focusin&#39;" onblur="this.parentNode.className=&#39;input-wrap&#39;">
+                        <span class="help-block"><span class="field-validation-valid" data-valmsg-for="username" data-valmsg-replace="true"></span></span>
+                    </div>
+                    <div class="input-wrap">
+                        <span class="input-tip">密码</span>
+                        <input autocomplete="off" placeholder="密码" data-left="100" data-val="true" data-val-length="登录密码必须由6-32位字符组成。" data-val-length-max="32" data-val-length-min="6" data-val-required="请填写登录密码。" id="password" name="password" tabindex="2" type="password" onfocus="this.parentNode.className=&#39;input-wrap focusin&#39;" onblur="this.parentNode.className=&#39;input-wrap&#39;">
+                        <span class="help-block"><span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span></span> 
+                    </div>
             <div class="input-wrap">
-                <span class="input-tip">密码</span>
-                <input type="password" class="password" id="userpwd" style="width:302px"  data-left="340" placeholder="密码" tabindex="2" id="LoginPass" name="LoginPass" autocomplete="off" data-val="true" data-val-regex="密码由 8 - 32 位数字、字母或常用符号组成，且必须同时包含数字和字母。" data-val-regex-pattern="^(?=.*[a-zA-Z].*)(?=.*[0-9].*)[A-Za-z0-9\^$\.\+\*_@!#%&amp;~=-]{8,32}$" data-val-required="请填写登录密码。">
-                <span class="help-block">
-                    <span class="field-validation-valid" data-valmsg-for="LoginPass" data-valmsg-replace="true"></span>
-                </span>
-            </div>
-            <div class="input-wrap">
-
-
     <div id="embed-captcha"></div>
     <p id="wait" class="show">正在加载验证码......</p>
     <p id="notice" class="hide">请先完成验证</p>
-
                 </div>
-
             <div class="input-wrap register-btn-wrap">
                 <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="agreeContract" checked="true" tabindex="4" data-val="true" data-val-extension-extension="on" data-val-extension="请勾选积木平台注册及服务协议。">
-                        我已阅读并同意<a href="https://www.jimu.com/User/Contract" target="_blank">《积木平台注册及服务协议》</a><a href="https://www.jimu.com/User/Agreement" target="_blank">《风险提示及承诺》</a>
-                    </label>
-                </div>
-                <span class="help-block">
-                    <span class="field-validation-valid" data-valmsg-for="agreeContract" data-valmsg-replace="true"></span>
-                </span>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="agreeContract" checked="true" tabindex="4" data-val="true" data-val-extension-extension="on" data-val-extension="请勾选积木平台注册及服务协议。">
+                            我已阅读并同意<a href="https://www.jimubox.com/User/Contract" target="_blank">《积木平台注册及服务协议》</a>
+                        </label>
+                    </div>
+                    <span class="help-block">
+                        <span class="field-validation-valid" data-valmsg-for="agreeContract" data-valmsg-replace="true"></span>
+                    </span>
                 <button tabindex="5" type="button" id="act_register" class="register-btn">
-                    立即注册
+                    登录
                 </button>
             </div>
-            <div>
-                <p class="agreement-info">
-                    <span>已有账户？<a href="http://www.zdmoney.com/home/user/login">登录</a></span>
+            <div id="oauth_www" class="padding-c">
+                <p class="login-other">
+                    <span class="login-label">使用第三方账号登录</span>
+                    <a class="login-icon" target="_blank" href="#" title="使用新浪微博账号登录"><img alt="使用新浪微博账号登录" src="image/weibo_icon.png"></a>
+                    <span class="split">|</span>
+                    <a class="forget-pwd" target="_blank" href="#">忘记密码？</a>
+                    <a href="http://www.zdmoney.com/user/regist" target="_blank" id="act_login_register">免费注册</a>
                 </p>
             </div>
         </form>
@@ -203,25 +199,25 @@
 
 
 <script>
-	
-	var obj = new Object();
-	
-	obj['username'] = $('#username').val()
-	obj['userpwd']  = $('#userpwd').val()
-	
-	$('#act_register').on('click', function(){
-		
-		$.ajax({
-			type: "POST",
-			url: "http://www.zdmoney.com/home/user/doRegist",
-			data: obj,
-			success: function(msg){
-				
-				alert( "Data Saved: " + msg );
-			}
-		});
-	})	
-	
+    
+    var obj = new Object();
+    
+    obj['username'] = $('#username').val()
+    obj['userpwd']  = $('#userpwd').val()
+    
+    $('#act_register').on('click', function(){
+        
+        $.ajax({
+            type: "POST",
+            url: "http://www.zdmoney.com/home/user/doRegist",
+            data: obj,
+            success: function(msg){
+                
+                alert( "Data Saved: " + msg );
+            }
+        });
+    })  
+    
 </script>
 
 </body>
