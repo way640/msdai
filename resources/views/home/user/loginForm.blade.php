@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!-- saved from url=(0153)https://passport.jimubox.com/authentication/loginForm?site=B662B0F090BE31C1DCB6A13D70E81429&redirectUrl=https%3A%2F%2Fwww.jimu.com%2FUser%2FAssetOverview -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -79,9 +80,9 @@
 </div>
 
 
-<script src="./jquery.min.js.下载"></script>
-<script src="./jquery.validate.min.js.下载"></script>
-<script src="./jquery.validate.unobtrusive.min.js.下载"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/jquery.validate.unobtrusive.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $.validator.addMethod('accept', function (value, element, param) {
