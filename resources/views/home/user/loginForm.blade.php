@@ -9,8 +9,8 @@
     <meta name="author" content="">
 
     <title>积木盒子登陆中心</title>
-    <link href="css/loginform.css" rel="stylesheet">
-    <script src="js/applycookie.js"></script>
+    <link href="{{ asset('css/loginform.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/applycookie.js') }}"></script>
 </head>
 <body marginwidth="0" marginheight="0">
 
@@ -22,14 +22,14 @@
                 <h4 class="pull-left">登录</h4>
                 <div class="pull-right">
                     <span>没有账号？</span>
-                    <a href="https://www.jimu.com/User/Register" target="_blank" id="act_login_register">免费注册</a>
+                    <a href="javascript:void(0);" target="_blank" id="act_login_register">免费注册</a>
                 </div>
             </div>
             <div class="padding-c">
                 <hr>
             </div>
 
-            <form action="https://passport.jimubox.com/authentication/login?redirectUrl=https://www.jimu.com/User/AssetOverview" method="post" novalidate="novalidate">
+            <form novalidate="novalidate">
                 <div class="padding-c">
                     <input type="hidden" name="site" value="B662B0F090BE31C1DCB6A13D70E81429">
                     <div class="input-wrap">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="input-wrap">
                         <span class="input-tip">密码</span>
-                        <input autocomplete="off" placeholder="密码" data-left="100" data-val="true" data-val-length="登录密码必须由6-32位字符组成。" data-val-length-max="32" data-val-length-min="6" data-val-required="请填写登录密码。" id="password" name="password" tabindex="2" type="password" onfocus="this.parentNode.className=&#39;input-wrap focusin&#39;" onblur="this.parentNode.className=&#39;input-wrap&#39;">
+                        <input autocomplete="off" placeholder="密码" data-left="100" data-val="true" data-val-length="登录密码必须由6-32位字符组成。" data-val-length-max="32" data-val-length-min="6" data-val-required="请填写登录密码。" id="userpwd" name="password" tabindex="2" type="password" onfocus="this.parentNode.className=&#39;input-wrap focusin&#39;" onblur="this.parentNode.className=&#39;input-wrap&#39;">
                         <span class="help-block"><span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span></span>
                     </div>
             </div>
@@ -52,17 +52,12 @@
 
             <div class="login-btn-wrap padding-c">
                 <div class="contract">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="agreeContract" checked="true" tabindex="4" data-val="true" data-val-extension-extension="on" data-val-extension="请勾选积木平台注册及服务协议。">
-                            我已阅读并同意<a href="https://www.jimubox.com/User/Contract" target="_blank">《积木平台注册及服务协议》</a>
-                        </label>
-                    </div>
+
                     <span class="help-block">
                         <span class="field-validation-valid" data-valmsg-for="agreeContract" data-valmsg-replace="true"></span>
                     </span>
                 </div>
-                <button type="submit" id="act_login" class="login-btn" tabindex="5">登录</button>
+                <button type="button" id="act_login" class="login-btn" tabindex="5">登录</button>
             </div>
             </form>
             <div id="oauth_www" class="padding-c">
@@ -71,7 +66,7 @@
                     <a class="login-icon" target="_blank" href="https://www.jimubox.com/oauth/login?target=xiaomi" title="使用小米账号登录"><img alt="使用小米账号登录" src="./mi_icon.png"></a>
                     <a class="login-icon" target="_blank" href="https://www.jimubox.com/oauth/login?target=weibo" title="使用新浪微博账号登录"><img alt="使用新浪微博账号登录" src="./weibo_icon.png"></a>
                     <span class="split">|</span>
-                    <a class="forget-pwd" target="_blank" href="https://www.jimu.com/User/Forgot/Password">忘记密码？</a>
+                    <a class="forget-pwd" target="_blank" href="{{ url('user/forget') }}">忘记密码？</a>
                 </p>
             </div>
         </div>
@@ -80,9 +75,9 @@
 </div>
 
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/jquery.validate.unobtrusive.min.js"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('js/jquery.validate.unobtrusive.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $.validator.addMethod('accept', function (value, element, param) {
@@ -92,6 +87,35 @@
             return false;
         });
     });
+	
+	$('#act_login_register').on('click', function(){
+		
+		window.parent.location.href='../../../user/regist';
+	})
+	
+	$('#act_login').on('click', function(){
+		
+		var username = $('#username').val();
+		var userpwd  = $('#userpwd').val();
+		
+        $.ajax({
+            type: "POST",
+            url: "../../../user/doLogin",
+			data: 'username='+username+"&userpwd="+userpwd,
+			dataType: 'json',
+            success: function(msg){
+                
+				if(msg.status == 0){
+
+					alert(msg.msg)
+				}else{
+					
+					alert('登陆成功')
+					window.parent.location.href="{{ url('') }}"
+				}
+            }
+        });
+	})
 </script>
 
 </body></html>
