@@ -7,6 +7,7 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+session_start();
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
