@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\home;
 //use Germey\Geetest\GeetestCaptcha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /*
 *@Class_name : 用户登录注册操作
@@ -24,9 +25,18 @@ class UserController extends CommonController
 	}
 	
 	/*
+	*Action_name : 登录调用框架级
+	*/
+	public function showLogin(){
+		
+		return view('home/user/loginForm');
+	}
+	
+	
+	/*
 	*@Action_name : 用户注册默认首页
 	*/
-//	use GeetestCaptcha;
+	//use GeetestCaptcha;
 	
 	public function regist(){
 		
@@ -35,42 +45,37 @@ class UserController extends CommonController
 	
 	/*
 	*@Action_name : 新用户注册页面
-	*@param : $username 用户名
-	*@param : $userpwd  用户密码
 	*/
-	public function doRegist ( $username = '', $userpwd = '' ) {
-		
-		//无法使用post请求报错405，暂用get方式传值   宋子腾  6.13  @todo 待修改
-		
-		/**
-		 * 输出二次验证结果,本文件示例只是简单的输出 Yes or No
-		 */
-		// error_reporting(0);
+	public function doRegist () {
 
-		/*require_once dirname( dirname(__FILE__) ) . '/lib/class.geetestlib.php';
-		require_once dirname( dirname(__FILE__) ) . '/config/config.php';
-		session_start();
-		$GtSdk = new GeetestLib( CAPTCHA_ID, PRIVATE_KEY );
+		$userName = isset( $this->post['username'] ) ? $this->post['username'] : '';
+		$userPwd  = isset( $this->post['userpwd'] )  ? $this->post['userpwd']  : '';
 
-		if ( $_SESSION['gtserver'] == 1 ) {   //服务器正常
+		$userPwd = md5($userPwd);
+		
+		$userExist = DB::select("select user_account from zd_user where user_account = '$userName'");
+		
+		if ( $userExist ) {
+
+			return $this->error ( '用户名已存在' );
+		} else {
 			
-			$result = $GtSdk->success_validate ( $_POST['geetest_challenge'], $_POST['geetest_validate'], $_POST['geetest_seccode'], $data);
-			if ($result) {
-
-				echo '{"status":"success"}';
-			} else{
-
-				echo '{"status":"fail"}';
-			}
-		}else{  //服务器宕机,走failback模式
-			if ( $GtSdk->fail_validate ( $_POST['geetest_challenge'], $_POST['geetest_validate'], $_POST['geetest_seccode'] ) ) {
-
-				echo '{"status":"success"}';
-			}else{
-
-				echo '{"status":"fail"}';
-			}
-		}*/
+			$userAdd = DB::insert( "insert into zd_user ( user_account, user_pwd ) values ( '$userName', '$userPwd' )" );
+			$id = DB::getPdo()->lastInsertId();
+		}
+		
+		if ( $userAdd ) {
+			
+			$arr = [ 'username' => $userName, 'user_id' => $id ];
+			
+			$_SESSION[ "user" ] = $arr;
+			
+			return $this->success (  );
+		} else { 
+			
+			return $this->error ( '网络异常，请重新尝试' );
+		}
+		
 	}
 	
 	/*
@@ -78,7 +83,7 @@ class UserController extends CommonController
 	*/
 	public function forget(){
 
-		return view('home/user/forget');
+		
 	}
 
 	/*
@@ -86,38 +91,53 @@ class UserController extends CommonController
 	*/
 	public function captcha(){
 
-		return view('/home/web/StartCaptchaServlet');
+		return view('home/web/StartCaptchaServlet');
 	}
 
 	/*
-	*@Action_name : 用户登录验证页面
+	*@Action_name : 用户登录首页
 	*/
 	public function login(){
-		//接收用户账号密码
-		$user_name = $_POST['username'];
-		$user_pwd = $_POST['password'];
-		// echo $user_name.$user_pwd;die;
-		//判断账号是否在数据表中
-		$handle = DB::table('user');
-		$where = " user_account='$user_name' or user_tel='$user_name' or user_email='$user_name'";
-		$res = $handle->whereRaw($where)->first();
-		$r1 = json_encode($res);
-		$res = json_decode($r1,true);
-		// echo '<pre>';
-		// var_dump($res);
-		// die;
-		if ($res) {
-			if ($res['user_pwd']==$user_pwd) {
-				//return view('home/user/login');
-				$_SESSION['user_name']=$res['user_id'];
-				redirect('user/login');
-			}else{
-				// echo "密码错误";
-				redirect('user/regist');
-			}
-		}else{
-			// echo "用户名错误";
-			redirect('user/regist');
+		
+		return view('home/user/login');
+	}
+	
+	/*
+	*@Action_name : 用户登录验证页面
+	*/
+	public function doLogin(){
+		
+		$userName = isset( $this->post['username'] ) ? $this->post['username'] : '';
+		$userPwd  = isset( $this->post['userpwd'] )  ? $this->post['userpwd']  : '';
+
+		$userPwd = md5($userPwd);
+		
+		$userExist = DB::select("select user_id, user_account from zd_user where user_account = '$userName' and user_pwd = '$userPwd'");	
+
+		if ( !empty( $userExist ) ) {
+			
+			$userData = $this->objToArray ( $userExist );
 		}
+
+		if ( $userExist ) {
+			
+			$arr = [ 'username' => $userName, 'user_id' => $userData[0]['user_id'] ];
+			$_SESSION[ "user" ] = $arr; 
+			
+			return $this->success (  );
+		}else{
+			
+			return $this->error ( '密码输入错误' );
+		}
+	}
+	
+	/*
+	*@Action_logout : 用户退出登录
+	*/
+	public function logout(){
+		
+		unset( $_SESSION['user'] );
+		
+		return $this->success(  );
 	}
 }
