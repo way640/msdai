@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\DB;
 class IndexController extends CommonController
 {
     /*
+     * @action_name：初始化
+     * @author：Way
+     * @Time：2017-06-14**/
+    public function __construct ( ) {
+        parent::__construct();
+
+    }
+
+
+    /*
      * @Action_name : 首页展示
      * @Author ：Way
      * @Time ：2017-06-12

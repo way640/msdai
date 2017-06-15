@@ -7,7 +7,7 @@
     <meta name="renderer" content="webkit">
 
     <title> hAdmin- 主页</title>
-    <base href="/admin/">
+    <base href="<?php echo e(URL::asset('')); ?>admin/">
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -87,13 +87,11 @@
                         <span class="ng-scope">分类</span>
                     </li>
                     <li>
-                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">信箱 </span><span class="label label-warning pull-right">16</span></a>
+                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">管理员</span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="mailbox.html">收件箱</a>
+                            <li><a class="J_menuItem" href="mailbox.html">添加管理员</a>
                             </li>
-                            <li><a class="J_menuItem" href="mail_detail.html">查看邮件</a>
-                            </li>
-                            <li><a class="J_menuItem" href="mail_compose.html">写信</a>
+                            <li><a class="J_menuItem" href="mail_detail.html">管理员列表</a>
                             </li>
                         </ul>
                     </li>
