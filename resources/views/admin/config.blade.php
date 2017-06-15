@@ -28,7 +28,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>自定义响应式表格</h5>
+                    <h5>数据展示列表</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -47,14 +47,18 @@
                         </a>
                     </div>
                 </div>
+                <div>
+                    <a href="{{url('admin/config/add')}}">
+                        <button class="btn btn-outline btn-primary dim" type="button" title="添加信息" style="left:1%">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </a>
+                </div>
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-5 m-b-xs">
                             <select class="input-sm form-control input-s-sm inline">
-                                <option value="0">请选择</option>
-                                <option value="1">选项1</option>
-                                <option value="2">选项2</option>
-                                <option value="3">选项3</option>
+                                <option value="">请选择</option>
                             </select>
                         </div>
                         <div class="col-sm-3">
@@ -70,14 +74,14 @@
                             <tr>
 
                                 <th></th>
-                                <th>项目</th>
-                                <th>进度</th>
-                                <th>任务</th>
-                                <th>日期</th>
+                                <th>配置名称</th>
+                                <th>配置类型</th>
+                                <th>配置说明</th>
+                                <th>配置链接</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="border-bottom: 2px solid #cccccc">
 
 
                             </tbody>
@@ -121,16 +125,45 @@
             dataType:'json',
             success:function ( msg ) {
                 if(msg.status == 1 && typeof msg.data == 'object'){
-
                     var str = '';
                     $.each(msg.data.confInfo,function(k,v){
-                        str += '<tr><td><input type="checkbox" checked class="i-checks" name="input[]"></td><td>'+ v.config_info+'</td><td><span class="pie">0.52/1.561</span></td><td>20%</td><td>2014.11.11</td><td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a></td></tr>';
+                        str += '<tr>' +
+                                '<td><input type="checkbox" class="i-checks" name="input[]"></td>' +
+                                '<td>'+ v.config_info+'</td>' +
+                                '<td>'+msg.data.typeInfo[v.config_type]+'</td>' +
+                                '<td>'+v.config_desc+'</td>' +
+                                '<td>'+v.config_link+'</td>' +
+                                '<td>' +
+                                    '<a href="javascript:void(0)" alt="删除" title="删除" class="config-del" configId="'+ v.config_id+'"><i class="fa fa-close text-navy"></i></a> ' +
+                                    '<a href="javascript:void(0)" alt="修改" title="修改" class="config-save" configId="'+ v.config_id+'"><i class="fa fa-wrench text-navy"></i></a>' +
+                                '</td>' +
+                                '</tr>';
                     });
-                    $(".table").children().eq(1).html(str);
                 }else{
-
+                    str = '<tr><td cospan="4">没有要展示的内容</td></tr>'
                 }
+                $(".table").children().eq(1).html(str);
+                $.each(msg.data.typeInfo,function(k,v){
+                    $('.input-sm').append('<option value="'+ k+'">'+v+'</option>');
+                });
             }
+        });
+        $('.table-responsive').delegate('.config-del','click',function(){
+//        $('.config-del').click(function(){
+            var configIdObj = $(this);
+            $.ajax({
+                type: "get",
+                url: "{{url('admin/config/configdel')}}",
+                data: 'configId='+configIdObj.attr('configId'),
+                dataType: 'json',
+                success: function (msg) {
+                    if(msg.status == 1){
+                        configIdObj.parent().parent().remove();
+                    }else{
+                        alert('删除失败');
+                    }
+                }
+            })
         });
     });
 </script>
