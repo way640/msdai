@@ -29,7 +29,7 @@ if($urlArr[1] == 'admin'){
 }else{
     Autoload(__DIR__.'\home');
 }
-//默认访问
+//默认访问首页
 Route::get('/', function () {
     return view('home.index');
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\home;
 //use Germey\Geetest\GeetestCaptcha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /*
 *@Class_name : 用户登录注册操作
@@ -26,7 +27,7 @@ class UserController extends CommonController
 	/*
 	*@Action_name : 用户注册默认首页
 	*/
-//	use GeetestCaptcha;
+	//use GeetestCaptcha;
 	
 	public function regist(){
 		
@@ -35,42 +36,37 @@ class UserController extends CommonController
 	
 	/*
 	*@Action_name : 新用户注册页面
-	*@param : $username 用户名
-	*@param : $userpwd  用户密码
 	*/
-	public function doRegist ( $username = '', $userpwd = '' ) {
-		
-		//无法使用post请求报错405，暂用get方式传值   宋子腾  6.13  @todo 待修改
-		
-		/**
-		 * 输出二次验证结果,本文件示例只是简单的输出 Yes or No
-		 */
-		// error_reporting(0);
+	public function doRegist () {
 
-		/*require_once dirname( dirname(__FILE__) ) . '/lib/class.geetestlib.php';
-		require_once dirname( dirname(__FILE__) ) . '/config/config.php';
-		session_start();
-		$GtSdk = new GeetestLib( CAPTCHA_ID, PRIVATE_KEY );
+		$username = isset( $this->post['username'] ) ? $this->post['username'] : '';
+		$userpwd  = isset( $this->post['userpwd'] )  ? $this->post['userpwd']  : '';
 
-		if ( $_SESSION['gtserver'] == 1 ) {   //服务器正常
+		$userpwd = md5($userpwd);
+		
+		$userExist = DB::select("select user_account from zd_user where user_account = '$username'");
+		
+		if ( $userExist ) {
+
+			return $this->error ( '用户名已存在' );
+		} else {
 			
-			$result = $GtSdk->success_validate ( $_POST['geetest_challenge'], $_POST['geetest_validate'], $_POST['geetest_seccode'], $data);
-			if ($result) {
-
-				echo '{"status":"success"}';
-			} else{
-
-				echo '{"status":"fail"}';
-			}
-		}else{  //服务器宕机,走failback模式
-			if ( $GtSdk->fail_validate ( $_POST['geetest_challenge'], $_POST['geetest_validate'], $_POST['geetest_seccode'] ) ) {
-
-				echo '{"status":"success"}';
-			}else{
-
-				echo '{"status":"fail"}';
-			}
-		}*/
+			$userAdd = DB::insert( "insert into zd_user ( user_account, user_pwd ) values ( '234567', '".md5('123456')."' )" );
+			$id = DB::getPdo()->lastInsertId();
+		}
+		
+		if ( $userAdd ) {
+			
+			session_start();
+			$_SESSION[ "username" ] = $username;
+			$_SESSION[ "user_id" ]  = $id;
+			
+			return $this->success (  );
+		} else { 
+			
+			return $this->error ( '网络异常，请重新尝试' );
+		}
+		
 	}
 	
 	/*
@@ -86,13 +82,21 @@ class UserController extends CommonController
 	*/
 	public function captcha(){
 
-		return view('/home/web/StartCaptchaServlet');
+		return view('home/web/StartCaptchaServlet');
 	}
 
 	/*
-	*@Action_name : 用户登录验证页面
+	*@Action_name : 用户登录首页
 	*/
 	public function login(){
+		
+		return view('home/user/login');
+	}
+	
+	/*
+	*@Action_name : 用户登录验证页面
+	*/
+	public function doLlogin(){
 		//接收用户账号密码
 		$user_name = $_POST['username'];
 		$user_pwd = $_POST['password'];

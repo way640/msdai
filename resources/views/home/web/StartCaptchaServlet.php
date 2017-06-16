@@ -4,8 +4,9 @@
  * @author Tanxu
  */
 //error_reporting(0);
-require_once dirname(dirname(__FILE__)) . '/lib/class.geetestlib.php';
-require_once dirname(dirname(__FILE__)) . '/config/config.php';
+require_once('../resources/views/home/lib/class.geetestlib.php');
+require_once('../resources/views/home/config/config.php');
+
 $GtSdk = new GeetestLib(CAPTCHA_ID, PRIVATE_KEY);
 session_start();
 

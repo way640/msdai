@@ -2,8 +2,10 @@
 
 
 
-//用户登录验证页面
-Route::post('user/add', 'Home\UserController@login');
+/*
+*@Use : 用户登录验证页面
+*/
+Route::post('user/doLogin', 'Home\UserController@doLogin');
 /*
 *@Use : 用户登录页面
 */
@@ -15,7 +17,7 @@ Route::get('user/regist', 'Home\UserController@regist');
 /*
 *@Use : 用户注册账户
 */
-Route::get('user/doRegist', 'Home\UserController@doRegist');
+Route::post('user/doRegist', 'Home\UserController@doRegist');
 /*
 *@Use : 用户帐号找回密码
 */
