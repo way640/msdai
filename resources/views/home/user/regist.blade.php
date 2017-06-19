@@ -105,7 +105,7 @@
             </div>
             <div>
                 <p class="agreement-info">
-                    <span>已有账户？<a href="http://www.zdmoney.com/home/user/login">登录</a></span>
+                    <span>已有账户？<a href="http://www.zdmoney.com/user/login">登录</a></span>
                 </p>
             </div>
         </form>
