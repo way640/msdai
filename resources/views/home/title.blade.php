@@ -50,22 +50,11 @@
     	<div class="head">
         	<a class="logo" href="http://www.zdmoney.com"><img src="{{ asset('image/logo-bg.png') }}" /></a>
           	<ul>
-<<<<<<< HEAD
+
                   <div id='box'>
                       
                   </div>
-=======
-        		<li><a href="http://www.zdmoney.com" >首页</a></li>
-            	<li><a href="{{ url('invest/invest') }}">轻松投</a></li>
-            	<li><a href="{{ url('lenging/lenging') }}">借款</a></li>
-				<li><a href="{{ asset('gold/gold') }}">贵金属</a></li
-                <li class="hot"></li>
-				@if( $arr )					
-					<li style="float:right;"><a href="{{ asset('personal/personal') }}">我的积木</a></li>
-				@else
 
-				@endif
->>>>>>> bdb682534f5f69b62d3b53aba9bfc1454d7558be
         	</ul>
         </div>
     </div>
