@@ -47,7 +47,7 @@
 						<li><a data-nav="userprofile" class=" highlight userprofile" href="javascript:void(0)">账户管理</a></li>
 					<ul class="jimu-leftsecnav">
 						<li><a data-nav="p2p-setting" class="" href="https://box.jimu.com/User/SecurityCenter">账户设置</a></li>
-						<li><a data-nav="user-center" class="" href="{{ url('home/personal/config') }}">安全设置</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/config') }}">安全设置</a></li>
 						<li><a data-nav="message" class="" href="https://www.jimu.com/Message/List"><span>消息</span></a>
 						</li>
 					</ul>

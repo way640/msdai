@@ -21,7 +21,10 @@ class CommonController extends Controller
     public function __construct() {
         $this->get = $_GET;
         $this->post = $_POST;
-
+        $checkUserInfo = $this->checkUserInfo(session('userInfo')['user_id']);
+//        if ( !$checkUserInfo ) {
+//            redirect("admin/login/login");
+//        }
     }
 
     /*
@@ -77,7 +80,7 @@ class CommonController extends Controller
      * @author ：Way**/
     protected function checkUserInfo ( $userId = null ) {
         if( @$userId && typeOf($userId) == 'int'){
-
+            return true;
         }else{
             return true;
         }
@@ -130,5 +133,17 @@ class CommonController extends Controller
             return json_decode(json_encode($obj),TRUE);
         }
         return false;
+    }
+
+    /*
+     * @action_name：取出两个字段组成新的数组
+     * @params：数组 arary  作为key的字段名 string  作为值的字段名 string
+     * @return 转换完成的数组 array
+     * @author：Way**/
+    public function twoFieldArr ( $arr , $keys , $vals ) {
+        foreach ( $arr as $key => $val ) {
+            $result[$val[$keys]] = $val[$vals];
+        }
+        return $result;
     }
 }
