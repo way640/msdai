@@ -23,6 +23,7 @@ class IndexController extends CommonController
 		//返回 数据
 		return  "$callback(".$info.")";
 	}
+
 	//首页 锦囊
 	public function silk(){
 		//jsonp传值
@@ -32,5 +33,10 @@ class IndexController extends CommonController
 		$info = DB::table('article')->orderby('article_add_time',`desc`)->limit(4)->get();
 		//返回 数据
 		return  "$callback(".$info.")";
+	}
+	
+	public function getinfo(){
+		//首页锦囊
+
 	}
 }

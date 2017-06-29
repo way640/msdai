@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/style.css')); ?>"/>
 <script type="text/javascript" src="<?php echo e(asset('js/javasrcipt.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/jquery.min.js')); ?>"></script>
 <title>积木</title>
 </head>
 
@@ -16,11 +17,33 @@
         	<img id="WeChat" onmousemove="WeChatMove()" onmouseout="WeChatOut()" src="<?php echo e(asset('image/微信-link.png')); ?>" />
             <ul>
             	<li><a href="#">最新活动</a></li>
-                <li><a href="<?php echo e(url('user/login')); ?>">登录</a></li>
-                <li style="border-right:none;"><a href="<?php echo e(url('user/regist')); ?>">注册</a></li>
+				<?php $arr = isset( $_SESSION['user'] ) ? $_SESSION['user'] : ''?>
+				<?php if( $arr ): ?>
+					<li><a href="javascript:void(0);"><?php echo $_SESSION['user']['username'];?>, 您好, 欢迎登陆</a></li>
+					<li style="border-right:none;"><a href="javascript:void(0);" class="userLogout">注销</a></li>
+				<?php else: ?>
+					<li><a href="<?php echo e(url('user/login')); ?>">登录</a></li>
+					<li style="border-right:none;"><a href="<?php echo e(url('user/logout')); ?>">注册</a></li>
+				<?php endif; ?> 
             </ul>
+			<script>
+				$('.userLogout').on('click', function(){
+					
+					 $.ajax({
+						type: "GET",
+						url: "../../../user/logout",
+						dataType: 'json',
+						success: function(msg){
+								
+							alert('退出成功')
+							window.location.href="<?php echo e(url('user/login')); ?>"
+						}
+					});
+				})
+			</script>	
         </div>
     </div>
+
 <!--header------------------------------------------------------------------------------------------------------------>
 <!--main-------------------------------------------------------------------------------------------------------------->
 	<div class="header">
@@ -30,17 +53,19 @@
                   <div id='box'>
                       
                   </div>
+                  <a href="">充值</a>
         	</ul>
         </div>
     </div>
     <script src='<?php echo e(asset('js/jquery.min.js')); ?>'></script>
     <script>
         jQuery(document).ready(function(){
-            var url = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
+            //导航栏 jsonp请求
+            var van = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
                 $.ajax({
                     type: "get",
-                    async: false,
-                    url: url,
+                    async: false, 
+                    url: van,
                     dataType: "jsonp",
                     jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
                     jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
@@ -53,9 +78,10 @@
                         $('#box').html(str);
                     },
                     error: function(){
-                        alert('fail');
+                        //alert('fail');
                     }
                 });
+            //锦囊妙计 4条最新添加的要知道的小知识
             var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
                 $.ajax({
                     type: "get",
@@ -70,6 +96,7 @@
                         var str2 ='';
                         var str3 ='';
                         $.each(msg,function(k,v){
+                            //如果内容超过50个字就截取前50个字
                             var content = v.article_content;
                             var new_content = content.substring(0,50)+"...";
                             if(k==0){
@@ -92,7 +119,7 @@
                         $('#pbox').html(str0+str1+str2+str3);
                     },
                     error: function(){
-                        alert('fail');
+                        //alert('fail');
                     }
                 }); 
          });
@@ -151,6 +178,7 @@
 </html>
 
 <div>
+
     <script type="text/template" id="DaBaiTpl">
             <option value="北京">北京</option>
             <option value="上海">上海</option>
@@ -235,4 +263,8 @@
             <option value="西安">西安</option>
             </script>
     <style type="text/css">
+	
 </div>
+
+
+
