@@ -268,7 +268,11 @@
         $('#side-menu').delegate('li','click',function(){
             if($(this).children().eq(1).attr('style') == undefined || $(this).children().eq(1).attr('style') != 'display: block;'){
 
-                $(this).siblings().removeClass('active');
+
+                $.each($(this).siblings(),function(k,v){
+                    $(this).removeClass('active')
+                    $(this).find('ul').hide();
+                });
                 $(this).addClass('active');
                 $(this).children().eq(1).animate({
                     height: 'toggle', opacity: 'toggle'
