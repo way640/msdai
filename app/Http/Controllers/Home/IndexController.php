@@ -19,7 +19,7 @@ class IndexController extends CommonController
 		$code = $_GET['code'];
 		$callback = $_GET['callback'];
 		//查询 导航
-		$info = DB::table('config')->where('config_type',2)->get();
+		$info = DB::table('config')->where('config_type',1)->get();
 		//返回 数据
 		return  "$callback(".$info.")";
 	}

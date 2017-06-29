@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 /*
@@ -12,6 +13,8 @@ class CommonController extends Controller
 {
     protected $get = '';
     protected $post = '';
+    public $emailAddr = '';
+    public $emailTitle = '';
 
     /*
      * @action_name ： 公共构造方法
@@ -21,10 +24,12 @@ class CommonController extends Controller
     public function __construct() {
         $this->get = $_GET;
         $this->post = $_POST;
-        $checkUserInfo = $this->checkUserInfo(session('userInfo')['user_id']);
-//        if ( !$checkUserInfo ) {
-//            redirect("admin/login/login");
-//        }
+        session(['admin'=>['admin_id'=>'1','admin_name'=>'name']]);//方便测试跳过登录检测
+        $checkUserInfo = $this->checkUserInfo(session('admin')['admin_id']);
+        if ( !$checkUserInfo ) {
+            echo self::gogo('admin/login/index','您好像还没有登录！！');
+            die();
+        }
     }
 
     /*
@@ -79,11 +84,11 @@ class CommonController extends Controller
      * @return ：array  OR  bool
      * @author ：Way**/
     protected function checkUserInfo ( $userId = null ) {
-        if( @$userId && typeOf($userId) == 'int'){
-            return true;
-        }else{
+        if( @$userId || @session('admin')['admin_id']){
             return true;
         }
+        return false;
+
     }
 
 
@@ -92,22 +97,58 @@ class CommonController extends Controller
      * @param：用户ID int
      * @return ：bool
      * @author ：Way**/
-    protected function checkUserPriv( $userId ){
-        //权限控制未编写 程晔 2017-06-12 @todo 未修改
-        if( @$userId && typeOf($userId) == 'int'){
+    protected function checkUserPriv( $userId = '' ){
+        //权限控制未编写 程晔 2017-06-12 @todo 06-25 程晔 以完善
+        $userId = $userId == ''?session('admin')['admin_id']:$userId;
+        if( @$userId){
+            //获取当前控制器和方法
+            $controller = '';
+            $action = '';
+            //设置公共访问目录和超级管理员
+            $publicController = ['index'];
+            $publicAction = ['index'];
+            if(in_array($controller,$publicController) && in_array($action,$publicAction)){
+                return true;
+            }
+
+            //某个功能开放权限
+            $publicConfig = ['config-index'];
+            if(in_array($controller.'-'.$action,$publicConfig)){
+                return true;
+            }
+
+            //权限控制
+            $privInfo = DB::select("select priv_controller,priv_action from zd_admin_role as ar LEFT JOIN zd_role_priv as rp on ar.role_id=rp.role_id LEFT JOIN zd_privilege as pr on rp.priv_id=pr.priv_id where ar.admin_id = '$userId' AND pr.priv_status = '1'");
+//            self::twoFieldArr($privInfo,);
+            foreach($privInfo as $val){
+                $controllerInfo[] = $val['priv_controller'];
+                $actionInfo[] = $val['priv_action'];
+            }
+            if(in_array($controller,$controllerInfo) && in_array($action,$actionInfo)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /*
+     * @action_name ： 发送验证邮件
+     * @params：邮箱地址 string  发送信息
+     * @return ：bool
+     * @author ：Way**/
+    protected function smtp($name, $email , $title , $msg ){
+        $this->emailAddr = $email;
+        $this->emailTitle = $title;
+        $flag = Mail::send('admin.email',['name'=>$name,'msg'=>$msg],function($message){
+            $to = $this->emailAddr;
+            $message ->to($to)->subject($this->emailTitle);
+        });
+        if($flag){
             return true;
         }else{
             return false;
         }
-    }
-
-    /*
-     * @action_name ： 发送邮件
-     * @params：邮箱地址 string  发送信息
-     * @return ：bool
-     * @author ：Way**/
-    protected function smtp( $email , $msg ){
-
     }
 
     /*
@@ -145,5 +186,14 @@ class CommonController extends Controller
             $result[$val[$keys]] = $val[$vals];
         }
         return $result;
+    }
+
+    /*
+     * @action_name：报错跳转
+     * @params：需要跳转的地址   错误信息   跳转方式（未实现）
+     * @author：Way**/
+    public function gogo($url,$msg = '',$way = ''){
+        $errorMsg = $msg ? $msg : '好像出错了呢' ;
+        return view('error',['errorMsg'=>$errorMsg,'locationUrl'=>$url]);
     }
 }

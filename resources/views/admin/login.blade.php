@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +37,7 @@
             <form class="m-t" role="form" action="" method="post" >
                 {{csrf_field()}}
                 <div class="form-group">
-                    <input type="email" class="form-control" name="admin_account" placeholder="用户名" required="">
+                    <input type="text" class="form-control" name="admin_account" placeholder="用户名" required="">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="admin_pwd" placeholder="密码" required="">

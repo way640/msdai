@@ -30,6 +30,7 @@ class UserController extends CommonController
 	public function showLogin(){
 		
 		return view('home/user/loginForm');
+		
 	}
 	
 	
@@ -110,6 +111,16 @@ class UserController extends CommonController
 		$userName = isset( $this->post['username'] ) ? $this->post['username'] : '';
 		$userPwd  = isset( $this->post['userpwd'] )  ? $this->post['userpwd']  : '';
 
+		if ( empty ( $userPwd ) ) {
+			
+			return $this->error ( '账户密码未填写' );
+		}
+		
+		if ( empty ( $userName )) {
+			
+			return $this->error ( '用户名未填写' );
+		}
+		
 		$userPwd = md5($userPwd);
 		
 		$userExist = DB::select("select user_id, user_account from zd_user where user_account = '$userName' and user_pwd = '$userPwd'");	

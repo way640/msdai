@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -14,8 +13,8 @@ class UserController extends CommonController
     //get.admin/user/user  全部管理员列表
     public function index()
     {
-        $data = User::orderBy('admin_id','asc')->get();
-        return view('admin.lists',compact('data'));
+//        $data = User::orderBy('admin_id','asc')->get();
+//        return view('admin.lists',compact('data'));
     }
 
     //get.admin/user/create   添加管理员
@@ -27,6 +26,8 @@ class UserController extends CommonController
     public function store()
     {
         $input = Input::except('_token');
+        $pwd = Input::md5('admin_pwd');
+        dd($pwd);die;
         $rules = [
             'admin_account'=>'required',
             'admin_pwd'=>'required',
@@ -48,18 +49,6 @@ class UserController extends CommonController
             return back()->withErrors($validator);
         }
     }
-
-   //put.admin/user/user{links}    更新管理员
-//    public function update($admin_id)
-//    {
-//        $input = Input::except('_token','_method');
-//        $re = User::where('admin_id',$admin_id)->update($input);
-//        if($re){
-//            return redirect('admin/user/user');
-//        }else{
-//            return back()->with('errors','管理员更新失败，请稍后重试！');
-//        }
-//    }
 
     //delete.admin/user/user{links}   删除单个管理员
     public function destroy($admin_id)

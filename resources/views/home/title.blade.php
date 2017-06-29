@@ -23,7 +23,7 @@
 					<li style="border-right:none;"><a href="javascript:void(0);" class="userLogout">注销</a></li>
 				@else
 					<li><a href="{{ url('user/login') }}">登录</a></li>
-					<li style="border-right:none;"><a href="{{ url('user/logout') }}">注册</a></li>
+					<li style="border-right:none;"><a href="{{ url('user/regist') }}">注册</a></li>
 				@endif 
             </ul>
 			<script>
@@ -73,12 +73,14 @@
                         var str ='';
                         $.each(msg,function(k,v){
                             // alert(v.config_info);
-                            str +='<li><a href="'+v.config_info+'" >'+v.config_desc+'</a></li>'; 
+                            str +='<li><a href="{{url('')}}/'+v.config_link+'" >'+v.config_info+'</a></li>'; 
                         })
                         $('#box').html(str);
                     },
                     error: function(){
+
                         //alert('fail');
+
                     }
                 });
             //锦囊妙计 4条最新添加的要知道的小知识
@@ -119,7 +121,9 @@
                         $('#pbox').html(str0+str1+str2+str3);
                     },
                     error: function(){
+
                         //alert('fail');
+
                     }
                 }); 
          });
