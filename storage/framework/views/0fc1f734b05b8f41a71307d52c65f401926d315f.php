@@ -23,7 +23,7 @@
 					<li style="border-right:none;"><a href="javascript:void(0);" class="userLogout">注销</a></li>
 				<?php else: ?>
 					<li><a href="<?php echo e(url('user/login')); ?>">登录</a></li>
-					<li style="border-right:none;"><a href="<?php echo e(url('user/logout')); ?>">注册</a></li>
+					<li style="border-right:none;"><a href="<?php echo e(url('user/regist')); ?>">注册</a></li>
 				<?php endif; ?> 
             </ul>
 			<script>
@@ -50,22 +50,11 @@
     	<div class="head">
         	<a class="logo" href="http://www.zdmoney.com"><img src="<?php echo e(asset('image/logo-bg.png')); ?>" /></a>
           	<ul>
-<<<<<<< HEAD
-        		<li><a href="http://www.zdmoney.com" >首页</a></li>
-            	<li><a href="<?php echo e(url('invest/invest')); ?>">轻松投</a></li>
-            	<li><a href="<?php echo e(url('lenging/lenging')); ?>">借款</a></li>
-				<li><a href="<?php echo e(asset('gold/gold')); ?>">贵金属</a></li
-                <li class="hot"></li>
-				<?php if( $arr ): ?>					
-					<li style="float:right;"><a href="<?php echo e(asset('personal/personal')); ?>">我的积木</a></li>
-				<?php else: ?>
 
-				<?php endif; ?>
-=======
                   <div id='box'>
                       
                   </div>
->>>>>>> 36160ebbd773f7c9f7c0a36157d4497605fdd0bd
+
         	</ul>
         </div>
     </div>

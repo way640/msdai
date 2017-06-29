@@ -24,8 +24,8 @@ class CommonController extends Controller
     public function __construct() {
         $this->get = $_GET;
         $this->post = $_POST;
+        session(['admin'=>['admin_id'=>'1','admin_name'=>'name']]);//方便测试跳过登录检测
         $checkUserInfo = $this->checkUserInfo(session('admin')['admin_id']);
-        $checkUserInfo = true;//方便测试跳过登录检测
         if ( !$checkUserInfo ) {
             echo self::gogo('admin/login/index','您好像还没有登录！！');
             die();
