@@ -73,12 +73,12 @@
                         var str ='';
                         $.each(msg,function(k,v){
                             // alert(v.config_info);
-                            str +='<li><a href="'+v.config_info+'" >'+v.config_desc+'</a></li>'; 
+                            str +='<li><a href="<?php echo e(url('')); ?>/'+v.config_link+'" >'+v.config_info+'</a></li>'; 
                         })
                         $('#box').html(str);
                     },
                     error: function(){
-                        alert('fail');
+                        // alert('fail');
                     }
                 });
             var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
@@ -117,7 +117,7 @@
                         $('#pbox').html(str0+str1+str2+str3);
                     },
                     error: function(){
-                        alert('fail');
+                        // alert('fail');
                     }
                 }); 
          });
