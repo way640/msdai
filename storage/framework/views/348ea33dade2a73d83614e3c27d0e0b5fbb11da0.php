@@ -100,9 +100,14 @@
             </div>
             <div>
                 <p class="agreement-info">
+<<<<<<< HEAD
                     <span>已有账户？<a href="<?php echo e(url('user/login')); ?>">登录</a></span>
 					
 				</p>
+=======
+                    <span>已有账户？<a href="http://www.zdmoney.com/user/login">登录</a></span>
+                </p>
+>>>>>>> 36160ebbd773f7c9f7c0a36157d4497605fdd0bd
             </div>
         </form>
     </div>

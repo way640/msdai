@@ -212,7 +212,10 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                 </ol>
             </a>
             <ul>
-                <a href="#" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;">
+                <div id='pbox'>
+                    
+                </div>
+                <!--<a href="#" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;">
                     <article>
                         <img src="image/icon-zplay.png"/>
                         <figcaption>锦 小 囊</figcaption>
@@ -245,7 +248,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                         <h3>阅读1721&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞142&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论8</h3>
                     </aside>
                 </a>
-                <a href="#" style="">
+                <a href="#" style="border-right:solid 1px #E5E5E5;;">
                     <article>
                         <img src="image/icon-zplay.png"/>
                         <figcaption>锦 小 囊</figcaption>
@@ -255,10 +258,11 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                         <p>天天竞猜，天天开奖！</p>
                         <h3>阅读1750&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞205&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论270</h3>
                     </aside>
-                </a>
+                </a>-->
             </ul>
         </div>
     </div>
+
 <!--row--------------------------------------------------------------------------------------------------------------->
     <div class="row">
         <ul>
