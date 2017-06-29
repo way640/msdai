@@ -23,7 +23,7 @@
 					<li style="border-right:none;"><a href="javascript:void(0);" class="userLogout">注销</a></li>
 				@else
 					<li><a href="{{ url('user/login') }}">登录</a></li>
-					<li style="border-right:none;"><a href="{{ url('user/logout') }}">注册</a></li>
+					<li style="border-right:none;"><a href="{{ url('user/regist') }}">注册</a></li>
 				@endif 
             </ul>
 			<script>
