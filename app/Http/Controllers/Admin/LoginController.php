@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 
 
-class LoginController extends CommonController
+class LoginController extends Controller
 {
     /**
      * 后台登录

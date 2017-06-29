@@ -50,19 +50,79 @@
     	<div class="head">
         	<a class="logo" href="http://www.zdmoney.com"><img src="{{ asset('image/logo-bg.png') }}" /></a>
           	<ul>
-        		<li><a href="http://www.zdmoney.com" >首页</a></li>
-            	<li><a href="{{ url('invest/invest') }}">轻松投</a></li>
-            	<li><a href="{{ url('lenging/lenging') }}">借款</a></li>
-				<li><a href="{{ asset('gold/gold') }}">贵金属</a></li
-                <li class="hot"></li>
-				@if( $arr )					
-					<li style="float:right;"><a href="{{ asset('personal/personal') }}">我的积木</a></li>
-				@else
 
-				@endif
+                  <div id='box'>
+                      
+                  </div>
+
         	</ul>
         </div>
     </div>
+    <script src='{{ asset('js/jquery.min.js') }}'></script>
+    <script>
+        jQuery(document).ready(function(){
+            var url = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
+                $.ajax({
+                    type: "get",
+                    async: false,
+                    url: url,
+                    dataType: "jsonp",
+                    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+                    jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+                    success: function(msg){
+                        var str ='';
+                        $.each(msg,function(k,v){
+                            // alert(v.config_info);
+                            str +='<li><a href="'+v.config_info+'" >'+v.config_desc+'</a></li>'; 
+                        })
+                        $('#box').html(str);
+                    },
+                    error: function(){
+                        alert('fail');
+                    }
+                });
+            var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
+                $.ajax({
+                    type: "get",
+                    async: false,
+                    url: url,
+                    dataType: "jsonp",
+                    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+                    jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+                    success: function(msg){
+                        var str0 ='';
+                        var str1 ='';
+                        var str2 ='';
+                        var str3 ='';
+                        $.each(msg,function(k,v){
+                            var content = v.article_content;
+                            var new_content = content.substring(0,50)+"...";
+                            if(k==0){
+                                // alert(1);
+                                //alert(v.article_content);
+                                // var content = v.article_content;
+                                // alert(content.substring(0,50)+"...");
+                                str0 +='<a href="#" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞82&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论7</h3></aside></a>';
+                            }else if(k==1){
+                                //alert(2);
+                                str1 +='<a href="#" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1104&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞97&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论189</h3></aside></a>';
+                            }else if(k==2){
+                                //alert(3);
+                                str2+='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1721&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞142&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论8</h3></aside></a>';
+                            }else{
+                                //alert(4);
+                                str3 +='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1750&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞205&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论270</h3></aside></a>';
+                            }
+                        })
+                        $('#pbox').html(str0+str1+str2+str3);
+                    },
+                    error: function(){
+                        alert('fail');
+                    }
+                }); 
+         });
+            
+    </script>
 	@yield('content')
 	<!--content-wrap------------------------------------------------------------------------------------------------------>
 	<div class="content-wrap">
