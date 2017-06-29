@@ -9,7 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends CommonController
+class AdminController extends CommonController
 {
     //get.admin/user/user  全部管理员列表
     public function index()
@@ -40,7 +40,7 @@ class UserController extends CommonController
         if($validator->passes()){
             $re = User::create($input);
             if($re){
-                return redirect('admin/user/user');
+                return redirect('admin/admin/admin');
             }else{
                 return back()->with('errors','管理员添加失败，请稍后重试！');
             }
@@ -48,18 +48,6 @@ class UserController extends CommonController
             return back()->withErrors($validator);
         }
     }
-
-   //put.admin/user/user{links}    更新管理员
-//    public function update($admin_id)
-//    {
-//        $input = Input::except('_token','_method');
-//        $re = User::where('admin_id',$admin_id)->update($input);
-//        if($re){
-//            return redirect('admin/user/user');
-//        }else{
-//            return back()->with('errors','管理员更新失败，请稍后重试！');
-//        }
-//    }
 
     //delete.admin/user/user{links}   删除单个管理员
     public function destroy($admin_id)
