@@ -23,6 +23,20 @@ class ConfigController extends CommonController
     public function add ( ) {
         return view('admin.configAdd');
     }
+    /*
+     * @action_name：配置类型展示页面
+     * @author：Way
+     * @Time：2017-06-14**/
+    public function typeIndex ( ) {
+        return view('admin.configType');
+    }
+    /*
+     * @action_name：配置类型添加页面
+     * @author：Way
+     * @Time：2017-06-14**/
+    public function typeAdd ( ) {
+        return view('admin.configTypeAdd');
+    }
 
 
     /*************以下是数据接口*************/
@@ -31,12 +45,9 @@ class ConfigController extends CommonController
      * @author：Way
      * @Time：2017-06-14**/
     public function configList ( ) {
-        $where = @$this->get['type'] ? "config_type = ". $this->get['type']:'1=1';
-        $where = "config_type = 1";
-        $result['confInfo'] = $this->objToArray(DB::select('select config_id,config_type,config_info,config_desc,config_link from zd_config where '.$where));
-        $result['typeInfo'] = $this->twoFieldArr( $this->objToArray(DB::select('select * from zd_config_type where type_status = 1')) , 'type_id' ,'type_name' );
-//        print_r($result);die;
-        return $this->success($result);
+        $where = @$this->get['type'] != 'all' ? "config_type = ". $this->get['type']:'1=1';
+        $confInfo = $this->objToArray(DB::select('select co.config_id,co.config_type,co.config_info,co.config_desc,co.config_link,ty.type_name from zd_config as co left join zd_config_type as ty on co.config_type = ty.type_id where '.$where));
+        return $this->success($confInfo);
     }
     /*
      * @action_name：配置类型数据接口

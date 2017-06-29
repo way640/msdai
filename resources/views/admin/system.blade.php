@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="{{url('admin/config/add')}}">
+                    <a href="{{url('admin/system/add')}}">
                         <button class="btn btn-outline btn-primary dim" type="button" title="添加信息" style="left:1%">
                             <i class="fa fa-plus"></i>
                         </button>
@@ -77,7 +77,7 @@
                                 <th></th>
                                 <th>配置名称</th>
                                 <th>配置类型</th>
-                                <th>配置说明</th>
+                                <th>配置状态</th>
                                 <th>配置链接</th>
                                 <th>操作</th>
                             </tr>
@@ -112,7 +112,7 @@
 <!-- iCheck -->
 {{--<script src="js/plugins/iCheck/icheck.min.js"></script>--}}
 
-<!-- Peity -->
+        <!-- Peity -->
 {{--<script src="js/demo/peity-demo.js"></script>--}}
 
 
@@ -122,7 +122,7 @@
         function getData( typeInfo ){
             $.ajax({
                 type:"get",
-                url:"{{url('admin/config/configlist')}}",
+                url:"{{url('admin/system/systemlist')}}",
                 data:'type='+typeInfo,
                 dataType:'json',
                 success:function ( msg ) {
@@ -131,13 +131,13 @@
                         $.each(msg.data,function(k,v){
                             str += '<tr>' +
                                     '<td><input type="checkbox" class="i-checks" name="input[]"></td>' +
-                                    '<td>'+ v.config_info+'</td>' +
+                                    '<td><span>'+ v.level_info+'</span>'+v.sys_content+'</td>' +
                                     '<td>'+v.type_name+'</td>' +
-                                    '<td>'+v.config_desc+'</td>' +
-                                    '<td>'+v.config_link+'</td>' +
+                                    '<td>'+v.sys_status+'</td>' +
+                                    '<td>'+v.sys_link+'</td>' +
                                     '<td>' +
-                                        '<a href="javascript:void(0)" alt="删除" title="删除" class="config-del" configId="'+ v.config_id+'"><i class="fa fa-close text-navy"></i></a> ' +
-                                        '<a href="javascript:void(0)" alt="修改" title="修改" class="config-save" configId="'+ v.config_id+'"><i class="fa fa-wrench text-navy"></i></a>' +
+                                    '<a href="javascript:void(0)" alt="删除" title="删除" class="config-del" configId="'+ v.sys_id+'"><i class="fa fa-close text-navy"></i></a> ' +
+                                    '<a href="javascript:void(0)" alt="修改" title="修改" class="config-save" configId="'+ v.sys_id+'"><i class="fa fa-wrench text-navy"></i></a>' +
                                     '</td>' +
                                     '</tr>';
                         });
@@ -152,7 +152,7 @@
         getData('all');
         $.ajax({
             type: "get",
-            url: "{{url('admin/config/configtypelist')}}",
+            url: "{{url('admin/system/systemtypelist')}}",
             data: '',
             dataType: 'json',
             success: function (msg) {
@@ -169,20 +169,35 @@
         });
         $('.table-responsive').delegate('.config-del','click',function(){
 //        $('.config-del').click(function(){
-            var configIdObj = $(this);
-            $.ajax({
-                type: "get",
-                url: "{{url('admin/config/configdel')}}",
-                data: 'configId='+configIdObj.attr('configId'),
-                dataType: 'json',
-                success: function (msg) {
-                    if(msg.status == 1){
-                        configIdObj.parent().parent().remove();
+            if(confirm('这将删除该分类及它的所有子分类，是否继续？')){
+                var configIdObj = $(this).parent().parent();
+                var objLength = configIdObj.find('span').text().length;
+                var delIds = configIdObj.find('a').eq(0).attr('configId');
+                $.each(configIdObj.nextAll(),function(k,v){
+                    if($(this).find('span').text().length > objLength){
+                        delIds += ','+$(this).find('a').eq(0).attr('configId');
+                        $(this).remove();
                     }else{
-                        alert('删除失败');
+                        return false;
                     }
-                }
-            })
+                });
+                configIdObj.remove();
+
+                $.ajax({
+                    type: "get",
+                    url: "{{url('admin/system/systemdel')}}",
+                    data: 'configId='+configIdObj.attr('configId'),
+                    dataType: 'json',
+                    success: function (msg) {
+                        if(msg.status == 1){
+
+                        }else{
+                            alert('删除失败');
+                        }
+                    }
+                })
+
+            }
         });
     });
 </script>
