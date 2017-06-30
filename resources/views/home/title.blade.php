@@ -79,7 +79,7 @@
                         var str ='';
                         $.each(msg,function(k,v){
                             // alert(v.config_info);
-                            str +='<li><a href="'+v.config_info+'" >'+v.config_desc+'</a></li>'; 
+                            str +='<li><a href="'+v.config_link+'" >'+v.config_desc+'</a></li>';
                         })
                         $('#box').html(str);
                     },
