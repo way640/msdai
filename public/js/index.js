@@ -353,5 +353,6 @@ require(['jquery', 'bootstrap'], function($) {
 
     $("#sms").click(getSms);
     $("#verify").click(verifySms);
+
 });
 

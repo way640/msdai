@@ -7,9 +7,7 @@
     <meta name="renderer" content="webkit">
 
     <title> hAdmin- 主页</title>
-
     <base href="{{URL::asset('')}}admin/">
-
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -17,10 +15,10 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet" />
+    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet" />
+    <link href="css/animate.css" rel="stylesheet" />
+    <link href="css/style.css?v=4.1.0" rel="stylesheet" >
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -33,7 +31,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="{{url('admin/index/index')}}">
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
                                         <i class="fa fa-area-chart"></i>
@@ -45,10 +43,12 @@
                         <div class="logo-element">hAdmin
                         </div>
                     </li>
+
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">分类</span>
+                        <span class="ng-scope">导航</span>
                     </li>
-                    <li>
+                   <!-- <li>
+>>>>>>> 7baa627c1eddba750a33af3e4a7a9f729dd3cba4
                         <a class="J_menuItem" href="index_v1.html">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>
@@ -83,6 +83,7 @@
                                 <a class="J_menuItem" href="graph_metrics.html">图表组合</a>
                             </li>
                         </ul>
+<<<<<<< HEAD
                     </li>
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
@@ -343,6 +344,8 @@
                             </li>
                         </ul>
                     </li>
+=======
+                    </li> -->
 
                 </ul>
             </div>
@@ -465,4 +468,84 @@
 </div>
 </body>
 <script src="js/main.js"></script>
+<script>
+    $(document).ready(function() {
+        function str_repeat(str, num){
+            return new Array( num + 1 ).join( str );
+        }
+        $.ajax({
+            type: "get",
+            url: "{{url('admin/index/adminnav')}}",
+            data: '',
+            dataType: 'json',
+            success: function (msg) {
+                var level = 1;
+                var nextLevel = 1;
+                var str = '';
+                var length = msg.data.length;
+
+
+                $.each(msg.data,function(k,v){
+//                    alert(k+1);
+                    if(v.sys_link == ''){
+                        v.sys_link = 'javascript:void(0)';
+                    }else{
+                        v.sys_link = "{{url('')}}/"+v.sys_link;
+                    }
+                    //开始部分
+                    if( v.level <= level && v.level == 1){
+                        if( length != k+1 && v.level < msg.data[k+1]['level'] ){
+                            str += '<li><a href="javascript:void(0)"><i class="fa fa fa-bar-chart-o"> </i><span class="nav-label">'+v.sys_content+'</span><span class="fa arrow"></span></a>';
+                        }else{
+                            str += '<li><a class="J_menuItem" href="'+ v.sys_link +'"><i class="fa fa-home"> </i><span class="nav-label">'+ v.sys_content +'</span></a>';
+                        }
+                    }else if ( v.level <= level && v.level != 1) {
+                        str += '<li> <a class="J_menuItem" href="'+ v.sys_link +'">'+ v.sys_content +'</a>';
+                    }else if ( v.level > level ) {
+
+                        str += '<ul class="nav nav-second-level collapse"> <li> <a class="J_menuItem" href="'+ v.sys_link +'">'+ v.sys_content +'</a>';
+                    }else {
+                        str += '<li> <a class="J_menuItem" href="'+ v.sys_link +'">'+ v.sys_content +'</a>';
+                    }
+
+                    //结束部分
+                    if ( length == k+1) {
+                        if(v.level == 1){
+                            str += '</li>';
+                        }else{
+                            str += str_repeat('</li></ul>',parseInt(v.level)-1);
+                        }
+                    }else if ( v.level == msg.data[k+1]['level']) {
+                        str += '</li>';
+                    }else if ( v.level > msg.data[k+1]['level'] ) {
+                        str += str_repeat('</li></ul></li>',parseInt(v.sys_desc)-parseInt(nextLevel));
+                    }else {
+
+                    }
+                    level = v.level;
+                });
+                $('#side-menu').append(str);
+            }
+        });
+
+        $('#side-menu').delegate('li','click',function(){
+            if($(this).children().eq(1).attr('style') == undefined || $(this).children().eq(1).attr('style') != 'display: block;'){
+
+
+                $.each($(this).siblings(),function(k,v){
+                    $(this).removeClass('active')
+                    $(this).find('ul').hide();
+                });
+                $(this).addClass('active');
+                $(this).children().eq(1).animate({
+                    height: 'toggle', opacity: 'toggle'
+                }, "slow");
+            }else{
+                $(this).children().eq(1).fadeOut('fast');
+                $(this).removeClass('active');
+            }
+//            console.log($(this).children().eq(1).attr('style'));
+        });
+    })
+</script>
 </html>

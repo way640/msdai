@@ -1,4 +1,3 @@
-
 <?php
 use Illuminate\Support\Facades\Session;
 ?>
@@ -216,5 +215,4 @@ use Illuminate\Support\Facades\Session;
             </div>
         </div>
     </div>
-
 @stop

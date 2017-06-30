@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 /*
  * @Class_name ：后台首页
@@ -13,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 class IndexController extends CommonController
 {
     /*
-
      * @action_name：初始化
      * @author：Way
      * @Time：2017-06-14**/
@@ -24,7 +22,6 @@ class IndexController extends CommonController
 
 
     /*
-
      * @Action_name : 首页展示
      * @Author ：Way
      * @Time ：2017-06-12
@@ -42,9 +39,9 @@ class IndexController extends CommonController
      * @Time ： 2017-06-12
      * **/
     public function adminNav ( ) {
-        $sysInfo = $this->objToArray(DB::select('select * from zd_system'));
+        $sysInfo = $this->objToArray(DB::select('select * from zd_system where sys_type = "1" and sys_status = "1"'));
         $sysInfo = $this->dataBack($sysInfo,'sys_id','sys_desc');
-        print_r($sysInfo);
+        return $this->success($sysInfo);
     }
 
     /*

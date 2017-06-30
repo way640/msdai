@@ -25,6 +25,7 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
+
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -57,8 +58,9 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-5 m-b-xs">
-                            <select class="input-sm form-control input-s-sm inline">
-                                <option value="">请选择</option>
+
+                            <select class="input-sm form-control input-s-sm inline" style="height: 35px">
+                                <option value="all">所有类型</option>
                             </select>
                         </div>
                         <div class="col-sm-3">
@@ -118,35 +120,54 @@
 
 <script>
     $(function ( ) {
-        $.ajax({
-            type:"get",
-            url:"{{url('admin/config/configlist')}}",
-            data:'',
-            dataType:'json',
-            success:function ( msg ) {
-                if(msg.status == 1 && typeof msg.data == 'object'){
-                    var str = '';
-                    $.each(msg.data.confInfo,function(k,v){
-                        str += '<tr>' +
-                                '<td><input type="checkbox" class="i-checks" name="input[]"></td>' +
-                                '<td>'+ v.config_info+'</td>' +
-                                '<td>'+msg.data.typeInfo[v.config_type]+'</td>' +
-                                '<td>'+v.config_desc+'</td>' +
-                                '<td>'+v.config_link+'</td>' +
-                                '<td>' +
-                                    '<a href="javascript:void(0)" alt="删除" title="删除" class="config-del" configId="'+ v.config_id+'"><i class="fa fa-close text-navy"></i></a> ' +
-                                    '<a href="javascript:void(0)" alt="修改" title="修改" class="config-save" configId="'+ v.config_id+'"><i class="fa fa-wrench text-navy"></i></a>' +
-                                '</td>' +
-                                '</tr>';
-                    });
-                }else{
-                    str = '<tr><td cospan="4">没有要展示的内容</td></tr>'
+        function getData( typeInfo ){
+            $.ajax({
+                type:"get",
+                url:"{{url('admin/config/configlist')}}",
+                data:'type='+typeInfo,
+                dataType:'json',
+                success:function ( msg ) {
+                    if( msg.status == 1 && typeof msg.data == 'object' && msg.data.length>0){
+                        var str = '';
+                        $.each(msg.data,function(k,v){
+                            str += '<tr>' +
+                                    '<td><input type="checkbox" class="i-checks" name="input[]"></td>' +
+                                    '<td>'+ v.config_info+'</td>' +
+                                    '<td>'+v.type_name+'</td>' +
+                                    '<td>'+v.config_desc+'</td>' +
+                                    '<td>'+v.config_link+'</td>' +
+                                    '<td>' +
+                                        '<a href="javascript:void(0)" alt="删除" title="删除" class="config-del" configId="'+ v.config_id+'"><i class="fa fa-close text-navy"></i></a> ' +
+                                        '<a href="javascript:void(0)" alt="修改" title="修改" class="config-save" configId="'+ v.config_id+'"><i class="fa fa-wrench text-navy"></i></a>' +
+                                    '</td>' +
+                                    '</tr>';
+                        });
+                    }else{
+                        str += '<tr><td></td><td colspan="4" align="center" >没有要展示的内容</td><td></td></tr>'
+                    }
+                    $(".table").children().eq(1).html(str);
+
                 }
-                $(".table").children().eq(1).html(str);
-                $.each(msg.data.typeInfo,function(k,v){
+            });
+        }
+        getData('all');
+        $.ajax({
+            type: "get",
+            url: "{{url('admin/config/configtypelist')}}",
+            data: '',
+            dataType: 'json',
+            success: function (msg) {
+                $('.input-sm').html('');
+                $('.input-sm').append('<option value="all">所有类型</option>');
+                $.each(msg.data,function(k,v){
                     $('.input-sm').append('<option value="'+ k+'">'+v+'</option>');
                 });
             }
+        });
+
+
+        $('.input-sm').change(function(){
+            getData($(this).val());
         });
         $('.table-responsive').delegate('.config-del','click',function(){
 //        $('.config-del').click(function(){

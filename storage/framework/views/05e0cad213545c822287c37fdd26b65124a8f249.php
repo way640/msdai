@@ -63,14 +63,12 @@
                 <dd>开放城市：目前仅支持北京，上海，深圳，苏州，成都地区客户申请，其他城市陆续开放中，敬请期待！</dd>
             </dl>
         </div>
-
         <div class="pull-right prod-info">
             <div class="prod-info-inner">
                 <div class="ck">
                     <p>
                         <span class="digit-strong f24" data-apply-type="301">34443</span>人<br>已经成功申请
                     </p>
-
                     <a class="btn btn-primary btn-ps" href="/mloans/lengpart/<?php echo e($v->lenging_id); ?>">查看详情</a>
 
                 </div>
@@ -113,6 +111,7 @@
 	</center>
 
 <?php $__env->stopSection(); ?>
+
 
 
 <?php echo $__env->make('Home.title', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

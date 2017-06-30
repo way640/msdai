@@ -92,7 +92,6 @@
 				
 				
             <div class="input-wrap register-btn-wrap">
-
                 <span class="help-block">
                     <span class="field-validation-valid" data-valmsg-for="agreeContract" data-valmsg-replace="true"></span>
                 </span>
@@ -200,7 +199,6 @@
             }, handlerEmbed);
         }
     });
-<<<<<<< HEAD
 	
 	$('#embed-submit').on('click', function(){
 
@@ -235,9 +233,9 @@
 								
 								alert(msg.msg)
 							}else{
-								
-								alert('注册成功')
-								location.href="{{ url('') }}"
+
+								alert('注册成功,请完善个人信息,以便享受本站更多服务')
+								location.href="{{ url('personal/config') }}"
 							}
 						}
 					});
@@ -249,8 +247,7 @@
 </script>
 
 
-=======
-</script>
+
 
 
 <script>
@@ -276,6 +273,6 @@
 	
 </script>
 
->>>>>>> lxy one
+
 </body>
 </html>

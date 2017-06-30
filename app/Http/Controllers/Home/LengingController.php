@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\home;
 
-
-
 use DB;
-
 /*
 *@Class_name : 借款详情
 *@Use : 用户借款信息详情展示
@@ -19,8 +16,7 @@ class LengingController extends CommonController
 	/*
 	*@Action_name : 借款默认首页
 	*/
-
-	public function index()
+    public function index()
     {
         //借款首页分页
         $data = DB::table('lenging')->paginate(3);     //每页显示3条
@@ -30,8 +26,7 @@ class LengingController extends CommonController
         $lastpage=$data->currentPage()-1 <0 ? 1 : $data->currentPage()-1 ;
         $data->next=$nextpage;
         $data->last=$lastpage;
-        //return view("book/show")->with('data',$data);
-		return view('home/leng/leng',['data'=>$data]);
+        return view('home/leng/leng',['data'=>$data]);
 
-	}
+    }
 }

@@ -251,7 +251,6 @@ use Illuminate\Support\Facades\Session;
                 </div>
                 <div class="form-control">
                     <label for="applyCity">是否分期</label>
-
                     <div class="controls">
                         <select class="i-arrow" name="applyCity" id="applyCity">
                             <option value="">请选择</option>

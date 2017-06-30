@@ -60,6 +60,5 @@ class CreditController extends Controller
     //用户申请借款
     public function applyto()
     {
-
     }
 }

@@ -2,7 +2,6 @@
 
 
 
-
 /*
 *@Use : 用户登录验证页面
 */
@@ -32,5 +31,6 @@ Route::get('resources/views/user/loginForm', 'Home\UserController@showLogin');
 /*
 *@Use : 用户退出
 */
+
 Route::get('user/logout', 'Home\UserController@logout');
 

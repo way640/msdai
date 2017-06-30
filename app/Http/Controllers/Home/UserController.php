@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Home;
 use App\Http\home;
 //use Germey\Geetest\GeetestCaptcha;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\DB;
 
 
@@ -27,7 +26,10 @@ class UserController extends CommonController
 	}
 	
 	/*
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7baa627c1eddba750a33af3e4a7a9f729dd3cba4
 	*Action_name : 登录调用框架级
 	*/
 	public function showLogin(){
@@ -90,18 +92,12 @@ class UserController extends CommonController
 	public function forget(){
 
 
-		
-
-		return view('home/user/forget');
-
 	}
 
 	/*
 	*@Action_name : 设置验证码
 	*/
 	public function captcha(){
-
-<<<<<<< HEAD
 		return view('home/web/StartCaptchaServlet');
 	}
 
@@ -117,9 +113,19 @@ class UserController extends CommonController
 	*@Action_name : 用户登录验证页面
 	*/
 	public function doLogin(){
-		
-		$userName = sset( $this->post['username'] ) ? $this->post['username'] : '';
+
+		$userName = isset( $this->post['username'] ) ? $this->post['username'] : '';
 		$userPwd  = isset( $this->post['userpwd'] )  ? $this->post['userpwd']  : '';
+
+		if ( empty ( $userPwd ) ) {
+			
+			return $this->error ( '账户密码未填写' );
+		}
+		
+		if ( empty ( $userName )) {
+			
+			return $this->error ( '用户名未填写' );
+		}
 
 		$userPwd = md5($userPwd);
 		
@@ -151,5 +157,4 @@ class UserController extends CommonController
 		
 		return $this->success(  );
 	}
-
 }

@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 */
 class CommonController extends Controller
 {
-
     protected $get = '';
     protected $post = '';
 
@@ -132,5 +131,4 @@ class CommonController extends Controller
         }
         return false;
 	}
-
 }

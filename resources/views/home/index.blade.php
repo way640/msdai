@@ -3,19 +3,7 @@
 <!--main-------------------------------------------------------------------------------------------------------------->
 
 <!--banner-----轮播图---------------------------------------------------------------------------------------->
-<!-- <div class="banner" id="banner">
-        <a href="#" class="focus">
-            <div class="left" id="left" onclick="left()"></div>
-                <ul>
-                    
-                    <li><em id="em1" onclick="Focus1()" style="background-color:#888"></em></li>
-                    <li><em id="em2" onclick="Focus2()"></em></li>
-                    <li><em id="em3" onclick="Focus3()"></em></li>
-                    <li style="margin-right:0px;"><em id="em4" onclick="Focus4()"></em></li>
-                </ul>
-            <div class="right" id="right" onclick="right()"></div>
-        </a>
-    </div> -->
+
 <div id="banner" >
     <img id="imgs" src="/image/focus1.gif">
         <div id="xd">
@@ -74,24 +62,19 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
             <a class="regular-thear" href="#">
                 <ol>
                     <li>产品丰富</li>
-
                     <li>期限多样</li>
                     <li>尽职风控</li>
                     <li style="font-size:12px;">更多固收理财> </li>
                 </ol>
-
             </a>
             <ul>
                 <li style="background-image:url(image/icon-xplan.png)">
                     <a href="#">车辆周转贷 1188989-1-1</a>
-
                     <p>一次还本付息</p>
                     <meter max="100" min="0" value="26" high="66" low="33" optimum="1"></meter>
                     <figcaption>160,000.00 / 61.20 万</figcaption>
                     <div class="earnings">
-
                         <h2>7.5+2</h2>
-
                         <h2>2</h2>
                         <h3>年化利率(%)</h3>
                         <h3>项目期限(月)</h3>
@@ -99,16 +82,12 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                     <a class="tender" href="#">立即投标</a>
                 </li>
                 <li>
-
                     <a href="#">项目集 160413-14</a>
-
                     <p>一次还本付息</p>
                     <meter max="100" min="0" value="40" high="66" low="33" optimum="1"></meter>
                     <figcaption>1,827,027.24 / 442.18 万</figcaption>
                     <div class="earnings">
-
                         <h2>7.5+2</h2>
-
                         <h2>2</h2>
                         <h3>年化利率(%)</h3>
                         <h3>项目期限(月)</h3>
@@ -116,33 +95,25 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                     <a class="tender" href="#">立即投标</a>
                 </li>
                 <li>
-
                     <a href="#">房产周转贷 1194661-1-1</a>
-
                     <p>一次还本付息</p>
                     <meter max="100" min="0" value="1" high="66" low="33" optimum="1"></meter>
                     <figcaption>28,945.30 / 267.00 万</figcaption>
                     <div class="earnings">
-
                         <h2>7.5+2</h2>
-
                         <h2>2</h2>
                         <h3>年化利率(%)</h3>
                         <h3>项目期限(月)</h3>
                     </div>
                     <a class="tender" href="#">立即投标</a>
                 </li>
-                <li style="border-right:none;">
-
+                <li style="border-right:none;">=
                     <a href="#">房产抵押贷 1169506-1-2</a>
-
                     <p>一次还本付息</p>
                     <meter max="100" min="0" value="66" high="66" low="33" optimum="1"></meter>
                     <figcaption>959,174.59 / 144.73 万</figcaption>
                     <div class="earnings">
-
                         <h2>7.5+2</h2>
-
                         <h2>2</h2>
                         <h3>年化利率(%)</h3>
                         <h3>项目期限(月)</h3>
@@ -156,7 +127,6 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
             <h1>基金理财</h1>
             <a href="#">更多</a>
         </div>
-
         <div class="fund">
             <a class="fund-thear" href="#">
                 <ol>
@@ -185,7 +155,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                 <li>
 
                     <p><span>混合</span>&nbsp;&nbsp;长盛基金&nbsp;&nbsp;001892</p>
-                    <a href="#">长盛新兴成长主题混合</a>
+                    <a href="http://www.howbuy.com/fund/001892/">长盛新兴成长主题混合</a>
                     <p style="color:#8A8A8A;">新兴产业灵活配置 绝对收益投资理念</p>
                     <div class="earnings">
                         <h2>1.1280</h2>
@@ -217,7 +187,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                     <p style="color:#8A8A8A;">债券为基股票添色 追求长期稳定增值</p>
                     <div class="earnings">
                         <h2>1.6720</h2>
-
+4
                         <h2>3.02</h2>
                         <h3>年化利率(%)</h3>
                         <h3>项目期限(月)</h3>
@@ -245,56 +215,9 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
             <ul>
 
                 <div id='pbox'>
-                    
+                
                 </div>
-                <!--<a href="#" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;">
-                    <article>
-                        <img src="image/icon-zplay.png"/>
-                        <figcaption>锦 小 囊</figcaption>
-                    </article>
-                    <aside>
-                        <h2 title="定投好还是一次性投资好？这个问题一开始就错了">定投好还是一次性投资好？这个问题…</h2>
 
-                        <p>不同的钱做不同的事，这是理财的一个基本常识。</p>
-                        <h3>阅读1005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞82&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论7</h3>
-                    </aside>
-                </a>
-                <a href="#" style="border-bottom:solid 1px #E5E5E5;">
-
-                    <article>
-                        <img src="image/icon-zplay.png"/>
-                        <figcaption>锦 小 囊</figcaption>
-                    </article>
-                    <aside>
-                        <h2 title="#有奖竞猜#开奖啦！（0415期）">#有奖竞猜#开奖啦！（0415期）</h2>
-
-                        <p>天天竞猜，天天开奖！</p>
-                        <h3>阅读1104&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞97&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论189</h3>
-                    </aside>
-                </a>
-                <a href="#" style="border-right:solid 1px #E5E5E5;;">
-
-                    <article>
-                        <img src="image/icon-yplan.png"/>
-                        <figcaption>一叶知秋</figcaption>
-                    </article>
-                    <aside>
-                        <h2 title="乱花渐欲迷人眼 揭秘大数据基金的投资秘诀（上）">乱花渐欲迷人眼 揭秘大数据基金的投…</h2>
-                        <p>2015年最受欢迎的大数据基金，取得超额收益的秘诀在哪里？面对众多产品，投资者应如何挑选大数据基金？且听本文详解。</p>
-                        <h3>阅读1721&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞142&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论8</h3>
-                    </aside>
-                </a>
-                <a href="#" style="border-right:solid 1px #E5E5E5;;">
-                    <article>
-                        <img src="image/icon-zplay.png"/>
-                        <figcaption>锦 小 囊</figcaption>
-                    </article>
-                    <aside>
-                        <h2 title="#有奖竞猜#开奖啦！（0414期）">#有奖竞猜#开奖啦！（0414期）</h2>
-                        <p>天天竞猜，天天开奖！</p>
-                        <h3>阅读1750&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞205&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论270</h3>
-                    </aside>
-                </a>-->
             </ul>
         </div>
     </div>

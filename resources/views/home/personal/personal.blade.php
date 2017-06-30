@@ -49,7 +49,6 @@
 						<li><a data-nav="p2p-setting" class="" href="https://box.jimu.com/User/SecurityCenter">账户设置</a></li>
 
 						<li><a data-nav="user-center" class="" href="{{ url('personal/config') }}">安全设置</a></li>
-
 						<li><a data-nav="message" class="" href="https://www.jimu.com/Message/List"><span>消息</span></a>
 						</li>
 					</ul>
@@ -75,15 +74,11 @@
                     </a>
         </div>
         <div class="account-info">
-            <h4 class="say-hello">中午好，jazz2312 吃完午饭小憩一会为下午补充能量！</h4>
+
+            <h4 class="say-hello"><?php echo $_SESSION['user']['username']?>，您好</h4>
             <div class="account-items-wrap clearfix">
                 <div class="account-item">
-                    <span>用户名</span><span class="large-text">jazz2312</span>
-                </div>
-                <div class="account-item">
-                    <span>安全等级</span>
-                    <span class="security-level">低</span>
-                    <a href="https://www.jimu.com/User/UserCenter">提升</a>
+                    <span>用户名</span><span class="large-text"><?php echo $_SESSION['user']['username']?></span>
                 </div>
                 <div class="account-item">
                     <span>可用积分</span>

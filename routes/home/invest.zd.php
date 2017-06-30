@@ -8,5 +8,3 @@ Route::get('invest/invest', 'Home\InvestController@index');
 */
 Route::get('invest/detail', 'Home\InvestController@detail');
 
-
-

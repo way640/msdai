@@ -68,7 +68,8 @@ class ArticleController extends CommonController
         if($re){
             return redirect('admin/article/article/');
         }else{
-            return back()->with('errors','配置项信息更新失败，请稍后重试！');
+
+            return back()->with('errors','文章信息更新失败，请稍后重试！');
         }
     }
 
@@ -79,14 +80,15 @@ class ArticleController extends CommonController
         if($re){
             $data = [
                 'status' => 0,
-                'msg' => '配置项删除成功！',
+                'msg' => '文章删除成功！',
             ];
         }else{
             $data = [
                 'status' => 1,
-                'msg' => '配置项删除失败，请稍后重试！',
+                'msg' => '文章删除失败，请稍后重试！',
             ];
         }
         return $data;
     }
 }
+

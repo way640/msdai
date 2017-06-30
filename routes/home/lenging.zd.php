@@ -4,3 +4,4 @@
 */
 
 Route::get('lenging/lenging', 'Home\LengingController@index');
+
