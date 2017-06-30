@@ -155,7 +155,7 @@
             </dl>
             <dl class="right">
                 <dt>期限范围：</dt>
-                <dd><span class="digit">6、12、18、24</span>个月</dd>
+                <dd><span class="digit">6、12、18、24</span>个月 </dd>
             </dl>
             <dl class="left">
                 <dt>还款方式：</dt>
