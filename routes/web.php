@@ -11,6 +11,19 @@
 |
 */
 
+// 万能路由  暂不启用
+/*
+$request = @$_SERVER['REQUEST_URI']? $_SERVER['REQUEST_URI'] : $_SERVER['PATH_INFO'] ;
+
+    $reqArr = @explode('?', $request);
+    $reqArr = @explode('/', $reqArr[0]);
+    $action = @array_pop($reqArr);
+    $controller = @array_pop($reqArr);
+    $namespace = @array_pop($reqArr);
+if($namespace&&$controller&&$action){
+    Route::get($namespace."/".$controller."/".$action,ucfirst($namespace).'\\'.ucfirst($controller).'Controller@'.$action);
+}
+*/
 function Autoload($path){
     $arr = opendir($path);
     while($info = readdir($arr)){
@@ -23,7 +36,9 @@ function Autoload($path){
     }
 }
 $path = @$_SERVER['PATH_INFO']?$_SERVER['PATH_INFO']:$_SERVER['REQUEST_URI'];
-$urlArr = explode('/',$path);
+
+$urlArr = @explode('?',$path);
+$urlArr = @explode('/',$urlArr['0']);
 if($urlArr[1] == 'admin'){
     Autoload(__DIR__.'\admin');
 }else{
@@ -33,6 +48,7 @@ if($urlArr[1] == 'admin'){
 Route::get('/', function () {
     return view('home.index');
 });
+    
 
 
 Route::get('admin/{name}/{id}', function () {
