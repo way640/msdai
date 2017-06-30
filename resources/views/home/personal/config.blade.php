@@ -44,7 +44,19 @@
                     <td class="text-left desc " width="40%">
                         <small class="muted">用户在积木网站头像，增加账户个性化</small>
                     </td>
-                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未设置</td>
+                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>
+					
+					<!--判断用户头像是否设置-->
+					   <?php if ( empty ( $data['user_head'] ) ) {?>
+					       未设置
+                       <?php 
+					       } else {
+					   ?>
+                           已设置
+					   <?php 
+					       }
+					   ?>
+					</td>
                             <td class="info " width="30%"></td>
                             <td nowrap="nowrap">
                                 <a href="{{ url('personal/addImage') }}">设置</a>
@@ -65,12 +77,12 @@
                 <tr>
                     <td class="text-left " nowrap="nowrap"><strong>登录密码</strong></td>
                     <td class="text-left desc " width="30%">
-                        <small class="muted">用于登录积木网站的密码</small>
+                        <small class="muted">用于登录挣点钱网站的密码</small>
                     </td>
                     <td class="status text-center" nowrap="nowrap"><i class="icon-ok-sign icon-green"></i>已设置</td>
                     <td class="info " width="30%"></td>
                     <td nowrap="nowrap">
-                        <a href="https://www.jimu.com/User/ChangePassword">修改</a>
+                        <a href="{{ url('personal/changePwd') }}">修改</a>
                     </td>
                 </tr>
 

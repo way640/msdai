@@ -100,9 +100,10 @@
             <div>
                 <p class="agreement-info">
 
-                    <span>已有账户？<a href="{{ url('user/login') }}">登录</a></span>	
-                    			
+                    <span>已有账户？<a href="{{ url('user/login') }}">登录</a></span>
+					
 				</p>
+
             </div>
         </form>
     </div>

@@ -20,3 +20,7 @@ Route::get('personal/addImage', 'Home\PersonalController@image');
 *@Use : 执行添加图片
 */
 Route::post('personal/image', 'Home\PersonalController@addImage');
+/*
+*@Use : 修改用户密码
+*/
+Route::get('personal/changePwd', 'Home\PersonalController@changePwd');

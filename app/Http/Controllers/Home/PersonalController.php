@@ -36,9 +36,10 @@ class PersonalController extends CommonController
 		
 		$userId = $_SESSION['user']['user_id'] ;
 		
-		$data = DB::select("select * from zd_user_info where user_id = $userId") ;
+		$arr = DB::select("select * from zd_user_info where user_id = $userId") ;
+		$arr = $this->objToArray($arr);
 		
-		return view('home/personal/config');
+		return view('home/personal/config', ['data' => $arr[0]]);
 	}
 	
 	/*
@@ -47,6 +48,14 @@ class PersonalController extends CommonController
 	public function image(){
 	
 		return view('home/personal/image');
+	}
+	
+	/*
+	*@Action_name : 用户修改密码
+	*/
+	public function changePwd(){
+		
+		return view('home/personal/changePwd');
 	}
 	
     /*

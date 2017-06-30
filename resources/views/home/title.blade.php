@@ -75,7 +75,8 @@
                             // alert(v.config_info);
                             str +='<li><a href="{{url('')}}/'+v.config_link+'" >'+v.config_info+'</a></li>'; 
                         })
-                        $('#box').html(str);
+
+						$('#box').append(str);
                     },
                     error: function(){
 
@@ -118,7 +119,7 @@
                                 str3 +='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1750&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞205&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论270</h3></aside></a>';
                             }
                         })
-                        $('#pbox').html(str0+str1+str2+str3);
+						$('#pbox').html(str0+str1+str2+str3);
                     },
                     error: function(){
 
