@@ -53,7 +53,7 @@
                   <div id='box'>
                       
                   </div>
-                  <a href="">充值</a>
+                  <a href="{{url('')}}/cz/index">充值</a>
         	</ul>
         </div>
     </div>

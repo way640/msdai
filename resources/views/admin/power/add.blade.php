@@ -14,6 +14,16 @@
                 @endif
             </div>
         @endif
+            <div class="form-group">
+                <label class="col-sm-3 control-label">权限列表：</label>
+                <div class="col-sm-9">
+                    <select class="form-control" style="width: 110px" name="">
+                        @foreach($data as $d)
+                            <option value="{{$d->priv_id}}">{{$d->_priv_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         <label class="col-sm-3 control-label">权限名称：</label>
         <div class="col-sm-9">
             <input type="text" name="priv_name" class="form-control" placeholder="请输入文本">
@@ -34,7 +44,13 @@
     <div class="form-group">
         <label class="col-sm-3 control-label">权限层级：</label>
         <div class="col-sm-9">
-             <input type="text" name="priv_level" class="form-control" placeholder="请输入文本">
+            <input type="text" name="priv_level" class="form-control" placeholder="请输入文本">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">pid：</label>
+        <div class="col-sm-9">
+            <input type="text" name="priv_pid" class="form-control" placeholder="请输入文本">
         </div>
     </div>
     <div class="form-group">

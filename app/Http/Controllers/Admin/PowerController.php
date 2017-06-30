@@ -20,7 +20,8 @@ class  PowerController extends CommonController
     //get.admin/article/create   添加权限
     public function create()
     {
-        return view('admin.power.add');
+        $data = (new Power)->tree();
+        return view('admin.power.add',compact('data'));
     }
 
     //post.admin/article/store 添加权限提交
