@@ -53,7 +53,7 @@
 </head>
 <body style="height:100%">
 <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-<script src="https://static.geetest.com/static/tools/gt.js"></script>
+<!--<script src="https://static.geetest.com/static/tools/gt.js"></script>-->
 <div class="register-logo">
         <a href="https://www.jimu.com/" target="_blank">
             <img src="../../image/logo-5464fa9708.png" alt="logo">
@@ -61,7 +61,7 @@
     </div>
     <div class="register-main">
         <h2>免费注册账户</h2>
-        <form class="popup">
+        <form class="popup" action="../web/VerifyLoginServlet.php" method="post">
 		<?php echo e(csrf_field()); ?>
 
             <div class="input-wrap">
@@ -85,29 +85,29 @@
     <div id="embed-captcha"></div>
     <p id="wait" class="show">正在加载验证码......</p>
     <p id="notice" class="hide">请先完成验证</p>
-	
+
                 </div>
 
 				
 				
             <div class="input-wrap register-btn-wrap">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="agreeContract" checked="true" tabindex="4" data-val="true" data-val-extension-extension="on" data-val-extension="请勾选积木平台注册及服务协议。">
-                        我已阅读并同意<a href="https://www.jimu.com/User/Contract" target="_blank">《积木平台注册及服务协议》</a><a href="https://www.jimu.com/User/Agreement" target="_blank">《风险提示及承诺》</a>
-                    </label>
-                </div>
                 <span class="help-block">
                     <span class="field-validation-valid" data-valmsg-for="agreeContract" data-valmsg-replace="true"></span>
                 </span>
-                <button tabindex="5" type="button" id="act_register" class="register-btn">
-                    立即注册
-                </button>
+              
+                    <input style="width:302px" class="btn" id="embed-submit" type="button" value="立即注册" class="register-btn">
+                
             </div>
             <div>
                 <p class="agreement-info">
-                    <span>已有账户？<a href="http://www.zdmoney.com/home/user/login">登录</a></span>
+<<<<<<< HEAD
+                    <span>已有账户？<a href="<?php echo e(url('user/login')); ?>">登录</a></span>
+					
+				</p>
+=======
+                    <span>已有账户？<a href="http://www.zdmoney.com/user/login">登录</a></span>
                 </p>
+>>>>>>> 36160ebbd773f7c9f7c0a36157d4497605fdd0bd
             </div>
         </form>
     </div>
@@ -200,31 +200,53 @@
             }, handlerEmbed);
         }
     });
-</script>
+	
+	$('#embed-submit').on('click', function(){
 
-
-<script>
+		var username = $('#username').val();
+		var userpwd  = $('#userpwd').val();
 	
-	var obj = new Object;
-	
-	obj['username'] = $('#username').val()
-	obj['userpwd']  = $('#userpwd').val()
-	
-	$('#act_register').on('click', function(){
-		alert(obj)
 		$.ajax({
-			type: "GET",
-			url: "<?php echo e(asset('home/user/doRegist')); ?>",
-			data: obj,
+			type: "POST",
+			url: "../web/VerifyLoginServlet.php",
+			data: {geetest_challenge: $("input[name='geetest_challenge']").val(),
+				   geetest_validate: $("input[name='geetest_validate']").val(),
+				   geetest_seccode: $("input[name='geetest_seccode']").val()},
 			dataType: 'json',
 			success: function(msg){
 				
-				alert( "Data Saved: " + msg );
+				if(msg.status == 'fail'){
+					
+					alert('请填写验证码')
+				}else{
+					
+					$.ajax({
+						type: "POST",
+						url: "<?php echo e(url('user/doRegist')); ?>",
+						data: 'username='+username+"&userpwd="+userpwd,
+						dataType: 'json',
+						success: function(msg){
+							
+							if(msg.status == 'fail'){
+								
+								alert('请填写验证码')
+							}else if(msg.status == 0){
+								
+								alert(msg.msg)
+							}else{
+								
+								alert('注册成功')
+								location.href="<?php echo e(url('')); ?>"
+							}
+						}
+					});
+				}
 			}
 		});
-	})	
-	
+	})		
+
 </script>
+
 
 </body>
 </html>

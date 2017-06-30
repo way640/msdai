@@ -5,7 +5,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	
+	<meta http-equiv="refresh" content="3;url=<?php echo e(url('')); ?>" />
 
     <title> - 404 页面</title>
     <meta name="keywords" content="">
@@ -34,12 +35,15 @@
                  </div>
                  <button type="submit" class="btn btn-primary">搜索</button>
             </form>-->
+			
         </div>
+		在3秒后跳转官网...
     </div>
 
     <!-- 全局js -->
     <script src="js/jquery.min.js?v=2.1.4"></script>
     <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	
 
     
     

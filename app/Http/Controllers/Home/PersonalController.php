@@ -32,6 +32,6 @@ class PersonalController extends CommonController
 	*/
 	public function config(){
 		
-		return view('home/personal/config');
+		return view('personal/config');
 	}
 }

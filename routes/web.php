@@ -33,10 +33,18 @@ if($urlArr[1] == 'admin'){
 Route::get('/', function () {
     return view('home.index');
 });
+
+
 Route::get('admin/{name}/{id}', function () {
     return view('admin.login');
 });
-//如果访问不存在的控制器和方法，跳转404
-Route::get('{name}/{id}}', function ($name,$id) {
+
+Route::get('{name}', function ($name) {
     return view('404');
 });
+
+//如果访问不存在的控制器和方法，跳转404
+Route::get('{name}/{id}', function ($name,$id) {
+    return view('404');
+});
+
