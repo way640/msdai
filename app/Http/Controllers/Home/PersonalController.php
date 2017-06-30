@@ -171,6 +171,7 @@ class PersonalController extends CommonController
 		
 		$_SESSION[ "captcha" ] = $random;
 		
+		//短信接口清请求地址
 		$href = "http://sms.106jiekou.com/utf8/sms.aspx?account=jazz2312&password=song123123&mobile=".$number."&content=您的订单编码：".$random."。如需帮助请联系客服。" ;
 	
 		$content = file_get_contents ( $href ) ; 
