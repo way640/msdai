@@ -45,9 +45,9 @@ class CzController extends CommonController
 				// $user_id => $_SESSION['user']['user_id'];
 				$user_id = 1;
 				//查询原来的余额
-				$info = DB::table('user_info')->where('user_id',$user_id)->first();
-				//修改余额 = 原来的余额加上充值的金额
-				DB::table('user_info')->where('user_id',$user_id)->update('user_money'=> int($info['user_money']+$_GET['total_fee']));
+				// $info = DB::table('user_info')->where('user_id',$user_id)->first();
+				// //修改余额 = 原来的余额加上充值的金额
+				// DB::table('user_info')->where('user_id',$user_id)->update('user_money'=> int($info['user_money']+$_GET['total_fee']));
 				//没值 新手 添加数据
 				$data = [
 				'user_id' => $user_id,
