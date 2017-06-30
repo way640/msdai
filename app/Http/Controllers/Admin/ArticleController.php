@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Model\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+
 
 class ArticleController extends CommonController
 {
@@ -23,7 +25,6 @@ class ArticleController extends CommonController
     {
         return view('admin.article.add');
     }
-
     //post.admin/article/store 添加文章提交
     public function store()
     {
@@ -62,10 +63,12 @@ class ArticleController extends CommonController
     public function update($article_id)
     {
         $input = Input::except('_token','_method');
+
         $re = Article::where('article_id',$article_id)->update($input);
         if($re){
             return redirect('admin/article/article/');
         }else{
+
             return back()->with('errors','文章信息更新失败，请稍后重试！');
         }
     }
@@ -88,3 +91,4 @@ class ArticleController extends CommonController
         return $data;
     }
 }
+

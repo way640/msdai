@@ -53,7 +53,7 @@
 </head>
 <body style="height:100%">
 <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-<!--<script src="https://static.geetest.com/static/tools/gt.js"></script>-->
+
 <div class="register-logo">
         <a href="https://www.jimu.com/" target="_blank">
             <img src="../../image/logo-5464fa9708.png" alt="logo">
@@ -61,7 +61,9 @@
     </div>
     <div class="register-main">
         <h2>免费注册账户</h2>
+
         <form class="popup" action="../web/VerifyLoginServlet.php" method="post">
+
 		{{ csrf_field() }}
             <div class="input-wrap">
                 <span class="input-tip">用户名</span>
@@ -99,14 +101,12 @@
             </div>
             <div>
                 <p class="agreement-info">
-<<<<<<< HEAD
-                    <span>已有账户？<a href="http://www.zdmoney.com/user/login">登录</a></span>
-                </p>
-=======
+
                     <span>已有账户？<a href="{{ url('user/login') }}">登录</a></span>
 					
 				</p>
->>>>>>> bdb682534f5f69b62d3b53aba9bfc1454d7558be
+
+
             </div>
         </form>
     </div>
@@ -233,7 +233,7 @@
 								
 								alert(msg.msg)
 							}else{
-								
+
 								alert('注册成功,请完善个人信息,以便享受本站更多服务')
 								location.href="{{ url('personal/config') }}"
 							}
@@ -244,6 +244,33 @@
 		});
 	})		
 
+</script>
+
+
+
+
+
+<script>
+	
+	var obj = new Object;
+	
+	obj['username'] = $('#username').val()
+	obj['userpwd']  = $('#userpwd').val()
+	
+	$('#act_register').on('click', function(){
+		alert(obj)
+		$.ajax({
+			type: "GET",
+			url: "{{ asset('home/user/doRegist') }}",
+			data: obj,
+			dataType: 'json',
+			success: function(msg){
+				
+				alert( "Data Saved: " + msg );
+			}
+		});
+	})	
+	
 </script>
 
 

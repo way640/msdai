@@ -1,3 +1,4 @@
+
 @extends('home.title')
 @section('content')
 <!DOCTYPE html>
@@ -44,7 +45,19 @@
                     <td class="text-left desc " width="40%">
                         <small class="muted">用户在积木网站头像，增加账户个性化</small>
                     </td>
-                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未设置</td>
+                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>
+					
+					<!--判断用户头像是否设置-->
+					   <?php if ( empty ( $data['user_head'] ) ) {?>
+					       未设置
+                       <?php 
+					       } else {
+					   ?>
+                           已设置
+					   <?php 
+					       }
+					   ?>
+					</td>
                             <td class="info " width="30%"></td>
                             <td nowrap="nowrap">
                                 <a href="{{ url('personal/addImage') }}">设置</a>
@@ -65,12 +78,12 @@
                 <tr>
                     <td class="text-left " nowrap="nowrap"><strong>登录密码</strong></td>
                     <td class="text-left desc " width="30%">
-                        <small class="muted">用于登录积木网站的密码</small>
+                        <small class="muted">用于登录挣点钱网站的密码</small>
                     </td>
                     <td class="status text-center" nowrap="nowrap"><i class="icon-ok-sign icon-green"></i>已设置</td>
                     <td class="info " width="30%"></td>
                     <td nowrap="nowrap">
-                        <a href="https://www.jimu.com/User/ChangePassword">修改</a>
+                        <a href="{{ url('personal/changePwd') }}">修改</a>
                     </td>
                 </tr>
 
@@ -86,33 +99,26 @@
                 </tr>
 
                 <tr>
-                    <td class="text-left " nowrap="nowrap"><strong>昵称</strong></td>
-                    <td class="text-left desc " width="30%">
-                        <small class="muted">用于锦囊，论坛的用户名</small>
-                    </td>
-                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未绑定</td>
-                            <td class="info " width="30%"></td>
-                            <td nowrap="nowrap"><a href="https://www.jimu.com/User/BindNickName">绑定</a></td>
-                        
-                </tr>
-
-                <tr>
                     <td class="text-left " nowrap="nowrap"><strong>手机号码</strong></td>
                     <td class="text-left desc " width="30%">
                         <small class="muted">手机号是您在积木盒子重要的身份凭证</small>
                     </td>
-                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未认证</td>
+                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>
+						
+						<!--判断用户手机是否认证-->
+					   <?php if ( empty ( $arr['user_tel'] ) ) {?>
+					       未认证
+                       <?php 
+					       } else {
+					   ?>
+                           已认证
+					   <?php 
+					       }
+					   ?>
+					</td>
                             <td class="info " width="30%"></td>
-                            <td nowrap="nowrap"><a href="https://www.jimu.com/User/BindMobile">验证</a></td>
+                            <td nowrap="nowrap"><a href="{{ url('personal/setNumber') }}">验证</a></td>
                         </tr>
-
-                <tr>
-                    <td class="text-left " nowrap="nowrap"><strong>短信设置</strong></td>
-                    <td class="text-left desc" colspan="3">
-                        <small class="muted">账户资产/资金变动短信通知更及时</small>
-                    </td>
-                    <td nowrap="nowrap"><a href="https://box.jimu.com/Message/SmsSetting">设置</a></td>
-                </tr>
 
                 <tr>
                     <td class="text-left" nowrap="nowrap"><strong>电子邮箱</strong></td>
@@ -121,7 +127,7 @@
                     </td>
                     <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未绑定</td>
                             <td class="info " width="30%"></td>
-                            <td nowrap="nowrap"><a href="https://www.jimu.com/User/BindEmail">绑定</a></td>
+                            <td nowrap="nowrap"><a href="{{ url('personal/bindEmail') }}">绑定</a></td>
                         </tr>
 
                 <tr>
@@ -132,7 +138,7 @@
 
                     <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未设置</td>
                             <td class="info " width="30%"></td>
-                            <td nowrap="nowrap"><a href="https://www.jimu.com/User/BindContact">填写</a></td>
+                            <td nowrap="nowrap"><a href="{{ url('personal/setConfig') }}">填写</a></td>
                         </tr>
 
                 <tr>
@@ -142,7 +148,7 @@
                     </td>
                     <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未设置</td>
                             <td class="info " width="30%"></td>
-                            <td nowrap="nowrap"><a href="https://www.jimu.com/User/BindLocation">填写</a></td>
+                            <td nowrap="nowrap"><a href="{{ url('personal/setConfig') }}">填写</a></td>
                         </tr>
                 </tbody>
             </table>

@@ -1,3 +1,4 @@
+
 /**
  * Created by jimubox on 16/2/18.
  */
@@ -352,4 +353,6 @@ require(['jquery', 'bootstrap'], function($) {
 
     $("#sms").click(getSms);
     $("#verify").click(verifySms);
+
 });
+

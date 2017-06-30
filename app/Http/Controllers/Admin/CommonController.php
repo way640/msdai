@@ -16,6 +16,7 @@ class CommonController extends Controller
     public $emailAddr = '';
     public $emailTitle = '';
 
+
     /*
      * @action_name ： 公共构造方法
      * @param：
@@ -88,7 +89,6 @@ class CommonController extends Controller
             return true;
         }
         return false;
-
     }
 
 

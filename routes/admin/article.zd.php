@@ -14,3 +14,4 @@
   Route::any('admin/article/update/{article_id}','Admin\ArticleController@update');
 
   Route::any('admin/article/destroy/{article_id}','Admin\ArticleController@destroy');
+

@@ -1,5 +1,9 @@
+<?php
+use Illuminate\Support\Facades\Session;
+?>
 @extends('Home.title')
-@section('content')   
+@section('content')
+
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -22,265 +26,167 @@
     <!-- end: Style -->
 
     <!-- start: Script -->
-	
-	<center>
-	
-    <script src="{{ asset('js/hm.js') }}"></script>
+
+    <script  type="text/javascript" src="{{ asset('js/jquery-1.3.2.min.js') }}"></script>
+
+    <script src="{{ asset('js/hm.js') }}"></script><div class="container venus-container">
+        <div class="banner">
+        <img src="{{ asset('image/venus_banner-55eb2b8744.png') }}" alt="轻松投banner">
+        <a href="javascript:;" class="banner-btn" target="_blank">查看攻略</a>
+        </div>
         <div class="project-container">
-            <h2 class="title">推荐产品</h2>
-            <div class="project-list clearfix">
-                        <div class="project ">
-                            <div class="invest-item-type-wrap"><span class="invest-item-type">新手专享</span></div>
-                            <div class="title">新手专享1个月20170606-3</div>
-                            <div class="desc">起投金额1,000元</div>
-                            <div class="info">
-                                <div class="rate">
-                                    <div class="num invest-item-profit">
-                                            6<em>.4+3</em>
-                                    </div>
-                                    <div class="tip">约定利率(%)<span class="tip-icon">!</span><span class="tip-info">约定利率不代表实际收益</span></div>
-                                </div>
-                                <div class="time">
-                                    <div class="num">1</div>
-                                    <div class="tip">投资期限（月）</div>
-                                </div>
-                                <div class="status">
-                                    <div class="num status-blue">可加入</div>
-                                    <div class="tip">状态</div>
-                                </div>
-                            </div>
-                            <div class="project-shadow">
-                                <div class="project-shadow-tip">
-                                    <div class="more-title">可加入</div>
-                                    <div class="more-info">查看详情</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <a href="{{ url('home/invest/detail') }}" target="_blank">
-                        <div class="project project-cantbid">
-                            <div class="title">轻松投15天20170606-2</div>
-                            <div class="desc">起投金额1,000元</div>
-                            <div class="info">
-                                <div class="rate">
-                                    <div class="num invest-item-profit">
-                                            5<em>.80</em>
-                                    </div>
-                                    <div class="tip">约定利率(%)<span class="tip-icon">!</span><span class="tip-info">约定利率不代表实际收益</span></div>
-                                </div>
-                                <div class="time">
-                                    <div class="num">15</div>
-                                    <div class="tip">投资期限（天）</div>
-                                </div>
-                                <div class="status">
-                                    <div class="num status-green">收益中</div>
-                                    <div class="tip">状态</div>
-                                </div>
-                            </div>
-                            <div class="project-shadow">
-                                <div class="project-shadow-tip">
-                                    <div class="more-title">收益中</div>
-                                    <div class="more-info">查看详情</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <a href="https://box.jimu.com/Venus/29961" target="_blank">
-                        <div class="project project-cantbid">
-                            <div class="title">轻松投1个月20170606-2</div>
-                            <div class="desc">起投金额1,000元</div>
-                            <div class="info">
-                                <div class="rate">
-                                    <div class="num invest-item-profit">
-                                            6<em>.40</em>
-                                    </div>
-                                    <div class="tip">约定利率(%)<span class="tip-icon">!</span><span class="tip-info">约定利率不代表实际收益</span></div>
-                                </div>
-                                <div class="time">
-                                    <div class="num">1</div>
-                                    <div class="tip">投资期限（月）</div>
-                                </div>
-                                <div class="status">
-                                    <div class="num status-green">收益中</div>
-                                    <div class="tip">状态</div>
-                                </div>
-                            </div>
-                            <div class="project-shadow">
-                                <div class="project-shadow-tip">
-                                    <div class="more-title">收益中</div>
-                                    <div class="more-info">查看详情</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <a href="https://box.jimu.com/Venus/29925" target="_blank">
-                        <div class="project project-cantbid">
-                            <div class="title">轻松投3个月20170606-1</div>
-                            <div class="desc">起投金额1,000元</div>
-                            <div class="info">
-                                <div class="rate">
-                                    <div class="num invest-item-profit">
-                                            7<em>.50</em>
-                                    </div>
-                                    <div class="tip">约定利率(%)<span class="tip-icon">!</span><span class="tip-info">约定利率不代表实际收益</span></div>
-                                </div>
-                                <div class="time">
-                                    <div class="num">3</div>
-                                    <div class="tip">投资期限（月）</div>
-                                </div>
-                                <div class="status">
-                                    <div class="num status-green">收益中</div>
-                                    <div class="tip">状态</div>
-                                </div>
-                            </div>
-                            <div class="project-shadow">
-                                <div class="project-shadow-tip">
-                                    <div class="more-title">收益中</div>
-                                    <div class="more-info">查看详情</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <a href="https://box.jimu.com/Venus/29932" target="_blank">
-                        <div class="project project-cantbid">
-                            <div class="title">轻松投5个月20170606-1</div>
-                            <div class="desc">起投金额1,000元</div>
-                            <div class="info">
-                                <div class="rate">
-                                    <div class="num invest-item-profit">
-                                            7<em>.80</em>
-                                    </div>
-                                    <div class="tip">约定利率(%)<span class="tip-icon">!</span><span class="tip-info">约定利率不代表实际收益</span></div>
-                                </div>
-                                <div class="time">
-                                    <div class="num">5</div>
-                                    <div class="tip">投资期限（月）</div>
-                                </div>
-                                <div class="status">
-                                    <div class="num status-green">收益中</div>
-                                    <div class="tip">状态</div>
-                                </div>
-                            </div>
-                            <div class="project-shadow">
-                                <div class="project-shadow-tip">
-                                    <div class="more-title">收益中</div>
-                                    <div class="more-info">查看详情</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <a href="https://box.jimu.com/Venus/29962" target="_blank">
-                        <div class="project project-cantbid">
-                            <div class="title">轻松投6个月20170606-2</div>
-                            <div class="desc">起投金额1,000元</div>
-                            <div class="info">
-                                <div class="rate">
-                                    <div class="num invest-item-profit">
-                                            8<em>.50</em>
-                                    </div>
-                                    <div class="tip">约定利率(%)<span class="tip-icon">!</span><span class="tip-info">约定利率不代表实际收益</span></div>
-                                </div>
-                                <div class="time">
-                                    <div class="num">6</div>
-                                    <div class="tip">投资期限（月）</div>
-                                </div>
-                                <div class="status">
-                                    <div class="num status-green">收益中</div>
-                                    <div class="tip">状态</div>
-                                </div>
-                            </div>
-                            <div class="project-shadow">
-                                <div class="project-shadow-tip">
-                                    <div class="more-title">收益中</div>
-                                    <div class="more-info">查看详情</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <a href="https://box.jimu.com/Venus/29946" target="_blank">
-                        <div class="project project-cantbid">
-                            <div class="title">轻松投11个月20170606-1</div>
-                            <div class="desc">起投金额1,000元</div>
-                            <div class="info">
-                                <div class="rate">
-                                    <div class="num invest-item-profit">
-                                            8<em>.80</em>
-                                    </div>
-                                    <div class="tip">约定利率(%)<span class="tip-icon">!</span><span class="tip-info">约定利率不代表实际收益</span></div>
-                                </div>
-                                <div class="time">
-                                    <div class="num">11</div>
-                                    <div class="tip">投资期限（月）</div>
-                                </div>
-                                <div class="status">
-                                    <div class="num status-green">收益中</div>
-                                    <div class="tip">状态</div>
-                                </div>
-                            </div>
-                            <div class="project-shadow">
-                                <div class="project-shadow-tip">
-                                    <div class="more-title">收益中</div>
-                                    <div class="more-info">查看详情</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <a href="https://box.jimu.com/Venus/29960" target="_blank">
-                        <div class="project project-cantbid">
-                            <div class="title">轻松投12个月20170606-2</div>
-                            <div class="desc">起投金额1,000元</div>
-                            <div class="info">
-                                <div class="rate">
-                                    <div class="num invest-item-profit">
-                                            9<em>.50</em>
-                                    </div>
-                                    <div class="tip">约定利率(%)<span class="tip-icon">!</span><span class="tip-info">约定利率不代表实际收益</span></div>
-                                </div>
-                                <div class="time">
-                                    <div class="num">12</div>
-                                    <div class="tip">投资期限（月）</div>
-                                </div>
-                                <div class="status">
-                                    <div class="num status-green">收益中</div>
-                                    <div class="tip">状态</div>
-                                </div>
-                            </div>
-                            <div class="project-shadow">
-                                <div class="project-shadow-tip">
-                                    <div class="more-title">收益中</div>
-                                    <div class="more-info">查看详情</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                <a href="https://box.jimu.com/Venus/23906" target="_blank">
-                        <div class="project project-cantbid">
-                            <div class="title">新手专享15天20170411-3</div>
-                            <div class="desc">起投金额1,000元</div>
-                            <div class="info">
-                                <div class="rate">
-                                    <div class="num invest-item-profit">
-                                            5<em>.8+4</em>
-                                    </div>
-                                    <div class="tip">约定利率(%)<span class="tip-icon">!</span><span class="tip-info">约定利率不代表实际收益</span></div>
-                                </div>
-                                <div class="time">
-                                    <div class="num">15</div>
-                                    <div class="tip">投资期限（天）</div>
-                                </div>
-                                <div class="status">
-                                    <div class="num status-blue">已完成</div>
-                                    <div class="tip">状态</div>
-                                </div>
-                            </div>
-                            <div class="project-shadow">
-                                <div class="project-shadow-tip">
-                                    <div class="more-title">已完成</div>
-                                    <div class="more-info">查看详情</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+            <h2 class="title">填写放款信息</h2>
+            <div class="result-wrap" style="text-align:center">
+                <div class="result-content" >
+                    <form action="/mloans/loan" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <table class="insert-tab" width="100%">
+                            <tbody><tr>
+                                <th width="120">放款金额：</th>
+                                <td>
+                                    <input class="common-text required" id="money" name="lenging_money" size="50" value="" type="text">
+                                    <div class="tbody"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th align="right">放款开始时间：</th>
+                                <td>
+                                    <input class="common-text required" id="calen2" name="lenging_start_time" size="50" value="" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>放款结束时间：</th>
+                                <td>
+                                    <input class="common-text required" id="calen2" name="lenging_end_time" size="50" value="" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>放款年利率：</th>
+                                <td><input class="common-text" name="lenging_interest" size="50" value="" type="text" id="inter"></td>
+                            </tr>
+                            <tr>
+                                <th>回款分配类型：</th>
+                                <td>
+                                    <select name="lenging_type" class="common-text">
+                                        <option value="1">本息回款</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>当前可用额度：</th>
+                                <td><input class="common-text required" id="title" name="lenging_quota" size="50" value="" type="text"></td>
+                            </tr>
+                            <tr>
+                                <th>最终收款：</th>
+                                <td class="inp"><input class="common-text required" id="title" name="lenging_total" size="50" value="" type="text" disabled></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                  <?php if(Session::get('user_id')){?>
+                                     <input class="btn btn-primary btn6 mr10" value="提交" type="submit" >
+                                  <?php }else{ ?>
+                                     <input class="btn btn-primary btn6 mr10" value="提交" id="but" type="button">
+                                  <?php } ?>
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </form>
+                </div>
+            </div>
+            <div id="mask" class="mask"></div>
+            <div id="prod" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;"><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="nozhe">X</button>
+                    <h3 id="myModalLabel">提示</h3>
+                </div>
+                <center>
+                <div class="modal-body">
+                    <p><span class="btn-modal-apply-win">请先登录</span></p>
+                </div>
+                </center>
+                <div class="modal-footer">
+                    <a href="/user/regist" class="btn btn-apply-big btn-modal-apply">免费注册</a>
+                    <a href="/user/login" class="btn btn-apply-big btn-modal-apply">登录</a>
+                </div>
+            </div>
+            <style type="text/css">
+                .contact-us .qrcode img {
+                    width: 100%;
+                    height: 100%;
+                }
+                .modal-header{
+                    background: #4687cc;
+                }
+                .modal-footer .btn{
+                    color: white;
+                    background: #4687cc;
+                }
+                .mask {
+                    position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #000;
+                    z-index: 1002; left: 0px;
+                    opacity:0.5; -moz-opacity:0.5;
+                }
+            </style>
+            <script>
+                $('#money').blur(function () {
+                    var num=$('#money').val();
+                    var inter=$('#inter').val();
+                    var str="<font color='red' size='1px'>最低加入金额 1,000元，上限500,000元</font>";
+                    var sa="";
+                    if(num<1000){
+                        $('.tbody').html(str);
+                    }else if(num>=1000){
+                        $.ajax({
+                            type:"post",
+                            url:"/mloans/dal",
+                            data:{
+                                "num":num,
+                                "inter":inter
+                            },
+                            success:function (data) {
+                                $('.inp').html('<input class="common-text required" id="title" name="lenging_total" size="50" value="'+data+'" type="text" disabled>');
+                            }
+                        });
+                        $('.tbody').html(sa);
+                    }
+                });
+
+//                计算用户最终收益
+                $('#inter').blur(function () {
+                    var num=$('#money').val();
+                    var inter=$('#inter').val();
+                    $.ajax({
+                        type:"post",
+                        url:"/mloans/dal",
+                        data:{
+                            "num":num,
+                            "inter":inter
+                        },
+                        success:function (data) {
+                            $('.inp').html('<input class="common-text required" id="title" name="lenging_total" size="50" value="'+data+'" type="text" disabled>');
+                        }
+                    });
+                });
+                //提示用户登录
+//                $('#but').click(function () {
+//                    alert('请先登录');
+//                })
+                $('#but').click(function () {
+                    $("#mask").css("height",$(document).height());
+                    $("#mask").css("width",$(document).width());
+                    $("#mask").show();
+                    $('#prod').show();
+                });
+
+                $('#nozhe').click(function () {
+                    $("#mask").hide();
+                    $('#prod').hide();
+
+                });
+            </script>
+
                 </div>
         </div>
     </div>
@@ -309,7 +215,4 @@
             </div>
         </div>
     </div>
-	
-    </center>
-	
 @stop
