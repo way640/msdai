@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class AdminController extends CommonController
+class UserController extends CommonController
 {
     //get.admin/user/user  全部管理员列表
     public function index()
     {
-        $data = User::orderBy('admin_id','asc')->get();
-        return view('admin.lists',compact('data'));
+//        $data = User::orderBy('admin_id','asc')->get();
+//        return view('admin.lists',compact('data'));
     }
 
     //get.admin/user/create   添加管理员
@@ -27,6 +26,8 @@ class AdminController extends CommonController
     public function store()
     {
         $input = Input::except('_token');
+        $pwd = Input::md5('admin_pwd');
+        dd($pwd);die;
         $rules = [
             'admin_account'=>'required',
             'admin_pwd'=>'required',
@@ -40,7 +41,7 @@ class AdminController extends CommonController
         if($validator->passes()){
             $re = User::create($input);
             if($re){
-                return redirect('admin/admin/admin');
+                return redirect('admin/user/user');
             }else{
                 return back()->with('errors','管理员添加失败，请稍后重试！');
             }

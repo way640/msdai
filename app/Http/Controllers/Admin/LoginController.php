@@ -20,11 +20,13 @@ class LoginController extends Controller
     {
         if($input = Input::all())
         {
-            $user = User::first();
+            $r = md5('123456');
+            dd($r);die;
+            $admin = User::first();
             if($user->admin_account != $input['admin_account'] || Crypt::decrypt($user->admin_pwd)!= $input['admin_pwd']){
                 return back()->with('msg','用户名或者密码错误！');
             }
-            session(['user'=>$user]);
+            session(['user'=>$admin]);
             return redirect('admin/index/index');
         }
         return view('admin.login');

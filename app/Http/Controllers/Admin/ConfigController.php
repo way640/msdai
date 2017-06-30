@@ -38,7 +38,6 @@ class ConfigController extends CommonController
         return view('admin.configTypeAdd');
     }
 
-
     /*************以下是数据接口*************/
     /*
      * @action_name：配置列表数据接口
