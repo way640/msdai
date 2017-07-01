@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use Illuminate\Support\Facades\DB;
 /*
  * @Class_name ：后台首页

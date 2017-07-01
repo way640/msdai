@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="{{url('admin/system/add')}}">
+                    <a href="{{url('admin/appo/appoadd')}}">
                         <button class="btn btn-outline btn-primary dim" type="button" title="添加信息" style="left:1%">
                             <i class="fa fa-plus"></i>
                         </button>
@@ -119,7 +119,7 @@
         function getData( typeInfo ){
             $.ajax({
                 type:"get",
-                url:"{{url('admin/priv/appolist')}}",
+                url:"{{url('admin/appo/appoinfo')}}",
                 data:'type='+typeInfo,
                 dataType:'json',
                 success:function ( msg ) {
@@ -128,13 +128,13 @@
                         $.each(msg.data,function(k,v){
                             str += '<tr>' +
                                     '<td><input type="checkbox" class="i-checks" name="input[]"></td>' +
-                                    '<td><span>'+ v.level_info+'</span>'+v.sys_content+'</td>' +
-                                    '<td>'+v.type_name+'</td>' +
-                                    '<td>'+v.sys_status+'</td>' +
-                                    '<td>'+v.sys_link+'</td>' +
+                                    '<td><span></span>'+v.admin_name+'('+v.admin_account+')</td>' +
+                                    '<td>'+v.app_priv+'</td>' +
+                                    '<td>'+v.app_start_time+'--'+v.app_end_time+'</td>' +
+                                    '<td>'+v.app_desc+'</td>' +
                                     '<td>' +
-                                    '<a href="javascript:void(0)" alt="删除" title="删除" class="config-del" configId="'+ v.sys_id+'"><i class="fa fa-close text-navy"></i></a> ' +
-                                    '<a href="javascript:void(0)" alt="修改" title="修改" class="config-save" configId="'+ v.sys_id+'"><i class="fa fa-wrench text-navy"></i></a>' +
+                                    '<a href="javascript:void(0)" alt="删除" title="删除" class="config-del" configId="'+ v.app_id+'"><i class="fa fa-close text-navy"></i></a> ' +
+                                    '<a href="javascript:void(0)" alt="修改" title="修改" class="config-save" configId="'+ v.app_id+'"><i class="fa fa-wrench text-navy"></i></a>' +
                                     '</td>' +
                                     '</tr>';
                         });
@@ -149,12 +149,12 @@
         getData('all');
         $.ajax({
             type: "get",
-            url: "{{url('admin/system/systemtypelist')}}",
+            url: "{{url('admin/appo/appoadmininfo')}}",
             data: '',
             dataType: 'json',
             success: function (msg) {
                 $('.input-sm').html('');
-                $('.input-sm').append('<option value="all">所有类型</option>');
+                $('.input-sm').append('<option value="all">指派人</option>');
                 $.each(msg.data,function(k,v){
                     $('.input-sm').append('<option value="'+ k+'">'+v+'</option>');
                 });

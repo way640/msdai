@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\home;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 /*
 *@Class_name : 个人中心
 *@Use : 用户个人中心页面展示及信息设置
@@ -28,14 +29,14 @@ class PersonalController extends CommonController
 		
 		return view('home/personal/points');
 	}
-	
+
 	/*
 	*@Action_name : 个人账号设置
 	*@Author : 宋子腾
 	*@Time : 06-27
 	*/
 	public function config(){
-		
+
 		$userId = $_SESSION['user']['user_id'] ;
 		
 		$arr = DB::select("select * from zd_user_info where user_id = $userId") ;
@@ -196,6 +197,7 @@ class PersonalController extends CommonController
 		
 		$checkCaptcha = $_SESSION['captcha'] ;
 	
+
 		if ( $captcha == $checkCaptcha ) {
 			
 			$telInfo = DB::select('select user_tel from zd_user where user_id = ' . $userId) ;

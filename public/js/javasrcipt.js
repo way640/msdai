@@ -19,6 +19,7 @@ function WeChatOut()
 	document.getElementById("WeChat").src = "image/微信-link.png";
 }
 /*焦点图--------------------------------------------------------------------------------------------------------------*/
+
 // var FocusArr = new Array
 // ("url(image/focus1.gif)","url(image/focus2.gif)","url(image/focus3.gif)","url(image/focus4.gif)");
 // var num = 0;
@@ -215,6 +216,7 @@ function WeChatOut()
 // 		document.getElementById("em4").style.backgroundColor = "#888";
 // 	}
 // }
+
 /*滚动图--------------------------------------------------------------------------------------------------------------*/
 var WrapArr = new Array
 ("image/wrap-广发基金.gif","image/wrap-华夏基金.gif","image/wrap-建信基金.gif","image/wrap-汇添富基金.gif","image/wrap-鹏华基金.gif","image/wrap-工银瑞信.gif","image/wrap-易方达基金.gif","image/wrap-景顺长城.gif","image/wrap-博时基金.gif","image/wrap-南方基金.gif","image/wrap-天弘基金.gif","image/wrap-招商基金.gif","image/wrap-银华基金.gif","image/wrap-华安基金.gif");

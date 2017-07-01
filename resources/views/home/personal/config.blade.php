@@ -1,3 +1,4 @@
+
 @extends('home.title')
 @section('content')
 <!DOCTYPE html>

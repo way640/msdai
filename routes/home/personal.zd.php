@@ -11,6 +11,7 @@ Route::get('personal/points', 'Home\PersonalController@points');
 /*
 *@Use : 个人中心账号设置
 */
+
 Route::get('personal/config', 'Home\PersonalController@config');
 /*
 *@Use : 用户添加头像
@@ -24,6 +25,7 @@ Route::post('personal/image', 'Home\PersonalController@addImage');
 *@Use : 修改用户密码
 */
 Route::get('personal/changePwd', 'Home\PersonalController@changePwd');
+
 /*
 *@Use : 执行密码修改
 */
@@ -44,3 +46,4 @@ Route::any('personal/checkCaptcha', 'Home\PersonalController@checkCaptcha');
 *@Use : 用户绑定邮箱
 */
 Route::any('personal/bindEmail', 'Home\PersonalController@bindEmail') ;
+

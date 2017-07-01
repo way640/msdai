@@ -34,7 +34,7 @@ class IndexController extends CommonController
 		//返回 数据
 		return  "$callback(".$info.")";
 	}
-	
+
 	public function getinfo(){
 		//首页锦囊
 
