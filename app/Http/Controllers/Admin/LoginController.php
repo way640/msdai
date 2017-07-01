@@ -21,8 +21,8 @@ class LoginController extends CommonController
     {
         if($input = Input::all())
         {
-        $user = User::first();
-        if($user->admin_account != $input['admin_account'] || ($user->admin_pwd)!= md5($input['admin_pwd'])){
+        $admin = User::first();
+        if($admin->admin_account != $input['admin_account'] || ($admin->admin_pwd)!= md5($input['admin_pwd'])){
             return back()->with('msg','用户名或者密码错误！');
         }
         return redirect('admin/index/index');
