@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/style.css')); ?>"/>
 <script type="text/javascript" src="<?php echo e(asset('js/javasrcipt.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/jquery.min.js')); ?>"></script>
 <title>积木</title>
 </head>
 
@@ -16,20 +17,44 @@
         	<img id="WeChat" onmousemove="WeChatMove()" onmouseout="WeChatOut()" src="<?php echo e(asset('image/微信-link.png')); ?>" />
             <ul>
             	<li><a href="#">最新活动</a></li>
-                <li><a href="<?php echo e(url('user/login')); ?>">登录</a></li>
-                <li style="border-right:none;"><a href="<?php echo e(url('user/regist')); ?>">注册</a></li>
+				<?php $arr = isset( $_SESSION['user'] ) ? $_SESSION['user'] : ''?>
+				<?php if( $arr ): ?>
+					<li><a href="javascript:void(0);"><?php echo $_SESSION['user']['username'];?>, 您好, 欢迎登陆</a></li>
+					<li style="border-right:none;"><a href="javascript:void(0);" class="userLogout">注销</a></li>
+				<?php else: ?>
+					<li><a href="<?php echo e(url('user/login')); ?>">登录</a></li>
+					<li style="border-right:none;"><a href="<?php echo e(url('user/regist')); ?>">注册</a></li>
+				<?php endif; ?> 
             </ul>
+			<script>
+				$('.userLogout').on('click', function(){
+					
+					 $.ajax({
+						type: "GET",
+						url: "../../../user/logout",
+						dataType: 'json',
+						success: function(msg){
+								
+							alert('退出成功')
+							window.location.href="<?php echo e(url('user/login')); ?>"
+						}
+					});
+				})
+			</script>	
         </div>
     </div>
+
 <!--header------------------------------------------------------------------------------------------------------------>
 <!--main-------------------------------------------------------------------------------------------------------------->
 	<div class="header">
     	<div class="head">
         	<a class="logo" href="http://www.zdmoney.com"><img src="<?php echo e(asset('image/logo-bg.png')); ?>" /></a>
           	<ul>
+
                   <div id='box'>
                       
                   </div>
+
         	</ul>
         </div>
     </div>
@@ -151,6 +176,7 @@
 </html>
 
 <div>
+
     <script type="text/template" id="DaBaiTpl">
             <option value="北京">北京</option>
             <option value="上海">上海</option>
@@ -235,4 +261,5 @@
             <option value="西安">西安</option>
             </script>
     <style type="text/css">
+	
 </div>

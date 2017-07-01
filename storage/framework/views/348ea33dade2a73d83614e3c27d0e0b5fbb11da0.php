@@ -101,13 +101,13 @@
             <div>
                 <p class="agreement-info">
 <<<<<<< HEAD
+                    <span>已有账户？<a href="http://www.zdmoney.com/user/login">登录</a></span>
+                </p>
+=======
                     <span>已有账户？<a href="<?php echo e(url('user/login')); ?>">登录</a></span>
 					
 				</p>
-=======
-                    <span>已有账户？<a href="http://www.zdmoney.com/user/login">登录</a></span>
-                </p>
->>>>>>> 36160ebbd773f7c9f7c0a36157d4497605fdd0bd
+>>>>>>> bdb682534f5f69b62d3b53aba9bfc1454d7558be
             </div>
         </form>
     </div>
@@ -235,8 +235,8 @@
 								alert(msg.msg)
 							}else{
 								
-								alert('注册成功')
-								location.href="<?php echo e(url('')); ?>"
+								alert('注册成功,请完善个人信息,以便享受本站更多服务')
+								location.href="<?php echo e(url('personal/config')); ?>"
 							}
 						}
 					});

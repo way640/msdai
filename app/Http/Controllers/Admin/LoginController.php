@@ -7,10 +7,11 @@ use App\Http\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 
-class LoginController extends Controller
+class LoginController extends CommonController
 {
     /**
      * 后台登录
@@ -20,15 +21,12 @@ class LoginController extends Controller
     {
         if($input = Input::all())
         {
-            $r = md5('123456');
-            dd($r);die;
-            $admin = User::first();
-            if($user->admin_account != $input['admin_account'] || Crypt::decrypt($user->admin_pwd)!= $input['admin_pwd']){
-                return back()->with('msg','用户名或者密码错误！');
-            }
-            session(['user'=>$admin]);
-            return redirect('admin/index/index');
+        $user = User::first();
+        if($user->admin_account != $input['admin_account'] || ($user->admin_pwd)!= md5($input['admin_pwd'])){
+            return back()->with('msg','用户名或者密码错误！');
         }
-        return view('admin.login');
+        return redirect('admin/index/index');
+    }
+      return view('admin.login');
     }
 }
