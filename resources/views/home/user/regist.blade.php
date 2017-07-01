@@ -99,14 +99,11 @@
             </div>
             <div>
                 <p class="agreement-info">
-<<<<<<< HEAD
-                    <span>已有账户？<a href="http://www.zdmoney.com/user/login">登录</a></span>
-                </p>
-=======
+
                     <span>已有账户？<a href="{{ url('user/login') }}">登录</a></span>
 					
 				</p>
->>>>>>> bdb682534f5f69b62d3b53aba9bfc1454d7558be
+
             </div>
         </form>
     </div>

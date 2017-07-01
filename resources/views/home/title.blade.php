@@ -50,22 +50,22 @@
     	<div class="head">
         	<a class="logo" href="http://www.zdmoney.com"><img src="{{ asset('image/logo-bg.png') }}" /></a>
           	<ul>
-
                   <div id='box'>
                       
                   </div>
-
+                  <a href="">充值</a>
         	</ul>
         </div>
     </div>
     <script src='{{ asset('js/jquery.min.js') }}'></script>
     <script>
         jQuery(document).ready(function(){
-            var url = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
+            //导航栏 jsonp请求
+            var van = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
                 $.ajax({
                     type: "get",
-                    async: false,
-                    url: url,
+                    async: false, 
+                    url: van,
                     dataType: "jsonp",
                     jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
                     jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
@@ -73,14 +73,18 @@
                         var str ='';
                         $.each(msg,function(k,v){
                             // alert(v.config_info);
-                            str +='<li><a href="'+v.config_info+'" >'+v.config_desc+'</a></li>'; 
+                            str +='<li><a href="{{url('')}}/'+v.config_link+'" >'+v.config_info+'</a></li>'; 
                         })
-                        $('#box').html(str);
+
+						$('#box').append(str);
                     },
                     error: function(){
-                        alert('fail');
+
+                        //alert('fail');
+
                     }
                 });
+            //锦囊妙计 4条最新添加的要知道的小知识
             var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
                 $.ajax({
                     type: "get",
@@ -95,6 +99,7 @@
                         var str2 ='';
                         var str3 ='';
                         $.each(msg,function(k,v){
+                            //如果内容超过50个字就截取前50个字
                             var content = v.article_content;
                             var new_content = content.substring(0,50)+"...";
                             if(k==0){
@@ -114,10 +119,12 @@
                                 str3 +='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1750&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞205&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论270</h3></aside></a>';
                             }
                         })
-                        $('#pbox').html(str0+str1+str2+str3);
+						$('#pbox').html(str0+str1+str2+str3);
                     },
                     error: function(){
-                        alert('fail');
+
+                        //alert('fail');
+
                     }
                 }); 
          });
@@ -263,3 +270,6 @@
     <style type="text/css">
 	
 </div>
+
+
+

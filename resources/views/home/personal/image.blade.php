@@ -205,6 +205,9 @@
 					success: function(re) {
 						if(re.status == '1') {
 							$('.user_pic img').attr('src',src );
+							alert('已成功设置头像')
+						}else{
+							alert('头像添加失败，请重试')
 						}
 					}
 				});
