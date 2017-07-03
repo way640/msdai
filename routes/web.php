@@ -11,6 +11,19 @@
 |
 */
 
+// 万能路由  暂不启用
+/*
+$request = @$_SERVER['REQUEST_URI']? $_SERVER['REQUEST_URI'] : $_SERVER['PATH_INFO'] ;
+
+    $reqArr = @explode('?', $request);
+    $reqArr = @explode('/', $reqArr[0]);
+    $action = @array_pop($reqArr);
+    $controller = @array_pop($reqArr);
+    $namespace = @array_pop($reqArr);
+if($namespace&&$controller&&$action){
+    Route::get($namespace."/".$controller."/".$action,ucfirst($namespace).'\\'.ucfirst($controller).'Controller@'.$action);
+}*/
+
 function Autoload($path){
     $arr = opendir($path);
     while($info = readdir($arr)){
@@ -23,7 +36,12 @@ function Autoload($path){
     }
 }
 $path = @$_SERVER['PATH_INFO']?$_SERVER['PATH_INFO']:$_SERVER['REQUEST_URI'];
-$urlArr = explode('/',$path);
+
+$urlArr = @explode('?',$path);
+$urlArr = @explode('/',$urlArr['0']);
+if(count($urlArr) > 4){
+    echo "<script>location='".url('')."'</script>";
+}
 if($urlArr[1] == 'admin'){
     Autoload(__DIR__.'\admin');
 }else{
@@ -34,6 +52,7 @@ if($urlArr[1] == 'admin'){
 Route::get('/', function () {
     return view('home.index');
 });
+    
 
 
 Route::get('admin/{name}/{id}', function () {
@@ -45,7 +64,11 @@ Route::get('{name}', function ($name) {
 });
 
 //如果访问不存在的控制器和方法，跳转404
-Route::get('{name}/{id}', function ($name,$id) {
+Route::get('{name}/{id}', function () {
+    return view('404');
+});
+
+Route::get('{name}/{id}/{source}', function () {
     return view('404');
 });
 

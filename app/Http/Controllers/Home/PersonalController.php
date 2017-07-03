@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\home;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail; 
 
 /*
 *@Class_name : 个人中心
@@ -172,6 +173,7 @@ class PersonalController extends CommonController
 		
 		$_SESSION[ "captcha" ] = $random;
 		
+		//短信接口清请求地址
 		$href = "http://sms.106jiekou.com/utf8/sms.aspx?account=jazz2312&password=song123123&mobile=".$number."&content=您的订单编码：".$random."。如需帮助请联系客服。" ;
 	
 		$content = file_get_contents ( $href ) ; 
@@ -221,6 +223,63 @@ class PersonalController extends CommonController
 	*/
 	public function bindEmail(){
 		
-		echo "暂无数据" ;
+		return view ( 'home/personal/bindemail' ) ; 
+	}
+	
+	/*
+	*@Action_name : 执行用户绑定操作
+	*@Author : 宋子腾
+	*@Time : 07-03
+	*/
+	public function doEmail(){
+		
+		$userId = $_SESSION['user']['user_id'] ; 
+		$emailAddress = $_POST["email"];
+     
+	    $userInfo = DB::select ( "select * from zd_user where user_id = '$userId'" ) ; 
+		$userInfo = $this -> objToArray ( $userInfo ) ;
+	 
+	    //对用户信息进行加密
+		$userArr = $userInfo[0] ;
+		$userArr['user_email'] = $emailAddress ; 
+		
+		$userData = base64_encode ( json_encode ( $userArr ) ) ; 
+	 
+      	$pattern = "/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/" ;
+        if ( preg_match ( $pattern, $emailAddress ) ) {
+            
+			//邮件参数设置   用户名                          用户邮箱     内容标题      内容详情
+		    $this -> smtp ( $userArr['user_account'], $emailAddress, '激活邮箱', '请在页面点击链接，激活您的邮箱http://www.zdmoney.com/personal/activate?mailbox='.$userData ) ;
+          
+		  /*$emailInfo = DB::select ( "select user_email from zd_user where user_id = '$userId'" ) ;
+            $emailInfo = $this -> objToArray ( $emailInfo ) ;
+			
+			if ( empty ( $mailInfo[0]['user_email'] ) ) {
+				
+				echo '1111' ;
+			}*/
+		
+		}
+	}
+	
+	/*
+	*@Action_name : 用户激活邮箱
+	*@Author : 宋子腾
+	*@Time : 07-03
+	*/
+	public function activate(){
+		
+		$userInfo = isset ( $_GET['mailbox'] ) ? $_GET['mailbox'] : '' ; 
+		
+		if ( $userInfo ) {
+			
+	        //解密数据信息
+		    $userInfo = json_decode ( base64_decode ( $userInfo ) ) ; 
+		    $userInfo = $this -> objToArray ( $userInfo ) ;
+		
+		   // $userId = $_SESSION['user']['user_id'] ; 
+			
+			print_r($userInfo) ;
+		}
 	}
 }
