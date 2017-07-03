@@ -37,7 +37,6 @@ class AppoController extends CommonController
      * @author：Way
      * @Time：2017-06-29**/
     public function appoInfo(){
-
         $where = 'app_from='.session('admin')['admin_id'];
         if(@$this->get['type'] != 'all' && @$this->get['type']){
             $where .= ' and ap.admin_id ='.$this->get['type'];
@@ -61,7 +60,6 @@ class AppoController extends CommonController
      * @Time：2017-06-29**/
     public function appoInsert(){
         
-
     }
 
     /*
@@ -69,7 +67,7 @@ class AppoController extends CommonController
      * @author：Way
      * @Time：2017-06-29**/
     public function appoDel(){
-
+        
     }
 
     /*

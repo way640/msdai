@@ -7,7 +7,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">委托人：</label>
             <div class="col-sm-9">
-                <input name="admin_id" id="admin_id" required class="form-control" placeholder="例：张三；请务必填写正确的名称" type="text"> <span class="help-block m-b-none">这里填写你想将权限委托给谁</span>
+                <input name="admin_account" id="admin_account" required class="form-control" placeholder="例：123@qq.com；请务必填写正确的账户名称" type="text"> <span class="help-block m-b-none">这里填写你想将权限委托给谁</span>
             </div>
         </div>
         <div class="form-group">
@@ -120,7 +120,24 @@
                         });
                     }
                 });
-
+                $("#admin_account").blur(function(){
+                    var obj = $(this);
+                    if($(this).val() != ''){
+                        $.ajax({
+                            type: "get",
+                            url: "{{url('admin/public/checkadminaccount')}}",
+                            data: "admin_account="+obj.val(),
+                            dataType: 'json',
+                            success: function (msg) {
+                                if(msg.success != 1){
+                                    alert('该帐号不存在');
+                                }
+                            }
+                        })
+                    }else{
+                        alert('委托人不能为空');
+                    }
+                });
             });
         </script>
     </div>
