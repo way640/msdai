@@ -56,7 +56,7 @@
             </dl>
             <dl class="right">
                 <dt>放款利率：</dt>
-                <dd><span class="digit"><?php echo $v->lenging_interest ?>%</span></dd>
+                <dd><span class="digit"><?php echo $v->lenging_interest ?></span></dd>
 
             </dl>
             <dl>

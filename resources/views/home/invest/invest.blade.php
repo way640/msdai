@@ -1,6 +1,4 @@
-<?php
-use Illuminate\Support\Facades\Session;
-?>
+<?php $arr = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : ''?>
 @extends('Home.title')
 @section('content')
 
@@ -43,26 +41,27 @@ use Illuminate\Support\Facades\Session;
                         <table class="insert-tab" width="100%">
                             <tbody><tr>
                                 <th width="120">放款金额：</th>
+                                <input type="hidden" id="uid" value="<?php echo $arr?>">
                                 <td>
-                                    <input class="common-text required" id="money" name="lenging_money" size="50" value="" type="text">
+                                    <input class="common-text required" id="money" name="lenging_money" size="50" value="" type="text" required>
                                     <div class="tbody"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <th align="right">放款开始时间：</th>
                                 <td>
-                                    <input class="common-text required" id="calen2" name="lenging_start_time" size="50" value="" type="text">
+                                    <input class="common-text required" id="calen2" name="lenging_start_time" size="50" value="" type="text" required>
                                 </td>
                             </tr>
                             <tr>
                                 <th>放款结束时间：</th>
                                 <td>
-                                    <input class="common-text required" id="calen2" name="lenging_end_time" size="50" value="" type="text">
+                                    <input class="common-text required" id="calen2" name="lenging_end_time" size="50" value="" type="text" required>
                                 </td>
                             </tr>
                             <tr>
                                 <th>放款年利率：</th>
-                                <td><input class="common-text" name="lenging_interest" size="50" value="" type="text" id="inter"></td>
+                                <td><input class="common-text" name="lenging_interest" size="50" value="" type="text" id="inter" required></td>
                             </tr>
                             <tr>
                                 <th>回款分配类型：</th>
@@ -75,7 +74,7 @@ use Illuminate\Support\Facades\Session;
 
                             <tr>
                                 <th>当前可用额度：</th>
-                                <td><input class="common-text required" id="title" name="lenging_quota" size="50" value="" type="text"></td>
+                                <td class="quota"><input class="common-text required" id="title" name="lenging_quota" size="50" value="" type="text" readonly></td>
                             </tr>
                             <tr>
                                 <th>最终收款：</th>
@@ -84,11 +83,11 @@ use Illuminate\Support\Facades\Session;
                             <tr>
                                 <th></th>
                                 <td>
-                                  <?php if(Session::get('user_id')){?>
+                                    @if ( $arr )
                                      <input class="btn btn-primary btn6 mr10" value="提交" type="submit" >
-                                  <?php }else{ ?>
+                                    @else
                                      <input class="btn btn-primary btn6 mr10" value="提交" id="but" type="button">
-                                  <?php } ?>
+                                    @endif
                                 </td>
                             </tr>
                             </tbody></table>
@@ -131,6 +130,7 @@ use Illuminate\Support\Facades\Session;
             </style>
             <script>
                 $('#money').blur(function () {
+                    var uid=$('#uid').val();
                     var num=$('#money').val();
                     var inter=$('#inter').val();
                     var str="<font color='red' size='1px'>最低加入金额 1,000元，上限500,000元</font>";
@@ -142,11 +142,18 @@ use Illuminate\Support\Facades\Session;
                             type:"post",
                             url:"/mloans/dal",
                             data:{
+                                "uid":uid,
                                 "num":num,
                                 "inter":inter
                             },
+                            dataType: "json",
                             success:function (data) {
-                                $('.inp').html('<input class="common-text required" id="title" name="lenging_total" size="50" value="'+data+'" type="text" disabled>');
+                                var sum=data.quota-num;
+                                if(sum<0){
+                                    sum=0;
+                                }
+                                $('.quota').html('<input class="common-text required" id="title" name="lenging_quota" size="50" value="'+sum+'" type="text" readonly>');
+                                $('.inp').html('<input class="common-text required" id="title" name="lenging_total" size="50" value="'+data.interest+'" type="text" disabled>');
                             }
                         });
                         $('.tbody').html(sa);
@@ -155,24 +162,29 @@ use Illuminate\Support\Facades\Session;
 
 //                计算用户最终收益
                 $('#inter').blur(function () {
+                    var uid=$('#uid').val();
                     var num=$('#money').val();
                     var inter=$('#inter').val();
                     $.ajax({
                         type:"post",
                         url:"/mloans/dal",
                         data:{
+                            "uid":uid,
                             "num":num,
                             "inter":inter
                         },
+                        dataType: "json",
                         success:function (data) {
-                            $('.inp').html('<input class="common-text required" id="title" name="lenging_total" size="50" value="'+data+'" type="text" disabled>');
+                            var sum=data.quota-num;
+                            if(sum<0){
+                                sum=0;
+                            }
+                            $('.quota').html('<input class="common-text required" id="title" name="lenging_quota" size="50" value="'+sum+'" type="text" readonly>');
+                            $('.inp').html('<input class="common-text required" id="title" name="lenging_total" size="50" value="'+data.interest+'" type="text" disabled>');
                         }
                     });
                 });
-                //提示用户登录
-//                $('#but').click(function () {
-//                    alert('请先登录');
-//                })
+
                 $('#but').click(function () {
                     $("#mask").css("height",$(document).height());
                     $("#mask").css("width",$(document).width());

@@ -62,7 +62,9 @@
                   <div id='box'>
                       
                   </div>
-                  <a href="">充值</a>
+
+                  <li><a href="<?php echo e(url('')); ?>/cz/index">充值</a></li>
+                  <li><a href="<?php echo e(url('')); ?>/molans/draw">抽奖</a></li>
 
         	</ul>
         </div>
