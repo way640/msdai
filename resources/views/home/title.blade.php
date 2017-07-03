@@ -69,86 +69,132 @@
         </div>
     </div>
     <script src='{{ asset('js/jquery.min.js') }}'></script>
-    <script>
-        jQuery(document).ready(function(){
+<script>
+jQuery(document).ready(function(){
 
-            //导航栏 jsonp请求
-            var van = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
-                $.ajax({
-                    type: "get",
-                    async: false, 
-                    url: van,
+//导航栏 jsonp请求
+var van = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
+    $.ajax({
+        type: "get",
+        async: false, 
+        url: van,
+        dataType: "jsonp",
+        jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+        jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+        success: function(msg){
+            var str ='';
+            $.each(msg,function(k,v){
+                // alert(v.config_info);
+                str +='<li><a href="{{url('')}}/'+v.config_link+'" >'+v.config_info+'</a></li>'; 
+            })
+			$('#box').append(str);
+        },
+        error: function(){
+            //alert('fail');
+        }
+    });
+//锦囊妙计 4条最新添加的要知道的小知识
 
-                    dataType: "jsonp",
-                    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-                    jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-                    success: function(msg){
-                        var str ='';
-                        $.each(msg,function(k,v){
-                            // alert(v.config_info);
+var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
+    $.ajax({
+        type: "get",
+        async: false,
+        url: url,
+        dataType: "jsonp",
+        jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+        jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+        success: function(msg){
+            var str0 ='';
+            var str1 ='';
+            var str2 ='';
+            var str3 ='';
+            $.each(msg,function(k,v){
+                //如果内容超过50个字就截取前50个字
+                var content = v.article_content;
+                var new_content = content.substring(0,50)+"...";
+                if(k==0){
+                    // alert(1);
+                    //alert(v.article_content);
+                    // var content = v.article_content;
+                    // alert(content.substring(0,50)+"...");
+                    str0 +='<a href="#" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞82&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论7</h3></aside></a>';
+                }else if(k==1){
+                    //alert(2);
+                    str1 +='<a href="#" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1104&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞97&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论189</h3></aside></a>';
+                }else if(k==2){
+                    //alert(3);
+                    str2+='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1721&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞142&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论8</h3></aside></a>';
+                }else{
+                    //alert(4);
+                    str3 +='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1750&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞205&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论270</h3></aside></a>';
+                }
+            })
 
-                            str +='<li><a href="{{url('')}}/'+v.config_link+'" >'+v.config_info+'</a></li>'; 
-                        })
+			$('#pbox').html(str0+str1+str2+str3);
+        },
+        error: function(){
+            //alert('fail');
+        }
+    }); 
 
-						$('#box').append(str);
-                    },
-                    error: function(){
-
-                        //alert('fail');
-
-                    }
-                });
-            //锦囊妙计 4条最新添加的要知道的小知识
-
-            var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
-                $.ajax({
-                    type: "get",
-                    async: false,
-                    url: url,
-                    dataType: "jsonp",
-                    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-                    jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-                    success: function(msg){
-                        var str0 ='';
-                        var str1 ='';
-                        var str2 ='';
-                        var str3 ='';
-                        $.each(msg,function(k,v){
-
-                            //如果内容超过50个字就截取前50个字
-
-                            var content = v.article_content;
-                            var new_content = content.substring(0,50)+"...";
-                            if(k==0){
-                                // alert(1);
-                                //alert(v.article_content);
-                                // var content = v.article_content;
-                                // alert(content.substring(0,50)+"...");
-                                str0 +='<a href="#" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞82&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论7</h3></aside></a>';
-                            }else if(k==1){
-                                //alert(2);
-                                str1 +='<a href="#" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1104&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞97&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论189</h3></aside></a>';
-                            }else if(k==2){
-                                //alert(3);
-                                str2+='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1721&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞142&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论8</h3></aside></a>';
+//友情链接 jsonp接口
+var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler";
+    $.ajax({
+        type: "get",
+        async: false,
+        url: link,
+        dataType: "jsonp",
+        jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+        jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+        success: function(msg){
+            //alert(msg);
+            var str = '';
+            $.each(msg,function(k,v){
+                //alert(v.config_desc)
+                str +='<a href="'+v.config_link+'" ><img id="roll'+(k+1)+'" src="{{ asset('')}}/'+v.config_desc+'" /></a>';
+            })
+            $('#linkbox').html(str);
+        },
+        error: function(){
+            //alert('fail');
+        }
+    }); 
+    //贵金属
+    var link = "http://www.zdmoney.com/gold/getgo?code=CA1998&callback=localHandler";
+        $.ajax({
+            type: "get",
+            async: false,
+            url: link,
+            dataType: "jsonp",
+            jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+            jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+            success: function(msg){
+                //alert(msg);
+                var str = '';
+                $.each(msg,function(k,v){
+                    //alert(v.goldid)
+                    str += '<li><p><span>指数</span>&nbsp;&nbsp;';
+                            if(v.change_price>0){
+                                str += '涨幅&nbsp;<font color="red" >↑↑&nbsp;';
                             }else{
-                                //alert(4);
-                                str3 +='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1750&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞205&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论270</h3></aside></a>';
+                                str += '跌幅&nbsp;<font color="green" >↓↓&nbsp;';
                             }
-                        })
-
-						$('#pbox').html(str0+str1+str2+str3);
-                    },
-                    error: function(){
-
-                        //alert('fail');
-
-
-                    }
-                }); 
-         });
-            
-    </script>
+                    str +=  v.change_price+'&nbsp;&nbsp;'+v.change_margin+'</font></p><font>'
+                            +v.varietynm+'&nbsp;&nbsp;'
+                            +v.goldid+'</font><p style="color:#8A8A8A;">当前价格：'
+                            +v.last_price+'<br>买入价格：'
+                            +v.buy_price+'&nbsp;&nbsp;<br>成交量：'
+                            +v.volume+'</p><div class="earnings"><h2>最高价</h2><h2 style="color:green;">最低价</h2><h3>'
+                            +v.high_price+'</h3><h3>'
+                            +v.low_price+'</h3></div><a class="purchase" href="#">立即申购</a></li>';
+                })
+                //alert(str);
+                $('#goldbox').html(str);
+            }
+        }); 
+}); 
+    
+</script>
 
 	@yield('content')
 	<!--content-wrap------------------------------------------------------------------------------------------------------>
@@ -157,14 +203,9 @@
    			<h1>合作机构</h1>
         	<div class="scroll">
           		<a href="###" class="left2" onclick="left2()"></a>
-              	<div>
-              		<img id="roll1" src="{{ asset('image/wrap-广发基金.gif') }}" />
-                    <img id="roll2" src="{{ asset('image/wrap-华夏基金.gif') }}" />
-                    <img id="roll3" src="{{ asset('image/wrap-建信基金.gif') }}" />
-                    <img id="roll4" src="{{ asset('image/wrap-汇添富基金.gif') }}" />
-                    <img id="roll5" src="{{ asset('image/wrap-鹏华基金.gif') }}" />
-                    <img id="roll6" src="{{ asset('image/wrap-工银瑞信.gif') }}" />
-              	</div>
+                  	<div id='linkbox'>
+                  	     
+                  	</div>
               	<a href="###" class="right2" onclick="right2()"></a>
        		</div>
       	</div>

@@ -16,17 +16,17 @@
     },
     "autoload": {
         "classmap": [
-            "database",
+            "database"
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
         "files": [
             "app/Libraries/AlipayCore.php",
             "app/Libraries/AlipayMD5.php",
             "app/Libraries/AlipayNotufy.php",
             "app/Libraries/AlipayPay.php",
-            "app/Libraries/AlipaySubmit.php",
+            "app/Libraries/AlipaySubmit.php"
         ]
     },
     "autoload-dev": {

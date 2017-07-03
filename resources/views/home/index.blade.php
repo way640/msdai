@@ -107,7 +107,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                     </div>
                     <a class="tender" href="#">立即投标</a>
                 </li>
-                <li style="border-right:none;">=
+                <li style="border-right:none;">
                     <a href="#">房产抵押贷 1169506-1-2</a>
                     <p>一次还本付息</p>
                     <meter max="100" min="0" value="66" high="66" low="33" optimum="1"></meter>
@@ -124,76 +124,22 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
         </div>
         
         <div class="title">
-            <h1>基金理财</h1>
+            <h1>贵金属理财</h1>
             <a href="#">更多</a>
         </div>
-        <div class="fund">
+        <div class="fund" >
             <a class="fund-thear" href="#">
                 <ol>
                     <li>紧随市场</li>
-
                     <li>海量牛基</li>
                     <li>热点聚集</li>
                     <li style="font-size:12px;">更多基金理财> </li>
                 </ol>
             </a>
             <ul>
-
-                <li>
-                    <p><span>指数</span>&nbsp;&nbsp;华安基金&nbsp;&nbsp;000217</p>
-                    <a href="#">华安黄金易ETF联接C</a>
-                    <p style="color:#8A8A8A;">全球避险带动黄金 品种保值属性彰显</p>
-                    <div class="earnings">
-                        <h2>0.9600</h2>
-
-                        <h2>15.11</h2>
-                        <h3>年化利率(%)</h3>
-                        <h3>项目期限(月)</h3>
-                    </div>
-                    <a class="purchase" href="#">立即申购</a>
-                </li>
-                <li>
-
-                    <p><span>混合</span>&nbsp;&nbsp;长盛基金&nbsp;&nbsp;001892</p>
-                    <a href="http://www.howbuy.com/fund/001892/">长盛新兴成长主题混合</a>
-                    <p style="color:#8A8A8A;">新兴产业灵活配置 绝对收益投资理念</p>
-                    <div class="earnings">
-                        <h2>1.1280</h2>
-
-                        <h2>12.80</h2>
-                        <h3>年化利率(%)</h3>
-                        <h3>项目期限(月)</h3>
-                    </div>
-                    <a class="purchase" href="#">立即申购</a>
-                </li>
-                <li>
-
-                    <p><span>混合</span>&nbsp;&nbsp;东方基金&nbsp;&nbsp;001495</p>
-                    <a href="#">东方新价值混合A</a>
-                    <p style="color:#8A8A8A;">灵活投资 双基金经理 双重业绩保障</p>
-                    <div class="earnings">
-                        <h2>1.1305</h2>
-
-                        <h2>9.62</h2>
-                        <h3>年化利率(%)</h3>
-                        <h3>项目期限(月)</h3>
-                    </div>
-                    <a class="purchase" href="#">立即申购</a>
-                </li>
-                <li style="border-right:none;">
-
-                    <p><span>债券</span>&nbsp;&nbsp;工银瑞信&nbsp;&nbsp;485111</p>
-                    <a href="#">工银双利债券A</a>
-                    <p style="color:#8A8A8A;">债券为基股票添色 追求长期稳定增值</p>
-                    <div class="earnings">
-                        <h2>1.6720</h2>
-4
-                        <h2>3.02</h2>
-                        <h3>年化利率(%)</h3>
-                        <h3>项目期限(月)</h3>
-                    </div>
-                    <a class="purchase" href="#">立即申购</a>
-                </li>
+                <div id='goldbox'>
+                    
+                </div>
           </ul>
         </div>
         
