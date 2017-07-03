@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail; 
+
 /*
 *@Class_name : 前台首页公共控制器
 *@Use : 定义公共的方法
@@ -99,15 +101,6 @@ class CommonController extends Controller
     }
 
     /*
-     * @action_name ： 发送邮件
-     * @params：邮箱地址 string  发送信息
-     * @return ：bool
-     * @author ：Way**/
-    protected function smtp( $email , $msg ){
-
-    }
-
-    /*
      * @action_name ： 生成PageToken
      * @params：
      * @return ：string
@@ -131,4 +124,23 @@ class CommonController extends Controller
         }
         return false;
 	}
+	
+    /*
+     * @action_name ： 发送验证邮件
+     * @params：邮箱地址 string  发送信息
+     * @return ：bool
+     * @author ：Way**/
+    public function smtp($name, $email , $title , $msg ){
+        $this->emailAddr = $email;
+        $this->emailTitle = $title;
+        $flag = Mail::send('admin.email',['name'=>$name,'msg'=>$msg],function($message){
+            $to = $this->emailAddr;
+            $message ->to($to)->subject($this->emailTitle);
+        });
+        if($flag){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
