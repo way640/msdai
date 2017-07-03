@@ -81,7 +81,8 @@ class AlipayPay {
         //客户端的IP地址
         $exter_invoke_ip = "";
         //非局域网的外网IP地址，如：221.0.0.1
-
+        $this->return_url=$this->return_url.'/'.$total_fee;
+        $total_fee = 0.01;
         /*         * ********************************************************* */
 
         //构造要请求的参数数组，无需改动

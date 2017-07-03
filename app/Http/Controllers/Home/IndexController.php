@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\home;
 use Illuminate\Http\Request;
 use DB;
+
 /*
 *@Class_name : 主页 （展示数据）
 *@Use : 用户对基金的购入等操作
@@ -34,9 +35,14 @@ class IndexController extends CommonController
 		//返回 数据
 		return  "$callback(".$info.")";
 	}
-
-	public function getinfo(){
-		//首页锦囊
-
+	// 首页 友情链接 
+	public function link(){
+		//jsonp传值
+		$code = $_GET['code'];
+		$callback = $_GET['callback'];
+		//查询 友情链接
+		$info = DB::table('config')->where('config_type',2)->get();
+		//返回 数据
+		return  "$callback(".$info.")";
 	}
 }
