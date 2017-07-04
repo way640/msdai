@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
-<script type="text/javascript" src="{{ asset('js/javasrcipt.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/style.css')); ?>"/>
+<script type="text/javascript" src="<?php echo e(asset('js/javasrcipt.js')); ?>"></script>
 
-<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/jquery.min.js')); ?>"></script>
 <title>积木</title>
 
 </head>
@@ -17,21 +17,21 @@
 	<div class="top">
     	<div class="top-server">
     		<h1>欢迎致电：<span>400-068-1176</span> 服务时间：9:00 - 21:00</h1>
-        	<img id="WeiBo" onmousemove="WeiBoMove()" onmouseout="WeiBoOut()" src="{{ asset('image/微博-link.png') }}" />
-        	<img id="WeChat" onmousemove="WeChatMove()" onmouseout="WeChatOut()" src="{{ asset('image/微信-link.png') }}" />
+        	<img id="WeiBo" onmousemove="WeiBoMove()" onmouseout="WeiBoOut()" src="<?php echo e(asset('image/微博-link.png')); ?>" />
+        	<img id="WeChat" onmousemove="WeChatMove()" onmouseout="WeChatOut()" src="<?php echo e(asset('image/微信-link.png')); ?>" />
             <ul>
             	<li><a href="#">最新活动</a></li>
 
 				<?php $arr = isset( $_SESSION['user'] ) ? $_SESSION['user'] : ''?>
-				@if ( $arr )
+				<?php if( $arr ): ?>
 					<li><a href="javascript:void(0);"><?php echo $_SESSION['user']['username'];?>, 您好, 欢迎登陆</a></li>
 					<li style="border-right:none;"><a href="javascript:void(0);" class="userLogout">注销</a></li>
-				@else
-					<li><a href="{{ url('user/login') }}">登录</a></li>
+				<?php else: ?>
+					<li><a href="<?php echo e(url('user/login')); ?>">登录</a></li>
 
-					<li style="border-right:none;"><a href="{{ url('user/regist') }}">注册</a></li>
+					<li style="border-right:none;"><a href="<?php echo e(url('user/regist')); ?>">注册</a></li>
 
-				@endif 
+				<?php endif; ?> 
             </ul>
 			<script>
 				$('.userLogout').on('click', function(){
@@ -43,7 +43,7 @@
 						success: function(msg){
 								
 							alert('退出成功')
-							window.location.href="{{ url('user/login') }}"
+							window.location.href="<?php echo e(url('user/login')); ?>"
 						}
 					});
 				})
@@ -56,20 +56,20 @@
 <!--main-------------------------------------------------------------------------------------------------------------->
 	<div class="header">
     	<div class="head">
-        	<a class="logo" href="http://www.zdmoney.com"><img src="{{ asset('image/logo-bg.png') }}" /></a>
+        	<a class="logo" href="http://www.zdmoney.com"><img src="<?php echo e(asset('image/logo-bg.png')); ?>" /></a>
           	<ul>
 
                   <div id='box'>
                       
                   </div>
 
-                  <a href="{{url('')}}/cz/index">充值</a>
+                  <a href="<?php echo e(url('')); ?>/cz/index">充值</a>
 
         	</ul>
         </div>
     </div>
-    <script src='{{ asset('js/jquery.min.js') }}'></script>
-    <script>
+    <script src='<?php echo e(asset('js/jquery.min.js')); ?>'></script>
+<script>
 jQuery(document).ready(function(){
 
 //导航栏 jsonp请求
@@ -85,7 +85,7 @@ var van = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
             var str ='';
             $.each(msg,function(k,v){
                 // alert(v.config_info);
-                str +='<li><a href="{{url('')}}/'+v.config_link+'" >'+v.config_info+'</a></li>'; 
+                str +='<li><a href="<?php echo e(url('')); ?>/'+v.config_link+'" >'+v.config_info+'</a></li>'; 
             })
 			$('#box').append(str);
         },
@@ -151,7 +151,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
             var str = '';
             $.each(msg,function(k,v){
                 //alert(v.config_desc)
-                str +='<a href="'+v.config_link+'" ><img id="roll'+(k+1)+'" src="{{ asset('')}}/'+v.config_desc+'" /></a>';
+                str +='<a href="'+v.config_link+'" ><img id="roll'+(k+1)+'" src="<?php echo e(asset('')); ?>/'+v.config_desc+'" /></a>';
             })
             $('#linkbox').html(str);
         },
@@ -191,36 +191,12 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                 //alert(str);
                 $('#goldbox').html(str);
             }
-        });
-    //基金
-        var fund = "http://www.zdmoney.com/gold/fund?code=CA1998&callback=localHandler";
-            $.ajax({
-                type: "get",
-                async: false,
-                url: fund,
-                dataType: "jsonp",
-                jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-                jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-                success: function(fund){
-                    //alert(fund.result);
-                    var strfund = '';
-                    $.each(fund.result,function(k,v){
-                        if (k<4) {
-                            // alert(k);
-                             strfund +='<li><a href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">'+v.name+'</a><br>';
-                             strfund +='<p>创建时间:'+v.clrq+'<br><br>';
-                             strfund +=v.CompanyName+'<br><br>基金规模：<font color="green" >'
-                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings">';
-                             strfund +='<h2>'+v.dwjz+'</h2><h2>'+v.ljjz+'</h2><h3>单位净值</h3><h3>累计净值</h3></div><a class="tender" href="#">立即投标</a></li>';
-                        };   
-                    })
-                    //alert(strfund);
-                    $('#fundbox').html(strfund);
-                }
-            }); 
+        }); 
 }); 
+    
 </script>
-	@yield('content')
+
+	<?php echo $__env->yieldContent('content'); ?>
 	<!--content-wrap------------------------------------------------------------------------------------------------------>
 	<div class="content-wrap">
   		<div class="c-wrap">

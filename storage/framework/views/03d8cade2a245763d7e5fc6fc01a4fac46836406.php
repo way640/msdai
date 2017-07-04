@@ -1,6 +1,5 @@
-@extends('admin.main')
-@section('content')
-    <script src="{{URL::asset('')}}admin/js/jquery.min.js"></script>
+<?php $__env->startSection('content'); ?>
+    <script src="<?php echo e(URL::asset('')); ?>admin/js/jquery.min.js"></script>
     <div style="padding: 50px 300px 0 300px">
         <h1 align="center">权限委派</h1>
     <div class="col-md-12">
@@ -52,7 +51,7 @@
                 $('.col-sm-3').attr('style','font-size:20px');
                 $.ajax({
                     type:"get",
-                    url:"{{url('admin/appo/privlist')}}",
+                    url:"<?php echo e(url('admin/appo/privlist')); ?>",
                     data:'',
                     dataType:'json',
                     success:function ( msg ) {
@@ -66,7 +65,7 @@
                 function checkSysDesc(type){
                     $.ajax({
                         type:"get",
-                        url:"{{url('admin/system/systemlist')}}",
+                        url:"<?php echo e(url('admin/system/systemlist')); ?>",
                         data:'type='+type,
                         dataType:'json',
                         success:function ( msg ) {
@@ -102,7 +101,7 @@
                         var config_status = $(".config_status[checked='checked']").val();
                         $.ajax({
                             type: "get",
-                            url: "{{url('admin/system/systeminsert')}}",
+                            url: "<?php echo e(url('admin/system/systeminsert')); ?>",
                             data: "sys_content="+config_info+"&sys_type="+config_type+"&sys_desc="+sys_desc+"&sys_link="+config_link+"&sys_status="+config_status,
                             dataType: 'json',
                             success: function (msg) {
@@ -111,7 +110,7 @@
                                         $('#config_info').val('');
                                         $('#config_link').val('');
                                     }else{
-                                        location.href="{{url('admin/system/index')}}";
+                                        location.href="<?php echo e(url('admin/system/index')); ?>";
                                     }
                                 }else{
 
@@ -125,7 +124,7 @@
                     if($(this).val() != ''){
                         $.ajax({
                             type: "get",
-                            url: "{{url('admin/public/checkadminaccount')}}",
+                            url: "<?php echo e(url('admin/public/checkadminaccount')); ?>",
                             data: "admin_account="+obj.val(),
                             dataType: 'json',
                             success: function (msg) {
@@ -141,4 +140,5 @@
             });
         </script>
     </div>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

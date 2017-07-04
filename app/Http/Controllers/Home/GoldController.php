@@ -24,10 +24,12 @@ class GoldController extends CommonController
 		// echo '<pre>';
 		// print_r($arr);
 		//传过去的网页直接掉接口 返回数据
-		//return view('home/gold/gold',['info'=>$info]);
+
+		return view('home/gold/gold',['info'=>$info]);
 		
 		//传过去的页面ajax请求本地 本地调用接口缓冲 在返回数据
-		return view('home/gold/golda',['info'=>$info]);
+		//return view('home/gold/golda',['info'=>$info]);
+
 	}
 	//  调用本地页面的时候
 	public function getlist(){
@@ -129,5 +131,4 @@ class GoldController extends CommonController
 		// "jjgm": 22.01, 		基金规模
 		// "trend": 47, 		基金近1月涨幅超过同类平均47.09%
 	}
-
 }
