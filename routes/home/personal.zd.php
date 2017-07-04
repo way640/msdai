@@ -54,4 +54,12 @@ Route::any('personal/doEmail', 'Home\PersonalController@doEmail') ;
 *@Use : 验证用户邮箱
 */
 Route::get('personal/activate', 'Home\PersonalController@activate') ; 
+/*
+*@Use : 用户填写地址
+*/
+Route::any('personal/setAddress', 'Home\personalController@setAddress') ; 
+/*
+*@Use : 添加用户地址
+*/
+Route::any('personal/addAddress', 'Home\PersonalController@addAddress') ; 
 

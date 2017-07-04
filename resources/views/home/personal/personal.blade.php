@@ -69,8 +69,17 @@
 
     <div class="account-info-container container clearfix">
         <div class="account-head">
-            <a href="https://www.jimu.com/User/SetAvatar">
-                <img src="{{ asset('image/default-6e81850cf7.jpg') }}" class="avatar">
+            <a href="javascript:void(0);">
+                <img src="
+				<?php if ( $userInfo['user_head'] ) {?>
+					{{ url('<?php echo $userInfo['user_head']?>') }}
+				<?php 
+				    } else { 
+			    ?>
+				{{ asset('image/default-6e81850cf7.jpg') }}
+				<?php 
+				}?>
+				" class="avatar">
                     </a>
         </div>
         <div class="account-info">
