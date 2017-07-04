@@ -22,7 +22,10 @@
         "psr-4": {
             "App\\": "app/"
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> c952895de8985a88f33efa1f1ce7bec02bca3c07
     },
     "autoload-dev": {
         "psr-4": {

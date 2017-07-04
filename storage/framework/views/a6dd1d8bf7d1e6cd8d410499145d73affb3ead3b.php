@@ -1,5 +1,4 @@
-@extends('Home.title')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!--main-------------------------------------------------------------------------------------------------------------->
 
 <!--banner-----轮播图---------------------------------------------------------------------------------------->
@@ -46,12 +45,17 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
 </script>
 
 <!--announcement------------------------------------------------------------------------------------------------------>
-  
+    <div class="announcement">
+        <p>最新公告</p>
+        <a href="#"><span>关于中国民生银行P2P网络资金存管系统部分时间段无法使用的重要通知</span></a>
+        <a href="#" style="float:right;">更多</a>
+    </div>
+    
 <div class="main">
         <div class="title">
-            <h1>基金理财</h1>
+            <h1>固收理财</h1>
             <p>盒子正在努力审核项目，预计项目发布时间 <span>10:00</span> , <span>13:00</span> , <span>16:00</span> , <span>20:00</span>，其余时间与周末随机发标。</p>
-            <a href="http://www.zdmoney.com/gold/fundlist">更多</a>
+            <a href="#">更多</a>
         </div>
         <div class="regular">
             <a class="regular-thear" href="#">
@@ -59,19 +63,68 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                     <li>产品丰富</li>
                     <li>期限多样</li>
                     <li>尽职风控</li>
-                    <li style="font-size:12px;">更多基金理财> </li>
+                    <li style="font-size:12px;">更多固收理财> </li>
                 </ol>
             </a>
             <ul>
-                <div id='fundbox'>
-                    
-                </div>
+                <li style="background-image:url(image/icon-xplan.png)">
+                    <a href="#">车辆周转贷 1188989-1-1</a>
+                    <p>一次还本付息</p>
+                    <meter max="100" min="0" value="26" high="66" low="33" optimum="1"></meter>
+                    <figcaption>160,000.00 / 61.20 万</figcaption>
+                    <div class="earnings">
+                        <h2>7.5+2</h2>
+                        <h2>2</h2>
+                        <h3>年化利率(%)</h3>
+                        <h3>项目期限(月)</h3>
+                    </div>
+                    <a class="tender" href="#">立即投标</a>
+                </li>
+                <li>
+                    <a href="#">项目集 160413-14</a>
+                    <p>一次还本付息</p>
+                    <meter max="100" min="0" value="40" high="66" low="33" optimum="1"></meter>
+                    <figcaption>1,827,027.24 / 442.18 万</figcaption>
+                    <div class="earnings">
+                        <h2>7.5+2</h2>
+                        <h2>2</h2>
+                        <h3>年化利率(%)</h3>
+                        <h3>项目期限(月)</h3>
+                    </div>
+                    <a class="tender" href="#">立即投标</a>
+                </li>
+                <li>
+                    <a href="#">房产周转贷 1194661-1-1</a>
+                    <p>一次还本付息</p>
+                    <meter max="100" min="0" value="1" high="66" low="33" optimum="1"></meter>
+                    <figcaption>28,945.30 / 267.00 万</figcaption>
+                    <div class="earnings">
+                        <h2>7.5+2</h2>
+                        <h2>2</h2>
+                        <h3>年化利率(%)</h3>
+                        <h3>项目期限(月)</h3>
+                    </div>
+                    <a class="tender" href="#">立即投标</a>
+                </li>
+                <li style="border-right:none;">
+                    <a href="#">房产抵押贷 1169506-1-2</a>
+                    <p>一次还本付息</p>
+                    <meter max="100" min="0" value="66" high="66" low="33" optimum="1"></meter>
+                    <figcaption>959,174.59 / 144.73 万</figcaption>
+                    <div class="earnings">
+                        <h2>7.5+2</h2>
+                        <h2>2</h2>
+                        <h3>年化利率(%)</h3>
+                        <h3>项目期限(月)</h3>
+                    </div>
+                    <a class="tender" href="#">立即投标</a>
+                </li>
             </ul>
         </div>
         
         <div class="title">
-            <h1>贵金属</h1>
-            <a href="http://www.zdmoney.com/gold/gold">更多</a>
+            <h1>贵金属理财</h1>
+            <a href="#">更多</a>
         </div>
         <div class="fund" >
             <a class="fund-thear" href="#">
@@ -79,7 +132,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
                     <li>紧随市场</li>
                     <li>海量牛基</li>
                     <li>热点聚集</li>
-                    <li style="font-size:12px;">更多贵金属理财> </li>
+                    <li style="font-size:12px;">更多基金理财> </li>
                 </ol>
             </a>
             <ul>
@@ -98,6 +151,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
             <a class="pocket-thear" href="#">
                 <ol>
                     <li>大咖云集</li>
+
                     <li>见微知著</li>
                     <li>智慧投资</li>
                     <li style="font-size:12px;">更多锦囊> </li>
@@ -144,5 +198,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
           </li>
         </ul>
     </div>
-@stop
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('Home.title', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
