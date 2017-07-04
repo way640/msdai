@@ -1,5 +1,4 @@
-@extends('Home.title')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!--main-------------------------------------------------------------------------------------------------------------->
 
 <!--banner-----轮播图---------------------------------------------------------------------------------------->
@@ -199,5 +198,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
           </li>
         </ul>
     </div>
-@stop
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('Home.title', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

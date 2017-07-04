@@ -148,7 +148,7 @@
                     </td>
                     <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未设置</td>
                             <td class="info " width="30%"></td>
-                            <td nowrap="nowrap"><a href="{{ url('personal/setAddress') }}">填写</a></td>
+                            <td nowrap="nowrap"><a href="{{ url('personal/setConfig') }}">填写</a></td>
                         </tr>
                 </tbody>
             </table>

@@ -106,7 +106,7 @@ class PersonalController extends CommonController
 		if ( preg_match( '/^(data:\s*image\/(\w+);base64,)/', $_POST['img'], $result ) ) { 
 		
 			$type = $result[2]; 
-			$new_file = "userImage/" . $userId . ".{$type}"; 	
+			$new_file = "userImage/" . $userId . ".{$type}";
 
 		    if( file_exists( $new_file ) ) {
 			
@@ -288,7 +288,7 @@ class PersonalController extends CommonController
 		if ( $userInfo ) {
 			
 	        //解密数据信息
-		    $userInfo = json_decode ( base64_decode ( $userInfo ) ) ; 
+		    $userInfo = json_decode ( base64_decode ( $userInfo ) ) ;
 		    $userInfo = $this -> objToArray ( $userInfo ) ;	
 			
 			$userId = $userInfo['user_id'] ; 		
