@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\home;
+use DB;
 
 /*
 *@Class_name : 轻松投详情(基金详情)
@@ -16,8 +17,9 @@ class InvestController extends CommonController
 	*@Use : 轻松投默认首页
 	*/
 	public function index(){
-		
-		return view('home/invest/invest');
+        $user_id = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '';
+		$data=DB::table('user_info')->where('user_id','=',$user_id)->get();
+		return view('home/invest/invest',['data'=>$data]);
 	}
 	
 	/*

@@ -1,4 +1,5 @@
 <?php $arr = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : ''?>
+<?php //$arr = 10; ?>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://loan.jimu.com/expwy/prod?applyType=401 -->
 <html class="v_scrollbar"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -125,7 +126,7 @@
                     </dl>
                     <dl>
                         <dt>费率说明：</dt>
-                        <dd>月服务费率最低可至<span class="digit">1</span></dd>
+                        <dd>月服务费率最低可至<span class="digit">1</span>%</dd>
                     </dl>
                     <dl>
                         <dt>区域限制：</dt>
@@ -229,12 +230,13 @@
             <form class="expwy-form" action="/molans/applyto">
                 <?php foreach($data as $k=>$v){?>
                 <input type="hidden" name="lenging_id"  value="<?php echo $v->lenging_id?>">
+                    <input type="hidden" name="lenging_money"  value="<?php echo $v->lenging_money?>">
                     <?php } ?>
                 <div class="form-control">
                     <label for="applyBalance">借款金额</label>
 
                     <div class="controls i-unit">
-                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额，保留整数位" required="" data-reg="^[1-9]([0-9]+)?$" data-reg-message="请输入正确的金额">
+                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额，保留整数位" required="" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
                     </div>
                 </div>
                 <div class="form-control">
@@ -246,6 +248,7 @@
                             <option value="1">是</option>
                         </select>
                     </div>
+                    <div class="controls" style="display: none " id="stages"><font color="blue">还款为一个自然月</font></div>
                 </div>
                 <div class="form-control" style="display: none;" id="applytime">
                     <label for="applyCity">分期时长</label>
@@ -343,6 +346,10 @@
         z-index: 1002; left: 0px;
         opacity:0.5; -moz-opacity:0.5;
     }
+
+    #stages{
+    text-align:center
+    }
 </style>
 <div class="footer">
     <div class="container">
@@ -434,6 +441,7 @@
         <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
     </div>
 </div>
+
 <!-- end:ContactUs -->
 <script type="text/javascript">
     var require = {
@@ -552,7 +560,9 @@
         var applyid=$('#applyCity').val();
         if(applyid==1){
             $('#applytime').show();
+            $('#stages').hide();
         }else if(applyid==0){
+            $('#stages').show();
             $('#applytime').hide();
             $('#recommendCode').attr('value',rate)
         }

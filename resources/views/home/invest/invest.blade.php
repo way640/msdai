@@ -24,7 +24,7 @@
     <!-- end: Style -->
 
     <!-- start: Script -->
-
+    <script type="text/javascript" src="{{ asset('jeDate/jedate.js') }}"></script>
     <script  type="text/javascript" src="{{ asset('js/jquery-1.3.2.min.js') }}"></script>
 
     <script src="{{ asset('js/hm.js') }}"></script><div class="container venus-container">
@@ -38,25 +38,30 @@
                 <div class="result-content" >
                     <form action="/mloans/loan" method="post" id="myform" name="myform" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <?php foreach($data as $k=>$v){?>
+                        <input type="hidden" name="user_money" value="<?php echo $v->user_money?>">
+                        <?php } ?>
                         <table class="insert-tab" width="100%">
                             <tbody><tr>
                                 <th width="120">放款金额：</th>
                                 <input type="hidden" id="uid" value="<?php echo $arr?>">
                                 <td>
-                                    <input class="common-text required" id="money" name="lenging_money" size="50" value="" type="text" required>
+                                    <input class="common-text required" id="money" name="lenging_money" size="50" value="" type="text" required onkeyup='this.value=this.value.replace(/\D/gi,"")'>
                                     <div class="tbody"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <th align="right">放款开始时间：</th>
                                 <td>
-                                    <input class="common-text required" id="calen2" name="lenging_start_time" size="50" value="" type="text" required>
+                                    <p class="datep"><input class="datainp" id="dateinfo" type="text" name="lenging_start_time"  placeholder="请选择" readonly  required></p>
+                                    <div class="start"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <th>放款结束时间：</th>
                                 <td>
-                                    <input class="common-text required" id="calen2" name="lenging_end_time" size="50" value="" type="text" required>
+                                    <p class="datep"><input class="datainp" id="dateinfo2" type="text" name="lenging_end_time"  placeholder="请选择"  readonly  required></p>
+                                    <div class="end"></div>
                                 </td>
                             </tr>
                             <tr>
@@ -74,17 +79,22 @@
 
                             <tr>
                                 <th>当前可用额度：</th>
-                                <td class="quota"><input class="common-text required" id="title" name="lenging_quota" size="50" value="" type="text" readonly></td>
+                                <td>
+                                    <input class="common-text required" id="ed" name="lenging_quota" size="50" value="" type="text" readonly>
+                                    <div class="ts"></div>
+                                </td>
                             </tr>
                             <tr>
                                 <th>最终收款：</th>
-                                <td class="inp"><input class="common-text required" id="title" name="lenging_total" size="50" value="" type="text" disabled></td>
+                                <td>
+                                    <input class="common-text required" id="zui" name="lenging_total" size="50" value="" type="text" disabled>
+                                </td>
                             </tr>
                             <tr>
                                 <th></th>
                                 <td>
                                     @if ( $arr )
-                                     <input class="btn btn-primary btn6 mr10" value="提交" type="submit" >
+                                     <input class="btn btn-primary btn6 mr10" value="提交" type="submit" id="butt">
                                     @else
                                      <input class="btn btn-primary btn6 mr10" value="提交" id="but" type="button">
                                     @endif
@@ -128,75 +138,110 @@
                     opacity:0.5; -moz-opacity:0.5;
                 }
             </style>
+
             <script>
-                $('#money').blur(function () {
+                //计算客户的可用余额和最终收益
+                $('#money,#inter').blur(function ()
+                {
                     var uid=$('#uid').val();
                     var num=$('#money').val();
                     var inter=$('#inter').val();
-                    var str="<font color='red' size='1px'>最低加入金额 1,000元，上限500,000元</font>";
-                    var sa="";
-                    if(num<1000){
-                        $('.tbody').html(str);
-                    }else if(num>=1000){
-                        $.ajax({
-                            type:"post",
-                            url:"/mloans/dal",
-                            data:{
-                                "uid":uid,
-                                "num":num,
-                                "inter":inter
-                            },
-                            dataType: "json",
-                            success:function (data) {
-                                var sum=data.quota-num;
-                                if(sum<0){
-                                    sum=0;
-                                }
-                                $('.quota').html('<input class="common-text required" id="title" name="lenging_quota" size="50" value="'+sum+'" type="text" readonly>');
-                                $('.inp').html('<input class="common-text required" id="title" name="lenging_total" size="50" value="'+data.interest+'" type="text" disabled>');
-                            }
-                        });
-                        $('.tbody').html(sa);
-                    }
-                });
-
-//                计算用户最终收益
-                $('#inter').blur(function () {
-                    var uid=$('#uid').val();
-                    var num=$('#money').val();
-                    var inter=$('#inter').val();
-                    $.ajax({
-                        type:"post",
-                        url:"/mloans/dal",
-                        data:{
-                            "uid":uid,
-                            "num":num,
-                            "inter":inter
-                        },
-                        dataType: "json",
-                        success:function (data) {
-                            var sum=data.quota-num;
-                            if(sum<0){
-                                sum=0;
-                            }
-                            $('.quota').html('<input class="common-text required" id="title" name="lenging_quota" size="50" value="'+sum+'" type="text" readonly>');
-                            $('.inp').html('<input class="common-text required" id="title" name="lenging_total" size="50" value="'+data.interest+'" type="text" disabled>');
+                        if(num<1000)
+                        {
+                            $('.tbody').html("<font color='red' size='2px'>最低加入金额 1,000元，上限500,000元</font>");
                         }
-                    });
+                        else if(num>=1000)
+                        {
+                            $.ajax({
+                                type:"post",
+                                url:"/mloans/dal",
+                                data:{
+                                    "uid":uid,
+                                    "num":num,
+                                    "inter":inter
+                                },
+                                dataType: "json",
+                                success:function (data)
+                                {
+                                    var quota=data.quota;
+                                    var sum=quota-num;
+                                    var interest=data.interest;
+                                    if(sum<0)
+                                    {
+                                       $('#money').val('');
+                                        $('#zui').val('');
+                                        $('#ed').val(quota);
+
+                                    }else{
+                                        if(uid=='')
+                                        {
+                                            $('.ts').html('<font color="red" size="2px">可用额度登录后显示</font>');
+                                        }
+                                        else
+                                        {
+                                            $('#ed').val(sum);
+                                        }
+                                        $('#zui').val(interest);
+                                    }
+                                    }
+
+                            });
+                            $('.tbody').html('');
+                        }
                 });
 
-                $('#but').click(function () {
+
+                $('#but').click(function ()
+                {
                     $("#mask").css("height",$(document).height());
                     $("#mask").css("width",$(document).width());
                     $("#mask").show();
                     $('#prod').show();
                 });
 
-                $('#nozhe').click(function () {
+
+                $('#nozhe').click(function ()
+                {
                     $("#mask").hide();
                     $('#prod').hide();
 
                 });
+
+
+                //日期插件
+                jeDate({dateCell:'#dateinfo',isTime:true,format:'YYYY-MM-DD hh:mm:ss'});
+                jeDate({dateCell:'#dateinfo2',isTime:true,format:'YYYY-MM-DD hh:mm:ss'});
+
+
+                $('#butt').click(function ()
+                {
+                    var dateinfo=$('#dateinfo').val();
+                    var dateinfo2=$('#dateinfo2').val();
+                    if(dateinfo=='')
+                    {
+                        $('.start').html('<font color="red" size="2px">请选择放款开始时间</font>');
+                        return false;
+                    }
+                    if(dateinfo2=='')
+                    {
+                        $('.end').html('<font color="red" size="2px">请选择放款结束时间</font>');
+                        return false;
+                    }
+                });
+
+
+                $('#dateinfo,#dateinfo2').focus(function ()
+                {
+                    var dateinfo=$('#dateinfo').val();
+                    var dateinfo2=$('#dateinfo2').val();
+                    if(dateinfo!='')
+                    {
+                        $('.start').hide();
+                    }
+                    if(dateinfo2!=''){
+                        $('.end').hide();
+                    }
+                })
             </script>
 
                 </div>

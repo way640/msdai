@@ -24,10 +24,19 @@ class CreditController extends Controller
         //$interest=str_replace('%','',$input['lenging_interest']);
         $input['lenging_total']=$input['lenging_money']+$input['lenging_money']*($input['lenging_interest']/100);
 
+        $yu=$input['user_money']-$input['lenging_money'];
+        unset($input['user_money']);
+
+        //print_r($input);exit;
         $res=DB::table('lenging')->insert(
             $input
         );
         if($res){
+            $update=DB::table('user_info')
+                ->where('user_id', $user_id)
+                ->update(['user_money' =>$yu ]);
+        }
+        if($update){
             echo "<script>alert('放款成功，正在返回放款页面......');location.href='/invest/invest'</script>";
         }
     }
@@ -49,8 +58,6 @@ class CreditController extends Controller
     //展示借款详情页面
     public function lengpart($id)
     {
-        //$id = Input::get('id');
-        //print_r($id);exit;
         $data=DB::table('lenging')->where('lenging_id','=',$id)->get();
 
         return view('home/leng/lengpart',['data'=>$data]);
@@ -71,6 +78,7 @@ class CreditController extends Controller
         $data=Input::all();
         $data['loan_time']=time();
         $data['user_id']=$_SESSION['user']['user_id'];
+        $data['user_id']=10;
         $data['loan_money']= $data['loan_money']*10000;
 //        $data['loan_interset']=str_replace('%', '', $data['loan_interset']);
         if($data['loan_is_instal']==0){
@@ -80,6 +88,7 @@ class CreditController extends Controller
         //还款结束时间
         $data['loan_end_time']=strtotime('+'.$data['loan_long'].'Month',$data['loan_time']);
 
+        //print_r($data);exit;
         $res=DB::table('loan')->insertGetId(
             $data
         );
@@ -89,11 +98,9 @@ class CreditController extends Controller
         $back['loan_id']= $res;
 
         //还款总金额
-//        $interset=str_replace('%', '', $data['loan_interset']);
         $back['amount_money']=$data['loan_money']*($data['loan_interset']/100)+$data['loan_money'];
 
         //每月应还多少钱
-        //$back['repayment_money']=sprintf("%.2f", ($back['amount_money']/$data['loan_long']));
         $sq=$back['amount_money']/$data['loan_long'];
         $back['repayment_money']=number_format($sq, 2, ',', ' ');
 
@@ -104,6 +111,7 @@ class CreditController extends Controller
             $back
         );
         if($re){
+
             echo "<script>alert('您以成功借款');location.href='http://www.zdmoney.com/'</script>";
         }
     }
