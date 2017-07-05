@@ -131,7 +131,7 @@ class GoldController extends CommonController
 	 			$url = 'http://apis.haoservice.com/lifeservice/fund/page/?pageindex=1&pagesize=50&key=dfdac25eb4174fbeb9d3caacf95e2ab1';
 		 		$data  = file_get_contents($url);				
 	 			ob_start();  
-	 			echo  "$callback(".json_encode($data).")";
+	 			echo  "$callback(".$data.")";
 	 			// echo $data;
 				$content = ob_get_contents();//把详情页内容赋值给$content变量
 				file_put_contents($fund, $content);//写入内容到对应静态文件中
