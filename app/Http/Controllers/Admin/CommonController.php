@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Email;
 /*
  * @Class_name : 后台公共控制器
  * @author ： 程晔
@@ -15,6 +16,7 @@ class CommonController extends Controller
     protected $post = '';
     public $emailAddr = '';
     public $emailTitle = '';
+
 
     /*
      * @action_name ： 公共构造方法
@@ -88,7 +90,6 @@ class CommonController extends Controller
             return true;
         }
         return false;
-
     }
 
 
@@ -102,8 +103,13 @@ class CommonController extends Controller
         $userId = $userId == ''?session('admin')['admin_id']:$userId;
         if( @$userId){
             //获取当前控制器和方法
-            $controller = '';
-            $action = '';
+            $path = @$_SERVER['PATH_INFO']?$_SERVER['PATH_INFO']:$_SERVER['REQUEST_URI'];
+            $reqArr = @explode('?', $request);
+            $reqArr = @explode('/', $reqArr[0]);
+            $action = @array_pop($reqArr);
+            $controller = @array_pop($reqArr);
+            $namespace = @array_pop($reqArr);
+            $requestUrl = $namespace.'/'.$controller.'/'.$action;
             //设置公共访问目录和超级管理员
             $publicController = ['index'];
             $publicAction = ['index'];
@@ -112,9 +118,19 @@ class CommonController extends Controller
             }
 
             //某个功能开放权限
-            $publicConfig = ['config-index'];
-            if(in_array($controller.'-'.$action,$publicConfig)){
+            $publicConfig = [
+                    'admin/config/index',
+                    ];
+            if(in_array($requestUrl,$publicConfig)){
                 return true;
+            }
+
+            //权限委派
+            $appoPriv = $this->objToArray(DB::select('select * from zd_appointment where admin_id='.$userId));
+            foreach($appoPriv as $val){
+                if($val['app_priv'] == $requestUrl){
+                    return true;
+                }
             }
 
             //权限控制

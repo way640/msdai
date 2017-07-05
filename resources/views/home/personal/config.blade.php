@@ -1,3 +1,4 @@
+
 @extends('home.title')
 @section('content')
 <!DOCTYPE html>
@@ -124,22 +125,22 @@
                     <td class="text-left desc">
                         <small class="muted">获取最新的投资讯息和账户信息变动通知</small>
                     </td>
-                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未绑定</td>
+                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>
+					
+											<!--判断用户手机是否认证-->
+					   <?php if ( empty ( $arr['user_email'] ) ) {?>
+					       未绑定
+                       <?php 
+					       } else {
+					   ?>
+                           已绑定
+					   <?php 
+					       }
+					   ?>
+					</td>
                             <td class="info " width="30%"></td>
                             <td nowrap="nowrap"><a href="{{ url('personal/bindEmail') }}">绑定</a></td>
                         </tr>
-
-                <tr>
-                    <td class="text-left" nowrap="nowrap"><strong>紧急联系人</strong></td>
-                    <td class="text-left desc">
-                        <small class="muted">紧急联系人是在紧急情况下能够被联系到的与当事人相关的人</small>
-                    </td>
-
-                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未设置</td>
-                            <td class="info " width="30%"></td>
-                            <td nowrap="nowrap"><a href="{{ url('personal/setConfig') }}">填写</a></td>
-                        </tr>
-
                 <tr>
                     <td class="text-left" nowrap="nowrap"><strong>联系地址</strong></td>
                     <td class="text-left desc">

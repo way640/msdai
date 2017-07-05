@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use App\Http\home;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail; 
+
 /*
 *@Class_name : 个人中心
 *@Use : 用户个人中心页面展示及信息设置
@@ -14,11 +16,33 @@ use Illuminate\Support\Facades\DB;
 class PersonalController extends CommonController
 {
 	/*
+	*@Action_name :用户个人中心构造方法
+	*@Author : 宋子腾
+	*@Time : 07-04
+	*/
+	public function __construct(){
+		
+		parent::__construct();
+	
+        $userId = isset ( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '' ; 
+		
+		if ( empty ( $userId ) ) {
+			
+			 return redirect('');
+		}
+	}
+	
+	/*
 	*@Action_name : 个人中心默认首页 
 	*/
 	public function index(){
+
+	    $userId = $_SESSION['user']['user_id'] ; 
 		
-		return view('home/personal/personal');
+		$userInfo = DB::select ( "select * from zd_user_info where user_id = $userId" ) ;
+        $userInfo = $this -> objToArray ( $userInfo ) ; 		
+		
+		return view('home/personal/personal', [ 'userInfo' => $userInfo[0] ]);
 	}
 	
 	/*
@@ -28,14 +52,14 @@ class PersonalController extends CommonController
 		
 		return view('home/personal/points');
 	}
-	
+
 	/*
 	*@Action_name : 个人账号设置
 	*@Author : 宋子腾
 	*@Time : 06-27
 	*/
 	public function config(){
-		
+
 		$userId = $_SESSION['user']['user_id'] ;
 		
 		$arr = DB::select("select * from zd_user_info where user_id = $userId") ;
@@ -82,7 +106,7 @@ class PersonalController extends CommonController
 		if ( preg_match( '/^(data:\s*image\/(\w+);base64,)/', $_POST['img'], $result ) ) { 
 		
 			$type = $result[2]; 
-			$new_file = "./userImage/" . $userId . ".{$type}"; 	
+			$new_file = "userImage/" . $userId . ".{$type}";
 
 		    if( file_exists( $new_file ) ) {
 			
@@ -91,25 +115,25 @@ class PersonalController extends CommonController
 		
 			$str = $_POST['img'] ;
 			
-            $url = explode(',', $str);
-
+            $url = explode(',', $str) ;
+            $time = time() ;
+			
 			if ( file_put_contents ( $new_file, base64_decode( $url[1] ) ) ) { 
                 
 				$bloon = DB::select("select user_id from zd_user_info where user_id = " . $userId);
 				
 				if ( $bloon ) {
 					
-					$addImage = DB::update("update zd_user_info set user_head = '$new_file' where user_id = $userId");
+					$addImage = DB::update("update zd_user_info set user_head = '$new_file', user_add_time $time where user_id = $userId");
 				} else {
 									
-					$addImage = DB::insert("insert into zd_user_info( user_id, user_head ) values( $userId,'$new_file')");
+					$addImage = DB::insert("insert into zd_user_info( user_id, user_head, user_add_time ) values( $userId,'$new_file', $time)");
 				} 
 				
-				if ( $addImage ) {
-					
-					$arr = array("status"=>"1");					
-                    echo json_encode($arr);
-				}
+
+			    $arr = array("status"=>"1");					
+                echo json_encode($arr);
+
 			}
 		}	
 	}
@@ -171,6 +195,7 @@ class PersonalController extends CommonController
 		
 		$_SESSION[ "captcha" ] = $random;
 		
+		//短信接口清请求地址
 		$href = "http://sms.106jiekou.com/utf8/sms.aspx?account=jazz2312&password=song123123&mobile=".$number."&content=您的订单编码：".$random."。如需帮助请联系客服。" ;
 	
 		$content = file_get_contents ( $href ) ; 
@@ -195,6 +220,7 @@ class PersonalController extends CommonController
 		
 		$checkCaptcha = $_SESSION['captcha'] ;
 	
+
 		if ( $captcha == $checkCaptcha ) {
 			
 			$telInfo = DB::select('select user_tel from zd_user where user_id = ' . $userId) ;
@@ -219,6 +245,97 @@ class PersonalController extends CommonController
 	*/
 	public function bindEmail(){
 		
-		echo "暂无数据" ;
+		return view ( 'home/personal/bindemail' ) ; 
 	}
+	
+	/*
+	*@Action_name : 执行用户绑定操作
+	*@Author : 宋子腾
+	*@Time : 07-03
+	*/
+	public function doEmail(){
+		
+		$userId = $_SESSION['user']['user_id'] ; 
+		$emailAddress = $_POST["email"];
+     
+	    $userInfo = DB::select ( "select * from zd_user where user_id = '$userId'" ) ; 
+		$userInfo = $this -> objToArray ( $userInfo ) ;
+	 
+	    //对用户信息进行加密
+		$userArr = $userInfo[0] ;
+		$userArr['user_email'] = $emailAddress ; 
+		
+		$userData = base64_encode ( json_encode ( $userArr ) ) ; 
+	 
+      	$pattern = "/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/" ;
+        if ( preg_match ( $pattern, $emailAddress ) ) {
+            
+			//邮件参数设置   用户名                          用户邮箱     内容标题      内容详情
+		    $this -> smtp ( $userArr['user_account'], $emailAddress, '激活邮箱', '请在页面点击链接，激活您的邮箱http://www.zdmoney.com/personal/activate?mailbox='.$userData ) ;
+		
+		}
+	}
+	
+	/*
+	*@Action_name : 用户激活邮箱
+	*@Author : 宋子腾
+	*@Time : 07-04
+	*/
+	public function activate(){
+		
+		$userInfo = isset ( $_GET['mailbox'] ) ? $_GET['mailbox'] : '' ; 
+		
+		if ( $userInfo ) {
+			
+	        //解密数据信息
+		    $userInfo = json_decode ( base64_decode ( $userInfo ) ) ;
+		    $userInfo = $this -> objToArray ( $userInfo ) ;	
+			
+			$userId = $userInfo['user_id'] ; 		
+			$user_email = $userInfo['user_email'] ; 
+			
+            $bloon = DB::update ( "update zd_user set user_email = '$user_email' where user_id = $userId" ) ; 
+			
+			if ( $bloon ) {
+				
+				$status = 1 ; 
+			} else {
+				
+				$status = 0 ;
+			}
+			
+			return view ( 'home/personal/activEmail', [ 'status' => $status ]) ;
+		}
+	}
+	
+	/*
+	*@Action_name : 用户填写地址
+	*@Author ： 宋子腾
+	*@Time : 07-04
+	*/
+	public function setAddress(){
+		
+		
+        return view ( 'home/personal/setAddress' ) ;
+	}
+	
+	/*
+	*@Action_name : 添加地址
+	*@Author : 宋子腾
+	*@Time : 07-04
+	*/
+    public function addAddress(){
+		
+		$address = $_POST['address'] ; 
+		$userId = $_SESSION['user']['user_id'] ; 
+		$time = time() ;
+		
+		//$pattern = "#([0-9a-zA-Z-_x{4e00}-x{9fa5}]+)#iu" ;
+		//if ( preg_match ( $pattern, $address ) ) {
+            
+            $bloon = DB::update ( "update zd_user_info set user_addr = '$address', user_add_time = '$time' where user_id = $userId" ) ;
+		//}
+			
+			$this -> success ( ) ; 
+	}	
 }

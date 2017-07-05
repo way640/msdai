@@ -15,8 +15,8 @@ class UserController extends CommonController
     //get.admin/user/user  全部管理员列表
     public function index()
     {
-        $data = User::orderBy('admin_id','asc')->get();
-        return view('admin.lists',compact('data'));
+       $data = User::orderBy('admin_id','asc')->get();
+       return view('admin.lists',compact('data'));
     }
 
     //get.admin/user/create   添加管理员

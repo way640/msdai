@@ -7,6 +7,7 @@ use App\Http\home;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 /*
 *@Class_name : 用户登录注册操作
 *@Use : 用户的注册登录等操作
@@ -25,12 +26,15 @@ class UserController extends CommonController
 	}
 	
 	/*
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7baa627c1eddba750a33af3e4a7a9f729dd3cba4
 	*Action_name : 登录调用框架级
 	*/
 	public function showLogin(){
 		
 		return view('home/user/loginForm');
-		
 	}
 	
 	
@@ -38,6 +42,7 @@ class UserController extends CommonController
 	*@Action_name : 用户注册默认首页
 	*/
 	//use GeetestCaptcha;
+
 	
 	public function regist(){
 		
@@ -46,6 +51,7 @@ class UserController extends CommonController
 	
 	/*
 	*@Action_name : 新用户注册页面
+
 	*/
 	public function doRegist () {
 
@@ -77,6 +83,7 @@ class UserController extends CommonController
 			return $this->error ( '网络异常，请重新尝试' );
 		}
 		
+
 	}
 	
 	/*
@@ -84,14 +91,13 @@ class UserController extends CommonController
 	*/
 	public function forget(){
 
-		
+
 	}
 
 	/*
 	*@Action_name : 设置验证码
 	*/
 	public function captcha(){
-
 		return view('home/web/StartCaptchaServlet');
 	}
 
@@ -107,7 +113,7 @@ class UserController extends CommonController
 	*@Action_name : 用户登录验证页面
 	*/
 	public function doLogin(){
-		
+
 		$userName = isset( $this->post['username'] ) ? $this->post['username'] : '';
 		$userPwd  = isset( $this->post['userpwd'] )  ? $this->post['userpwd']  : '';
 
@@ -120,7 +126,7 @@ class UserController extends CommonController
 			
 			return $this->error ( '用户名未填写' );
 		}
-		
+
 		$userPwd = md5($userPwd);
 		
 		$userExist = DB::select("select user_id, user_account from zd_user where user_account = '$userName' and user_pwd = '$userPwd'");	

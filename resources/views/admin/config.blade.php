@@ -58,6 +58,7 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-5 m-b-xs">
+
                             <select class="input-sm form-control input-s-sm inline" style="height: 35px">
                                 <option value="all">所有类型</option>
                             </select>
@@ -163,6 +164,7 @@
                 });
             }
         });
+
 
         $('.input-sm').change(function(){
             getData($(this).val());

@@ -47,6 +47,7 @@
 						<li><a data-nav="userprofile" class=" highlight userprofile" href="javascript:void(0)">账户管理</a></li>
 					<ul class="jimu-leftsecnav">
 						<li><a data-nav="p2p-setting" class="" href="https://box.jimu.com/User/SecurityCenter">账户设置</a></li>
+
 						<li><a data-nav="user-center" class="" href="{{ url('personal/config') }}">安全设置</a></li>
 						<li><a data-nav="message" class="" href="https://www.jimu.com/Message/List"><span>消息</span></a>
 						</li>
@@ -68,11 +69,21 @@
 
     <div class="account-info-container container clearfix">
         <div class="account-head">
-            <a href="https://www.jimu.com/User/SetAvatar">
-                <img src="{{ asset('image/default-6e81850cf7.jpg') }}" class="avatar">
+            <a href="javascript:void(0);">
+                <img src="
+				<?php if ( $userInfo['user_head'] ) {?>
+					{{ url('<?php echo $userInfo['user_head']?>') }}
+				<?php 
+				    } else { 
+			    ?>
+				{{ asset('image/default-6e81850cf7.jpg') }}
+				<?php 
+				}?>
+				" class="avatar">
                     </a>
         </div>
         <div class="account-info">
+
             <h4 class="say-hello"><?php echo $_SESSION['user']['username']?>，您好</h4>
             <div class="account-items-wrap clearfix">
                 <div class="account-item">
