@@ -20,8 +20,7 @@
         	<img id="WeiBo" onmousemove="WeiBoMove()" onmouseout="WeiBoOut()" src="{{ asset('image/微博-link.png') }}" />
         	<img id="WeChat" onmousemove="WeChatMove()" onmouseout="WeChatOut()" src="{{ asset('image/微信-link.png') }}" />
             <ul>
-            	<li><a href="#">最新活动</a></li>
-
+            	<li><a href="{{url('')}}">最新活动</a></li>
 				<?php $arr = isset( $_SESSION['user'] ) ? $_SESSION['user'] : ''?>
 				@if ( $arr )
 					<li><a href="javascript:void(0);"><?php echo $_SESSION['user']['username'];?>, 您好, 欢迎登陆</a></li>
@@ -63,7 +62,8 @@
                       
                   </div>
 
-                  <a href="{{url('')}}/cz/index">充值</a>
+                  <li><a href="{{url('')}}/cz/index">充值</a></li>
+                  <li><a href="{{url('')}}/molans/draw">抽奖</a></li>
 
         	</ul>
         </div>

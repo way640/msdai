@@ -14,3 +14,7 @@ Route::get('mloans/lengpart/{id}','Home\CreditController@lengpart');
 Route::get('mloans/approve/{id}','Home\CreditController@approve');
 //申请借款
 Route::get('molans/applyto','Home\CreditController@applyto');
+//幸运大转盘
+Route::get('molans/draw','Home\CreditController@draw');
+//用户大转盘中奖信息
+Route::get('molans/lucy','Home\CreditController@lucy');

@@ -1,6 +1,5 @@
-<?php
-use Illuminate\Support\Facades\Session;
-?>
+<?php $arr = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : ''?>
+<?php //$arr = 10; ?>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://loan.jimu.com/expwy/prod?applyType=401 -->
 <html class="v_scrollbar"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -123,7 +122,7 @@ use Illuminate\Support\Facades\Session;
                     </dl>
                     <dl>
                         <dt>利率：</dt>
-                        <dd><span class="digit" id="rate"><?php echo $v->lenging_interest ?></span>%</dd>
+                        <dd><span class="digit" id="rate"><?php echo $v->lenging_interest ?></span></dd>
                     </dl>
                     <dl>
                         <dt>费率说明：</dt>
@@ -138,12 +137,11 @@ use Illuminate\Support\Facades\Session;
                     <p class="text-center">
                         <span class="digit-strong f24" data-apply-type="401">5260</span>人已经成功申请
                     </p>
+                    @if ( $arr )
                     <a class="btn btn-second"  id="applyLoan">立即申请</a>
-                    {{--<?php if(Session::get('user_id')){?>--}}
-                    {{--<a class="btn btn-second"  id="applyLoan">立即申请</a>--}}
-                    {{--<?php }else{?>--}}
-                    {{--<a class="btn btn-second"  id="applyno">立即申请</a>--}}
-                    {{--<?php } ?>--}}
+                    @else
+                    <a class="btn btn-second"  id="applyno">立即申请</a>
+                    @endif
                 </div>
             </div>
             <?php } ?>
@@ -231,38 +229,31 @@ use Illuminate\Support\Facades\Session;
         <div class="modal-form">
             <form class="expwy-form" action="/molans/applyto">
                 <?php foreach($data as $k=>$v){?>
-                <input type="hidden" name="applyid"  value="<?php echo $v->lenging_id?>">
+                <input type="hidden" name="lenging_id"  value="<?php echo $v->lenging_id?>">
+                    <input type="hidden" name="lenging_money"  value="<?php echo $v->lenging_money?>">
                     <?php } ?>
-                {{--<input type="hidden" name="applyType" id="applyType" value="301">--}}
-
-                {{--<div class="form-control">--}}
-                {{--<label for="mobile">手机号码</label>--}}
-
-                    {{--<div class="controls">--}}
-                        {{--<input type="text" name="mobile" id="mobile" placeholder="请填写手机号码" required="" data-reg="^[1][0-9]{10}$" data-reg-message="请输入正确的手机号码">--}}
-                    {{--</div>--}}
-                {{--</div>--}}
                 <div class="form-control">
                     <label for="applyBalance">借款金额</label>
 
                     <div class="controls i-unit">
-                        <input type="text" name="applyBalance" id="applyBalance" placeholder="请填写金额，保留整数位" required="" data-reg="^[1-9]([0-9]+)?$" data-reg-message="请输入正确的金额">
+                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额，保留整数位" required="" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
                     </div>
                 </div>
                 <div class="form-control">
                     <label for="applyCity">是否分期</label>
                     <div class="controls">
-                        <select class="i-arrow" name="applyCity" id="applyCity">
+                        <select class="i-arrow" name="loan_is_instal" id="applyCity" required>
                             <option value="">请选择</option>
                             <option value="0">否</option>
                             <option value="1">是</option>
                         </select>
                     </div>
+                    <div class="controls" style="display: none " id="stages"><font color="blue">还款为一个自然月</font></div>
                 </div>
                 <div class="form-control" style="display: none;" id="applytime">
                     <label for="applyCity">分期时长</label>
                     <div class="controls">
-                        <select class="i-arrow" name="applymon" id="applymon">
+                        <select class="i-arrow" name="loan_long" id="applymon" required>
                             <option value="">请选择</option>
                             <option value="3">3个月</option>
                             <option value="6">6个月</option>
@@ -273,6 +264,15 @@ use Illuminate\Support\Facades\Session;
                         </select>
                     </div>
                 </div>
+                    {{--<input type="hidden" name="applyType" id="applyType" value="301">--}}
+
+                    {{--<div class="form-control">--}}
+                    {{--<label for="mobile">手机号码</label>--}}
+
+                    {{--<div class="controls">--}}
+                    {{--<input type="text" name="mobile" id="mobile" placeholder="请填写手机号码" required="" data-reg="^[1][0-9]{10}$" data-reg-message="请输入正确的手机号码">--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
                 {{--<div class="form-control captcha">--}}
                     {{--<label for="captcha">验证码</label>--}}
                     {{--<div class="controls">--}}
@@ -284,7 +284,7 @@ use Illuminate\Support\Facades\Session;
                     <label for="recommendCode">借款利率</label>
 
                     <div class="controls">
-                        <input type="text" name="recommendCode" id="recommendCode" disabled>
+                        <input type="text" name="loan_interset" id="recommendCode" readonly>
                     </div>
                 </div>
                 <div class="form-control">
@@ -312,7 +312,7 @@ use Illuminate\Support\Facades\Session;
 </div>
 
 <div id="deng" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;"><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
-    <input id="hiddenName" type="hidden" value="<?php Session::get('user_id')?>" />
+    <input id="hiddenName" type="hidden" value="<?php $arr ?>" />
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="nz">+</button>
         <h3 id="myModalLabel">提示</h3>
@@ -345,6 +345,10 @@ use Illuminate\Support\Facades\Session;
         position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #000;
         z-index: 1002; left: 0px;
         opacity:0.5; -moz-opacity:0.5;
+    }
+
+    #stages{
+    text-align:center
     }
 </style>
 <div class="footer">
@@ -437,6 +441,7 @@ use Illuminate\Support\Facades\Session;
         <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
     </div>
 </div>
+
 <!-- end:ContactUs -->
 <script type="text/javascript">
     var require = {
@@ -533,8 +538,7 @@ use Illuminate\Support\Facades\Session;
     });
 
     $('#submit').click(function () {
-//        var id=$("#hiddenName").val();
-        var id=1;
+        var id=$("#hiddenName").val();
         $.ajax({
             type:'get',
             url:'/mloans/approve/'+id,
@@ -552,18 +556,21 @@ use Illuminate\Support\Facades\Session;
 
     //是否分期
     $('#applyCity').change(function () {
+        var rate=$('#rate').html();
         var applyid=$('#applyCity').val();
-        var str='';
         if(applyid==1){
             $('#applytime').show();
+            $('#stages').hide();
         }else if(applyid==0){
+            $('#stages').show();
             $('#applytime').hide();
-            $('#recommendCode').attr('value',str)
+            $('#recommendCode').attr('value',rate)
         }
     });
+
     //计算借款利率 3个月利率增加1%，6个月增加1.5%，9个月增加2.2%，12个月增加5%，18个月增加7%，24个月增加10%
     $('#applymon').change(function () {
-        var rate=$('#rate').html();
+        var rate=$('#rate').html().replace(/[\%\/]/g,"");
         var applymon=$('#applymon').val();
         var str='';
         if(applymon==3){
