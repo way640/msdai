@@ -39,7 +39,7 @@ $path = @$_SERVER['PATH_INFO']?$_SERVER['PATH_INFO']:$_SERVER['REQUEST_URI'];
 
 $urlArr = @explode('?',$path);
 $urlArr = @explode('/',$urlArr['0']);
-if(count($urlArr) > 4){
+if(count($urlArr) > 5){
     echo "<script>location='".url('')."'</script>";
 }
 if($urlArr[1] == 'admin'){

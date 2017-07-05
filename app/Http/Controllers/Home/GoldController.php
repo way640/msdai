@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 /*
 *@Class_name : 贵金属详情
 *@Use : 用户对贵金属的购入等操作
-*@Author : (负责人)
+*@Author : (姬国荣)
 *@Time : (完成时间)
 */
 class GoldController extends CommonController
@@ -31,30 +31,34 @@ class GoldController extends CommonController
 	}
 	//  调用本地页面的时候
 	public function getlist(){
+		//接受要查询的贵金属id
 		$fund_no = $_GET['fund_no']; 
-		//到public目录
-		//public_path('')
+
+		//到public目录		public_path('')
 		$goods_statis_file = public_path('file')."\\goods_file_".$fund_no.".html";
 		//对应静态页文件
-		$expr = 60*60; //静态文件有效期1小时
+		$expr = 60*60; 												//静态文件有效期1小时
+
 		if(file_exists($goods_statis_file)){  
-			$file_ctime = filectime($goods_statis_file);//文件创建时间  
-			if($file_ctime+$expr > time()){//如果没过期    
-				echo file_get_contents($goods_statis_file);//输出静态文件内容    
-				exit;  
+
+			$file_ctime = filectime($goods_statis_file);			//文件创建时间  
+
+			if($file_ctime+$expr > time()){
+				//如果没过期    输出静态文件内容
+				echo file_get_contents($goods_statis_file);
+ 
 			}else{
 				//如果已过期    
-				unlink($goods_statis_file);				//删除过期的静态页文件 
+				unlink($goods_statis_file);							//删除过期的静态页文件 
+				//调接口
 				set_time_limit(0); 
 	 			$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=23464&sign=c649cb4d82839e08bf3b5f917e8cc9df&format=json";
 				$data = file_get_contents($url);
-				$arr = json_decode($data,true);
 	 			ob_start();  
 	 			echo $data;
-				//从数据库读取数据，并赋值给相关变量
-				$content = ob_get_contents();//把详情页内容赋值给$content变量
-				file_put_contents($goods_statis_file, $content);//写入内容到对应静态文件中
-				ob_end_flush();//发送内部缓冲区的内容到浏览器，删除缓冲区的内容，关闭缓冲区。
+				$content = ob_get_contents();						//把详情页内容赋值给$content变量
+				file_put_contents($goods_statis_file, $content);	//写入内容到对应静态文件中
+				ob_end_flush();										// 冲刷出（送出）输出缓冲区内容并关闭缓冲
 			}
 		}else{ 
 			//调接口
@@ -63,99 +67,116 @@ class GoldController extends CommonController
 			$data = file_get_contents($url);
  			ob_start();  
  			echo $data;
-			//从数据库读取数据，并赋值给相关变量
-			$content = ob_get_contents();//把详情页内容赋值给$content变量
-			file_put_contents($goods_statis_file, $content);//写入内容到对应静态文件中
-			ob_end_flush();//发送内部缓冲区的内容到浏览器，删除缓冲区的内容，关闭缓冲区。
+			$content = ob_get_contents();							//把详情页内容赋值给$content变量
+			file_put_contents($goods_statis_file, $content);		//写入内容到对应静态文件中
+			ob_end_flush();											// 冲刷出（送出）输出缓冲区内容并关闭缓冲
 		}
 	}
 
 	public function getgo(){
+		//jsonp接值
 		$code = $_GET['code'];
 		$callback = $_GET['callback'];
+
 		$foud_no_list = [
-				1051,1052,1053,1054
+				1051,1052,1056,1058
 		];
+
 		$goods_statis_file = public_path('file\goods_file.html');
-		//echo $goods_statis_file;die;
-		//对应静态页文件
-		$expr = 60*60; //静态文件有效期，秒
+
+
+		$expr = 60*60*5; 												//静态文件有效期5小时
 		if(file_exists($goods_statis_file)){  
-			 $file_ctime = filectime($goods_statis_file);//文件创建时间  
-			if($file_ctime+$expr > time()){//如果没过期    
-				echo file_get_contents($goods_statis_file);//输出静态文件内容      
-			}else{//如果已过期   
-				unlink($goods_statis_file);				//删除过期的静态页文件 
+
+			 $file_ctime = filectime($goods_statis_file);				//文件创建时间  
+
+			if($file_ctime+$expr > time()){
+				//如果没过期   输出静态文件内容
+
+				echo file_get_contents($goods_statis_file);
+
+			}else{
+				//如果已过期   删除过期的静态页文件 
+				unlink($goods_statis_file);
+
 				set_time_limit(0); 
+
 				foreach ($foud_no_list as $key => $fund_no) {
+
 		 			$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=23464&sign=c649cb4d82839e08bf3b5f917e8cc9df&format=json";
 					$data = file_get_contents($url);
 					$arr[$key] = json_decode($data,true)['result'];
+
 				}
 	 			ob_start();  
-	 			echo "$callback(".json_encode($arr).")";
-	 			// echo $data;
-				$content = ob_get_contents();//把详情页内容赋值给$content变量
-				file_put_contents($goods_statis_file, $content);//写入内容到对应静态文件中
-				ob_end_flush();//发送内部缓冲区的内容到浏览器，删除缓冲区的内容，关闭缓冲区。
+	 			echo  "$callback(".json_encode($arr).")";
+				$content = ob_get_contents();							//把详情页内容赋值给$content变量
+				file_put_contents($goods_statis_file, $content);		//写入内容到对应静态文件中
+				ob_end_flush();											// 冲刷出（送出）输出缓冲区内容并关闭缓冲
 			}
 		}else{ 
 			set_time_limit(0); 
 			foreach ($foud_no_list as $key => $fund_no) {
-	 			$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=23464&sign=c649cb4d82839e08bf3b5f917e8cc9df&format=json";
+				//接口1  超限换接口
+	 			//$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=23464&sign=c649cb4d82839e08bf3b5f917e8cc9df&format=json";
+	 			//接口2
+	 			$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=22630&sign=d66f184f4d189e1981b1ed34fa98e622&format=json";
 				$data = file_get_contents($url);
 				$arr[$key] = json_decode($data,true)['result'];
+
 			}
  			ob_start();  
  			echo  "$callback(".json_encode($arr).")";
- 			// echo $data;
-			$content = ob_get_contents();//把详情页内容赋值给$content变量
-			file_put_contents($goods_statis_file, $content);//写入内容到对应静态文件中
-			ob_end_flush();//发送内部缓冲区的内容到浏览器，删除缓冲区的内容，关闭缓冲区。
+			$content = ob_get_contents();								//把详情页内容赋值给$content变量
+			file_put_contents($goods_statis_file, $content);			//写入内容到对应静态文件中
+			ob_end_flush();												// 冲刷出（送出）输出缓冲区内容并关闭缓冲
 		}
 	}
 	//基金接口
 	public function fund(){
+		//jsonp接值
 		$code = $_GET['code'];
 		$callback = $_GET['callback'];
+
 		//静态页面
 		$fund = public_path('file\fund.html');
-		$expr = 60*60*24*7; //静态文件有效期，秒
+		$expr = 60*60*24*7; 									//静态文件有效期7小时
 		if(file_exists($fund)){  
-			 $file_ctime = filectime($fund);//文件创建时间  
-			if($file_ctime+$expr > time()){//如果没过期    
-				echo file_get_contents($fund);//输出静态文件内容      
-			}else{//如果已过期   
-				unlink($fund);				//删除过期的静态页文件 
+
+			 $file_ctime = filectime($fund);					//文件创建时间  
+
+			if($file_ctime+$expr > time()){
+				//如果没过期   输出静态文件内容 
+				$data = file_get_contents($fund);
+				echo  "$callback(".$data.")";
+
+			}else{
+				//如果已过期   删除过期的静态页文件 
+				unlink($fund);
+
 				set_time_limit(0); 
 	 			$url = 'http://apis.haoservice.com/lifeservice/fund/page/?pageindex=1&pagesize=50&key=dfdac25eb4174fbeb9d3caacf95e2ab1';
-		 		$data  = file_get_contents($url);				
+		 		$data  = file_get_contents($url);
+
 	 			ob_start();  
-	 			echo  "$callback(".$data.")";
-	 			// echo $data;
-				$content = ob_get_contents();//把详情页内容赋值给$content变量
-				file_put_contents($fund, $content);//写入内容到对应静态文件中
-				ob_end_flush();//发送内部缓冲区的内容到浏览器，删除缓冲区的内容，关闭缓冲区。
+	 			echo  $data;									//输出静态文件的内容
+				$content = ob_get_contents();					//把详情页内容赋值给$content变量
+				file_put_contents($fund, $content);				//写入内容到对应静态文件中
+				ob_end_clean();									//输出缓冲区的内容并关闭这个缓冲区
+				echo  "$callback(".$data.")";
 			}
 		}else{ 
+
 			set_time_limit(0); 
  			$url = 'http://apis.haoservice.com/lifeservice/fund/page/?pageindex=1&pagesize=50&key=dfdac25eb4174fbeb9d3caacf95e2ab1';
 	 		$data  = file_get_contents($url);
+
  			ob_start();  
- 			echo  "$callback(".$data.")";
- 			// echo $data;
-			$content = ob_get_contents();//把详情页内容赋值给$content变量
-			file_put_contents($fund, $content);//写入内容到对应静态文件中
-			ob_end_flush();//发送内部缓冲区的内容到浏览器，删除缓冲区的内容，关闭缓冲区。
+ 			echo  $data;									//输出静态文件的内容
+			$content = ob_get_contents();					//把详情页内容赋值给$content变量
+			file_put_contents($fund, $content);				//写入内容到对应静态文件中
+			ob_end_clean();									//输出缓冲区的内容并关闭这个缓冲区
+			echo  "$callback(".$data.")";
 		}
-		// "symbol": "660001", //基金代码
-		// "name": "农银行业成长股票",	//基金全称
-		// "CompanyName": "农银汇理",	//基金简称
-		// "SubjectName": "创业板",	基金类型
-		// "clrq": "2008-08-04 00:00:00", 成立日期
-		// "dwjz": 2.2396,		单位净值 元
-		// "ljjz": 2.8396,		累计净值
-		// "jjgm": 22.01, 		基金规模
-		// "trend": 47, 		基金近1月涨幅超过同类平均47.09%
 	}
 }

@@ -15,14 +15,14 @@ use Illuminate\Support\Collection;
 */
 class FundController extends CommonController
 {
-	//基金跟多展示页面
+	//基金更多展示页面
 	public function fundlist(){
-		$fund = public_path('file\fund.html');
+	$fund = public_path('file\fund.html');
 
-		$info = file_get_contents($fund);
+	$info = file_get_contents($fund);
 
-		$data = json_decode($info,true)['result'];
-		//获取当前的分页数，就是第6这样的
+	$data = json_decode($info,true)['result'];
+	//获取当前的分页数，就是第6这样的
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
         //实例化collect方法
@@ -37,6 +37,7 @@ class FundController extends CommonController
         $data= new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
         $data->setPath('fundlist'); 
         $num = $data->lastpage();
+        //上一页 下一页
         $nextpage=$data->currentPage() >$num ? $num : $data->currentPage()+1 ;
         $lastpage=$data->currentPage()-1 <0 ? 1 : $data->currentPage()-1 ;
         $data->next=$nextpage;
