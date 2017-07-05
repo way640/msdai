@@ -66,15 +66,12 @@ Route::get('{name}', function ($name) {
 });
 
 //如果访问不存在的控制器和方法，跳转404
-<<<<<<< HEAD
-Route::get('{name}/{id}', function ($name,$id) {
-=======
 Route::get('{name}/{id}', function () {
     return view('404');
 });
 
 Route::get('{name}/{id}/{source}', function () {
->>>>>>> c952895de8985a88f33efa1f1ce7bec02bca3c07
+
     return view('404');
 });
 
