@@ -19,6 +19,7 @@ class LoginController extends CommonController
      */
     public function login()
     {
+
         if($input = Input::all())
         {
         $admin = User::first();
