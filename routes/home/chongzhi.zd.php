@@ -9,6 +9,3 @@ Route::get('cz/index', 'Home\CzController@index');
 Route::post('cz/add', 'Home\CzController@add');
 //同步回调
 Route::get('cz/hd/{price}', 'Home\CzController@return_url');
-
-
-

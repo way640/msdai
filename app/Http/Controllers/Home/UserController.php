@@ -26,10 +26,6 @@ class UserController extends CommonController
 	}
 	
 	/*
-<<<<<<< HEAD
-
-=======
->>>>>>> 7baa627c1eddba750a33af3e4a7a9f729dd3cba4
 	*Action_name : 登录调用框架级
 	*/
 	public function showLogin(){

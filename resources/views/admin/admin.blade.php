@@ -2,42 +2,24 @@
 @section('content')
     <script src="{{URL::asset('')}}admin/js/jquery.min.js"></script>
     <div style="padding: 50px 300px 0 300px">
-        <h1 align="center">权限委派</h1>
+        <h1 align="center">角色赋值</h1>
     <div class="col-md-12">
         <div class="form-group">
-            <label class="col-sm-3 control-label">委托人：</label>
+            <label class="col-sm-3 control-label">角色名称：</label>
             <div class="col-sm-9">
-                <input name="admin_account" id="admin_account" required class="form-control" placeholder="例：123@qq.com；请务必填写正确的账户名称" type="text"> <span class="help-block m-b-none">这里填写你想将权限委托给谁</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">权限明细：</label>
-            <div class="col-sm-9">
-                <select class="form-control" id="app_priv" name="app_priv" style="height: 40px">
+                <select class="form-control" id="role_name" name="role_name" style="height: 40px">
 
                 </select>
             </div>
         </div>
+		
         <div class="form-group">
-            <label class="col-sm-3 control-label">委派缘由：</label>
-            <div class="col-sm-9">
-                <input name="config_link" id="app_desc" class="form-control" required placeholder="例：出差两天，委派助理小红管理" type="text"> <span class="help-block m-b-none">这里是注明委派的具体缘由</span>
-            </div>
-        </div>
+            <label class="col-sm-3 control-label">赋值权限</label>
+            <div class="col-sm-9" id="privList">
 
-        <div class="form-group">
-            <label class="col-sm-3 control-label">开始时间：</label>
-            <div class="col-sm-9">
-                <input name="app_start_time" id="app_start_time" required class="form-control" placeholder="例：2017-09-21" type="text">
-            </div>
+			</div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">结束时间：</label>
-            <div class="col-sm-9">
-                <input name="app_end_time" id="app_end_time" required class="form-control" placeholder="例：2017-09-22" type="text"> 
-            </div>
-        </div>
-
+		<br><br><br><br>
         <div class="form-group">
             <div class="col-sm-12 col-sm-offset-3">
                 <button class="btn btn-primary" type="submit" id="sub">保存内容</button>
@@ -52,33 +34,38 @@
                 $('.col-sm-3').attr('style','font-size:20px');
                 $.ajax({
                     type:"get",
-                    url:"{{url('admin/appo/privlist')}}",
+                    url:"{{url('admin/admin/roleList')}}",
                     data:'',
                     dataType:'json',
                     success:function ( msg ) {
-                        $('#app_priv').append('<option value="">请选择分类</option>');
+                        $('#role_name').append('<option value="">请选择角色</option>');
 
                         $.each(msg.data,function(k,v){
-                            $('#app_priv').append('<option level="' + v.priv_level + '" value="' + v.priv_id + '"><span>'+v.level_info+'</span>'+v.priv_name+'</option>');
+                            $('#role_name').append('<option value="' + v.role_id + '"><span>'+v.role_name+'</span></option>');
                         });
                     }
                 });
 				
-				//$('.col-md-12').delegate('#app_priv','change',function(){
-				$('#app_priv').change(function(){	
-					str = '';
-				    var privId = $("#app_priv").find("option:selected");  
-					str += privId.val();
-					var nextAll = privId.nextAll();
-					$.each(nextAll,function(k,v){
+				$.ajax({
+                    type:"get",
+                    url:"{{url('admin/admin/privList')}}",
+                    data:'',
+                    dataType:'json',
+                    success:function ( msg ) {
 						
-						if($(this).attr('level') <= privId.attr('level')){
-							return false;
-						}else{
-							str += ','+$(this).val();
-						}
-					});    
-				})
+						$.each(msg.data,function(k,v){
+
+							$.each(msg.data.arr1,function(k1,v1){
+								
+							    if ( k1 == v.priv_level ){
+								    
+						    		$('#privList').append( msg.data.arr1[k1] + '<input type="checkbox" value="' + v.role_id + '"><span>'+v.priv_name+'</span>' );
+						    	}
+							
+						    });
+                        });
+                    }
+                });
 				
                 $('#sub').click(function(){
                     					
