@@ -45,30 +45,35 @@ if(count($urlArr) > 4){
 if($urlArr[1] == 'admin'){
     Autoload(__DIR__.'\admin');
 }else{
-    Autoload(__DIR__.'\home');
+    if(is_file(config_path('').'\stop.lock')){
+        Route::get('/', function () { return view('stop'); });
+    }else{
+        Autoload(__DIR__.'\home');
+        //默认访问首页
+        Route::get('/', function () {
+            return view('home.index');
+        });
+            
+        Route::get('{name}', function ($name) {
+            return view('404');
+        });
+
+        //如果访问不存在的控制器和方法，跳转404
+        Route::get('{name}/{id}', function () {
+            return view('404');
+        });
+
+        Route::get('{name}/{id}/{source}', function () {
+            return view('404');
+        });
+    }
 }
-
-//默认访问首页
-Route::get('/', function () {
-    return view('home.index');
+Route::get('admin/{name}', function () {
+    return view('admin.login');
 });
-    
-
 
 Route::get('admin/{name}/{id}', function () {
     return view('admin.login');
 });
 
-Route::get('{name}', function ($name) {
-    return view('404');
-});
-
-//如果访问不存在的控制器和方法，跳转404
-Route::get('{name}/{id}', function () {
-    return view('404');
-});
-
-Route::get('{name}/{id}/{source}', function () {
-    return view('404');
-});
 
