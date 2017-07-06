@@ -37,7 +37,7 @@ class AppoController extends CommonController
      * @author：Way
      * @Time：2017-06-29**/
     public function appoInfo(){
-        $where = 'app_from='.session('admin')['admin_id'];
+        $where = 'app_from='.$_SESSION['admin']['admin_id'];
         if(@$this->get['type'] != 'all' && @$this->get['type']){
             $where .= ' and ap.admin_id ='.$this->get['type'];
         }
@@ -75,11 +75,46 @@ class AppoController extends CommonController
      * @author：Way
      * @Time：2017-06-29**/
     public function privList(){
+		
         $confInfo = $this->dataBack($this->objToArray(DB::select('select * from zd_privilege where priv_status = "1"')),'priv_id','priv_pid');
         foreach($confInfo as $k=> $v){
             $confInfo[$k]['level_info'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$v['level']-1);
         }
         return $this->success($confInfo);
     }
+	
+	/*
+	*@Action_name : 添加委任
+	*@Author : szt 
+	*@Time : 07-06
+	*/
+	public function doAppoAdd(){
+
+		$appoData = $_POST ; 
+        $appoAdmin   = $_SESSION['admin']['admin_id'] ; 
+		
+		$appoUser = $appoData['admin_account'] ; 
+		
+		$appoFrom  = DB::select ( 'select admin_id from zd_admin where admin_account = "' . $appoUser . '"' ) ; 
+		$appoFrom  = $this -> objToArray ( $appoFrom ) ; 
+		$appoId = $appoFrom[0]['admin_id'] ; 
+		
+		$start_time = strtotime ( $appoData['app_start_time'] ) ;
+        $end_time   = strtotime ( $appoData['app_end_time'] ) ; 	
+        $desc       = $appoData['app_desc'] ;	
+		$status     = $appoData['app_status'] ; 
+		
+		$bloon = DB::insert ( 'insert into zd_appointment ( app_id, app_from, app_desc, app_start_time, app_end_time, app_priv, admin_id ) values ( "", ' . $appoAdmin . ', "' . $desc . '", "' . $start_time . '", "' . $end_time . '", "' . $status . '", "' . $appoId . '" ) ' );
+		
+        if ( $bloon ) {
+			
+			return $this -> success ( ) ;
+		} else {
+			
+			return $this -> error ( ) ;
+		}
+	}
+	
+	
 
 }

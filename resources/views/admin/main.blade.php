@@ -438,6 +438,17 @@
                                 </li>
                             </ul>
                         </li>
+						
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:void(0);">
+                               <?php echo $_SESSION['admin']['admin_account']?>，您好
+                            </a>
+                        </li>
+	                   <li class="dropdown">
+                            <a class="dropdown-toggle count-info" id="logout" data-toggle="dropdown" href="javascript:void(0);">
+                               退出
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -548,4 +559,26 @@
         });
     })
 </script>
+
+<script>
+    $('#logout').on('click', function(){
+		
+        $.ajax({
+			
+            type: "POST",
+            url: "{{ url('admin/public/doLogout') }}",
+			dataType: 'json',
+            success: function(msg){
+                
+				if ( msg.status == 1 ) {
+					
+					alert('已成功退出')
+					
+					window.location.href="{{ url('admin/login/login') }}"
+				}
+            }
+        });
+	})
+</script>
+
 </html>

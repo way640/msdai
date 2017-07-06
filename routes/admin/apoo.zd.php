@@ -13,4 +13,9 @@ Route::get('admin/appo/appoinsert','Admin\AppoController@appoInsert');
 Route::get('admin/appo/appodel','Admin\AppoController@appoDelt');
 Route::get('admin/appo/privlist','Admin\AppoController@privList');
 
+/*
+*@Use : 添加权限委派
+*/
+Route::post('admin/appo/doAppoAdd', 'Admin\AppoController@doAppoAdd') ; 
+
 
