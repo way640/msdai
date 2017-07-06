@@ -117,16 +117,16 @@ var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
                     //alert(v.article_content);
                     // var content = v.article_content;
                     // alert(content.substring(0,50)+"...");
-                    str0 +='<a href="#" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞82&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论7</h3></aside></a>';
+                    str0 +='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }else if(k==1){
                     //alert(2);
-                    str1 +='<a href="#" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1104&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞97&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论189</h3></aside></a>';
+                    str1 +='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }else if(k==2){
                     //alert(3);
-                    str2+='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1721&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞142&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论8</h3></aside></a>';
+                    str2+='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }else{
                     //alert(4);
-                    str3 +='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1750&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞205&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论270</h3></aside></a>';
+                    str3 +='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }
             })
 

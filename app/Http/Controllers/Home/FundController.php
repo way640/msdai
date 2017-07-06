@@ -38,7 +38,7 @@ class FundController extends CommonController
         $data->setPath('fundlist'); 
         $num = $data->lastpage();
         //上一页 下一页
-        $nextpage=$data->currentPage() >$num ? $num : $data->currentPage()+1 ;
+        $nextpage=$data->currentPage()+1 >$num ? $num : $data->currentPage()+1 ;
         $lastpage=$data->currentPage()-1 <0 ? 1 : $data->currentPage()-1 ;
         $data->next=$nextpage;
         $data->last=$lastpage;

@@ -21,7 +21,14 @@
 <div class="prod-item person" id="DaBaiContent">
 
     <div class="pull-left prod-logo">
-        <img src="{{ asset('image/dabai-logo.png') }}" alt="">
+        <?php if ($v['jjgm']<5){ ?>
+                <img src="{{ asset('image/dabai-logo.png') }}" alt="">
+            <?php }else if ($v['jjgm']<60) {?>
+                <img src="{{ asset('image/times.png') }}" alt="">
+           <?php  }else{?>
+                <img src="{{ asset('image/wzxy2.png') }}" alt="">
+          <?php  } ?>
+
         <p class="logo-desc">Zdmoney<br>您要有个小目标，赚点小钱</p>
     </div>
     <div class="prod-content">
