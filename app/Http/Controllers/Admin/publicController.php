@@ -35,4 +35,16 @@ class PublicController extends CommonController
         }
         return $this->error();
     }
+	
+	/*
+	*@Action_name : 用户退出登录
+	*@Author : szt
+	*@Time : 2017-07-03	
+	*/
+	public function logout(){
+		
+	    unset( $_SESSION['admin'] );
+		
+		return $this->success(  );
+	}
 }

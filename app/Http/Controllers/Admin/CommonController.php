@@ -26,10 +26,11 @@ class CommonController extends Controller
     public function __construct() {
         $this->get = $_GET;
         $this->post = $_POST;
-        session(['admin'=>['admin_id'=>'1','admin_name'=>'name']]);//方便测试跳过登录检测
-        $checkUserInfo = $this->checkUserInfo(session('admin')['admin_id']);
+    //  session(['admin'=>['admin_id'=>'1','admin_name'=>'name']]);//方便测试跳过登录检测
+        $checkUserInfo = $this->checkUserInfo($_SESSION['admin']['admin_id']);
+		
         if ( !$checkUserInfo ) {
-            echo self::gogo('admin/login/index','您好像还没有登录！！');
+            echo self::gogo('admin/login/login','您好像还没有登录！！');
             die();
         }
     }
@@ -86,7 +87,7 @@ class CommonController extends Controller
      * @return ：array  OR  bool
      * @author ：Way**/
     protected function checkUserInfo ( $userId = null ) {
-        if( @$userId || @session('admin')['admin_id']){
+        if( @$userId || @$_SESSION['admin']['admin_id']){
             return true;
         }
         return false;
@@ -100,7 +101,7 @@ class CommonController extends Controller
      * @author ：Way**/
     protected function checkUserPriv( $userId = '' ){
         //权限控制未编写 程晔 2017-06-12 @todo 06-25 程晔 以完善
-        $userId = $userId == ''?session('admin')['admin_id']:$userId;
+        $userId = $userId == ''?$_SESSION['admin']['admin_id']:$userId;
         if( @$userId){
             //获取当前控制器和方法
             $path = @$_SERVER['PATH_INFO']?$_SERVER['PATH_INFO']:$_SERVER['REQUEST_URI'];
@@ -126,12 +127,22 @@ class CommonController extends Controller
             }
 
             //权限委派
-            $appoPriv = $this->objToArray(DB::select('select * from zd_appointment where admin_id='.$userId));
-            foreach($appoPriv as $val){
-                if($val['app_priv'] == $requestUrl){
-                    return true;
-                }
+			$adminId = $_SESSION['admin']['admin_id'] ; 
+			$userData = DB::select ( 'select app_priv from zd_appointment where admin_id = "' . $adminId . '"' ) ;
+			$userData = $this -> objToArray ( $userData ) ; 
+			
+			$appoPriv = DB::select ( 'select priv_controller, priv_action from zd_privilege where priv_id in ("' . $userData[0]['app_priv'] . '")' ) ;  
+			$appoPriv = $this -> objToArray ( $appopriv ) ;
+			
+            //$appoPriv = $this->objToArray(DB::select('select * from zd_appointment where admin_id='.$userId));
+            foreach($privInfo as $val){
+                $controllerInfo[] = $val['priv_controller'];
+                $actionInfo[] = $val['priv_action'];
             }
+            if(in_array($controller,$controllerInfo) && in_array($action,$actionInfo)){
+                return true;
+            }
+        
 
             //权限控制
             $privInfo = DB::select("select priv_controller,priv_action from zd_admin_role as ar LEFT JOIN zd_role_priv as rp on ar.role_id=rp.role_id LEFT JOIN zd_privilege as pr on rp.priv_id=pr.priv_id where ar.admin_id = '$userId' AND pr.priv_status = '1'");
@@ -212,4 +223,6 @@ class CommonController extends Controller
         $errorMsg = $msg ? $msg : '好像出错了呢' ;
         return view('error',['errorMsg'=>$errorMsg,'locationUrl'=>$url]);
     }
+	
+	
 }
