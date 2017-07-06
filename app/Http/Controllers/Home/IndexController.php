@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\home;
 use Illuminate\Http\Request;
 use DB;
+
 /*
 *@Class_name : 主页 （展示数据）
 *@Use : 用户对基金的购入等操作

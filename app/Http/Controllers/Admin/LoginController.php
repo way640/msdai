@@ -26,6 +26,7 @@ class LoginController extends Controller
      */
     public function login()
     {
+
         if($input = Input::all())
         {
         //$admin = User::first();

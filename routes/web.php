@@ -22,7 +22,6 @@ $request = @$_SERVER['REQUEST_URI']? $_SERVER['REQUEST_URI'] : $_SERVER['PATH_IN
     $namespace = @array_pop($reqArr);
 if($namespace&&$controller&&$action){
     Route::get($namespace."/".$controller."/".$action,ucfirst($namespace).'\\'.ucfirst($controller).'Controller@'.$action);
-
 }*/
 
 function Autoload($path){
@@ -40,7 +39,10 @@ $path = @$_SERVER['PATH_INFO']?$_SERVER['PATH_INFO']:$_SERVER['REQUEST_URI'];
 
 $urlArr = @explode('?',$path);
 $urlArr = @explode('/',$urlArr['0']);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 222a9155fbfcf4aebf64e383e3302763ff4ccc89
 if(count($urlArr) > 5){
     echo "<script>location='".url('')."'</script>";
 }

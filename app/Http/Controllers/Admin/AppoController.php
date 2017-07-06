@@ -67,7 +67,7 @@ class AppoController extends CommonController
      * @author：Way
      * @Time：2017-06-29**/
     public function appoDel(){
-
+        
     }
 
     /*

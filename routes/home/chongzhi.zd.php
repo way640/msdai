@@ -3,7 +3,6 @@
 /*
 *@Use : 充值路由
 */
-
 //充值页面
 Route::get('cz/index', 'Home\CzController@index');
 //生成支付二维码页面

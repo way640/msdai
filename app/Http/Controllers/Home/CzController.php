@@ -30,6 +30,7 @@ class CzController extends CommonController
 		//生成支付页面
 		$subject = $_POST['name'];
 		$total_fee = $_POST['price'];
+		//$total_fee1 = $_POST['price'];
 		$body = $_POST['desc'];
 		$out_trade_no = date('YmdHis').rand(10000,99999);
 		$alipay->requestPay($out_trade_no, $subject, $total_fee, $body, $show_url='');
