@@ -51,7 +51,7 @@
 <div class="prod-item corp" id="TimesContent">
         <p class="prod-title">
             <span class="font-bold">贵金属种类：
-            <select>
+            <select id="JJ_zl">
             <option value="">--选择--</option>
                 @foreach ($info as $va)
                     <option value="{{$va->fund_no}}" class='J_zl' >{{$va->fund_name}}</option>
@@ -73,7 +73,7 @@
 </div>
 </center>
 <script>
-$('.J_zl').on('click',function(){
+$('#JJ_zl').change(function(){
     var fund_no = $(this).val();
     //alert(dian);
     $.ajax({
