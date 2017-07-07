@@ -3,6 +3,9 @@
 /*
 *@Use : 个人中心首页
 */
+if(@$_SESSION['user']){
+
+
 Route::get('personal/personal', 'Home\PersonalController@index') ;
 /*
 *@Use : 个人中心积分首页
@@ -66,4 +69,5 @@ Route::any('personal/addAddress', 'Home\PersonalController@addAddress') ;
 *@Use : 获取用户信息
 */
 Route::any('personal/getUserInfo', 'Home\PersonalController@getUserInfo') ;
+}
 
