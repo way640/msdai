@@ -1,4 +1,4 @@
-@extends('home.title')
+@extends('home.title') 
 @section('content')
 
 @stop

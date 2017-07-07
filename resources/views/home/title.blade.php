@@ -63,8 +63,7 @@
                       
                   </div>
 
-                  <li><a href="{{url('')}}/cz/index">充值</a></li>
-                  <li><a href="{{url('')}}/molans/draw">抽奖</a></li>
+				  <li style="float:right;"><a href="{{ asset('personal/personal') }}">我的积木</a></li>
 
         	</ul>
         </div>
@@ -222,19 +221,6 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
 }); 
 </script>
 	@yield('content')
-	<!--content-wrap-->
-	<div class="content-wrap">
-  		<div class="c-wrap">
-   			<h1>合作机构</h1>
-        	<div class="scroll">
-          		<a href="###" class="left2" onclick="left2()"></a>
-                  	<div id='linkbox'>
-                  	     
-                  	</div>
-              	<a href="###" class="right2" onclick="right2()"></a>
-       		</div>
-      	</div>
-    </div>
 <!--footer-->	
 	<div class="footer" style="">
     	<div class="foot">

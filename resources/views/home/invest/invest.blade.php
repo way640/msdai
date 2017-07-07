@@ -34,7 +34,7 @@
         </div>
         <div class="project-container">
             <h2 class="title">填写放款信息</h2>
-            <div class="result-wrap" style="text-align:center">
+            <div class="result-wrap" style="margin: 0 auto;">
                 <div class="result-content" >
                     <form action="/mloans/loan" method="post" id="myform" name="myform" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -42,21 +42,23 @@
                         <input type="hidden" name="user_money" value="<?php echo $v->user_money?>">
                         <?php } ?>
                         <table class="insert-tab" width="100%">
-                            <tbody><tr>
-                                <th width="120">放款金额：</th>
+                            <tr>
+                                <th>放款金额：</th>
                                 <input type="hidden" id="uid" value="<?php echo $arr?>">
                                 <td>
-                                    <input class="common-text required" id="money" name="lenging_money" size="50" value="" type="text" required onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+                                    <input class="common-text required" id="money" name="lenging_money" size="50" value="" type="text" placeholder="请填写金额，保留整数位" required onkeyup='this.value=this.value.replace(/\D/gi,"")'>
                                     <div class="tbody"></div>
                                 </td>
                             </tr>
+
                             <tr>
-                                <th align="right">放款开始时间：</th>
+                                <th>放款开始时间：</th>
                                 <td>
                                     <p class="datep"><input class="datainp" id="dateinfo" type="text" name="lenging_start_time"  placeholder="请选择" readonly  required></p>
                                     <div class="start"></div>
                                 </td>
                             </tr>
+
                             <tr>
                                 <th>放款结束时间：</th>
                                 <td>
@@ -64,10 +66,12 @@
                                     <div class="end"></div>
                                 </td>
                             </tr>
+
                             <tr>
                                 <th>放款年利率：</th>
-                                <td><input class="common-text" name="lenging_interest" size="50" value="" type="text" id="inter" required></td>
+                                <td><input class="common-text" name="lenging_interest" size="50" value="" type="text" id="inter" required onkeyup='this.value=this.value.replace(/\D/gi,"")'></td>
                             </tr>
+
                             <tr>
                                 <th>回款分配类型：</th>
                                 <td>
@@ -84,12 +88,14 @@
                                     <div class="ts"></div>
                                 </td>
                             </tr>
+
                             <tr>
                                 <th>最终收款：</th>
                                 <td>
                                     <input class="common-text required" id="zui" name="lenging_total" size="50" value="" type="text" disabled>
                                 </td>
                             </tr>
+
                             <tr>
                                 <th></th>
                                 <td>
@@ -100,7 +106,7 @@
                                     @endif
                                 </td>
                             </tr>
-                            </tbody></table>
+                          </table>
                     </form>
                 </div>
             </div>
@@ -272,4 +278,31 @@
             </div>
         </div>
     </div>
+    <style type="text/css">
+        .contact-us {
+            position: relative;
+        }
+        .contact-us .qrcode {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 76px;
+            height: 76px;
+            overflow: hidden;
+        }
+        .contact-us .qrcode img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .mask {
+            position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #000;
+            z-index: 1002; left: 0px;
+            opacity:0.5; -moz-opacity:0.5;
+        }
+
+        #stages{
+            text-align:center
+        }
+    </style>
 @stop
