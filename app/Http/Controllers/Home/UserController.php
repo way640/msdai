@@ -62,8 +62,8 @@ class UserController extends CommonController
 
 			return $this->error ( '用户名已存在' );
 		} else {
-			
-			$userAdd = DB::insert( "insert into zd_user ( user_account, user_pwd ) values ( '$userName', '$userPwd' )" );
+			$regTime = time();
+			$userAdd = DB::insert( "insert into zd_user ( user_account, user_pwd , user_reg_time ) values ( '$userName', '$userPwd' , '$regTime' )" );
 			$id = DB::getPdo()->lastInsertId();
 		}
 		

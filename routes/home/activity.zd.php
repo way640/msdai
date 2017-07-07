@@ -4,3 +4,4 @@
 */
 Route::get('home/activity', 'Home\ActivityController@index');
 
+

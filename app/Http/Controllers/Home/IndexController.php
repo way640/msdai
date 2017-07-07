@@ -45,4 +45,11 @@ class IndexController extends CommonController
 		//返回 数据
 		return  "$callback(".$info.")";
 	}
+	public function silkid(){
+		$id = $_GET['id'];
+		//查询文章详情
+		$info = DB::table('article')->where('article_id',$id)->first();
+		//print_r($info);
+		return view('home.gold.article',['info'=>$info]);
+	}
 }
