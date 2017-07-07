@@ -23,12 +23,17 @@
 
 <script type="text/javascript" async="" src="js/mv.js"></script><script type="text/javascript" async="" src="./安全设置_files/mba.js.下载"></script><script charset="utf-8" src="./安全设置_files/v.js.下载"></script><script src="./安全设置_files/header-init-8dc16d38ce.js.下载"></script><div class="container jimu-account-container">
         
-			<div class="jimu-account-nav-wrap">
+<div class="jimu-account-nav-wrap">
             <div class="jimu-leftnav" data-version="4">
 				<ul>
 					<ul class="jimu-leftsecnav">
-						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/config') }}">安全设置</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/personal') }}">安全设置</a></li>
 					    <li><a data-nav="user-center" class="" href="{{ url('cz/index') }}">账户充值</a></li>
+					    <li><a data-nav="user-center" class="" href="{{ url('personal/addImage') }}">添加头像</a></li>
+						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/changePwd') }}">修改密码</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">添加地址</a></li>					    
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">
@@ -43,12 +48,7 @@
                         <li></li>						
                         <li></li>
 					</ul>
-                        <li></li>
-					<ul class="jimu-leftsecnav">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-					</ul>
+
 				</ul>
 			</div>
 </div>

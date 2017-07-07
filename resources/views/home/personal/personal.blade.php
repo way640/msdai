@@ -30,12 +30,17 @@
     
 
 <center>
- <div class="jimu-account-nav-wrap">
+<div class="jimu-account-nav-wrap">
             <div class="jimu-leftnav" data-version="4">
 				<ul>
 					<ul class="jimu-leftsecnav">
-						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/config') }}">安全设置</a></li>
+						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/personal') }}">安全设置</a></li>
 					    <li><a data-nav="user-center" class="" href="{{ url('cz/index') }}">账户充值</a></li>
+					    <li><a data-nav="user-center" class="" href="{{ url('personal/addImage') }}">添加头像</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/changePwd') }}">修改密码</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">添加地址</a></li>					    
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">
@@ -50,19 +55,12 @@
                         <li></li>						
                         <li></li>
 					</ul>
-                        <li></li>
-					<ul class="jimu-leftsecnav">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-					</ul>
+
 				</ul>
 			</div>
 </div>
 
         <div class="jimu-account-content-wrap">
-            <div class="alert alert-warning overview-tips opened-fund">请到虹点基金查看您的基金资产和收益<a class="btn btn-warning" href="https://www.hongdianfund.com/" target="_blank">前往虹点</a></div>
-    <div class="alert alert-warning overview-tips open-cmbc" style="display: block;">您还未开通民生存管账户，即刻开通确保您的正常使用和资金安全。<a class="btn btn-warning" href="https://box.jimu.com/User/OpenPnr">开通民生存管账户</a></div>
 
     <div class="row-fluid">
         </div>
