@@ -18,7 +18,8 @@ class GoldController extends CommonController
 	/*
 	*@Use : 贵金属默认首页
 	*/
-	public function index(){
+	public function index()
+	{
 		$info = DB::table('fund')->get();
 		$arr = json_decode($info,true);
 		// echo '<pre>';
@@ -30,7 +31,8 @@ class GoldController extends CommonController
 		return view('home/gold/golda',['info'=>$info]);
 	}
 	//  调用本地页面的时候
-	public function getlist(){
+	public function getlist()
+	{
 		//接受要查询的贵金属id
 		$fund_no = $_GET['fund_no']; 
 
@@ -39,15 +41,19 @@ class GoldController extends CommonController
 		//对应静态页文件
 		$expr = 60*60; 												//静态文件有效期1小时
 
-		if(file_exists($goods_statis_file)){  
+		if(file_exists($goods_statis_file))
+		{  
 
 			$file_ctime = filectime($goods_statis_file);			//文件创建时间  
 
-			if($file_ctime+$expr > time()){
+			if($file_ctime+$expr > time())
+			{
 				//如果没过期    输出静态文件内容
 				echo file_get_contents($goods_statis_file);
  
-			}else{
+			}
+			else
+			{
 				//如果已过期    
 				unlink($goods_statis_file);							//删除过期的静态页文件 
 				//调接口
@@ -60,7 +66,9 @@ class GoldController extends CommonController
 				file_put_contents($goods_statis_file, $content);	//写入内容到对应静态文件中
 				ob_end_flush();										// 冲刷出（送出）输出缓冲区内容并关闭缓冲
 			}
-		}else{ 
+		}
+		else
+		{ 
 			//调接口
 			set_time_limit(0); 
  			$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=23464&sign=c649cb4d82839e08bf3b5f917e8cc9df&format=json";
@@ -73,7 +81,8 @@ class GoldController extends CommonController
 		}
 	}
 
-	public function getgo(){
+	public function getgo()
+	{
 		//jsonp接值
 		$code = $_GET['code'];
 		$callback = $_GET['callback'];
@@ -86,22 +95,27 @@ class GoldController extends CommonController
 
 
 		$expr = 60*60*5; 												//静态文件有效期5小时
-		if(file_exists($goods_statis_file)){  
+		if(file_exists($goods_statis_file))
+		{  
 
 			 $file_ctime = filectime($goods_statis_file);				//文件创建时间  
 
-			if($file_ctime+$expr > time()){
+			if($file_ctime+$expr > time())
+			{
 				//如果没过期   输出静态文件内容
 
 				echo file_get_contents($goods_statis_file);
 
-			}else{
+			}
+			else
+			{
 				//如果已过期   删除过期的静态页文件 
 				unlink($goods_statis_file);
 
 				set_time_limit(0); 
 
-				foreach ($foud_no_list as $key => $fund_no) {
+				foreach ($foud_no_list as $key => $fund_no) 
+				{
 
 		 			$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=23464&sign=c649cb4d82839e08bf3b5f917e8cc9df&format=json";
 					$data = file_get_contents($url);
@@ -114,9 +128,12 @@ class GoldController extends CommonController
 				file_put_contents($goods_statis_file, $content);		//写入内容到对应静态文件中
 				ob_end_flush();											// 冲刷出（送出）输出缓冲区内容并关闭缓冲
 			}
-		}else{ 
+		}
+		else
+		{ 
 			set_time_limit(0); 
-			foreach ($foud_no_list as $key => $fund_no) {
+			foreach ($foud_no_list as $key => $fund_no) 
+			{
 				//接口1  超限换接口
 	 			//$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=23464&sign=c649cb4d82839e08bf3b5f917e8cc9df&format=json";
 	 			//接口2
@@ -133,7 +150,8 @@ class GoldController extends CommonController
 		}
 	}
 	//基金接口
-	public function fund(){
+	public function fund()
+	{
 		//jsonp接值
 		$code = $_GET['code'];
 		$callback = $_GET['callback'];
@@ -141,16 +159,20 @@ class GoldController extends CommonController
 		//静态页面
 		$fund = public_path('file\fund.html');
 		$expr = 60*60*24*7; 									//静态文件有效期7小时
-		if(file_exists($fund)){  
+		if(file_exists($fund))
+		{  
 
 			 $file_ctime = filectime($fund);					//文件创建时间  
 
-			if($file_ctime+$expr > time()){
+			if($file_ctime+$expr > time())
+			{
 				//如果没过期   输出静态文件内容 
 				$data = file_get_contents($fund);
 				echo  "$callback(".$data.")";
 
-			}else{
+			}
+			else
+			{
 				//如果已过期   删除过期的静态页文件 
 				unlink($fund);
 
@@ -165,7 +187,9 @@ class GoldController extends CommonController
 				ob_end_clean();									//输出缓冲区的内容并关闭这个缓冲区
 				echo  "$callback(".$data.")";
 			}
-		}else{ 
+		}
+		else
+		{ 
 
 			set_time_limit(0); 
  			$url = 'http://apis.haoservice.com/lifeservice/fund/page/?pageindex=1&pagesize=50&key=dfdac25eb4174fbeb9d3caacf95e2ab1';

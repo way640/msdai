@@ -221,19 +221,6 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
 }); 
 </script>
 	<?php echo $__env->yieldContent('content'); ?>
-	<!--content-wrap------------------------------------------------------------------------------------------------------>
-	<div class="content-wrap">
-  		<div class="c-wrap">
-   			<h1>合作机构</h1>
-        	<div class="scroll">
-          		<a href="###" class="left2" onclick="left2()"></a>
-                  	<div id='linkbox'>
-                  	     
-                  	</div>
-              	<a href="###" class="right2" onclick="right2()"></a>
-       		</div>
-      	</div>
-    </div>
 <!--footer------------------------------------------------------------------------------------------------------------>	
 	<div class="footer" style="">
     	<div class="foot">

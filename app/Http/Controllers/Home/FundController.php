@@ -17,10 +17,50 @@ class FundController extends CommonController
 {
 	//基金更多展示页面
 	public function fundlist(){
+
 	$fund = public_path('file\fund.html');
+        $expr = 60*60*24*7;                                                             //静态文件有效期7小时
+        if(file_exists($fund))
+        {  
+
+                 $file_ctime = filectime($fund);                                        //文件创建时间  
+
+                if($file_ctime+$expr > time())
+                {
+                        //如果没过期   输出静态文件内容 
+                        $info = file_get_contents($fund);
+
+                }
+                else
+                {
+                        
+                        unlink($fund);                                                                  //如果已过期   删除过期的静态页文件 
+                        set_time_limit(0); 
+                        $url = 'http://apis.haoservice.com/lifeservice/fund/page/?pageindex=1&pagesize=50&key=dfdac25eb4174fbeb9d3caacf95e2ab1';
+                        $info  = file_get_contents($url);
+
+                        ob_start();  
+                        echo  $info;                                                                    //输出静态文件的内容
+                        $content = ob_get_contents();                                                   //把详情页内容赋值给$content变量
+                        file_put_contents($fund, $content);                                             //写入内容到对应静态文件中
+                        ob_end_flush();                                                                 //输出缓冲区的内容并关闭这个缓冲区
+                }
+        }
+        else
+        { 
+                set_time_limit(0); 
+                $url = 'http://apis.haoservice.com/lifeservice/fund/page/?pageindex=1&pagesize=50&key=dfdac25eb4174fbeb9d3caacf95e2ab1';
+                $info  = file_get_contents($url);
+
+                ob_start();  
+                echo  $info;                                                                    //输出静态文件的内容
+                $content = ob_get_contents();                                                   //把详情页内容赋值给$content变量
+                file_put_contents($fund, $content);                                             //写入内容到对应静态文件中
+                ob_end_flush();  
+        }
 
 	$info = file_get_contents($fund);
-
+        //print_r($info);
 	$data = json_decode($info,true)['result'];
 	//获取当前的分页数，就是第6这样的
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
@@ -38,8 +78,8 @@ class FundController extends CommonController
         $data->setPath('fundlist'); 
         $num = $data->lastpage();
         //上一页 下一页
-        $nextpage=$data->currentPage()+1 >$num ? $num : $data->currentPage()+1 ;
-        $lastpage=$data->currentPage()-1 <0 ? 1 : $data->currentPage()-1 ;
+        $nextpage=$data->currentPage()+1 > $num ? $num : $data->currentPage()+1 ;
+        $lastpage=$data->currentPage()-1 <   0  ?   1  : $data->currentPage()-1 ;
         $data->next=$nextpage;
         $data->last=$lastpage;
 

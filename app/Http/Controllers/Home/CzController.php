@@ -44,12 +44,14 @@ class CzController extends CommonController
 		if ($alipay->verifyReturn()) {
 			//echo '签名正确';
 			if ($_GET['trade_status']=='TRADE_SUCCESS') {
-				//$user_id => $_SESSION['user']['user_id'];
-				$user_id = 1;
+				$user_id => $_SESSION['user']['user_id'];
+				//$user_id = 1;
 				//查询原来的余额
 				 $info = DB::table('user_info')->where('user_id',$user_id)->first();
 				 if (empty($info)) {
+
 				 	echo '请您完善信息';
+
 				 }else{
 					//修改余额 = 原来的余额加上充值的金额
 					DB::table('user_info')->where('user_id',$user_id)->update(['user_money'=> ($info->user_money+$price)]);

@@ -143,6 +143,18 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
           </li>
         </ul>
     </div>
+    <div class="content-wrap">
+        <div class="c-wrap">
+            <h1>合作机构</h1>
+            <div class="scroll">
+                <a href="###" class="left2" onclick="left2()"></a>
+                    <div id='linkbox'>
+                         
+                    </div>
+                <a href="###" class="right2" onclick="right2()"></a>
+            </div>
+        </div>
+    </div>
 <?php $__env->stopSection(); ?>
 
 

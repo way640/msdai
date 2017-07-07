@@ -221,19 +221,6 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
 }); 
 </script>
 	<?php echo $__env->yieldContent('content'); ?>
-	<!--content-wrap------------------------------------------------------------------------------------------------------>
-	<div class="content-wrap">
-  		<div class="c-wrap">
-   			<h1>合作机构</h1>
-        	<div class="scroll">
-          		<a href="###" class="left2" onclick="left2()"></a>
-                  	<div id='linkbox'>
-                  	     
-                  	</div>
-              	<a href="###" class="right2" onclick="right2()"></a>
-       		</div>
-      	</div>
-    </div>
 <!--footer------------------------------------------------------------------------------------------------------------>	
 	<div class="footer" style="">
     	<div class="foot">
@@ -257,7 +244,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
 			</article>
             <aside>
             	<p>联系我们 <span>9:00 - 21:00</span> </p>
-              	<h1>400-068-1176</h1>
+              	<h1>666-666-6606</h1>
 				<div class="customer"><a href="#">在线客服</a></div>
               	<div class="customer"><a href="#">客服邮箱</a></div>
             </aside>
