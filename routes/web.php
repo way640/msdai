@@ -38,11 +38,7 @@ function Autoload($path){
 $path = @$_SERVER['PATH_INFO']?$_SERVER['PATH_INFO']:$_SERVER['REQUEST_URI'];
 
 $urlArr = @explode('?',$path);
-$urlArr = @explode('/',$urlArr['0']);
-<<<<<<< HEAD
-=======
-
->>>>>>> 753b1be7e1560dbe35e76bfc4a08a02cb4a4677e
+$urlArr = @explode('/',$urlArr['0']);	
 if(count($urlArr) > 5){
     echo "<script>location='".url('')."'</script>";
 }
