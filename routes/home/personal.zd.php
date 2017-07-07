@@ -70,4 +70,3 @@ Route::any('personal/addAddress', 'Home\PersonalController@addAddress') ;
 */
 Route::any('personal/getUserInfo', 'Home\PersonalController@getUserInfo') ;
 }
-
