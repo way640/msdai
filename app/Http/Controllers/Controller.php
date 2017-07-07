@@ -15,23 +15,23 @@ class Controller extends BaseController
     	$time = time();
     	$content = $_SESSION['admin']['admin_account'];
     	$table = $table ? '在'.$table.'表中 ' : '在数据库中 ' ;
-    	while ($curd) {
-    		case 'C'://create
+    	switch ($curd) {
+    		case 'C' ://create
     			$content .= '添加了 '
     			break;
-    		case 'U'://update
+    		case 'U' ://update
     			$content .= '修改了 '
     			break;
-    		case 'R'://read
+    		case 'R' ://read
     			$content .= '查看了 '
     			break;
-    		case 'D'://delete
+    		case 'D' ://delete
     			$content .= '删除了 '
     			break;
-    		case 'IN'://delete
+    		case 'IN' ://sign in
     			$content .= '<font color="green">登录</font>了后台管理系统 '
     			break;
-    		case 'OUT'://delete
+    		case 'OUT'://sign out
     			$content .= '<font color="red">退出</font>了后台管理系统 '
     			break;
     		default :
