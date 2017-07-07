@@ -17,26 +17,25 @@ class Controller extends BaseController
     	$table = $table ? '在'.$table.'表中 ' : '在数据库中 ' ;
     	switch ($curd) {
     		case 'C' ://create
-    			$content .= '添加了 '
+    			$content .= '添加了 ';
     			break;
     		case 'U' ://update
-    			$content .= '修改了 '
+    			$content .= '修改了 ';
     			break;
     		case 'R' ://read
-    			$content .= '查看了 '
+    			$content .= '查看了 ';
     			break;
     		case 'D' ://delete
-    			$content .= '删除了 '
+    			$content .= '删除了 ';
     			break;
     		case 'IN' ://sign in
-    			$content .= '<font color="green">登录</font>了后台管理系统 '
+    			$content .= '<font color="green">登录</font>了后台管理系统 ';
     			break;
     		case 'OUT'://sign out
-    			$content .= '<font color="red">退出</font>了后台管理系统 '
+    			$content .= '<font color="red">退出</font>了后台管理系统 ';
     			break;
     		default :
     			return false;
-    			break;
     	}
     	$contnet .= $msg.'。';
     	if($new){
