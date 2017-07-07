@@ -158,11 +158,5 @@ class UserController extends CommonController
 		
 		return $this->success(  );
 	}
-	
-	/*
-	*Action_name : 获取用户信息
-	*/
-	public function getUserInfo(){
-		
-	}
+
 }

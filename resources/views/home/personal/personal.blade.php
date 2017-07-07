@@ -63,15 +63,11 @@
         <div class="jimu-account-content-wrap">
             <div class="alert alert-warning overview-tips opened-fund">请到虹点基金查看您的基金资产和收益<a class="btn btn-warning" href="https://www.hongdianfund.com/" target="_blank">前往虹点</a></div>
     <div class="alert alert-warning overview-tips open-cmbc" style="display: block;">您还未开通民生存管账户，即刻开通确保您的正常使用和资金安全。<a class="btn btn-warning" href="https://box.jimu.com/User/OpenPnr">开通民生存管账户</a></div>
-    <div class="alert alert-warning overview-tips open-all">
-        您还未开通民生存管账户，即刻开通确保您的正常使用和资金安全。
-        <a class="btn btn-warning" href="https://www.hongdianfund.com/" target="_blank">前往虹点</a>
-        <a class="btn btn-warning" href="https://box.jimu.com/User/OpenPnr">开通民生存管账户</a>
-    </div>
+
     <div class="row-fluid">
         </div>
 
-    <div class="account-info-container container clearfix">
+    <div class="account-info-container container clearfix" style="width:800px">
         <div class="account-head">
             <a href="javascript:void(0);">
                 <img src="
@@ -94,150 +90,38 @@
                     <span>用户名</span><span class="large-text"><?php echo $_SESSION['user']['username']?></span>
                 </div>
                 <div class="account-item">
-                    <span>上次登录</span>
+                    <span>上次登录	</span>
                     <span class="last-login">
 					
 					</span>
                     </div>
             </div>
         </div>
-        <div class="sign-in-container">
-            <button type="button" class="sign-btn common-btn common-btn-blue">立即签到</button>
-            <div class="days">累计签到 <span>1</span> 天</div>
-        </div>
     </div>
 
-    <div class="container-fluid channel-user-wrap">
-        <div class="row">
-            <div class="col-xs-12">
-                <h4>渠道账户</h4>
-                <div class="btn-wrap">
-                    <a href="https://box.jimu.com/Entity/GuaranteeAll" class="common-btn common-btn-blue channel-btn common-btn-active" target="_blank">推介项目</a>
-                    <a href="https://box.jimu.com/ChannelRepayment/List" class="common-btn common-btn-blue channel-btn common-btn-active" target="_blank">还款日历</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="summary-amount-container">
         <div class="row-fluid">
             <div class="col-xs-4 summary-amount-item">
-                <div class="amount revenus-total" id="revenues-total">0.00</div>
-                <div class="desc">累计收益（元）</div>
+                <div class="amount" id="roll_money">0.00</div>
+                <div class="desc">流动资产（元）<span class="asset-tips-icon">!<span class="tip-hover">自选投资产总额+轻松投资产总额+冻结金额+提现在途+可用余额</span></span></div>
             </div>
             <div class="col-xs-4 summary-amount-item">
-                <div class="amount">0.00</div>
-                <div class="desc">资产总额（元）<span class="asset-tips-icon">!<span class="tip-hover">自选投资产总额+轻松投资产总额+冻结金额+提现在途+可用余额</span></span></div>
+                <div class="amount revenus-total" id="roll_in">0.00</div>
+                <div class="desc">累计进账（元）</div>
             </div>
             <div class="col-xs-4 summary-amount-item">
-                <div class="amount" id="revenues-yesterday">0.00</div>
-                <div class="desc">昨日收益（元）</div>
+                <div class="amount" id="roll_out">0.00</div>
+                <div class="desc">累计出账（元）</div>
             </div>
         </div>
     </div>
-
-    <div class="overview-container clearfix">
-        <div class="overview-draw-content">
-            <h4>资产分布</h4>
-            <div class="draw-content">
-                <div class="leave-draw-box" id="leave-draw-box" _echarts_instance_="1496816933936" style="-webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0); cursor: default;"><div style="position: relative; overflow: hidden; width: 600px; height: 190px;"><div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 600px; height: 190px; user-select: none;"></div><canvas width="600" height="190" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 600px; height: 190px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="600" height="190" data-zr-dom-id="1" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 600px; height: 190px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="600" height="190" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 600px; height: 190px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div></div>
-                <div class="leave-legend">
-                    <div class="ever title clearfix">
-                        <div class="words">资产金额</div>
-                        <div class="words">累计收益</div>
-                    </div>
-                    <div class="ever clearfix">
-                        <div class="words venus" data-total="0.00">轻松投</div>
-                        <div class="words amount">0.00</div>
-                        <div class="words amount" id="total-venus">0.00</div>
-                    </div>
-                    <div class="ever clearfix">
-                        <div class="words p2p" data-total="0.00">自选投</div>
-                        <div class="words amount">0.00</div>
-                        <div class="words amount" id="total-p2p">0.00</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="overview-info">
-            <div class="can-use-money">0.00</div>
-            <div class="desc">可用余额（元）</div>
-            <div class="other-money clearfix">
-                <div class="ever">
-                    <div class="amount">0.00</div>
-                    <div class="desc">冻结金额（元）</div>
-                </div>
-                <div class="ever">
-                    <div class="amount">0.00</div>
-                    <div class="desc">提现在途（元）</div>
-                </div>
-            </div>
-            <a href="javascript:void(0)" class="common-btn common-btn-gray recharge-btn">充值</a>
-                <a href="javascript:void(0)" class="common-btn common-btn-gray withdraw-btn">提现</a>
-            <a class="link" href="https://box.jimu.com/Fund/Activity" target="_blank">查看交易记录</a>
-        </div>
-    </div>
-    <div class="deal-detail-container">
-        <div class="detail-tab clearfix">
-            <div class="ever ever-round-border ever-right-shadow" data-type="venus">轻松投</div>
-            <div class="ever" data-type="p2p">自选投</div>
-        </div>
-        <div class="detail-content">
-            <div class="ever venus">
-                <div class="title">
-                    <span>加入记录</span>
-                </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>名称</th>
-                        <th class="text-right">约定利率</th>
-                        <th class="text-right table-large-right">加入金额(元)</th>
-                        <th>加入时间</th>
-                        <th>到期时间</th>
-                        <th>状态</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                            <td style="text-align: center" colspan="6">暂无数据</td>
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
-            <div class="ever p2p">
-                <div class="title">
-                    <span>投资记录</span>
-                </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>项目信息</th>
-                        <th class="text-right">持有金额</th>
-                        <th class="text-right"><span>投资金额</span><i class="glyphicon glyphicon-question-sign detail-icon" title="直投项目投标金额，债转项目债权金额"></i></th>
-                        <th class="text-right"><span>交易金额</span><i class="glyphicon glyphicon-question-sign detail-icon" title="直投项目投标金额的交易价格，债转项目债权金额的交易价格"></i></th>
-                        <th class="text-right">已回款</th>
-                        <th class="text-right">待收本息</th>
-                        <th class="text-right">剩余天数</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                            <td style="text-align: center" colspan="7">暂无数据</td>
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
-        </div>
-    </div>
-
 </div>
     </div>
 	</div>
-</center>
-
 <script>
-$(function(){
+$(document).ready(function(){ 
 	
     $.ajax({
         type:"get",
@@ -245,9 +129,25 @@ $(function(){
         data:'',
         dataType:'json',
         success:function ( msg ) {
-
+            console.log(msg)
+			if ( msg.status == 1 ) {
+				
+				var time = msg.data.user_login_time	
+				
+			    $('.last-login').html( "<br><br>"+time )
+				$('#roll_money').html( msg.data.roll_money )
+				$('#roll_in').html( msg.data.roll_in )
+				$('#roll_out').html( msg.data.roll_out )
+			} else {
+				
+				alert('页面加载失败，请重新加载')
+			}
         }
     });
-}
+})
 </script>
+	
+</center>
+
+
 	@stop

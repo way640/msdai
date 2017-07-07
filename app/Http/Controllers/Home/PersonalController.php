@@ -23,13 +23,6 @@ class PersonalController extends CommonController
 	public function __construct(){
 		
 		parent::__construct();
-	
-        $userId = isset ( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '' ; 
-		
-		if ( empty ( $userId ) ) {
-			
-			 return redirect('');
-		}
 	}
 	
 	/*
@@ -37,7 +30,7 @@ class PersonalController extends CommonController
 	*/
 	public function index(){
 
-	    $userId = $_SESSION['user']['user_id'] ; 
+	    $userId = @$_SESSION['user']['user_id'] ; 
 		
 		$userInfo = DB::select ( "select * from zd_user_info where user_id = $userId" ) ;
         $userInfo = $this -> objToArray ( $userInfo ) ; 		
@@ -339,4 +332,24 @@ class PersonalController extends CommonController
 			
 			$this -> success ( ) ; 
 	}	
+	
+	/*
+	*Action_name : 获取用户信息
+	*/
+	public function getUserInfo(){
+		
+		$userId = $_SESSION['user']['user_id'] ; 
+		
+		$userInfo = DB::select ( 'select user_login_time from zd_user_login where user_id = ' . $userId ) ;
+        $userInfo = $this -> objToArray ( $userInfo ) ; 
+		//Array ( [0] => Array ( [user_login_time] => 1499432110 ) )
+		//print_r($userInfo) ; die;
+		
+		$userData = DB::select ( 'select roll_money, roll_in, roll_out from zd_roll where user_id = ' . $userId ) ; 
+		$userData = $this -> objToArray ( $userData ) ; 
+		
+		$userData[0]['user_login_time'] = date("Y-m-d H:i:s", $userInfo[0]['user_login_time']) ; 
+		
+		return $this -> success ( $userData[0] );
+	}
 }
