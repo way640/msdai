@@ -26,7 +26,7 @@
             <div class="col-sm-10">
                 <div class="row">
                     <div class="col-sm-4">
-                        <div class="row row-sm text-center" id="dataInfo">
+                        <div class="row row-sm text-center" id="dataInfo" style="padding-top: 2%">
                             <div class="col-xs-6">
                                 <div class="panel padder-v item">
                                     <div class="h1 text-info font-thin h1">521</div>
@@ -78,64 +78,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-9" style="padding-right:0;">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title" style="border-bottom:none;background:#fff;">
-                                <h5>往年数据</h5>
-                            </div>
-                            <div class="ibox-content" style="border-top:none;">
-                                <div id="yesterday" style="height:217px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3" style="padding-left:0;">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-content" style="border-top:none;background-color:#e4eaec;">
-                                <h5>新增玩家</h5>
-                                <div class="progress progress-striped active">
-                                    <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar">
-                                        <span class="sr-only"></span>
-                                    </div>
-                                </div>
-                                <h5>流失玩家</h5>
-                                <div class="progress progress-striped active">
-                                    <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-warning">
-                                        <span class="sr-only"></span>
-                                    </div>
-                                </div>
-                                <h5>新增玩家</h5>
-                                <div class="progress progress-striped active">
-                                    <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar .progress-bar-danger">
-                                        <span class="sr-only"></span>
-                                    </div>
-                                </div>
-                                <h5>新增玩家</h5>
-                                <div class="progress progress-striped active">
-                                    <div style="width: 75%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-info">
-                                        <span class="sr-only"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-5">
+                    <div style="padding: 0 1%">
                         <div class="ibox float-e-margins">
                         <div class="" id="ibox-content">
-
-                            <div id="vertical-timeline" class="vertical-container light-timeline">
+                            <div class="ibox-title">
+                                <h5>操作日志</h5>
+                            </div>
+                            <div id="vertical-timeline" class="vertical-container light-timeline" style="width: 48%;display: inline-block;margin-left: 1%">
                                 <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon navy-bg">
-                                        <i class="fa fa-briefcase"></i>
+                                    <div class="vertical-timeline-icon blue-bg">
+                                        <i class="fa fa-edit"></i>
                                     </div>
 
                                     <div class="vertical-timeline-content">
-                                        <h2>会议</h2>
-                                        <p>上一年的销售业绩发布会。总结产品营销和销售趋势及销售的现状。
+                                        <h2>修改</h2>
+                                        <p>谁谁谁修改了什么
                                         </p>
-                                        <a href="#" class="btn btn-sm btn-primary"> 更多信息</a>
                                         <span class="vertical-date">
                                     今天 <br>
                                     <small>2月3日</small>
@@ -147,11 +105,76 @@
                                     <div class="vertical-timeline-icon blue-bg">
                                         <i class="fa fa-file-text"></i>
                                     </div>
+                                    <div class="vertical-timeline-content">
+                                        <h2>添加</h2>
+                                        <p>是诶谁谁添加了什么</p>
+                                        <span class="vertical-date">
+                                    今天 <br>
+                                    <small>2月3日</small>
+                                </span>
+                                    </div>
+                                </div>
+
+                                <div class="vertical-timeline-block">
+                                    <div class="vertical-timeline-icon red-bg">
+                                        <i class="fa fa-remove"></i>
+                                    </div>
+                                    <div class="vertical-timeline-content">
+                                        <h2>删除</h2>
+                                        <p>删除了啦啦啦，啦啦啦~~</p>
+                                        <span class="vertical-date"> 昨天 <br><small>2月2日</small></span>
+                                    </div>
+                                </div>
+
+                                <div class="vertical-timeline-block">
+                                    <div class="vertical-timeline-icon lazur-bg">
+                                        <i class="fa fa-hand-pointer-o"></i>
+                                    </div>
 
                                     <div class="vertical-timeline-content">
-                                        <h2>给张三发送文档</h2>
-                                        <p>发送上年度《销售业绩报告》</p>
-                                        <a href="#" class="btn btn-sm btn-success"> 下载文档 </a>
+                                        <h2>查看了</h2>
+                                        <p>查看了什么</p>
+                                        <span class="vertical-date">昨天 <br><small>2月2日</small></span>
+                                    </div>
+                                </div>
+
+                                <div class="vertical-timeline-block">
+                                    <div class="vertical-timeline-icon lazur-bg">
+                                        <i class="fa fa-user-md"></i>
+                                    </div>
+
+                                    <div class="vertical-timeline-content">
+                                        <h2>公司年会</h2>
+                                        <p>发年终奖啦，啦啦啦~~</p>
+                                        <span class="vertical-date">前天 <br><small>2月1日</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="vertical-timeline" class="vertical-container light-timeline" style="width: 48%;display: inline-block;margin-right: 1%">
+                                <div class="vertical-timeline-block">
+                                    <div class="vertical-timeline-icon yellow-bg">
+                                        <i class="fa fa-sign-in"></i>
+                                    </div>
+
+                                    <div class="vertical-timeline-content">
+                                        <h2>登录</h2>
+                                        <p>谁谁谁登录
+                                        </p>
+                                        <span class="vertical-date">
+                                    今天 <br>
+                                    <small>2月3日</small>
+                                </span>
+                                    </div>
+                                </div>
+
+                                <div class="vertical-timeline-block">
+                                    <div class="vertical-timeline-icon yellow-bg">
+                                        <i class="fa fa-sign-out"></i>
+                                    </div>
+
+                                    <div class="vertical-timeline-content">
+                                        <h2>退出了</h2>
+                                        <p>谁谁谁退出了</p>
                                         <span class="vertical-date">
                                     今天 <br>
                                     <small>2月3日</small>
@@ -167,7 +190,6 @@
                                     <div class="vertical-timeline-content">
                                         <h2>喝咖啡休息</h2>
                                         <p>喝咖啡啦，啦啦啦~~</p>
-                                        <a href="#" class="btn btn-sm btn-info">更多</a>
                                         <span class="vertical-date"> 昨天 <br><small>2月2日</small></span>
                                     </div>
                                 </div>
@@ -203,191 +225,16 @@
                 </div>
             </div>
             <div class="col-sm-2">
-                <div class="ibox float-e-margins">
+                <div class="ibox float-e-margins" style="display:block;height: 1180px">
                     <div class="ibox-title">
                         <h5>任务列表</h5>
                     </div>
                     <div class="ibox-content">
-                        <ul class="todo-list m-t small-list ui-sortable">
+                        <ul class="todo-list m-t small-list ui-sortable" >
                             <li>
                                 <a href="widgets.html#" class="check-link"><i class="fa fa-check-square"></i> </a>
                                 <span class="m-l-xs todo-completed">吃饭</span>
 
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-check-square"></i> </a>
-                                <span class="m-l-xs  todo-completed">多吃饭</span>
-
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
                             </li>
                             <li>
                                 <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
@@ -435,12 +282,12 @@
                 $.each(msg.data.system,function(k,v){
                     if(k == 'status' ){
                         if(v.data == '1'){
-                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" id="status" status="1"><i class="glyphicon glyphicon-ok"></i></button>';
+                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" status="1"><i class="glyphicon glyphicon-ok"></i></button>';
                         }else{
-                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" id="status" status="0"><i class="glyphicon glyphicon-remove"></i></button>';
+                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" status="0"><i class="glyphicon glyphicon-remove"></i></button>';
                         }
                     }else if (k == 'start_time' ){
-                        v.data = '<input type="hidden" value="'+v.data+'"><span></span>';
+                        v.data = '<input type="hidden" value="'+v.data+'"><span><embed style="width:50%;height:35%;margin-left:-13%" wmode="transparent" src="<?php echo e(url("image/time.swf")); ?>" quality="high" bgcolor="#ffffff" name="honehoneclock" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" height="140" width="320"></span>';
                     }
                     strHtml += '<tr><td>';
                     strHtml += v.info+'：</td><td id="';
@@ -451,26 +298,38 @@
             }
         })
         $('.table').delegate('button','click',function(){
-
-        //});
-
-        //$('#status').click(function(){
-            var obj  = $(this);
-            var status = obj.attr('status');
-            $.ajax({
-                type:"get",
-                url:"<?php echo e(url('admin/index/checkstatus')); ?>",
-                data:'status='+status,
-                dataType:'json',
-                success:function ( msg ) {
-                    if(status == '0'){
-                        obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" id="status" status="1"><i class="glyphicon glyphicon-ok"></i></button>');
-                    }else{
-                        obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" id="status" status="0"><i class="glyphicon glyphicon-remove"></i></button>');
-                    }
+            var rand = parseInt(Math.random()*10000);
+            var pwd = prompt('请输入验证码：'+rand);
+            if(pwd == rand){
+                var superpwd = prompt('请输入管理密码：')
+                if(superpwd != ''){
+                    var obj  = $(this);
+                    var status = obj.attr('status');
+                    $.ajax({
+                        type:"get",
+                        url:"<?php echo e(url('admin/index/checkstatus')); ?>",
+                        data:'status='+status+'&superpwd='+superpwd,
+                        dataType:'json',
+                        success:function ( msg ) {
+                            if(msg.status == '1'){
+                                if(status == '0'){
+                                    obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" status="1"><i class="glyphicon glyphicon-ok"></i></button>');
+                                }else{
+                                    obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" status="0"><i class="glyphicon glyphicon-remove"></i></button>');
+                                }
+                            }else{
+                                alert('管理密码认证失败');
+                            }
+                        }
+                    })
                 }
-            })
+            }else{
+                alert('验证码填错了');
+            }
+
         });
+
+
     });
 </script>
 </html>
