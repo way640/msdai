@@ -62,5 +62,8 @@ Route::any('personal/setAddress', 'Home\personalController@setAddress') ;
 *@Use : 添加用户地址
 */
 Route::any('personal/addAddress', 'Home\PersonalController@addAddress') ; 
-
+/*
+*@Use : 获取用户信息
+*/
+Route::any('personal/getUserInfo', 'Home\PersonalController@getUserInfo') ;
 

@@ -272,7 +272,8 @@ class PersonalController extends CommonController
             
 			//邮件参数设置   用户名                          用户邮箱     内容标题      内容详情
 		    $this -> smtp ( $userArr['user_account'], $emailAddress, '激活邮箱', '请在页面点击链接，激活您的邮箱http://www.zdmoney.com/personal/activate?mailbox='.$userData ) ;
-		
+		    
+			return $this -> success (  ) ;
 		}
 	}
 	
