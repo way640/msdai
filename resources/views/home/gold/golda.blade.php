@@ -62,6 +62,7 @@
             <div id='vbox'>
                 
             </div>
+            
         </div>
         <div class="pull-right prod-info">     
 			<p><a class="btn btn-primary btn-ps" href="javascript:void(0);">立即买入</a></p>
@@ -88,7 +89,7 @@ $('.J_zl').on('click',function(){
                     var v=msg.result;
                     //alert(v.uptime);
                     str +='<p class="prod-title"></span></p><div class="pull-left prod-intro">';
-                    str +='<h2>'+v.uptime+'</h2>';
+                    str +='<h2>'+v.uptime+'</h2><input type="hidden" id="didden" value='+v.goldid+'" >';
                     str +='<dl class="left"><dt>当前价格：</dt><dd><span class="digit">'+v.last_price+'元</span></dd></dl>';
                     str +='<dl class="right"><dt>买入价格：</dt><dd><span class="digit">'+v.buy_price+'元</span></dd></dl>';
                     str +='<dl class="left"><dt>卖出价格：</dt><dd><span class="digit">'+v.sell_price+'元</span></dd></dl>';

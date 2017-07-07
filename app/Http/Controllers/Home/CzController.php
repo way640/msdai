@@ -48,7 +48,7 @@ class CzController extends CommonController
 			//echo '签名正确';
 			if ($_GET['trade_status']=='TRADE_SUCCESS') 
 			{
-				$user_id => $_SESSION['user']['user_id'];
+				$user_id = $_SESSION['user']['user_id'];
 				//$user_id = 1;
 				//查询原来的余额
 				 $info = DB::table('user_info')->where('user_id',$user_id)->first();

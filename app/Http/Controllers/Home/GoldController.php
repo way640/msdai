@@ -237,4 +237,8 @@ class GoldController extends CommonController
 			echo  "$callback(".$data.")";
 		}
 	}
+	public function addgold()
+	{
+		return view('home/gold/addgold');
+	}
 }

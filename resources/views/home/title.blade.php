@@ -20,6 +20,7 @@
         	<img id="WeiBo" onmousemove="WeiBoMove()" onmouseout="WeiBoOut()" src="{{ asset('image/微博-link.png') }}" />
         	<img id="WeChat" onmousemove="WeChatMove()" onmouseout="WeChatOut()" src="{{ asset('image/微信-link.png') }}" />
             <ul>
+
             	<li><a href="{{url('')}}">最新活动</a></li>
 				<?php $arr = isset( $_SESSION['user'] ) ? $_SESSION['user'] : ''?>
 				@if ( $arr )
@@ -185,7 +186,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                             +v.buy_price+'&nbsp;&nbsp;<br>成交量：'
                             +v.volume+'</p><div class="earnings"><h2>最高价</h2><h2 style="color:green;">最低价</h2><h3>'
                             +v.high_price+'</h3><h3>'
-                            +v.low_price+'</h3></div><a class="purchase" href="#">立即申购</a></li>';
+                            +v.low_price+'</h3></div><a class="purchase" href="http://www.zdmoney.com/gold/addgold">立即购买</a></li>';
                 })
                 //alert(str);
                 $('#goldbox').html(str);
@@ -210,7 +211,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                              strfund +='<p>创建时间:'+v.clrq+'<br><br>';
                              strfund +=v.CompanyName+'<br><br>基金规模：<font color="green" >'
                              strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings" style="margin-top:20px">';
-                             strfund +='<h2>'+v.dwjz+'</h2><h2>'+v.ljjz+'</h2><h3>单位净值</h3><h3>累计净值</h3></div><a class="tender" href="#">立即投标</a></li>';
+                             strfund +='<h2>'+v.dwjz+'</h2><h2>'+v.ljjz+'</h2><h3>单位净值</h3><h3>累计净值</h3></div><a class="tender" href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">立即购买</a></li>';
                         };   
                     })
                     //alert(strfund);
