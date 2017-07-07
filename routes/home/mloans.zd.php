@@ -18,3 +18,5 @@ Route::get('molans/applyto','Home\CreditController@applyto');
 Route::get('molans/draw','Home\CreditController@draw');
 //用户大转盘中奖信息
 Route::get('molans/lucy','Home\CreditController@lucy');
+//安全交易协议
+Route::get('molans/agr','Home\CreditController@agr');

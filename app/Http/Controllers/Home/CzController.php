@@ -55,9 +55,8 @@ class CzController extends CommonController
 				 if (empty($info)) 
 				 {
 				 	echo '请您完善信息';
-				 }
-				 else
-				 {
+					return view ( 'home/personal/config' ) ;
+				 }else{
 					//修改余额 = 原来的余额加上充值的金额
 					DB::table('user_info')->where('user_id',$user_id)->update(['user_money'=> ($info->user_money+$price)]);
 					//没值 新手 添加数据
@@ -76,10 +75,8 @@ class CzController extends CommonController
 					{
 						echo '钱没到账,又给那小子了';
 						//个人中心账户页面
-						//return view('');
-					}
-					else
-					{
+						return view('home/personal/personal');
+					}else{
 						//echo '充值失败';
 						return view('home/cz/index');
 					}

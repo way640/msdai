@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Home;
 use App\Http\home;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-//use Illuminate\Database\Query;
 use DB;
 
 class CreditController extends Controller
@@ -13,21 +12,20 @@ class CreditController extends Controller
     {
         //轻松投放款
        $user_id=$_SESSION['user']['user_id'];
-       $lenging_no=rand(10000000,99999999);
+       $lenging_no=time().rand(1000,9999);
         $input = Input::all();
         unset($input['_token']);
-        //print_r($input);exit;
         $input['user_id']=$user_id;
         $input['lenging_no']=$lenging_no;
         $input['lenging_start_time']=strtotime($input['lenging_start_time']);
         $input['lenging_end_time']=strtotime($input['lenging_end_time']);
-        //$interest=str_replace('%','',$input['lenging_interest']);
         $input['lenging_total']=$input['lenging_money']+$input['lenging_money']*($input['lenging_interest']/100);
 
         $yu=$input['user_money']-$input['lenging_money'];
+        $input['lenging_interest']=$input['lenging_interest'].'%';
         unset($input['user_money']);
 
-        //print_r($input);exit;
+
         $res=DB::table('lenging')->insert(
             $input
         );
@@ -59,8 +57,8 @@ class CreditController extends Controller
     public function lengpart($id)
     {
         $data=DB::table('lenging')->where('lenging_id','=',$id)->get();
-
-        return view('home/leng/lengpart',['data'=>$data]);
+        $read=DB::table('config')->where('config_type',1)->get();;
+        return view('home/leng/lengpart',['data'=>$data,'read'=>$read]);
     }
 
     //验证用户是否实名制认证
@@ -78,9 +76,8 @@ class CreditController extends Controller
         $data=Input::all();
         $data['loan_time']=time();
         $data['user_id']=$_SESSION['user']['user_id'];
-        $data['user_id']=10;
+//        $data['user_id']=10;
         $data['loan_money']= $data['loan_money']*10000;
-//        $data['loan_interset']=str_replace('%', '', $data['loan_interset']);
         if($data['loan_is_instal']==0){
             $data['loan_long']=1;
         }
@@ -88,7 +85,6 @@ class CreditController extends Controller
         //还款结束时间
         $data['loan_end_time']=strtotime('+'.$data['loan_long'].'Month',$data['loan_time']);
 
-        //print_r($data);exit;
         $res=DB::table('loan')->insertGetId(
             $data
         );
@@ -116,16 +112,9 @@ class CreditController extends Controller
         }
     }
 
-    //幸运大转盘展示页面
-    public function draw()
+    //用户借款交易安全协议
+    public function agr()
     {
-        return view('home\leng\draw');
-    }
-
-    //用户大转盘中奖信息
-    public function lucy()
-    {
-        $user_id=Input::get('user_id');
-       // print_r($data);
+        return view('home\Transaction security\Agreement');
     }
 }
