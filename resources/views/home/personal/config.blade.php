@@ -30,8 +30,36 @@
     <div class="social-qq-pure"></div>
     <h4>在线客服</h4></a></div>
 <script type="text/javascript" async="" src="js/mv.js"></script><script type="text/javascript" async="" src="./安全设置_files/mba.js.下载"></script><script charset="utf-8" src="./安全设置_files/v.js.下载"></script><script src="./安全设置_files/header-init-8dc16d38ce.js.下载"></script><div class="container jimu-account-container">
-        <div class="jimu-account-nav-wrap">
-            <div class="jimu-leftnav" data-version="4"><ul><ul class="jimu-leftsecnav"><li><a data-nav="asset-overview" class=" highlight asset-overview" href="https://www.jimu.com/User/AssetOverview">资产总览</a></li></ul><li><a data-nav="venus-category" class=" highlight venus-category" href="javascript:void(0)">轻松理财</a></li><ul class="jimu-leftsecnav"><li><a data-nav="venus" class="" href="https://box.jimu.com/User/Venus/JoinList">轻松投</a></li></ul><li><a data-nav="p2p" class=" highlight p2p" href="javascript:void(0)">散标理财</a></li><ul class="jimu-leftsecnav"><li><a data-nav="p2p-overview" class="" href="https://box.jimu.com/Account/CreditAssign/Owned">自选投</a></li><li><a data-nav="p2p-autoinvest" class="" href="https://box.jimu.com/AutoInvest/AutoInvestInfo">自动投标队列</a></li><li><a data-nav="p2p-repayment-plan" class="" href="https://box.jimu.com/RepaymentPlan/Month">回款计划</a></li></ul><li><a data-nav="award" class=" highlight award" href="javascript:void(0)">奖励管理</a></li><ul class="jimu-leftsecnav"><li><a data-nav="coupon" class="" href="https://box.jimu.com/Coupon/List"><span>优惠券</span></a></li><li><a data-nav="moneycat" class="" href="https://box.jimu.com/Recommend/Send">邀请好友</a></li><li><a data-nav="usermission" class="" href="https://www.jimu.com/Mission/Index">我的任务</a></li><li><a data-nav="userscore" class="" href="https://www.jimu.com/UserScore/Index">我的积分</a></li></ul><li><a data-nav="userprofile" class=" highlight userprofile" href="javascript:void(0)">账户管理</a></li><ul class="jimu-leftsecnav"><li><a data-nav="p2p-setting" class="" href="https://box.jimu.com/User/SecurityCenter">账户设置</a></li><li><a data-nav="user-center" class="active" href="https://www.jimu.com/User/UserCenter">安全设置</a></li><li><a data-nav="message" class="" href="https://www.jimu.com/Message/List"><span>消息</span></a></li></ul></ul></div></div>
+<div class="jimu-account-nav-wrap">
+            <div class="jimu-leftnav" data-version="4">
+				<ul>
+					<ul class="jimu-leftsecnav">
+						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/config') }}">安全设置</a></li>
+					    <li><a data-nav="user-center" class="" href="{{ url('cz/index') }}">账户充值</a></li>
+					</ul>
+                        <li></li>
+					<ul class="jimu-leftsecnav">
+                        <li>
+						</li>					
+					</ul>
+					
+					<ul class="jimu-leftsecnav">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>						
+                        <li></li>
+					</ul>
+                        <li></li>
+					<ul class="jimu-leftsecnav">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+					</ul>
+				</ul>
+			</div>
+</div>
+
         <div class="jimu-account-content-wrap">
   
     <div class="widget">
@@ -88,17 +116,6 @@
                 </tr>
 
                 <tr>
-                    <td class="text-left " nowrap="nowrap"><strong>真实姓名</strong></td>
-                    <td class="text-left desc " width="30%">
-                        <small class="muted">实名认证，账户更安全</small>
-                    </td>
-                        <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未认证</td>
-                                <td class="info " width="30%"></td>
-                                <td>
-                            </td>
-                </tr>
-
-                <tr>
                     <td class="text-left " nowrap="nowrap"><strong>手机号码</strong></td>
                     <td class="text-left desc " width="30%">
                         <small class="muted">手机号是您在积木盒子重要的身份凭证</small>
@@ -146,9 +163,23 @@
                     <td class="text-left desc">
                         <small class="muted">用于邮寄资料或礼品</small>
                     </td>
-                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>未设置</td>
+                    <td class="status text-center" nowrap="nowrap"><i class="icon-remove-sign icon-red"></i>
+					
+					
+					   <?php if ( empty ( $data['user_addr'] ) ) {?>
+					       未绑定
+                       <?php 
+					       } else {
+					   ?>
+                           已绑定
+					   <?php 
+					       }
+					   ?>
+					
+					
+					</td>
                             <td class="info " width="30%"></td>
-                            <td nowrap="nowrap"><a href="{{ url('personal/setConfig') }}">填写</a></td>
+                            <td nowrap="nowrap"><a href="{{ url('personal/setAddress') }}">填写</a></td>
                         </tr>
                 </tbody>
             </table>

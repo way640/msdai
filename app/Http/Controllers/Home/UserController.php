@@ -62,12 +62,15 @@ class UserController extends CommonController
 
 			return $this->error ( '用户名已存在' );
 		} else {
+			
 			$regTime = time();
 			$userAdd = DB::insert( "insert into zd_user ( user_account, user_pwd , user_reg_time ) values ( '$userName', '$userPwd' , '$regTime' )" );
 			$id = DB::getPdo()->lastInsertId();
 		}
 		
 		if ( $userAdd ) {
+			
+		    uesDB::insert ( "insert into zd_user_login ( login_id, user_id, user_login_time ) val ( '', " . $_SESSION['user']['user_id'] . ", " . time() . " )" ) ; 
 			
 			$arr = [ 'username' => $userName, 'user_id' => $id ];
 			
@@ -137,6 +140,8 @@ class UserController extends CommonController
 			$arr = [ 'username' => $userName, 'user_id' => $userData[0]['user_id'] ];
 			$_SESSION[ "user" ] = $arr; 
 			
+			DB::update ( 'update zd_user_login set user_login_time = ' . time() . ' where user_id = ' . $_SESSION['user']['user_id'] ) ;
+			
 			return $this->success (  );
 		}else{
 			
@@ -145,12 +150,19 @@ class UserController extends CommonController
 	}
 	
 	/*
-	*@Action_logout : 用户退出登录
+	*@Action_name : 用户退出登录
 	*/
 	public function logout(){
 		
 		unset( $_SESSION['user'] );
 		
 		return $this->success(  );
+	}
+	
+	/*
+	*Action_name : 获取用户信息
+	*/
+	public function getUserInfo(){
+		
 	}
 }

@@ -1,6 +1,7 @@
 @extends('home.title') 
 @section('content')
 <title>积木盒子 jimu.com - 智能综合理财平台</title>
+<base href="./../../">
 <!-- end: Meta -->
 <meta property="wb:webmaster" content="9fd1b56cebfec3b3">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -33,24 +34,27 @@
             <div class="jimu-leftnav" data-version="4">
 				<ul>
 					<ul class="jimu-leftsecnav">
-						<li><a data-nav="asset-overview" class="active highlight asset-overview" href="https://www.jimu.com/User/AssetOverview">资产总览</a></li></ul><li><a data-nav="venus-category" class=" highlight venus-category" href="javascript:void(0)">轻松理财</a></li><ul class="jimu-leftsecnav"><li><a data-nav="venus" class="" href="https://box.jimu.com/User/Venus/JoinList">轻松投</a></li></ul><li><a data-nav="p2p" class=" highlight p2p" href="javascript:void(0)">散标理财</a></li><ul class="jimu-leftsecnav"><li><a data-nav="p2p-overview" class="" href="https://box.jimu.com/Account/CreditAssign/Owned">自选投</a></li>
-						<li><a data-nav="p2p-autoinvest" class="" href="https://box.jimu.com/AutoInvest/AutoInvestInfo">自动投标队列</a></li>
-						<li><a data-nav="p2p-repayment-plan" class="" href="https://box.jimu.com/RepaymentPlan/Month">回款计划</a></li>
+						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/config') }}">安全设置</a></li>
+					    <li><a data-nav="user-center" class="" href="{{ url('cz/index') }}">账户充值</a></li>
 					</ul>
-						<li><a data-nav="award" class=" highlight award" href="javascript:void(0)">奖励管理</a></li>
+                        <li></li>
 					<ul class="jimu-leftsecnav">
-						<li><a data-nav="coupon" class="" href="https://box.jimu.com/Coupon/List"><span>优惠券</span></a></li>
-						<li><a data-nav="moneycat" class="" href="https://box.jimu.com/Recommend/Send">邀请好友</a></li>
-						<li><a data-nav="usermission" class="" href="https://www.jimu.com/Mission/Index">我的任务</a></li>
-						<li><a data-nav="userscore" class="" href="{{ url('home/personal/points') }}">我的积分</a></li>
+                        <li>
+						</li>					
 					</ul>
-						<li><a data-nav="userprofile" class=" highlight userprofile" href="javascript:void(0)">账户管理</a></li>
+					
 					<ul class="jimu-leftsecnav">
-						<li><a data-nav="p2p-setting" class="" href="https://box.jimu.com/User/SecurityCenter">账户设置</a></li>
-
-						<li><a data-nav="user-center" class="" href="{{ url('personal/config') }}">安全设置</a></li>
-						<li><a data-nav="message" class="" href="https://www.jimu.com/Message/List"><span>消息</span></a>
-						</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>						
+                        <li></li>
+					</ul>
+                        <li></li>
+					<ul class="jimu-leftsecnav">
+                        <li></li>
+                        <li></li>
+                        <li></li>
 					</ul>
 				</ul>
 			</div>
@@ -72,11 +76,11 @@
             <a href="javascript:void(0);">
                 <img src="
 				<?php if ( $userInfo['user_head'] ) {?>
-					{{ url('<?php echo $userInfo['user_head']?>') }}
+					<?php echo $userInfo['user_head']?>
 				<?php 
 				    } else { 
 			    ?>
-				{{ asset('image/default-6e81850cf7.jpg') }}
+				image/default-6e81850cf7.jpg
 				<?php 
 				}?>
 				" class="avatar">
@@ -90,16 +94,10 @@
                     <span>用户名</span><span class="large-text"><?php echo $_SESSION['user']['username']?></span>
                 </div>
                 <div class="account-item">
-                    <span>可用积分</span>
-                    <span class="large-text available-score">12.00</span>
-                    <a target="_blank" href="https://www.jimu.com/Issue/Jimu/1026">积分介绍</a>
-                </div>
-                <div class="account-item">
                     <span>上次登录</span>
-                    <span class="last-login">昨天22:35&nbsp;&nbsp;上海</span>
-                        <a target="_blank" href="https://www.jimu.com/User/LoginLog">
-                            <span class="check-tip">查看</span>
-                        </a>
+                    <span class="last-login">
+					
+					</span>
                     </div>
             </div>
         </div>
@@ -237,4 +235,19 @@
     </div>
 	</div>
 </center>
+
+<script>
+$(function(){
+	
+    $.ajax({
+        type:"get",
+        url:"{{url('personal/getUserInfo')}}",
+        data:'',
+        dataType:'json',
+        success:function ( msg ) {
+
+        }
+    });
+}
+</script>
 	@stop
