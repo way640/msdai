@@ -33,6 +33,13 @@ class CommonController extends Controller
             echo self::gogo('admin/login/login','您好像还没有登录！！');
             die();
         }
+		
+		if ( ! $this -> checkUserPriv ( $_SESSION['admin']['admin_id'] ) ) {
+		    
+			echo self::gogo('admin/index/index','没有操作权限！');
+            die();
+		}
+		
     }
 
     /*
@@ -105,13 +112,22 @@ class CommonController extends Controller
         if( @$userId){
             //获取当前控制器和方法
             $path = @$_SERVER['PATH_INFO']?$_SERVER['PATH_INFO']:$_SERVER['REQUEST_URI'];
-            $reqArr = @explode('?', $request);
-            $reqArr = @explode('/', $reqArr[0]);
+
+            $reqArr = @explode('?', $path);
+            $reqArr = @explode('/', $reqArr[0]);			
+			
             $action = @array_pop($reqArr);
             $controller = @array_pop($reqArr);
+
             $namespace = @array_pop($reqArr);
             $requestUrl = $namespace.'/'.$controller.'/'.$action;
             //设置公共访问目录和超级管理员
+			$super = 14 ; 
+			if ( $_SESSION['admin']['admin_id'] == $super ) {
+				
+				return true ;
+			}
+			
             $publicController = ['index'];
             $publicAction = ['index'];
             if(in_array($controller,$publicController) && in_array($action,$publicAction)){
@@ -120,7 +136,9 @@ class CommonController extends Controller
 
             //某个功能开放权限
             $publicConfig = [
-                    'admin/config/index',
+                    //'admin/config/index',
+					'admin/index/adminnav',
+					'admin/public/doLogout',
                     ];
             if(in_array($requestUrl,$publicConfig)){
                 return true;
@@ -132,10 +150,10 @@ class CommonController extends Controller
 			$userData = $this -> objToArray ( $userData ) ; 
 			
 			$appoPriv = DB::select ( 'select priv_controller, priv_action from zd_privilege where priv_id in ("' . $userData[0]['app_priv'] . '")' ) ;  
-			$appoPriv = $this -> objToArray ( $appopriv ) ;
-			
-            //$appoPriv = $this->objToArray(DB::select('select * from zd_appointment where admin_id='.$userId));
-            foreach($privInfo as $val){
+			$appoPriv = $this -> objToArray ( $appoPriv ) ;
+
+           // $appoInfo = $this->objToArray(DB::select('select * from zd_appointment where admin_id='.$userId));
+            foreach($appoPriv as $val){
                 $controllerInfo[] = $val['priv_controller'];
                 $actionInfo[] = $val['priv_action'];
             }
@@ -145,8 +163,9 @@ class CommonController extends Controller
         
 
             //权限控制
-            $privInfo = DB::select("select priv_controller,priv_action from zd_admin_role as ar LEFT JOIN zd_role_priv as rp on ar.role_id=rp.role_id LEFT JOIN zd_privilege as pr on rp.priv_id=pr.priv_id where ar.admin_id = '$userId' AND pr.priv_status = '1'");
+            $privInfo = DB::select("select priv_controller,priv_action from zd_admin_role as ar LEFT JOIN zd_role_prive as rp on ar.role_id=rp.role_id LEFT JOIN zd_privilege as pr on rp.priv_id=pr.priv_id where ar.admin_id = '$userId' AND pr.priv_status = '1'");
 //            self::twoFieldArr($privInfo,);
+            $privInfo = $this -> objToArray ( $privInfo ) ; 
             foreach($privInfo as $val){
                 $controllerInfo[] = $val['priv_controller'];
                 $actionInfo[] = $val['priv_action'];
