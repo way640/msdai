@@ -196,8 +196,9 @@ class CommonController extends Controller
         if($obj){
             return json_decode(json_encode($obj),TRUE);
         }
-	    return false;
+        return false;
 	}
+	
     /*
      * @action_name：取出两个字段组成新的数组
      * @params：数组 arary  作为key的字段名 string  作为值的字段名 string
