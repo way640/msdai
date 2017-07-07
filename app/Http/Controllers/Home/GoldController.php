@@ -6,7 +6,11 @@ use App\Http\home;
 use DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-
+use App\Libraries\AlipayCore;
+use App\Libraries\AlipayMD5;
+use App\Libraries\AlipayNotify;
+use App\Libraries\AlipayPay;
+use App\Libraries\AlipaySubmit;
 /*
 *@Class_name : 贵金属详情
 *@Use : 用户对贵金属的购入等操作
@@ -239,6 +243,38 @@ class GoldController extends CommonController
 	}
 	public function addgold()
 	{
-		return view('home/gold/addgold');
+		//返回基金
+		$goldid = $_GET['goldid'];
+		$goods_statis_file = public_path('file')."\\goods_file_".$goldid.".html";
+		$data = file_get_contents($goods_statis_file);
+		$info = json_decode($data,true)['result'];
+		return view('home/gold/addgold',['data'=>$info]);
 	}
+	//购买基金
+	public function numprice()
+	{
+		if (@$_SESSION['user']) {
+			$goldid = $_POST['id'];
+			$goods_statis_file = public_path('file')."\\goods_file_".$goldid.".html";
+			$data = file_get_contents($goods_statis_file);
+			$info = json_decode($data,true)['result'];
+			$price = $info['open_price'];
+			$num = $_POST['num'];
+			$alipay = new AlipayPay();
+			//print_r($new);
+			//生成支付页面
+			$subject = $info['varietynm'];
+			$total_fee = $price*$num;
+			//echo $total_fee;die;
+			$body = '购买贵金属';
+			$out_trade_no = date('YmdHis').rand(10000,99999);
+			$alipay->requestPay($out_trade_no, $subject, $total_fee, $body, $show_url='');
+		}else{
+			return view('personal/personal');
+		}
+		
+	}
+	
+	
+	
 }

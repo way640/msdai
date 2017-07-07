@@ -187,7 +187,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                             +v.buy_price+'&nbsp;&nbsp;<br>成交量：'
                             +v.volume+'</p><div class="earnings"><h2>最高价</h2><h2 style="color:green;">最低价</h2><h3>'
                             +v.high_price+'</h3><h3>'
-                            +v.low_price+'</h3></div><a class="purchase" href="http://www.zdmoney.com/gold/addgold">立即购买</a></li>';
+                            +v.low_price+'</h3></div><a class="purchase" href="http://www.zdmoney.com/gold/addgold?goldid='+v.goldid+'">立即购买</a></li>';
                 })
                 //alert(str);
                 $('#goldbox').html(str);

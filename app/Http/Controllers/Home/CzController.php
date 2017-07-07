@@ -27,6 +27,7 @@ class CzController extends CommonController
 	//生成支付页面
 	public function add()
 	{
+		
 		$alipay = new AlipayPay();
 		//print_r($new);
 		//生成支付页面
