@@ -56,7 +56,7 @@
 
             <div class="col-xs-7">
                 <a href="{{ url('') }}" target="">
-                        <img alt="登录页活动图" src="{{ asset('file/07a662f4-3d1d-42d5-8806-084234e29cf0') }}">
+                        <img alt="登录页活动图" src="{{ asset('image/home_login.jpg') }}">
                     </a>
                 </div>
 

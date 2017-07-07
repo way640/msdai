@@ -50,7 +50,7 @@
 <div class="prod-item corp" id="TimesContent">
         <p class="prod-title">
             <span class="font-bold">贵金属种类：
-            <select>
+            <select id="JJ_zl">
             <option value="">--选择--</option>
                 <?php $__currentLoopData = $info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $va): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <option value="<?php echo e($va->fund_no); ?>" class='J_zl' ><?php echo e($va->fund_name); ?></option>
@@ -72,14 +72,14 @@
 </div>
 </center>
 <script>
-$('.J_zl').on('click',function(){
+$('#JJ_zl').change(function(){
     var dian = $(this).val();
     var urljs = 'http://api.k780.com/?app=finance.shgold&goldid='+dian+'&version=2&appkey=23464&sign=c649cb4d82839e08bf3b5f917e8cc9df&format=json&jsoncallback=?';
     var str = '';
     $.ajax({ 
             type :"GET",      
             url : urljs,        
-            dataType : "jsonp",            
+            dataType : "json",            
             success:function(data){
                 if(data.success=='1'){
                     var v=data.result;

@@ -210,7 +210,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                              strfund +='<li><a href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">'+v.name+'</a><br>';
                              strfund +='<p>创建时间:'+v.clrq+'<br><br>';
                              strfund +=v.CompanyName+'<br><br>基金规模：<font color="green" >'
-                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings">';
+                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings" style="margin-top:20px">';
                              strfund +='<h2>'+v.dwjz+'</h2><h2>'+v.ljjz+'</h2><h3>单位净值</h3><h3>累计净值</h3></div><a class="tender" href="#">立即投标</a></li>';
                         };   
                     })
