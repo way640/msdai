@@ -21151,3 +21151,21 @@ Stack trace:
 #29 D:\phpStudy\WWW\zdmoney\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #30 D:\phpStudy\WWW\zdmoney\public\index.php(56): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #31 {main}  
+[2017-07-07 14:57:01] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:06] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:07] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:07] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:08] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:13] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
