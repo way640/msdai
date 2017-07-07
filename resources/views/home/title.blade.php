@@ -114,16 +114,16 @@ var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
                     //alert(v.article_content);
                     // var content = v.article_content;
                     // alert(content.substring(0,50)+"...");
-                    str0 +='<a href="#" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞82&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论7</h3></aside></a>';
+                    str0 +='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }else if(k==1){
                     //alert(2);
-                    str1 +='<a href="#" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1104&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞97&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论189</h3></aside></a>';
+                    str1 +='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }else if(k==2){
                     //alert(3);
-                    str2+='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1721&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞142&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论8</h3></aside></a>';
+                    str2+='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }else{
                     //alert(4);
-                    str3 +='<a href="#" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p><h3>阅读1750&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赞205&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评论270</h3></aside></a>';
+                    str3 +='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }
             })
 
@@ -207,7 +207,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                              strfund +='<li><a href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">'+v.name+'</a><br>';
                              strfund +='<p>创建时间:'+v.clrq+'<br><br>';
                              strfund +=v.CompanyName+'<br><br>基金规模：<font color="green" >'
-                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings">';
+                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings" style="margin-top:20px">';
                              strfund +='<h2>'+v.dwjz+'</h2><h2>'+v.ljjz+'</h2><h3>单位净值</h3><h3>累计净值</h3></div><a class="tender" href="#">立即投标</a></li>';
                         };   
                     })
@@ -218,19 +218,6 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
 }); 
 </script>
 	@yield('content')
-	<!--content-wrap------------------------------------------------------------------------------------------------------>
-	<div class="content-wrap">
-  		<div class="c-wrap">
-   			<h1>合作机构</h1>
-        	<div class="scroll">
-          		<a href="###" class="left2" onclick="left2()"></a>
-                  	<div id='linkbox'>
-                  	     
-                  	</div>
-              	<a href="###" class="right2" onclick="right2()"></a>
-       		</div>
-      	</div>
-    </div>
 <!--footer------------------------------------------------------------------------------------------------------------>	
 	<div class="footer" style="">
     	<div class="foot">
@@ -254,7 +241,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
 			</article>
             <aside>
             	<p>联系我们 <span>9:00 - 21:00</span> </p>
-              	<h1>400-068-1176</h1>
+              	<h1>666-666-6606</h1>
 				<div class="customer"><a href="#">在线客服</a></div>
               	<div class="customer"><a href="#">客服邮箱</a></div>
             </aside>

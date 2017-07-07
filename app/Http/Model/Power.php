@@ -19,7 +19,7 @@ class Power extends Model
 
     public function getTree($data,$priv_name,$priv_id='id',$priv_pid='pid',$pid='0')
     {
-        $arr = array();
+        static $arr = array();
         foreach($data as $k=>$v){
             if($v->$priv_pid==$pid){
                 $data[$k]['_'.$priv_name] = $data[$k][$priv_name];
