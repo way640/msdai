@@ -62,9 +62,6 @@
                       
                   </div>
 
-                  <li><a href="{{url('')}}/cz/index">充值</a></li>
-                  <li><a href="{{url('')}}/molans/draw">抽奖</a></li>
-
         	</ul>
         </div>
     </div>
