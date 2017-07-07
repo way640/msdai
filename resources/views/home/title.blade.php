@@ -64,6 +64,7 @@
 
                   <li><a href="{{url('')}}/cz/index">充值</a></li>
                   <li><a href="{{url('')}}/molans/draw">抽奖</a></li>
+				  <li style="float:right;"><a href="{{ asset('personal/personal') }}">我的积木</a></li>
 
         	</ul>
         </div>

@@ -44,13 +44,16 @@ class CzController extends CommonController
 		if ($alipay->verifyReturn()) {
 			//echo '签名正确';
 			if ($_GET['trade_status']=='TRADE_SUCCESS') {
-				//$user_id => $_SESSION['user']['user_id'];
-				$user_id = 1;
+				$user_id => $_SESSION['user']['user_id'];
+				//$user_id = 1;
 				//查询原来的余额
 				 $info = DB::table('user_info')->where('user_id',$user_id)->first();
 				 if (empty($info)) {
 				 	echo '请您完善信息';
+					return view ( 'home/personal/config' ) ; 
 				 }else{
+					 
+					
 					//修改余额 = 原来的余额加上充值的金额
 					DB::table('user_info')->where('user_id',$user_id)->update(['user_money'=> ($info->user_money+$price)]);
 					//没值 新手 添加数据
@@ -68,7 +71,7 @@ class CzController extends CommonController
 					if($Q){
 						echo '钱没到账,又给那小子了';
 						//个人中心账户页面
-						//return view('');
+						return view('home/personal/personal');
 					}else{
 						//echo '充值失败';
 						return view('home/cz/index');
