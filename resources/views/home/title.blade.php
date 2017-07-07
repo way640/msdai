@@ -62,6 +62,8 @@
                       
                   </div>
 
+				  <li style="float:right;"><a href="{{ asset('personal/personal') }}">我的积木</a></li>
+
         	</ul>
         </div>
     </div>
