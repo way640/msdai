@@ -49,8 +49,9 @@ class CzController extends CommonController
 				//查询原来的余额
 				 $info = DB::table('user_info')->where('user_id',$user_id)->first();
 				 if (empty($info)) {
+
 				 	echo '请您完善信息';
-					return view ( 'home/personal/config' ) ; 
+					return view ( 'home/personal/config' ) ;
 				 }else{
 					 
 					

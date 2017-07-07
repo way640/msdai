@@ -1,9 +1,8 @@
-<?php $arr = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : ''?>
-<?php //$arr = 10; ?>
-<!DOCTYPE html>
+<?php //$arr = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : ''?>
+<?php $arr = 10; ?>
+        <!DOCTYPE html>
 <!-- saved from url=(0046)https://loan.jimu.com/expwy/prod?applyType=401 -->
 <html class="v_scrollbar"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>【申请借款】- 挣点钱 zdmoney.com</title>
     <meta name="keywords" content="读秒,个人贷款,信用贷款,无抵押贷款,小额贷款,快速贷款,手机贷款,互联网金融,分期,买房贷款,P2P借贷平台,积木贷款">
@@ -68,11 +67,9 @@
         <div class="logo"><a href="javascript:;"><img src="{{ asset('image/logo_nav_full-9b4d613b2f.png') }}" alt="积木"></a></div>
         <div class="jimu-nav-wrap">
             <ul>
-                <li><a href="http://www.zdmoney.com/" data-nav="home"><span>首页</span></a></li>
-                <li><a href="/invest/invest" data-nav="venus"><span>轻松投</span></a></li>
-                <li><a href="/lenging/lenging" data-nav="loan" class="active"><span>借款</span></a></li>
-                {{--<li><a href="https://www.jimu.com/Home/About" data-nav="about"><span>关于积木</span></a></li>--}}
-                <li class="pull-right"><a href="https://www.jimu.com/User/AssetOverview" data-nav="account"><span>我的积木</span></a></li>
+                <?php foreach($read as $k=>$v){?>
+                    <li><a href="<?php echo $v->config_link ?>" data-nav="home"><span><?php echo $v->config_info?></span></a></li>
+                <?php } ?>
             </ul>
         </div>
     </div>
@@ -138,9 +135,9 @@
                         <span class="digit-strong f24" data-apply-type="401">5260</span>人已经成功申请
                     </p>
                     @if ( $arr )
-                    <a class="btn btn-second"  id="applyLoan">立即申请</a>
+                        <a href="javascript:;" class="btn btn-second" id="applyLoan">立即申请</a>
                     @else
-                    <a class="btn btn-second"  id="applyno">立即申请</a>
+                        <a href="javascript:;" class="btn btn-second" id="applyno">立即申请</a>
                     @endif
                 </div>
             </div>
@@ -230,13 +227,13 @@
             <form class="expwy-form" action="/molans/applyto">
                 <?php foreach($data as $k=>$v){?>
                 <input type="hidden" name="lenging_id"  value="<?php echo $v->lenging_id?>">
-                    <input type="hidden" name="lenging_money"  value="<?php echo $v->lenging_money?>">
-                    <?php } ?>
+                <input type="hidden" name="lenging_money"  value="<?php echo $v->lenging_money?>">
+                <?php } ?>
                 <div class="form-control">
                     <label for="applyBalance">借款金额</label>
 
                     <div class="controls i-unit">
-                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额，保留整数位" required="" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额" required="" onkeyup="this.value=(this.value.match(/\d+(\.\d{0,2})?/)||[''])[0]">
                     </div>
                 </div>
                 <div class="form-control">
@@ -264,27 +261,33 @@
                         </select>
                     </div>
                 </div>
-                    {{--<input type="hidden" name="applyType" id="applyType" value="301">--}}
+                {{--<input type="hidden" name="applyType" id="applyType" value="301">--}}
 
-                    {{--<div class="form-control">--}}
-                    {{--<label for="mobile">手机号码</label>--}}
+                {{--<div class="form-control">--}}
+                {{--<label for="mobile">手机号码</label>--}}
 
-                    {{--<div class="controls">--}}
-                    {{--<input type="text" name="mobile" id="mobile" placeholder="请填写手机号码" required="" data-reg="^[1][0-9]{10}$" data-reg-message="请输入正确的手机号码">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
+                {{--<div class="controls">--}}
+                {{--<input type="text" name="mobile" id="mobile" placeholder="请填写手机号码" required="" data-reg="^[1][0-9]{10}$" data-reg-message="请输入正确的手机号码">--}}
+                {{--</div>--}}
+                {{--</div>--}}
                 {{--<div class="form-control captcha">--}}
-                    {{--<label for="captcha">验证码</label>--}}
-                    {{--<div class="controls">--}}
-                        {{--<input type="text" name="captcha" id="captcha" placeholder="请填写验证码" required="">--}}
-                        {{--<img src="./【申请借款】- 积木盒子 jimu.com_files/captcha" alt="验证码" data-src="/captcha/captcha?w=120&amp;h=44" title="点击刷新">--}}
-                    {{--</div>--}}
+                {{--<label for="captcha">验证码</label>--}}
+                {{--<div class="controls">--}}
+                {{--<input type="text" name="captcha" id="captcha" placeholder="请填写验证码" required="">--}}
+                {{--<img src="./【申请借款】- 积木盒子 jimu.com_files/captcha" alt="验证码" data-src="/captcha/captcha?w=120&amp;h=44" title="点击刷新">--}}
+                {{--</div>--}}
                 {{--</div>--}}
                 <div class="form-control">
                     <label for="recommendCode">借款利率</label>
 
                     <div class="controls">
                         <input type="text" name="loan_interset" id="recommendCode" readonly>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <div class="controls">
+                        <input type="radio" name="agreement" id="reco" value="1">&nbsp;&nbsp;&nbsp;
+                        <a href="/molans/agr"  target=_blank>我已阅读并同意《网络安全交易协议》</a>
                     </div>
                 </div>
                 <div class="form-control">
@@ -297,7 +300,7 @@
     </div>
 </div>
 
-    <div id="prod" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;"><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
+<div id="prod" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;"><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="nozhe">+</button>
         <h3 id="myModalLabel">提示</h3>
@@ -348,7 +351,7 @@
     }
 
     #stages{
-    text-align:center
+        text-align:center
     }
 </style>
 <div class="footer">
@@ -533,8 +536,8 @@
     });
 
     $('#zhe').click(function () {
-            $("#mask").hide();
-            $('#prodModal').hide();
+        $("#mask").hide();
+        $('#prodModal').hide();
     });
 
     $('#submit').click(function () {
@@ -587,6 +590,18 @@
             str=(rate*1+10*1)+'%';
         }
         $('#recommendCode').attr('value',str)
+    });
+
+    //安全协议单选框选中移除
+    $('#reco').click(function () {
+        if($("#reco").attr('checked')){
+            $("#reco").removeAttr('checked');
+            $('#submit').attr("disabled","true");
+        }else{
+            $("#reco").attr('checked','checked');
+            $('#submit').removeAttr('disabled');
+        }
+
     })
 </script>
 

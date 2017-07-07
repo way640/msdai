@@ -210,7 +210,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                              strfund +='<li><a href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">'+v.name+'</a><br>';
                              strfund +='<p>创建时间:'+v.clrq+'<br><br>';
                              strfund +=v.CompanyName+'<br><br>基金规模：<font color="green" >'
-                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings" style="margin-top:20px">';
+                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings">';
                              strfund +='<h2>'+v.dwjz+'</h2><h2>'+v.ljjz+'</h2><h3>单位净值</h3><h3>累计净值</h3></div><a class="tender" href="#">立即投标</a></li>';
                         };   
                     })
@@ -244,7 +244,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
 			</article>
             <aside>
             	<p>联系我们 <span>9:00 - 21:00</span> </p>
-              	<h1>666-666-6606</h1>
+              	<h1>400-068-1176</h1>
 				<div class="customer"><a href="#">在线客服</a></div>
               	<div class="customer"><a href="#">客服邮箱</a></div>
             </aside>
