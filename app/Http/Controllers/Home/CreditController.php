@@ -12,7 +12,7 @@ class CreditController extends Controller
     {
         //轻松投放款
        $user_id=$_SESSION['user']['user_id'];
-       $lenging_no=rand(100000000000,999999999999);
+       $lenging_no=time().rand(1000,9999);
         $input = Input::all();
         unset($input['_token']);
         $input['user_id']=$user_id;
