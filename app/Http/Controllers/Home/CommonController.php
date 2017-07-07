@@ -77,21 +77,6 @@ class CommonController extends Controller
         }
         return $result;
     }
-<<<<<<< HEAD
-=======
-    /*
-     * @action_name ： 检测登录状态
-     * @param：用户ID int (选填项，当该参数生效时，返回用户信息)
-     * @return ：array  OR  bool
-     * @author ：Way**/
-    protected function checkUserInfo ( $userId = null ) {
-        if( @$userId || @$_SESSION['user']['user_id']){
-            return true;
-        }
-        return false;
-    }
-
->>>>>>> c902f18dbb5a28b45366f017bfe7b75ff50d7803
 
     /*
      * @action_name ： 检测用户权限
@@ -211,21 +196,8 @@ class CommonController extends Controller
         if($obj){
             return json_decode(json_encode($obj),TRUE);
         }
-        return false;
-<<<<<<< HEAD
+	    return false;
 	}
-	
-	protected function checkUserInfo ( $userId = null ) {
-        if( @$userId || @$_SESSION['admin']['admin_id']){
-            return true;
-        }
-        return false;
-    }
-	
-=======
-    }
-
->>>>>>> c902f18dbb5a28b45366f017bfe7b75ff50d7803
     /*
      * @action_name：取出两个字段组成新的数组
      * @params：数组 arary  作为key的字段名 string  作为值的字段名 string
@@ -247,18 +219,4 @@ class CommonController extends Controller
         return view('error',['errorMsg'=>$errorMsg,'locationUrl'=>$url]);
         die;
     }
-<<<<<<< HEAD
-	
-    /*
-     * @action_name：报错跳转
-     * @params：需要跳转的地址   错误信息   跳转方式（未实现）
-     * @author：Way**/
-    public function gogo($url,$msg = '',$way = ''){
-        $errorMsg = $msg ? $msg : '好像出错了呢' ;
-        return view('error',['errorMsg'=>$errorMsg,'locationUrl'=>$url]);
-    }
-=======
-    
-    
->>>>>>> c902f18dbb5a28b45366f017bfe7b75ff50d7803
 }
