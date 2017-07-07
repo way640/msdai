@@ -8,12 +8,13 @@
 <script type="text/javascript" src="<?php echo e(asset('js/javasrcipt.js')); ?>"></script>
 
 <script type="text/javascript" src="<?php echo e(asset('js/jquery.min.js')); ?>"></script>
+<script type="text/javascript" src="http://developer.baidu.com/wiki/index.php?title=docs/cplat/libs#jQuery"></script>
 <title>积木</title>
 
 </head>
 
 <body style="height:100%">
-<!--top--------------------------------------------------------------------------------------------------------------->
+
 	<div class="top">
     	<div class="top-server">
     		<h1>欢迎致电：<span>400-068-1176</span> 服务时间：9:00 - 21:00</h1>
@@ -51,8 +52,8 @@
     </div>
 
 
-<!--header------------------------------------------------------------------------------------------------------------>
-<!--main-------------------------------------------------------------------------------------------------------------->
+
+
 	<div class="header">
     	<div class="head">
         	<a class="logo" href="http://www.zdmoney.com"><img src="<?php echo e(asset('image/logo-bg.png')); ?>" /></a>
@@ -221,7 +222,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
 }); 
 </script>
 	<?php echo $__env->yieldContent('content'); ?>
-	<!--content-wrap------------------------------------------------------------------------------------------------------>
+	<!--content-wrap-->
 	<div class="content-wrap">
   		<div class="c-wrap">
    			<h1>合作机构</h1>
@@ -234,22 +235,18 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
        		</div>
       	</div>
     </div>
-<!--footer------------------------------------------------------------------------------------------------------------>	
+<!--footer-->	
 	<div class="footer" style="">
     	<div class="foot">
         	<article>
             	<div class="friend">
-                	<a href="#">关于我们</a>
+                	<a href="<?php echo e(url('index/about')); ?>">关于我们</a>
                   	<span></span>
-                 	<a href="#">法律声明</a>
-                    <span></span>
-                  	<a href="#">媒体报道</a>
+                 	<a href="<?php echo e(url('index/shengming')); ?>">法律声明</a>
                     <span></span>
                   	<a href="#">团队介绍</a>
                     <span></span>
-                  	<a href="#">帮助中心</a>
-                    <span></span>
-                  	<a href="#">友情链接</a>
+                  	<a href="<?php echo e(url('index/help')); ?>">帮助中心</a>
                 </div>
                 <figure></figure>
             	<p>© 2016 北京乐融多源信息技术有限公司 京ICP证12049103号-3 京公网安备11010502025440</p>
@@ -258,13 +255,26 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
             <aside>
             	<p>联系我们 <span>9:00 - 21:00</span> </p>
               	<h1>400-068-1176</h1>
-				<div class="customer"><a href="#">在线客服</a></div>
+				<div class="customer"><a href="javaScript:void(0)" onclick="openQQ()">在线客服</a></div>
               	<div class="customer"><a href="#">客服邮箱</a></div>
             </aside>
         </div>
     </div>
-<!-------------------------------------------------------------------------------------------------------------------->
 </body>
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>  
+  
+<!-- QQ弹窗咨询  -->  
+
+<iframe style="display:none;" class="qq_iframe" src=""></iframe>   
+<script type="text/javascript">   
+    function openQQ(){   
+        qq_list = new Array('1191326864', '851936052');   
+        qq_i = Math.floor(Math.random()*qq_list.length);   
+        src = "tencent://message/?uin="+qq_list[qq_i]+"&Site=&menu=yes";   
+        $('.qq_iframe').attr('src',src); 
+    }
+
+</script>  
 </html>
 
 <div>
