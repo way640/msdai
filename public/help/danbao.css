@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+.danbaobox{ width:100%; margin:20px auto 20px;}
+.danbaobox h2{ font-size:24px; color:#e00000; text-align:center; font-weight:bold;}
+.danbaobox p{ font-size:16px; line-height:28px; text-indent:32px;}
+.danbaobox p span{ width:12px; height:12px; background:#e00000; display:inline-block; margin-right:10px;}
+.danbaobox p.db-sd{ margin-top:20px;}
+.danbaobox h3{ padding:0 20px; height:40px; display:inline-block; background:#ee791a; color:#fff; text-align:center; font-size:20px; font-weight:bold; line-height:40px;}
+.danbaobox .title{ margin:20px 0; text-align:center;}
+.lb-bottom{text-align:center; margin-top:20px; font-weight:bold; font-size:18px; padding-bottom:40px;}
+.danbaobox h4{ color:#ff6002; font-size:22px; font-weight:bold; margin:20px 0 20px 0;}
+.danbaobox h4 span{width:40px; height:15px; background:#ff9c00; display:inline-block; margin-right:10px;}
+.danbaobox font{ height:40px; display:inline-block; color:#fff; background:#00508f; line-height:40px; padding:0 20px; float:left; margin-top:22px;}
+.danbaobox h5{ font-size:18px; color:#00508f; font-weight:bold; margin:20px 0 10px;}
+.danbaobox h6{ font-size:18px; color:#3a62a8; font-weight:bold; margin:20px 0 10px;}
+.danbaobox p em{ font-style:normal; color:#3a62a8; font-size:18px; font-weight:bold;}
+.hxdb-p{ padding:10px 0;}
+.danbaobox p.hxdb-p span{ width:12px; height:12px; background:#f20016;}
+.danbaobox p.hx-bottom{text-align:center; margin-top:20px; font-size:20px; padding-bottom:40px;}
+.danbaobox p span.collegeIntro{ width:553px; height:50px; background:#302649; display:inline-block; font-size:30px; float:left; color:#fff; line-height:50px; padding-left:10px;margin:30px 0; margin-right:0;}
+.danbaobox p span.collegeBg{ width:382px; height:50px; background:#ec1d27; display:inline-block;margin:30px 0;float:left; margin-right:0;}
+.danbaobox p span.color{ background:#ed8c09;}
+.danbaobox h2.titlebg{ width:145px; height:45px; font-size:22px; font-weight:normal;background:url(../../images/card2.png) no-repeat 0 0; color:#fff; line-height:45px; text-align:left; padding-left:20px; margin:10px 0;}
+.danbaobox p span.titlebg{ width:145px; height:45px; background:url(../../images/card2.png) no-repeat 0 0;float:left; text-indent:0; color:#fff;padding-left:20px; font-size:22px; line-height:45px; text-align:left; display:inline-block;}
+.danbaobox p.titb{ padding-top:20px; text-indent:0;}
+.danbaobox .line{ width:100%; border-bottom:2px solid #00a1e9; margin:10px 0 20px;}
+.danbaobox p span.rbcolor{ background:#00a1e9;}
+.danbaobox p.st-title{color:#da8705; font-weight: bold; font-size:20px; margin-top: 25px;}
+.danbaobox p.st-title i{width:12px; height:12px; display:inline-block; background-color:#da8705; margin-right: 10px;}
+.danbaobox p.st-p{font-size:18px; color:#505050; padding-top: 10px; }
+.danbaobox p.st-p i{ width: 8px; height: 8px; border-radius: 8px; display: inline-block; vertical-align: middle; background-color: #0c0c0e; margin-right: 10px; }
+.st-line{ width: 100%; border-bottom: 1px solid #e0e0e0; margin: 30px 0 20px; }
+.danbaobox p.st-img{ margin-top: 20px; text-indent:0;  }
