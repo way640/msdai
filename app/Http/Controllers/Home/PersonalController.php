@@ -118,11 +118,7 @@ class PersonalController extends CommonController
 				if ( $bloon ) {
 					
 					$addImage = DB::update("update zd_user_info set user_head = '$new_file', user_add_time $time where user_id = $userId");
-				} else {
-									
-					$addImage = DB::insert("insert into zd_user_info( user_id, user_head, user_add_time ) values( $userId,'$new_file', $time)");
-				} 
-				
+				}
 
 			    $arr = array("status"=>"1");					
                 echo json_encode($arr);

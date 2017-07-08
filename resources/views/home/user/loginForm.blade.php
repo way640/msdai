@@ -34,7 +34,7 @@
                     <input type="hidden" name="site" value="B662B0F090BE31C1DCB6A13D70E81429">
                     <div class="input-wrap">
                         <span class="input-tip">用户名</span>
-                        <input data-val="true" placeholder="用户名/手机/邮箱" data-left="100" data-val-regex="用户名错误。" data-val-regex-pattern="[A-Za-z0-9_@.-]{6,100}" data-val-required="请填写用户名/手机号/邮箱。" id="username" name="username" tabindex="1" type="text" value="" onfocus="this.parentNode.className=&#39;input-wrap focusin&#39;" onblur="this.parentNode.className=&#39;input-wrap&#39;">
+                        <input data-val="true" placeholder="用户名" data-left="100" data-val-regex="用户名错误。" data-val-regex-pattern="[A-Za-z0-9_@.-]{6,100}" data-val-required="请填写用户名/手机号/邮箱。" id="username" name="username" tabindex="1" type="text" value="" onfocus="this.parentNode.className=&#39;input-wrap focusin&#39;" onblur="this.parentNode.className=&#39;input-wrap&#39;">
                         <span class="help-block"><span class="field-validation-valid" data-valmsg-for="username" data-valmsg-replace="true"></span></span>
                     </div>
                     <div class="input-wrap">
