@@ -67,9 +67,12 @@
         <div class="logo"><a href="javascript:;"><img src="{{ asset('image/logo_nav_full-9b4d613b2f.png') }}" alt="积木"></a></div>
         <div class="jimu-nav-wrap">
             <ul>
-                <?php foreach($read as $k=>$v){?>
-                    <li><a href="<?php echo $v->config_link ?>" data-nav="home"><span><?php echo $v->config_info?></span></a></li>
-                <?php } ?>
+                <li><a href="http://www.zdmoney.com/" data-nav="home"><span>首页</span></a></li>
+                <li><a href="/invest/invest" data-nav="venus"><span>轻松投</span></a></li>
+                <li><a href="/lenging/lenging" data-nav="loan"><span>借款</span></a></li>
+                <li><a href="/gold/gold" data-nav="loan"><span>贵金属</span></a></li>
+                <li><a href="/cz/index" data-nav="loan"><span>充值</span></a></li>
+                <li class="pull-right"><a href="/personal/personal" data-nav="account"><span>我的积木</span></a></li>
             </ul>
         </div>
     </div>
@@ -233,7 +236,7 @@
                     <label for="applyBalance">借款金额</label>
 
                     <div class="controls i-unit">
-                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额" required="" onkeyup="this.value=(this.value.match(/\d+(\.\d{0,2})?/)||[''])[0]">
+                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额" required="" onkeyup="this.value=(this.value.match(/\d+(\.\d{0,2})?/)||[''])[0]">  <span style="color: red;">注意：该金额以万元为单位</span>
                     </div>
                 </div>
                 <div class="form-control">
