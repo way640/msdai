@@ -22177,7 +22177,28 @@ Stack trace:
 #29 D:\phpStudy\WWW\zdmoney\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #30 D:\phpStudy\WWW\zdmoney\public\index.php(56): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #31 {main}  
+<<<<<<< HEAD
+[2017-07-07 14:57:01] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:06] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:07] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:07] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:08] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+[2017-07-07 14:57:13] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot redeclare App\Http\Controllers\Home\CommonController::checkUserInfo() in D:\phpStudy\WWW\zdmoney\app\Http\Controllers\Home\CommonController.php:214
+Stack trace:
+#0 {main}  
+=======
 >>>>>>> d88960ba0fd8dc8b9b546c06e0410f71af196c1c
+<<<<<<< HEAD
 [2017-07-08 08:44:25] local.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected 'css' (T_STRING), expecting ',' or ')' in D:\htdocs\month_11\zdmoney\storage\framework\views\515a1ed4abdcfd2ab6375d243a254328f13609ae.php:10
 Stack trace:
 #0 D:\htdocs\month_11\zdmoney\vendor\laravel\framework\src\Illuminate\View\Engines\CompilerEngine.php(59): Illuminate\View\Engines\PhpEngine->evaluatePath('D:\\htdocs\\month...', Array)
@@ -22278,3 +22299,6 @@ Stack trace:
 #45 D:\htdocs\month_11\zdmoney\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #46 D:\htdocs\month_11\zdmoney\public\index.php(56): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #47 {main}  
+=======
+>>>>>>> ef795594dde66dabad766cbadf1731308fdaeb24
+>>>>>>> 9dc8f8ec0b31cd66b556d897a0fffc48ea997f48
