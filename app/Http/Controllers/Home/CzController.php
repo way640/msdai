@@ -22,7 +22,16 @@ class CzController extends CommonController
 
 	public function index()
 	{
-		return view('home/cz/index');
+		if (@$_SESSION['user'])
+		{
+			return view('home/cz/index');
+		}
+		else
+		{
+			echo '<script>alert("请您登录")</script>';
+			return view('home/user/login');
+		}
+		
 	}
 	//生成支付页面
 	public function add()
@@ -53,35 +62,30 @@ class CzController extends CommonController
 				//$user_id = 1;
 				//查询原来的余额
 				 $info = DB::table('user_info')->where('user_id',$user_id)->first();
-				 if (empty($info)) 
-				 {
-				 	echo '请您完善信息';
-					return view ( 'home/personal/config' ) ;
-				 }else{
-					//修改余额 = 原来的余额加上充值的金额
-					DB::table('user_info')->where('user_id',$user_id)->update(['user_money'=> ($info->user_money+$price)]);
-					//没值 新手 添加数据
-					$data = [
-							'user_id' => $user_id,
-							'roll_money' => $price,
-							'roll_type' => '1',
-							'roll_time' => time(),
-							'roll_in' => $price,
-							'roll_account' => $_GET['buyer_email']
-						];
-					//处理逻辑
-					$Q = DB::table('roll')->insert($data);
-					//判断是否入库成功
-					if($Q)
-					{
-						echo '钱没到账,又给那小子了';
-						//个人中心账户页面
-						return view('home/personal/personal');
-					}else{
-						//echo '充值失败';
-						return view('home/cz/index');
-					}
-				}
+				//修改余额 = 原来的余额加上充值的金额
+				DB::table('user_info')->where('user_id',$user_id)->update(['user_money'=> ($info->user_money+$price)]);
+				//给日志表添加数据
+				$data = [
+						'user_id' => $user_id,
+						'roll_money' => $price,
+						'roll_type' => '1',
+						'roll_time' => time(),
+						'roll_in' => $price,
+						'roll_account' => $_GET['buyer_email']
+					];
+				//处理逻辑
+				$Q = DB::table('roll')->insert($data);
+				//判断是否入库成功
+				if($Q)
+				{
+					//echo '钱没到账,又给那小子了';
+					echo '<script>alert("成功")</script>';
+					//个人中心账户页面
+					return view('home/personal/personal');
+				}else{
+					//echo '充值失败';
+					return view('home/cz/index');
+				}				
 			}
 			else
 			{

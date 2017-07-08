@@ -160,6 +160,32 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
             //alert('fail');
         }
     }); 
+    //基金
+        var fund = "http://www.zdmoney.com/gold/fund?code=CA1998&callback=localHandler";
+            $.ajax({
+                type: "get",
+                async: false,
+                url: fund,
+                dataType: "jsonp",
+                jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+                jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+                success: function(fund){
+                    //alert(fund.result);
+                    var strfund = '';
+                    $.each(fund.result,function(k,v){
+                        if (k<4) {
+                            // alert(k);
+                             strfund +='<li><a href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">'+v.name+'</a><br>';
+                             strfund +='<p>创建时间:'+v.clrq+'<br><br>';
+                             strfund +=v.CompanyName+'<br><br>基金规模：<font color="green" >'
+                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings" style="margin-top:20px">';
+                             strfund +='<h2>'+v.dwjz+'</h2><h2>'+v.ljjz+'</h2><h3>单位净值</h3><h3>累计净值</h3></div><a class="tender" href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">立即购买</a></li>';
+                        };   
+                    })
+                    //alert(strfund);
+                    $('#fundbox').html(strfund);
+                }
+            }); 
     //贵金属
     var link = "http://www.zdmoney.com/gold/getgo?code=CA1998&callback=localHandler";
         $.ajax({
@@ -193,32 +219,6 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                 $('#goldbox').html(str);
             }
         });
-    //基金
-        var fund = "http://www.zdmoney.com/gold/fund?code=CA1998&callback=localHandler";
-            $.ajax({
-                type: "get",
-                async: false,
-                url: fund,
-                dataType: "jsonp",
-                jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-                jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-                success: function(fund){
-                    //alert(fund.result);
-                    var strfund = '';
-                    $.each(fund.result,function(k,v){
-                        if (k<4) {
-                            // alert(k);
-                             strfund +='<li><a href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">'+v.name+'</a><br>';
-                             strfund +='<p>创建时间:'+v.clrq+'<br><br>';
-                             strfund +=v.CompanyName+'<br><br>基金规模：<font color="green" >'
-                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings" style="margin-top:20px">';
-                             strfund +='<h2>'+v.dwjz+'</h2><h2>'+v.ljjz+'</h2><h3>单位净值</h3><h3>累计净值</h3></div><a class="tender" href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">立即购买</a></li>';
-                        };   
-                    })
-                    //alert(strfund);
-                    $('#fundbox').html(strfund);
-                }
-            }); 
 }); 
 </script>
 	@yield('content')

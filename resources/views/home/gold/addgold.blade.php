@@ -29,13 +29,12 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="newLoginPass">购买数量:&nbsp&nbsp&nbsp
-                    <input type="text" name='num'>   </label>
+                <label class="control-label" for="newLoginPass">购买数量:&nbsp&nbsp&nbsp（只能填数字哦）
+                    <input type="text" name='num'><span></span>    </label>
                 <div class="controls">
                     
                 </div>
             </div>
-            
             <hr>
             <button type="submit" class="btn btn-primary span12" style="margin-left: 0">确认</button>
         </div>

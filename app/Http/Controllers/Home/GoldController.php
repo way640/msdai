@@ -169,7 +169,7 @@ class GoldController extends CommonController
 	 			$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=22630&sign=d66f184f4d189e1981b1ed34fa98e622&format=json";
 				$data = file_get_contents($url);
 				//$info=json_decode($data,true);
-				//print_r($info);die;
+				//print_r($data);die;
 				//判断访问的接口是否超限
 				if (json_decode($data,true)['success']==1) 
 				{
@@ -179,6 +179,7 @@ class GoldController extends CommonController
 				{
 					$url = "http://api.k780.com/?app=finance.shgold&goldid=".$fund_no."&version=2&appkey=23464&sign=c649cb4d82839e08bf3b5f917e8cc9df&format=json";
 					$data = file_get_contents($url);
+					//print_r($data);
 					$arr[$key] = json_decode($data,true)['result'];
 				}
 			}
@@ -189,6 +190,7 @@ class GoldController extends CommonController
 			ob_end_flush();												// 冲刷出（送出）输出缓冲区内容并关闭缓冲
 		}
 	}
+
 	//基金接口
 	public function fund()
 	{
@@ -270,7 +272,8 @@ class GoldController extends CommonController
 			$out_trade_no = date('YmdHis').rand(10000,99999);
 			$alipay->requestPay($out_trade_no, $subject, $total_fee, $body, $show_url='');
 		}else{
-			return view('personal/personal');
+			echo '<script>alert("请先登录")</script>';
+			return view('home/user/login');
 		}
 		
 	}
