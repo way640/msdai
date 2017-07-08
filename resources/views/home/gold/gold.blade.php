@@ -96,8 +96,8 @@ $('#JJ_zl').change(function(){
                     str +='</dl><dl class="right"><dt>最低价：</dt><dd><span class="digit">'+v.low_price+'元</span></dd>';
                     str +='</dl><dl class="left"><dt>开盘价：</dt><dd><span class="digit">'+v.open_price+'元</span></dd>';
                     str +='</dl><dl><dt>昨收价：</dt><dd><span class="digit">'+v.yesy_price+'元</span></dd></dl>';
-                    //alert(str);
-                    $('#vbox').html(str);
+                    console.log(str);
+                    //$('#vbox').html(str);
                 }else{
                     alert('你请求次数太多，请稍后再试');
                 }

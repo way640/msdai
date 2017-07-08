@@ -21,37 +21,37 @@
     
 <link href="css/index-ef3dfa649d.css" rel="stylesheet">
 
-<div class="online-service hidden-phone">
-<a href="https://box.jimu.com/Help/Center" target="_blank" class="online-service-title">
-    <div class="social-qq-pure"></div>
-    <h4>在线客服</h4></a></div>
 <script type="text/javascript" async="" src="js/mv.js"></script><script type="text/javascript" async="" src="./安全设置_files/mba.js.下载"></script><script charset="utf-8" src="./安全设置_files/v.js.下载"></script><script src="./安全设置_files/header-init-8dc16d38ce.js.下载"></script><div class="container jimu-account-container">
-        <div class="jimu-account-nav-wrap">
+        
+<div class="jimu-account-nav-wrap">
             <div class="jimu-leftnav" data-version="4">
 				<ul>
 					<ul class="jimu-leftsecnav">
-						<li><a data-nav="asset-overview" class="" href="https://www.jimu.com/User/AssetOverview">资产总览</a></li></ul><li><a data-nav="venus-category" class=" highlight venus-category" href="javascript:void(0)">轻松理财</a></li><ul class="jimu-leftsecnav"><li><a data-nav="venus" class="" href="https://box.jimu.com/User/Venus/JoinList">轻松投</a></li></ul><li><a data-nav="p2p" class=" highlight p2p" href="javascript:void(0)">散标理财</a></li><ul class="jimu-leftsecnav"><li><a data-nav="p2p-overview" class="" href="https://box.jimu.com/Account/CreditAssign/Owned">自选投</a></li>
-						<li><a data-nav="p2p-autoinvest" class="" href="https://box.jimu.com/AutoInvest/AutoInvestInfo">自动投标队列</a></li>
-						<li><a data-nav="p2p-repayment-plan" class="" href="https://box.jimu.com/RepaymentPlan/Month">回款计划</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/personal') }}">安全设置</a></li>
+					    <li><a data-nav="user-center" class="" href="{{ url('cz/index') }}">账户充值</a></li>
+					    <li><a data-nav="user-center" class="" href="{{ url('personal/addImage') }}">添加头像</a></li>
+						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/changePwd') }}">修改密码</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">添加地址</a></li>					    
 					</ul>
-						<li><a data-nav="award" class=" highlight award" href="javascript:void(0)">奖励管理</a></li>
+                        <li></li>
 					<ul class="jimu-leftsecnav">
-						<li><a data-nav="coupon" class="" href="https://box.jimu.com/Coupon/List"><span>优惠券</span></a></li>
-						<li><a data-nav="moneycat" class="" href="https://box.jimu.com/Recommend/Send">邀请好友</a></li>
-						<li><a data-nav="usermission" class="" href="https://www.jimu.com/Mission/Index">我的任务</a></li>
-						<li><a data-nav="userscore" class="" href="{{ url('home/personal/points') }}">我的积分</a></li>
+                        <li>
+						</li>					
 					</ul>
-						<li><a data-nav="userprofile" class=" highlight userprofile" href="javascript:void(0)">账户管理</a></li>
+					
 					<ul class="jimu-leftsecnav">
-						<li><a data-nav="p2p-setting" class="" href="https://box.jimu.com/User/SecurityCenter">账户设置</a></li>
-						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/config') }}">安全设置</a></li>
-						<li><a data-nav="message" class="" href="https://www.jimu.com/Message/List"><span>消息</span></a>
-						</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>						
+                        <li></li>
 					</ul>
+
 				</ul>
 			</div>
-			</div>
-			<div class="jimu-account-content-wrap">
+</div>
   
         <div class="register-main">
             <h4>修改密码</h4>

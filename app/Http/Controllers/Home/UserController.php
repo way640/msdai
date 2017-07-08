@@ -47,7 +47,6 @@ class UserController extends CommonController
 	
 	/*
 	*@Action_name : 新用户注册页面
-
 	*/
 	public function doRegist () {
 
@@ -62,6 +61,7 @@ class UserController extends CommonController
 
 			return $this->error ( '用户名已存在' );
 		} else {
+			
 			$regTime = time();
 			$userAdd = DB::insert( "insert into zd_user ( user_account, user_pwd , user_reg_time ) values ( '$userName', '$userPwd' , '$regTime' )" );
 			$id = DB::getPdo()->lastInsertId();
@@ -69,9 +69,15 @@ class UserController extends CommonController
 		
 		if ( $userAdd ) {
 			
+			//用户注册成功，添加用户，以及用户信息
+		    uesDB::insert ( "insert into zd_user_login ( login_id, user_id, user_login_time ) val ( '', " . $_SESSION['user']['user_id'] . ", " . time() . " )" ) ; 
+			
 			$arr = [ 'username' => $userName, 'user_id' => $id ];
 			
 			$_SESSION[ "user" ] = $arr;
+			$userId = $_SESSION['user']['user_id'] ; 
+			
+			$addImage = DB::insert("insert into zd_user_info( user_id, user_add_time ) values( $userId, $time)");
 			
 			return $this->success (  );
 		} else { 
@@ -137,6 +143,8 @@ class UserController extends CommonController
 			$arr = [ 'username' => $userName, 'user_id' => $userData[0]['user_id'] ];
 			$_SESSION[ "user" ] = $arr; 
 			
+			DB::update ( 'update zd_user_login set user_login_time = ' . time() . ' where user_id = ' . $_SESSION['user']['user_id'] ) ;
+			
 			return $this->success (  );
 		}else{
 			
@@ -145,7 +153,7 @@ class UserController extends CommonController
 	}
 	
 	/*
-	*@Action_logout : 用户退出登录
+	*@Action_name : 用户退出登录
 	*/
 	public function logout(){
 		
@@ -153,4 +161,5 @@ class UserController extends CommonController
 		
 		return $this->success(  );
 	}
+
 }

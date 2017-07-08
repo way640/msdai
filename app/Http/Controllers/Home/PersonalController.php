@@ -23,13 +23,6 @@ class PersonalController extends CommonController
 	public function __construct(){
 		
 		parent::__construct();
-	
-        $userId = isset ( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '' ; 
-		
-		if ( empty ( $userId ) ) {
-			
-			 return redirect('');
-		}
 	}
 	
 	/*
@@ -37,7 +30,7 @@ class PersonalController extends CommonController
 	*/
 	public function index(){
 
-	    $userId = $_SESSION['user']['user_id'] ; 
+	    $userId = @$_SESSION['user']['user_id'] ; 
 		
 		$userInfo = DB::select ( "select * from zd_user_info where user_id = $userId" ) ;
         $userInfo = $this -> objToArray ( $userInfo ) ; 		
@@ -124,12 +117,8 @@ class PersonalController extends CommonController
 				
 				if ( $bloon ) {
 					
-					$addImage = DB::update("update zd_user_info set user_head = '$new_file', user_add_time $time where user_id = $userId");
-				} else {
-									
-					$addImage = DB::insert("insert into zd_user_info( user_id, user_head, user_add_time ) values( $userId,'$new_file', $time)");
-				} 
-				
+					$addImage = DB::update("update zd_user_info set user_head = '$new_file', user_add_time = $time where user_id = $userId");
+				}
 
 			    $arr = array("status"=>"1");					
                 echo json_encode($arr);
@@ -272,7 +261,8 @@ class PersonalController extends CommonController
             
 			//邮件参数设置   用户名                          用户邮箱     内容标题      内容详情
 		    $this -> smtp ( $userArr['user_account'], $emailAddress, '激活邮箱', '请在页面点击链接，激活您的邮箱http://www.zdmoney.com/personal/activate?mailbox='.$userData ) ;
-		
+		    
+			return $this -> success (  ) ;
 		}
 	}
 	
@@ -338,4 +328,24 @@ class PersonalController extends CommonController
 			
 			$this -> success ( ) ; 
 	}	
+	
+	/*
+	*Action_name : 获取用户信息
+	*/
+	public function getUserInfo(){
+		
+		$userId = $_SESSION['user']['user_id'] ; 
+		
+		$userInfo = DB::select ( 'select user_login_time from zd_user_login where user_id = ' . $userId ) ;
+        $userInfo = $this -> objToArray ( $userInfo ) ; 
+		//Array ( [0] => Array ( [user_login_time] => 1499432110 ) )
+		//print_r($userInfo) ; die;
+		
+		$userData = DB::select ( 'select roll_money, roll_in, roll_out from zd_roll where user_id = ' . $userId ) ; 
+		$userData = $this -> objToArray ( $userData ) ; 
+		
+		$userData[0]['user_login_time'] = date("Y-m-d H:i:s", $userInfo[0]['user_login_time']) ; 
+		
+		return $this -> success ( $userData[0] );
+	}
 }

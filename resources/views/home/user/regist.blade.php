@@ -235,7 +235,7 @@
 							}else{
 
 								alert('注册成功,请完善个人信息,以便享受本站更多服务')
-								location.href="{{ url('personal/config') }}"
+								location.href="{{ url('personal/personal') }}"
 							}
 						}
 					});
