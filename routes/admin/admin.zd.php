@@ -18,7 +18,7 @@ Route::any('admin/admin/privList', 'Admin\AdminController@privList') ;
 /*
 *@Use : 添加角色赋权
 */
-Route::any('admin/admin/addRole', 'Admin\AdminController@addRole') ; 
+Route::post('admin/admin/addRole', 'Admin\AdminController@addRole') ; 
 
 /*
 *@Use : 添加管理员赋予角色

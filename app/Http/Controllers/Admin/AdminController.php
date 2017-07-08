@@ -76,7 +76,7 @@ class AdminController extends CommonController
 			DB::insert ( 'insert into zd_role_prive ( role_id, priv_id ) values ( ' . $privId . ', ' . $privList[$i] . ' )' ) ;
 		}
 		
-		$this -> succeess ( ) ;
+		return $this -> success ( ) ;
 	}
 	
 	/*
