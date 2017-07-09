@@ -81,21 +81,24 @@
 
     <div class="container">
         <div class="prod-info">
+            <?php foreach ($data as $k=>$v){?>
             <div class="prod-head">
                 <div class="pull-left">
-                    <img src="{{ asset('image/wzxy2.png') }}" alt="">
-                    <span class="logo-desc">Powered by DUMIAO <br>小微企业智能风控决策引擎</span>
+                    @if($v->user_head!='')
+                        <img src="{{ asset($v->user_head) }}" alt="">
+                    @else
+                        <img src="{{ asset('image/default-6e81850cf7.jpg') }}" alt="">
+                    @endif
                 </div>
                 <div class="head-right">
                     <p class="pull-right">
-                        <span class="i i-folder">无需抵押	</span>
+                        <span class="i i-folder">无需抵押   </span>
                         <span class="i i-calendar">最快3天到账</span>
                     </p>
-                    <h1>读秒·旺仔</h1>
+                    <h1></h1>
                 </div>
             </div>
             <hr class="prod-split">
-            <?php foreach ($data as $k=>$v){?>
             <div class="prod-body">
                 <div class="prod-intro">
                     <dl>
@@ -131,9 +134,7 @@
                     </dl>
                 </div>
                 <div class="prod-apply">
-                    <p class="text-center">
-                        <span class="digit-strong f24" data-apply-type="401">5260</span>人已经成功申请
-                    </p>
+                    
                     @if ( $arr )
                         <a href="javascript:;" class="btn btn-second" id="applyLoan">立即申请</a>
                     @else

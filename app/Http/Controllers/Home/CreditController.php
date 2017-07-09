@@ -56,7 +56,7 @@ class CreditController extends Controller
     //展示借款详情页面
     public function lengpart($id)
     {
-        $data=DB::table('lenging')->where('lenging_id','=',$id)->get();
+        $data=DB::table('lenging')->leftjoin('user_info','lenging.user_id','=','user_info.user_id')->where('lenging_id','=',$id)->get();
         $read=DB::table('config')->where('config_type',1)->get();;
         return view('home/leng/lengpart',['data'=>$data,'read'=>$read]);
     }

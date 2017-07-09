@@ -114,36 +114,6 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
     </div>
 
 <!--row--------------------------------------------------------------------------------------------------------------->
-    <div class="row">
-        <ul>
-            <li>
-                <h1>极速开户</h1>
-
-              <p>超低佣金，实时美股行情</p>
-              <img src="image/stock.png" />
-              <figcaption>股票</figcaption>
-              <a href="#">查看详情</a>
-
-          </li>
-            <li>
-              <h1>长期趋势</h1>
-
-                <p>价值投资</p>
-              <img src="image/invest.png" />
-              <figcaption>前沿投资</figcaption>
-              <a href="#">查看详情</a>
-          </li>
-            <li style="border-right:none;">
-
-              <h1>在线贷款</h1>
-
-                <p>无抵押、10分钟放款</p>
-              <img src="image/second.png" />
-              <figcaption>读秒</figcaption>
-              <a href="#">查看详情</a>
-          </li>
-        </ul>
-    </div>
     <div class="content-wrap">
         <div class="c-wrap">
             <h1>合作机构</h1>
