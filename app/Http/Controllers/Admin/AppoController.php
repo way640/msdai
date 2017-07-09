@@ -103,15 +103,11 @@ class AppoController extends CommonController
         $end_time   = strtotime ( $appoData['app_end_time'] ) ; 	
         $desc       = $appoData['app_desc'] ;	
 		$status     = $appoData['app_status'] ; 
-		
 		$bloon = DB::insert ( 'insert into zd_appointment ( app_id, app_from, app_desc, app_start_time, app_end_time, app_priv, admin_id ) values ( "", ' . $appoAdmin . ', "' . $desc . '", "' . $start_time . '", "' . $end_time . '", "' . $status . '", "' . $appoId . '" ) ' );
-		
         if ( $bloon ) {
-			
-			return $this -> success ( ) ;
+			return $this -> success( ) ;
 		} else {
-			
-			return $this -> error ( ) ;
+			return $this -> error( ) ;
 		}
 	}
 	

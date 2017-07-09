@@ -117,4 +117,13 @@ class CreditController extends Controller
     {
         return view('home\Transaction security\Agreement');
     }
+
+    //用户还款页面
+    public function repay()
+    {
+        $user_id=$_SESSION['user']['user_id'];
+        $repay=DB::table('loan')->where('user_id','=',$user_id)->get();
+
+        return view('home\repay\repayment',['repay'=>$repay]);
+    }
 }

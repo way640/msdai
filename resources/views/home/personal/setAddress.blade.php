@@ -1,10 +1,10 @@
 @extends('home.title')
 @section('content')
-
 <title>积木盒子 jimu.com - 智能综合理财平台</title>
 <meta name="keywords" content="投资理财, 互联网金融, 网络投融资平台, 网络理财, 互联网理财, 积木盒子, 投资理财, www.jimu.com">
 <meta name="description" content="积木盒子提供安全、有保障的互联网投融资服务。投资理财100元起投，1—12个月项目期限，债权转让灵活。">
 <meta name="author" content="乐融多源(北京)科技有限公司">
+>>>>>>> f9ea0354d9dda3710dfa4d67b2be9519e2798d43
 <base href="./../../">
 <meta name="apple-itunes-app" content="app-id=790276804">
 <!-- end: Meta -->
@@ -34,7 +34,7 @@
 						<li><a data-nav="user-center" class="" href="{{ url('personal/changePwd') }}">修改密码</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
-						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/setAddress') }}">添加地址</a></li>					    
+						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/setAddress') }}">修改地址</a></li>					    
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">
@@ -58,7 +58,7 @@
             <h4>添加联系地址</h4>
             <hr>
             <form>
-                <span class="help-block">提示：用于邮寄资料和礼品</span>
+                <span class="help-block">提示：用于邮寄资料和礼品，如果这是您第一次完善信息，系统将会为您添加地址，而不会修改它</span>
                 <div class="control-group">
                     <label class="control-label" for="address">联系地址</label>
                     <input data-val="true" data-val-required="请填写联系地址。" id="address" name="address" type="text">
@@ -95,15 +95,15 @@
                 type: "POST",
                 url: "{{ url('personal/addAddress') }}",
                 data: 'address='+address,
+                dataType: "json",
                 success: function(msg){
-					
-                    if ( msg.status == 0 ) {
+
+                    if ( msg.status != 1 ) {
 						
+                       alert('添加失败， 请重新尝试')
+					} else {
 						alert('添加成功')
 						window.parent.location.href="{{ url('personal/config') }}"
-					} else {
-						
-						alert('添加失败， 请重新尝试')
 					}
                 }
           });

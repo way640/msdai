@@ -40,7 +40,8 @@
 						<li><a data-nav="user-center" class="" href="{{ url('personal/changePwd') }}">修改密码</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
-						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">添加地址</a></li>					    
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">添加地址</a></li>
+                        <li><a data-nav="user-center" class="" href="{{ url('molans/repay') }}">我要还款</a></li>
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">
@@ -87,12 +88,24 @@
                 <div class="account-item">
                     <span>用户名</span><span class="large-text"><?php echo $_SESSION['user']['username']?></span>
                 </div>
+			    <div class="account-item">
+                    <span>地址</span>
+					<span id="address">
+					    
+					</span>
+                </div>
                 <div class="account-item">
-                    <span>上次登录	</span>
+                    <span>上次登录</span>
                     <span class="last-login">
 					
 					</span>
-                    </div>
+                </div>
+                <div class="account-item">
+                    <span>信息完善</span>
+                    <span id="more">
+					    
+					</span>
+                </div>
             </div>
         </div>
     </div>
@@ -132,10 +145,12 @@ $(document).ready(function(){
 				
 				var time = msg.data.user_login_time	
 				
-			    $('.last-login').html( "<br><br>"+time )
-				$('#roll_money').html( msg.data.roll_money )
-				$('#roll_in').html( msg.data.roll_in )
-				$('#roll_out').html( msg.data.roll_out )
+				$('#more').html( msg.data.more )
+				$('#address').html( msg.data.userAddr )
+			    $('.last-login').html( time )
+				$('#roll_money').html( msg.data.money )
+				$('#roll_in').html( msg.data.moneyIn )
+				$('#roll_out').html( msg.data.moneyOut )
 			} else {
 				
 				alert('页面加载失败，请重新加载')

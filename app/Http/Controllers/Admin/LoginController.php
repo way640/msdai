@@ -51,7 +51,7 @@ class LoginController extends Controller
 				} else {
 				
 		            $_SESSION['admin'] = $adminPwd[0] ; 
-					
+					$this->makeLogs($_SESSION['admin']['admin_id'],'IN');
 					return redirect('admin/index/index');
 				}
           	}

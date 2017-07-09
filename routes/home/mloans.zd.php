@@ -20,3 +20,5 @@ Route::get('molans/draw','Home\CreditController@draw');
 Route::get('molans/lucy','Home\CreditController@lucy');
 //安全交易协议
 Route::get('molans/agr','Home\CreditController@agr');
+//用户还款页面
+Route::get('molans/repay','Home\CreditController@repay');
