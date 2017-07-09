@@ -70,14 +70,14 @@ class UserController extends CommonController
 		if ( $userAdd ) {
 			
 			//用户注册成功，添加用户，以及用户信息
-		    uesDB::insert ( "insert into zd_user_login ( login_id, user_id, user_login_time ) val ( '', " . $_SESSION['user']['user_id'] . ", " . time() . " )" ) ; 
+		    DB::insert ( "insert into zd_user_login ( login_id, user_id, user_login_time ) values ( '', " . $id . ", " . time() . " )" ) ; 
 			
 			$arr = [ 'username' => $userName, 'user_id' => $id ];
 			
 			$_SESSION[ "user" ] = $arr;
 			$userId = $_SESSION['user']['user_id'] ; 
 			
-			$addImage = DB::insert("insert into zd_user_info( user_id, user_add_time ) values( $userId, $time)");
+			$addImage = DB::insert("insert into zd_user_info( user_id, user_add_time ) values ( $userId, $regTime )");
 			
 			return $this->success (  );
 		} else { 
@@ -143,7 +143,14 @@ class UserController extends CommonController
 			$arr = [ 'username' => $userName, 'user_id' => $userData[0]['user_id'] ];
 			$_SESSION[ "user" ] = $arr; 
 			
-			DB::update ( 'update zd_user_login set user_login_time = ' . time() . ' where user_id = ' . $_SESSION['user']['user_id'] ) ;
+			$info = DB::select ( 'select * from zd_user_login where user_id = ' . $userData[0]['user_id'] ) ;
+			if ( $info ) {
+				
+				DB::update ( 'update zd_user_login set user_login_time = ' . time() . ' where user_id = ' . $_SESSION['user']['user_id'] ) ;
+			} else {
+				
+				DB::insert ( 'insert into zd_user_login ( user_id, user_login_time ) values ( ' . $userData[0]['user_id'] . ', ' . time() . ' )' ) ;
+			}
 			
 			return $this->success (  );
 		}else{
@@ -159,7 +166,62 @@ class UserController extends CommonController
 		
 		unset( $_SESSION['user'] );
 		
-		return $this->success(  );
+		return $this->success();
 	}
+	
+	/*
+	*@Action_name : 判断用户是否完善信息
+	*/
+    public function more(){
+
+    	$userId = isset ( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '' ; 
+
+    	if ( $userId == '' ) {
+
+    		return $this -> error (  ) ;
+    	} else {
+
+    		$userInfo = DB::select ( 'select * from zd_user where user_id = ' . $userId ) ;
+    		$userInfo = $this -> objToArray ( $userInfo ) ; 
+    		$userData = DB::select ( 'select * from zd_user_info where user_id = ' . $userId ) ; 
+            $userData = $this -> objToArray ( $userData ) ;
+
+            $arr = array() ;
+            if ( $userInfo[0]['user_tel'] == '' ) {
+
+            	$arr[] = "电话" ;
+            }
+
+            if ( $userInfo[0]['user_email'] == '' ) {
+
+            	$arr[] = "邮箱" ;
+            }
+
+            if ( $userData[0]['user_head'] == '' ) {
+
+            	$arr[] = "头像" ;
+            }
+
+            if ( $userData[0]['user_addr'] == '' ) {
+
+            	$arr[] = "地址" ;
+            }
+
+            if ( count ( $arr ) == 0 ) {
+                
+                return $this -> error (  ) ;
+            } else {
+
+            	$str  = "您的" ;
+
+            	$str .= implode(",", $str) ;
+                
+                $str .= "尚未填写" ; 
+
+                return $this -> success ( $str ) ;
+            }
+    	}
+
+    }
 
 }

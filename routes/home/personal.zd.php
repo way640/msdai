@@ -69,4 +69,7 @@ Route::any('personal/addAddress', 'Home\PersonalController@addAddress') ;
 *@Use : 获取用户信息
 */
 Route::any('personal/getUserInfo', 'Home\PersonalController@getUserInfo') ;
+} else {
+	
+Route::get('personal/personal', 'Home\UserController@login') ; 
 }

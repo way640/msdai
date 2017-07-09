@@ -31,6 +31,8 @@ Route::get('resources/views/user/loginForm', 'Home\UserController@showLogin');
 /*
 *@Use : 用户退出
 */
-
 Route::get('user/logout', 'Home\UserController@logout');
-
+/*
+*@Use : 判断用户是否完善信息
+*/
+Route::post('user/more', 'Home\UserController@more');
