@@ -233,7 +233,7 @@
                     <label for="applyBalance">借款金额</label>
 
                     <div class="controls i-unit">
-                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额" required="" onkeyup="this.value=(this.value.match(/\d+(\.\d{0,2})?/)||[''])[0]">
+                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额" required="" onkeyup="this.value=(this.value.match(/\d+(\.\d{0,2})?/)||[''])[0]">  <span style="color: red;">注意：该金额以万元为单位</span>
                     </div>
                 </div>
                 <div class="form-control">

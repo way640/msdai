@@ -1,16 +1,16 @@
-
 <head>
-
 <script></script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
 <script type="text/javascript" src="{{ asset('js/javasrcipt.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="http://developer.baidu.com/wiki/index.php?title=docs/cplat/libs#jQuery"></script>
 <title>积木</title>
-
-
 </head>
 
 <body style="height:100%">
@@ -20,8 +20,6 @@
     		<h1>欢迎致电：<span>400-068-1176</span> 服务时间：9:00 - 21:00</h1>
                <span id="getMore" style="font-size:15px;color:red;display:inline-block;margin-top:10px"></span>
             <ul>
-
-            	
 				<?php $arr = isset( $_SESSION['user'] ) ? $_SESSION['user'] : ''?>
 				@if ( $arr )
 					<li><a href="javascript:void(0);"><?php echo $_SESSION['user']['username'];?>, 您好, 欢迎登陆</a></li>
@@ -62,9 +60,7 @@
                   <div id='box'>
                       
                   </div>
-
 				  <li style="float:right;"><a href="{{ asset('personal/personal') }}">个人中心</a></li>
-
         	</ul>
         </div>
     </div>
@@ -245,11 +241,6 @@ jQuery(document).ready(function(){
 });
 })
 </script>
-
-
-
-
-
 	@yield('content')
 <!--footer-->	
 	<div class="footer" style="">
@@ -272,7 +263,7 @@ jQuery(document).ready(function(){
             	<p>联系我们 <span>9:00 - 21:00</span> </p>
               	<h1>400-068-1176</h1>
 				<div class="customer"><a href="javaScript:void(0)" onclick="openQQ()">在线客服</a></div>
-              	<div class="customer"><a href="#">客服邮箱</a></div>
+              	<div class="customer"><a href="javaScript:void(0)">客服邮箱</a></div>
             </aside>
         </div>
     </div>

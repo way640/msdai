@@ -123,6 +123,7 @@
                    type: "POST",
                    url: "{{ url('personal/doEmail') }}",
                    data: "email="+szMail,
+                   dataType: "json",
                    success: function(msg){
                    
 					 if ( msg.status == 0 ) {

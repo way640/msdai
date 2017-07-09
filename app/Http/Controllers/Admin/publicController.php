@@ -42,7 +42,7 @@ class PublicController extends CommonController
 	*@Time : 2017-07-03	
 	*/
 	public function logout(){
-		
+		$this->makeLogs($_SESSION['admin']['admin_id'],'OUT');
 	    unset( $_SESSION['admin'] );
 		
 		return $this->success(  );

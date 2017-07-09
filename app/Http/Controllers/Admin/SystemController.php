@@ -70,7 +70,7 @@ class SystemController extends CommonController
      * @author：Way
      * @Time：2017-06-15**/
     public function systemDel ( ) {
-        $checkDel=DB::table("config")->where('config_id',$this->get['configId'])->delete();
+        $checkDel=DB::delete('delete from zd_system where sys_id in ('.$this->get['configId'].')');
         if($checkDel){
             return $this->success();
         }else{
