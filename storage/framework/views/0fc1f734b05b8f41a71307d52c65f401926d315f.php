@@ -1,4 +1,5 @@
-
+<head>
+<script></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,7 +11,6 @@
 <script type="text/javascript" src="<?php echo e(asset('js/jquery.min.js')); ?>"></script>
 <script type="text/javascript" src="http://developer.baidu.com/wiki/index.php?title=docs/cplat/libs#jQuery"></script>
 <title>积木</title>
-
 </head>
 
 <body style="height:100%">
@@ -18,11 +18,8 @@
 	<div class="top">
     	<div class="top-server">
     		<h1>欢迎致电：<span>400-068-1176</span> 服务时间：9:00 - 21:00</h1>
-        	<img id="WeiBo" onmousemove="WeiBoMove()" onmouseout="WeiBoOut()" src="<?php echo e(asset('image/微博-link.png')); ?>" />
-        	<img id="WeChat" onmousemove="WeChatMove()" onmouseout="WeChatOut()" src="<?php echo e(asset('image/微信-link.png')); ?>" />
+               <span id="getMore" style="font-size:15px;color:red;display:inline-block;margin-top:10px"></span>
             <ul>
-
-            	<li><a href="<?php echo e(url('')); ?>">最新活动</a></li>
 				<?php $arr = isset( $_SESSION['user'] ) ? $_SESSION['user'] : ''?>
 				<?php if( $arr ): ?>
 					<li><a href="javascript:void(0);"><?php echo $_SESSION['user']['username'];?>, 您好, 欢迎登陆</a></li>
@@ -63,9 +60,7 @@
                   <div id='box'>
                       
                   </div>
-
-				  <li style="float:right;"><a href="<?php echo e(asset('personal/personal')); ?>">我的积木</a></li>
-
+				  <li style="float:right;"><a href="<?php echo e(asset('personal/personal')); ?>">个人中心</a></li>
         	</ul>
         </div>
     </div>
@@ -221,6 +216,31 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
         });
 }); 
 </script>
+<script>
+jQuery(document).ready(function(){
+	
+    $.ajax({
+        type: "POST",
+        url: "<?php echo e(url ( 'user/more' )); ?>",
+        dataType: "json",
+        success: function(msg){
+         
+
+         if ( msg.status == 1 ){
+
+            $('#getMore').html( msg.msg )
+         } else {
+            
+            var str = "<span style='color:blue'>欢迎使用挣点钱金融网站！！！</span>"
+
+            $('#getMore').html( str )
+             
+         }
+		    
+        }
+});
+})
+</script>
 	<?php echo $__env->yieldContent('content'); ?>
 <!--footer-->	
 	<div class="footer" style="">
@@ -243,7 +263,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
             	<p>联系我们 <span>9:00 - 21:00</span> </p>
               	<h1>400-068-1176</h1>
 				<div class="customer"><a href="javaScript:void(0)" onclick="openQQ()">在线客服</a></div>
-              	<div class="customer"><a href="#">客服邮箱</a></div>
+              	<div class="customer"><a href="javaScript:void(0)">客服邮箱</a></div>
             </aside>
         </div>
     </div>
