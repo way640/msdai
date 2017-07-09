@@ -28,25 +28,6 @@
                 </div>
                 <div class="prod-items">
                     
-<div class="prod-item person" id="DaBaiContent">
-
-    <div class="prod-content">
-
-        <div class="pull-left prod-intro">
-
-        </div>
-        <div class="pull-right prod-info">
-            <div class="prod-info-inner">
-                <div class="ck">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
 
 <div class="prod-item corp" id="TimesContent">
         <p class="prod-title">
