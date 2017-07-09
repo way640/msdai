@@ -1,8 +1,7 @@
 <?php $arr = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : ''?>
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <!-- saved from url=(0046)https://loan.jimu.com/expwy/prod?applyType=401 -->
 <html class="v_scrollbar"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>【申请借款】- 挣点钱 zdmoney.com</title>
     <meta name="keywords" content="读秒,个人贷款,信用贷款,无抵押贷款,小额贷款,快速贷款,手机贷款,互联网金融,分期,买房贷款,P2P借贷平台,积木贷款">
@@ -69,9 +68,10 @@
             <ul>
                 <li><a href="http://www.zdmoney.com/" data-nav="home"><span>首页</span></a></li>
                 <li><a href="/invest/invest" data-nav="venus"><span>轻松投</span></a></li>
-                <li><a href="/lenging/lenging" data-nav="loan" class="active"><span>借款</span></a></li>
-                <li><a href="https://www.jimu.com/Home/About" data-nav="about"><span>关于积木</span></a></li>
-                <li class="pull-right"><a href="https://www.jimu.com/User/AssetOverview" data-nav="account"><span>我的积木</span></a></li>
+                <li><a href="/lenging/lenging" data-nav="loan"><span>借款</span></a></li>
+                <li><a href="/gold/gold" data-nav="loan"><span>贵金属</span></a></li>
+                <li><a href="/cz/index" data-nav="loan"><span>充值</span></a></li>
+                <li class="pull-right"><a href="/personal/personal" data-nav="account"><span>我的积木</span></a></li>
             </ul>
         </div>
     </div>
@@ -125,7 +125,7 @@
                     </dl>
                     <dl>
                         <dt>费率说明：</dt>
-                        <dd>月服务费率最低可至<span class="digit">1</span></dd>
+                        <dd>月服务费率最低可至<span class="digit">1</span>%</dd>
                     </dl>
                     <dl>
                         <dt>区域限制：</dt>
@@ -134,12 +134,12 @@
                 </div>
                 <div class="prod-apply">
                     <p class="text-center">
-                        <span class="digit-strong f24" data-apply-type="401">525</span>人已经成功申请
+                        <span class="digit-strong f24" data-apply-type="401">5260</span>人已经成功申请
                     </p>
                     @if ( $arr )
-                    <a class="btn btn-second"  id="applyLoan">立即申请</a>
+                        <a href="javascript:;" class="btn btn-second" id="applyLoan">立即申请</a>
                     @else
-                    <a class="btn btn-second"  id="applyno">立即申请</a>
+                        <a href="javascript:;" class="btn btn-second" id="applyno">立即申请</a>
                     @endif
                 </div>
             </div>
@@ -226,10 +226,11 @@
         </div>
 
         <div class="modal-form">
-            <form class="expwy-form" action="/molans/applyto">
+            <form class="expwy-form" action="{{url('molans/applyto')}}}">
                 <?php foreach($data as $k=>$v){?>
                 <input type="hidden" name="lenging_id"  value="<?php echo $v->lenging_id?>">
-                    <?php } ?>
+                <input type="hidden" name="lenging_money"  value="<?php echo $v->lenging_money?>">
+                <?php } ?>
                 <div class="form-control">
                     <label for="applyBalance">借款金额</label>
 
@@ -248,7 +249,6 @@
                     </div>
                     <div class="controls" style="display: none " id="stages"><font color="blue">还款为一个自然月</font></div>
                 </div>
-
                 <div class="form-control" style="display: none;" id="applytime">
                     <label for="applyCity">分期时长</label>
                     <div class="controls">
@@ -263,12 +263,17 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="form-control">
                     <label for="recommendCode">借款利率</label>
 
                     <div class="controls">
                         <input type="text" name="loan_interset" id="recommendCode" readonly>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <div class="controls">
+                        <input type="radio" name="agreement" id="reco" value="1" checked>&nbsp;&nbsp;&nbsp;
+                        <a href="/molans/agr"  target=_blank>我已阅读并同意《网络安全交易协议》</a>
                     </div>
                 </div>
                 <div class="form-control">
@@ -281,7 +286,7 @@
     </div>
 </div>
 
-    <div id="prod" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;"><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
+<div id="prod" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;"><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="nozhe">+</button>
         <h3 id="myModalLabel">提示</h3>
@@ -330,6 +335,7 @@
         z-index: 1002; left: 0px;
         opacity:0.5; -moz-opacity:0.5;
     }
+
     #stages{
         text-align:center
     }
@@ -424,6 +430,7 @@
         <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
     </div>
 </div>
+
 <!-- end:ContactUs -->
 <script type="text/javascript">
     var require = {

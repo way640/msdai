@@ -99,36 +99,20 @@
 <script src="{{ asset('js/header-init-8dc16d38ce.js') }}"></script><div class="container jimu-account-container">
     <div class="jimu-account-nav-wrap">
         <div class="jimu-leftnav" data-version="4">
-            <ul>
+
                 <ul class="jimu-leftsecnav">
-                    <li><a data-nav="asset-overview" class=" highlight asset-overview" href="https://www.jimu.com/User/AssetOverview">资产总览</a></li>
-                </ul>
-                <li><a data-nav="venus-category" class=" highlight venus-category" href="javascript:void(0)">轻松理财</a></li>
-                <ul class="jimu-leftsecnav">
-                    <li><a data-nav="venus" class="" href="https://box.jimu.com/User/Venus/JoinList">轻松投</a></li>
-                </ul>
-                <li><a data-nav="p2p" class=" highlight p2p" href="javascript:void(0)">散标理财</a></li>
-                <ul class="jimu-leftsecnav">
-                    <li><a data-nav="p2p-overview" class="" href="https://box.jimu.com/Account/CreditAssign/Owned">自选投</a></li>
-                    <li><a data-nav="p2p-autoinvest" class="" href="https://box.jimu.com/AutoInvest/AutoInvestInfo">自动投标队列</a></li>
-                    <li><a data-nav="p2p-repayment-plan" class="" href="https://box.jimu.com/RepaymentPlan/Month">回款计划</a></li>
-                </ul>
-                <li><a data-nav="award" class=" highlight award" href="javascript:void(0)">奖励管理</a></li>
-                <ul class="jimu-leftsecnav">
-                    <li><a data-nav="coupon" class="" href="https://box.jimu.com/Coupon/List"><span>优惠券</span></a></li>
-                    <li><a data-nav="moneycat" class="" href="https://box.jimu.com/Recommend/Send">邀请好友</a></li>
-                    <li><a data-nav="usermission" class="" href="https://www.jimu.com/Mission/Index">我的任务</a></li>
-                    <li><a data-nav="userscore" class="" href="{{ url('home/personal/points') }}">我的积分</a></li>
-                </ul>
-                <li><a data-nav="userprofile" class=" highlight userprofile" href="javascript:void(0)">账户管理</a></li>
-                <ul class="jimu-leftsecnav">
-                    <li><a data-nav="p2p-setting" class="" href="https://box.jimu.com/User/SecurityCenter">账户设置</a></li>
-                    <li><a data-nav="user-center" class="" href="{{ url('personal/config') }}">安全设置</a></li>
+                    <li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/personal') }}">安全设置</a></li>
+                    <li><a data-nav="user-center" class="" href="{{ url('cz/index') }}">账户充值</a></li>
+                    <li><a data-nav="user-center" class="" href="{{ url('personal/addImage') }}">添加头像</a></li>
+                    <li><a data-nav="user-center" class="" href="{{ url('personal/changePwd') }}">修改密码</a></li>
+                    <li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
+                    <li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
+                    <li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">添加地址</a></li>
+                    <ul class="jimu-leftsecnav">
                     <li><a data-nav="p2p-repayment-plan" class="active" href="{{ url('molans/repay') }}">我要还款</a></li>
-                    <li><a data-nav="message" class="" href="https://www.jimu
-                    .com/Message/List"><span>消息</span></a></li>
+                    </ul>
                 </ul>
-            </ul>
+
         </div>
     </div>
 
@@ -143,13 +127,14 @@
                 </div>
             </div>
 
-            {{--<div>--}}
-                {{--<?php foreach ($repay as $k=>$v){?>--}}
-                            {{--<input type="hidden" id="amount" value="借款金额"/>--}}
-                            {{--<input type="hidden" id="rate" value="借款利率"/>--}}
-                            {{--<input type="hidden" id="period" value="借款期限"/>--}}
-                {{--<?php } ?>--}}
-            {{--</div>--}}
+            <div>
+                <?php foreach ($repay as $k=>$v){?>
+                            <input type="hidden" id="amount" value="<?php echo $v->loan_money ?>"/>
+                            <input type="hidden" id="rate" value="<?php echo $v->loan_interset ?>"/>
+                            <input type="hidden" id="period" value="<?php echo $v->loan_long ?>"/>
+                            <input type="hidden" id="typ" value="<?php echo $v->lenging_type ?>"/>
+                <?php } ?>
+            </div>
 
             <div class="row-fluid">
                 <div class="span12 ">
@@ -165,18 +150,7 @@
                             <th width="150px"></th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td></td>
-                            <td class="text-success num"></td>
-                            <td class="num"></td>
-                            <td class="text-success num"></td>
-                            <td class="num"></td>
-                            <td class="num" >
-                                <input type="button" value="还款" id="repay" style="width: 40px; height: 15px;">
-                            </td>
-                            <td></td>
-                        </tr>
+                        <tbody id="result">
                         </tbody>
                     </table>
                 </div>
@@ -272,11 +246,116 @@
 </script>
 
 <script>
-    $(document).ready(function(){
-     $.ajax({
+    $(document).ready(function() {
+        var amount = $('#amount').val().trim();
+        var rate = $('#rate').val().trim();
+        var period = $('#period').val().trim();
+        var type = $('#typ').val().trim();
 
-     })
+        amount = parseFloat(amount);
+        rate = parseFloat(rate);
+        period = parseFloat(period);
+
+        if (type == '1') {
+            debx(amount, rate, period);
+        }
     });
+
+        //等额本息
+        function debx(amount, rate, period) {
+            //每月还款金额
+            var month_rate = rate / 100 / 12;
+            amount = parseFloat(amount);
+            var month_total = parseFloat(amount * month_rate * Math.pow((1 + month_rate), period) / (Math.pow((1 + month_rate), period) - 1));
+            month_total = parseFloat(month_total.toFixed(2));
+
+            var total_amount = parseFloat((month_total * period).toFixed(2));
+            var total_interest = parseFloat((total_amount - amount).toFixed(2));
+            total_amount = (total_amount == null || total_amount == '' || total_amount == 0) ? '0.00' : total_amount;
+            total_interest = (total_interest == null || total_interest == '' || total_interest == 0) ? '0.00' : total_interest;
+
+            $("#ben_xi").html(formatMoney(total_amount.toString()) + '元');
+            $("#li_xi").html(formatMoney(total_interest.toString()) + '元');
+
+
+            var str = '';
+            for (var i = 1; i <= period; i++) {
+                //月还利息
+                var current_principal = parseFloat(amount * month_rate * Math.pow((1 + month_rate), i - 1) / (Math.pow((1 + month_rate), period) - 1));
+                var current_interest = parseFloat(month_total) - parseFloat(current_principal);
+                current_principal = current_principal.toFixed(2);
+                current_interest = current_interest.toFixed(2);
+                var date = getRefundDate(i);
+
+                show_month_total = formatMoney(month_total);
+                show_current_principal = formatMoney(current_principal);
+                show_current_interest = formatMoney(current_interest);
+
+
+                str += '<tr><th width="100px">第' + i + '期</th>';
+                str += '<th class="num-label">' + date + '</th>';
+                str += '<th class="num-label" id="month_total">' + show_month_total + '</th>';
+                str += '<th class="num-label">' + show_current_principal + '元</th>';
+                str += '<th class="num-label">' + show_current_interest + '元</th>';
+                str += '<th class="num-label" id="with"><button  class="rep">还款</button></th>';
+                str += '<th width="150px"></th></tr>';
+            }
+
+            $("#result").html(str);
+        }
+
+        //获取每一期的还款时间
+        function getRefundDate(period) {
+            var date = new Date();
+            var new_date = new Date(date.setDate(date.getDate() + period * 30));
+
+            var year = new_date.getFullYear();
+            var month = new_date.getMonth() + 1;
+            var date1 = new_date.getDate();
+
+            return year + '-' + month + '-' + date1;
+        }
+
+    //格式化资金
+    function formatMoney(v) {
+        if(isNaN(v)){
+            return v;
+        }
+        v = (Math.round((v - 0) * 100)) / 100;
+        v = (v == Math.floor(v)) ? v + ".00" : ((v * 10 == Math.floor(v * 10)) ? v
+            + "0" : v);
+        v = String(v);
+        var ps = v.split('.');
+        var whole = ps[0];
+        var sub = ps[1] ? '.' + ps[1] : '.00';
+        var r = /(\d+)(\d{3})/;
+        while (r.test(whole)) {
+            whole = whole.replace(r, '$1' + ',' + '$2');
+        }
+        v = whole + sub;
+
+        return v;
+    }
+
+    $(document).on("click",".rep",function(){
+        var month_total =$('#month_total').html();
+        $.ajax({
+            type:"get",
+            url:"/molans/withpay",
+            data:{
+                "month_total":month_total
+            },
+            success:function (data) {
+                if(data==0){
+                    alert('余额不足请充值');
+                }
+                if(data==1){
+                    $("#with").replaceWith('<th class="num-label">以还款</th>');
+                }
+            }
+        })
+    })
+
 </script>
 <script src="{{ asset('js/require-16035e47b8.js') }}" async=""></script>
 <script src="{{ asset('js/font_2vki31oofhudte29.js') }}"></script>
