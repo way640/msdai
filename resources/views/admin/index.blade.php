@@ -283,9 +283,9 @@
                 $.each(msg.data.system,function(k,v){
                     if(k == 'status' ){
                         if(v.data == '1'){
-                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" status="1"><i class="glyphicon glyphicon-ok"></i></button>';
+                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" status="1"><i class="glyphicon glyphicon-ok"></i></button><font color="green" size="4">前台正常开启</font>';
                         }else{
-                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" status="0"><i class="glyphicon glyphicon-remove"></i></button>';
+                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" status="0"><i class="glyphicon glyphicon-remove"></i></button><font color="red" size="4">前台已关闭访问</font>';
                         }
                     }else if (k == 'start_time' ){
                         v.data = '<input type="hidden" value="'+v.data+'"><span><embed style="width:50%;height:35%;margin-left:-13%" wmode="transparent" src="{{url("image/time.swf")}}" quality="high" bgcolor="#ffffff" name="honehoneclock" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" height="140" width="320"></span>';
@@ -314,9 +314,9 @@
                         success:function ( msg ) {
                             if(msg.status == '1'){
                                 if(status == '0'){
-                                    obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" status="1"><i class="glyphicon glyphicon-ok"></i></button>');
+                                    obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" status="1"><i class="glyphicon glyphicon-ok"></i></button><font color="green" size="4">前台正常开启</font>');
                                 }else{
-                                    obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" status="0"><i class="glyphicon glyphicon-remove"></i></button>');
+                                    obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" status="0"><i class="glyphicon glyphicon-remove"></i></button><font color="red" size="4">前台已关闭访问</font>');
                                 }
                             }else{
                                 alert('管理密码认证失败');

@@ -173,25 +173,43 @@
                 var configIdObj = $(this).parent().parent();
                 var objLength = configIdObj.find('span').text().length;
                 var delIds = configIdObj.find('a').eq(0).attr('configId');
+                var navObj = $('#side-menu').find('li[sysid='+delIds+']');
                 $.each(configIdObj.nextAll(),function(k,v){
                     if($(this).find('span').text().length > objLength){
                         delIds += ','+$(this).find('a').eq(0).attr('configId');
-                        $(this).remove();
+                        $(this).hide();
                     }else{
                         return false;
                     }
                 });
-                configIdObj.remove();
-
+                navObj.hide();
+                configIdObj.hide();
                 $.ajax({
                     type: "get",
                     url: "{{url('admin/system/systemdel')}}",
-                    data: 'configId='+configIdObj.attr('configId'),
+                    data: 'configId='+delIds,
                     dataType: 'json',
                     success: function (msg) {
                         if(msg.status == 1){
-
+                            $.each(configIdObj.nextAll(),function(k,v){
+                                if($(this).find('span').text().length > objLength){
+                                    $(this).remove();
+                                }else{
+                                    return false;
+                                }
+                            });
+                            configIdObj.remove();
+                            navObj.remove();
                         }else{
+                            $.each(configIdObj.nextAll(),function(k,v){
+                                if($(this).find('span').text().length > objLength){
+                                    $(this).show();
+                                }else{
+                                    return false;
+                                }
+                            });
+                            configIdObj.show();
+                            navObj.show();
                             alert('删除失败');
                         }
                     }

@@ -24,3 +24,4 @@ Route::get('molans/agr','Home\CreditController@agr');
 Route::get('molans/repay','Home\CreditController@repay');
 //用户还款
 Route::get('molans/withpay','Home\CreditController@withpay');
+

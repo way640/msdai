@@ -62,7 +62,7 @@ class CreditController extends Controller
     //展示借款详情页面
     public function lengpart($id)
     {
-        $data=DB::table('lenging')->where('lenging_id','=',$id)->get();
+        $data=DB::table('lenging')->leftjoin('user_info','lenging.user_id','=','user_info.user_id')->where('lenging_id','=',$id)->get();
         $read=DB::table('config')->where('config_type',1)->get();;
         return view('home/leng/lengpart',['data'=>$data,'read'=>$read]);
     }
@@ -122,11 +122,11 @@ class CreditController extends Controller
         return view('home\Transaction security\Agreement');
     }
 
-
     //用户还款页面
     public function repay()
     {
         $user_id=$_SESSION['user']['user_id'];
+
         $repay = DB::table('loan')
             ->leftJoin('lenging', 'loan.lenging_id', '=', 'lenging.lenging_id')
             ->where('loan.user_id',$user_id)
@@ -182,4 +182,5 @@ class CreditController extends Controller
        }
     }
 }
-http://www.zdmoney.com/molans/applyto%7D?lenging_id=2&lenging_money=45656.00&loan_money=1&loan_is_instal=1&loan_long=3&loan_interset=2%25&agreement=1
+
+

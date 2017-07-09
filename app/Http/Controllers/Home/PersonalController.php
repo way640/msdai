@@ -326,7 +326,7 @@ class PersonalController extends CommonController
             $bloon = DB::update ( "update zd_user_info set user_addr = '$address', user_add_time = '$time' where user_id = $userId" ) ;
 		//}
 			
-			$this -> success ( ) ; 
+			return $this -> success ( ) ; 
 	}	
 	
 	/*
@@ -336,16 +336,83 @@ class PersonalController extends CommonController
 		
 		$userId = $_SESSION['user']['user_id'] ; 
 		
+		//获取用户个人信息
+		$userMore = DB::select ( 'select * from zd_user where user_id = ' . $userId ) ;
+        $userMore = $this -> objToArray ( $userMore ) ; 		
+		
+		//获取用户登录时间
 		$userInfo = DB::select ( 'select user_login_time from zd_user_login where user_id = ' . $userId ) ;
         $userInfo = $this -> objToArray ( $userInfo ) ; 
-		//Array ( [0] => Array ( [user_login_time] => 1499432110 ) )
-		//print_r($userInfo) ; die;
 		
+		//获取用户账户金额，绑定地址
+		$userArr = DB::select ( 'select * from zd_user_info where user_id = ' . $userId ) ; 
+		$userArr = $this -> objToArray ( $userArr ) ; 
+		
+		//获取用户出账，入账信息
 		$userData = DB::select ( 'select roll_money, roll_in, roll_out from zd_roll where user_id = ' . $userId ) ; 
 		$userData = $this -> objToArray ( $userData ) ; 
 		
-		$userData[0]['user_login_time'] = date("Y-m-d H:i:s", $userInfo[0]['user_login_time']) ; 
+		//统计累计充值金额
+		$moneyIn  = '' ; 
+		$moneyOut = '' ; 
+		if ( count ( $userData ) > 1 ) {
+			
+			foreach ( $userData as $k => $v ) {
+				
+				$moneyIn  = $moneyIn  + $v['roll_in'] ; 
+				$moneyOut = $moneyOut + $v['roll_out'] ; 
+			}
+		}
 		
-		return $this -> success ( $userData[0] );
+        if ( empty ( $moneyIn ) ) {
+
+        	$moneyIn = 0 ; 
+        }
+
+        if ( empty ( $moneyOut ) ) {
+
+            $moneyOut = 0 ;
+        }
+
+		$userAddr = $userArr[0]['user_addr'] ;
+		
+		if ( empty ( $userAddr ) ) {
+			
+			$userAddr = '您还未绑定地址';
+		}
+		
+		if ( empty ( $userArr[0]['user_money'] ) ) {
+			
+			$userArr[0]['user_money'] = 0 ; 
+		}
+		
+		$num = 5 ;
+		
+		foreach ( $userMore[0] as $userKey => $userVal ) {
+			
+			if ( $userMore[0][$userKey] == '' ) {
+				
+				$num = $num - 1 ;
+			}
+		}
+		
+		if ( $userArr[0]['user_head'] == ''  ) {
+			
+			$num = $num - 1 ;
+		}
+		
+		if ( $userArr[0]['user_addr'] == '' ) {
+			
+			$num = $num - 1 ;
+		}
+	
+	    $showData['more']            = $num * 20 . "%" ;
+	    $showData['userAddr']        = $userAddr ; 
+		$showData['moneyIn']         = number_format ( $moneyIn, 2 ) ;
+		$showData['moneyOut']        = number_format ( $moneyOut, 2 ) ; 
+		$showData['money']           = number_format ( $userArr[0]['user_money'], 2 ) ;
+		$showData['user_login_time'] = date("Y-m-d H:i:s", $userInfo[0]['user_login_time']) ; 
+	
+		return $this -> success ( $showData );
 	}
 }

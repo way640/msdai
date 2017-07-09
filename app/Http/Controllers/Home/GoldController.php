@@ -47,9 +47,7 @@ class GoldController extends CommonController
 
 		if(file_exists($goods_statis_file))
 		{  
-
 			$file_ctime = filectime($goods_statis_file);			//文件创建时间  
-
 			if($file_ctime+$expr > time())
 			{
 				//如果没过期    输出静态文件内容

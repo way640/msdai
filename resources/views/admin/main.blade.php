@@ -19,6 +19,12 @@
     <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet" />
     <link href="css/animate.css" rel="stylesheet" />
     <link href="css/style.css?v=4.1.0" rel="stylesheet" >
+    <style type="text/css">
+        *{
+            cursor: url({{url('image/noa.png')}}), default;
+        }
+        a:hover{cursor:url({{url('image/isa.png')}}), pointer;}
+    </style>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">

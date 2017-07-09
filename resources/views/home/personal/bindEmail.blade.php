@@ -33,7 +33,7 @@
 						<li><a data-nav="user-center" class="" href="{{ url('personal/changePwd') }}">修改密码</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
 						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
-						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">添加地址</a></li>					    
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">修改地址</a></li>					    
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">
@@ -123,14 +123,15 @@
                    type: "POST",
                    url: "{{ url('personal/doEmail') }}",
                    data: "email="+szMail,
+                   dataType: "json",
                    success: function(msg){
-                    
-					 if ( msg.status == 1 ) {
-						 
-						 alert('验证信息已发送至您的邮箱，请尽快激活')
-					 } else {
+                   
+					 if ( msg.status == 0 ) {
 						 
 						 alert('验证邮件发送失败')
+					 } else {
+						 
+						 alert('验证信息已发送至您的邮箱，请尽快激活')
 					 }
 					 
 					 

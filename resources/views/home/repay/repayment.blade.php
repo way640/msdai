@@ -99,6 +99,7 @@
 <script src="{{ asset('js/header-init-8dc16d38ce.js') }}"></script><div class="container jimu-account-container">
     <div class="jimu-account-nav-wrap">
         <div class="jimu-leftnav" data-version="4">
+<<<<<<< HEAD
 
                 <ul class="jimu-leftsecnav">
                     <li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/personal') }}">安全设置</a></li>
@@ -112,7 +113,6 @@
                     <li><a data-nav="p2p-repayment-plan" class="active" href="{{ url('molans/repay') }}">我要还款</a></li>
                     </ul>
                 </ul>
-
         </div>
     </div>
 
@@ -150,7 +150,18 @@
                             <th width="150px"></th>
                         </tr>
                         </thead>
-                        <tbody id="result">
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="text-success num"></td>
+                            <td class="num"></td>
+                            <td class="text-success num"></td>
+                            <td class="num"></td>
+                            <td class="num" >
+                                <input type="button" value="还款" id="repay" style="width: 40px; height: 15px;">
+                            </td>
+                            <td></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
