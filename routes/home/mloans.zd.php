@@ -22,3 +22,6 @@ Route::get('molans/lucy','Home\CreditController@lucy');
 Route::get('molans/agr','Home\CreditController@agr');
 //用户还款页面
 Route::get('molans/repay','Home\CreditController@repay');
+//用户还款
+Route::get('molans/withpay','Home\CreditController@withpay');
+
