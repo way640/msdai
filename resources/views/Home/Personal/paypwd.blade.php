@@ -32,11 +32,11 @@
 					    <li><a data-nav="user-center" class="" href="{{ url('personal/addImage') }}">添加头像</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/changePwd') }}">修改密码</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
-						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">修改地址</a></li>					    
                         <li><a data-nav="user-center" class="" href="{{ url('molans/repay') }}">我要还款</a></li>
                         <li><a data-nav="user-center" class="" href="{{ url('personal/idCard') }}">绑定身份证</a></li>
-                        <li><a data-nav="user-center" class="" href="{{ url('personal/payPwd') }}">设置支付密码</a></li>
+                        <li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/payPwd') }}">设置支付密码</a></li>
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">
@@ -57,17 +57,33 @@
 </div>
   
         <div class="register-main">
-            <h4>绑定邮箱</h4>
+            <h4>修改支付密码</h4><span>还未设置支付密码？<a href="javascript:void(0);" id="getpaypwd">点击获取支付密码</a></span>
             <hr>
             <form>
                 <div class="row-fluid">
                     <div class="control-group">
-                        <label class="control-label" for="bindEmail" >邮箱</label>
+                        <label class="control-label" for="oldPayPwd" >原支付密码</label>
                         <div class="controls">
-                            <input type="text" id="bindEmail" name="bindEmail" onkeydown="if(event.keyCode==13)return false;">
-                            <br>
-							<span id="content"></span>
-						</div>
+                            <input class="span12 valid" type="password" id="oldPayPwd" name="oldLoginPass" data-val="true" data-val-required="请填写原密码。" data-val-regex="密码只能为 6 - 32 位数字，字母及常用符号组成。" data-val-regex-pattern="^[A-Za-z0-9\^$\.\+\*_@!#%&amp;~=-]{6,32}$">
+                        </div>
+                        <span class="help-block"><span class="field-validation-valid" data-valmsg-for="oldLoginPass" data-valmsg-replace="true"></span></span>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="newPayPwd">新支付密码</label>
+
+                        <div class="controls">
+                            <input class="span12 valid" type="password" id="newPayPwd" name="newLoginPass" data-val="true" data-val-required="请填写新密码。" data-val-regex="密码由 8 - 32 位数字、字母或常用符号组成，且必须同时包含数字和字母。" data-val-regex-pattern="^(?=.*[a-zA-Z].*)(?=.*[0-9].*)[A-Za-z0-9\^$\.\+\*_@!#%&amp;~=-]{8,32}$">
+                        </div>
+                        <span class="help-block"><span class="field-validation-valid" data-valmsg-for="newLoginPass" data-valmsg-replace="true"></span></span>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="checkPayPwd">确认支付密码</label>
+
+                        <div class="controls">
+                            <input class="span12 valid" data-val="true" data-val-equalto="“确认密码”和“新密码”不匹配。" data-val-equalto-other="*.newLoginPass" data-val-required="请填写确认密码。" id="checkPayPwd" name="checkPayPwd" type="password">
+                        </div>
+                        <span class="help-block"><span class="field-validation-valid" data-valmsg-for="checkPayPwd" data-valmsg-replace="true"></span></span>
                     </div>
                     <hr>
                     <button type="button" class="btn btn-primary span12" id="checkOut" style="margin-left: 0">确认</button>
@@ -97,55 +113,53 @@
         });
     </script>
     
+    <script>
+        $('#getpaypwd').on('click', function(){
+
+        	$.ajax({
+                type: "POST",
+                url: "{{ url('personal/getpaypwd') }}",
+                dataType: "json",
+                success: function(msg){
+
+                  if ( msg.status == 0 ) {
+						
+						alert(msg.msg)
+					} else {
+						
+						alert('已成功获取支付密码')
+						
+						window.parent.location.href="{{ url('personal/personal') }}"
+					}
+                }
+});
+        })
+    </script>
+
 	<script>
 	    $('#checkOut').on('click', function(){
-
-           var email = $('#bindEmail').val()
-
-		   emailTest(email)
-		})
-	</script>
-	
-	<script>
-	    $('#bindEmail').on('focus', function(){
+			var data = {};
+			data.oldPayPwd = $('#oldPayPwd').val()
+			data.newPayPwd = $('#newPayPwd').val()
+			data.checkPayPwd  = $('#checkPayPwd').val()
 			
-			$('#content').html('')
+           $.ajax({
+                type: "POST",
+                url: "{{ url('personal/changepaypwd') }}",
+                data: data,
+                dataType: "json",
+                success: function(msg){
+                     
+                     if(msg.status == 0){
+
+                     	alert(msg.msg)
+                     } else {
+
+                     	alert('已成功修改密码')
+                     }
+                }
+});
 		})
-	</script>
-	
-	<script>
-	
-	function emailTest(szMail){
-	
-		   var szReg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/;
-           var bChk=szReg.test(szMail);
-		  
-		   if ( bChk ) {
-			   
-               $.ajax({
-                   type: "POST",
-                   url: "{{ url('personal/doEmail') }}",
-                   data: "email="+szMail,
-                   dataType: "json",
-                   success: function(msg){
-                   
-					 if ( msg.status == 0 ) {
-						 
-						 alert('验证邮件发送失败')
-					 } else {
-						 
-						 alert('验证信息已发送至您的邮箱，请尽快激活')
-					 }
-					 
-					 
-                   }
-              });
-		   } else {
-			   
-			   $('#content').html('请填写正确的邮箱')
-		   }
-	}
-		   
 	</script>
 	
 	<script src="js/font_hxuxey0tud81714i.js" type="text/javascript"></script>

@@ -77,6 +77,18 @@ Route::any('personal/idCard', 'Home\PersonalController@bindCard') ;
 *@Use : 验证身份证是否正确
 */
 Route::any('personal/doBandCard', 'Home\PersonalController@doBindCard') ;
+/*
+*@Use : 设置用户支付密码
+*/
+Route::any('personal/payPwd', 'Home\PersonalController@dopay') ;
+/*
+*@Use : 用户获取支付密码
+*/
+Route::any('personal/getpaypwd', 'Home\PersonalController@paypwd') ; 
+/*
+*@Use : 用户更改支付密码
+*/
+Route::post('personal/changepaypwd', 'Home\PersonalController@changepaypwd') ; 
 } else {
 Route::get('personal/personal', 'Home\UserController@login') ; 
 }

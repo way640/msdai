@@ -460,7 +460,8 @@ class PersonalController extends CommonController
         	$thie -> error() ; 
         }
 
-/*        Array
+/*接口返回数据
+Array
 (
     [result] => Array
         (
@@ -470,7 +471,78 @@ class PersonalController extends CommonController
 
     [error_code] => 0
     [reason] => Succes
-)*/
+)
+*/
     }
 
+    /*
+    *@Action_name : 用户设置支付密码
+    *@Author : szt
+    *@Time : 7-10
+    */
+    public function dopay() {
+
+        return view ( 'Home/Personal/paypwd' ) ; 
+    }
+
+    /*
+    *@Action_name : 执行用户设置支付密码操作
+    *@Author : szt
+    *@Time : 7-10
+    */
+    public function paypwd(){
+
+        $userId = $_SESSION['user']['user_id'] ; 
+        $userInfo = DB::select ( 'select * from zd_user where user_id = ' . $userId ) ; 
+        $userInfo = $this -> objToArray ( $userInfo ) ; 
+
+        if ( empty ( $userInfo[0]['user_email'] ) ) {
+        
+            return $this -> error("支付密码会自动发送到您的邮箱，请您绑定邮箱后在继续操作") ; 
+        }
+
+        if ( empty ( $userInfo[0]['user_paypwd'] ) ) {
+
+            $number = rand(10000000, 99999999) ; 
+            $this -> smtp ( $userInfo[0]['user_account'], $userInfo[0]['user_email'], '获取支付密码', '感谢您使用挣点钱金融网站，您的支付密码为' . $number .'，支付密码已为您自动设置，您可根据喜好自行修改' ) ;
+            	
+            DB::update ('update zd_user set user_paypwd = "' . md5($number) . '" where user_id = ' . $userId) ; 
+
+            return $this -> success() ;
+        } else {
+
+            return $this -> error("您已拥有支付密码，请您重新确认") ; 
+        }
+    }
+
+    /*
+    *@Action_name : 用户更改支付密码
+    *@Arthor : szt
+    *@Time : 07-10
+    */
+    public function changepaypwd(){
+
+        $oldpwd = $_POST['oldPayPwd'] ; 
+        $newpwd = $_POST['newPayPwd'] ; 
+        $checkpwd = $_POST['checkPayPwd'] ; 
+        $userId = $_SESSION['user']['user_id'] ; 
+
+        $userData = DB::select ( 'select user_paypwd from zd_user where user_id = ' . $userId ) ; 
+        $userData = $this -> objToArray ( $userData ) ; 
+
+        if ( md5($oldpwd) != $userData[0]['user_paypwd'] ) {
+
+        	return $this -> error ("旧支付密码不一致") ; 
+        }
+
+        if ( $newpwd != $checkpwd ) {
+
+        	return $this -> error ("两次密码不一致") ; 
+        }
+
+        DB::update ( 'update zd_user set user_paypwd = "' . md5($newpwd) .'" where user_id = ' . $userId ) ; 
+        return $this -> success() ; 
+    }
+   
+    
 }
