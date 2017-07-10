@@ -5,8 +5,8 @@
  */
 //error_reporting(0);
 
-require_once('../resources/views/home/lib/class.geetestlib.php');
-require_once('../resources/views/home/config/config.php');
+require_once('../resources/views/Home/lib/class.geetestlib.php');
+require_once('../resources/views/Home/config/config.php');
 
 
 $GtSdk = new GeetestLib(CAPTCHA_ID, PRIVATE_KEY);

@@ -41,12 +41,12 @@
                         <?php foreach($data as $k=>$v){?>
                         <input type="hidden" name="user_money" value="<?php echo $v->user_money?>">
                         <?php } ?>
-                        <table class="insert-tab" width="100%">
+                        <table class="insert-tab" width="100%" align="center">
                             <tr>
                                 <th>放款金额：</th>
                                 <input type="hidden" id="uid" value="<?php echo $arr?>">
-                                <td>
-                                    <input class="common-text required" id="money" name="lenging_money" size="50" value="" type="text" placeholder="请填写金额，保留整数位" required onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+                                <td  width='50%'>
+                                    <input class="common-text required" id="money" name="lenging_money" size="50"  value="" type="text" placeholder="请填写金额，保留整数位" required onkeyup='this.value=this.value.replace(/\D/gi,"")'>
                                     <div class="tbody"></div>
                                 </td>
                             </tr>

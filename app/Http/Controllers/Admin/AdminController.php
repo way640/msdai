@@ -145,5 +145,45 @@ class AdminController extends CommonController
 		
 		return $this -> success (  ) ;
 	}
+
+	public function getLog(){
+
+        //获取系统的日志信息
+		$logInfo = DB::select ( 'select * from zd_log limit 10' ) ; 
+        $logInfo = $this -> objToArray ( $logInfo ) ; 
+
+        foreach($logInfo as $k => $v){
+
+        	if($v['log_type'] == 1){
+
+        		$logInfo[$k]['type_name'] = '添加' ;
+        	}
+        	if($v['log_type'] == 2){
+
+        		$logInfo[$k]['type_name'] = '修改' ;
+        	}
+        	if($v['log_type'] == 3){
+
+        		$logInfo[$k]['type_name'] = '查看' ;
+        	}
+        	if($v['log_type'] == 4){
+
+        		$logInfo[$k]['type_name'] = '删除' ;
+        	}
+        	if($v['log_type'] == 5){
+
+        		$logInfo[$k]['type_name'] = '登录' ;
+        	}
+        	if($v['log_type'] == 6){
+
+        		$logInfo[$k]['type_name'] = '退出' ;
+        	}
+
+        	$logInfo[$k]['time'] = date('Y-m-d H:i:s', $logInfo[$k]['log_time']) ; 
+        }
+
+        return $this -> success ( $logInfo ) ; 
+
+	}
 	
 }
