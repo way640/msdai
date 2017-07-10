@@ -34,12 +34,12 @@
 					
 					 $.ajax({
 						type: "GET",
-						url: "../../../User/logout",
+						url: "{{ url('user/logout') }}",
 						dataType: 'json',
 						success: function(msg){
 								
 							alert('退出成功')
-							window.location.href="{{ url('User/login') }}"
+							window.location.href="{{ url('user/login') }}"
 						}
 					});
 				})
@@ -219,7 +219,7 @@ jQuery(document).ready(function(){
 	
     $.ajax({
         type: "POST",
-        url: "{{ url ( 'User/more' ) }}",
+        url: "{{ url ( 'user/more' ) }}",
         dataType: "json",
         success: function(msg){
          
@@ -245,13 +245,13 @@ jQuery(document).ready(function(){
     	<div class="foot">
         	<article>
             	<div class="friend">
-                	<a href="{{url('Index/about')}}">关于我们</a>
+                	<a href="{{url('index/about')}}">关于我们</a>
                   	<span></span>
-                 	<a href="{{url('Index/shengming')}}">法律声明</a>
+                 	<a href="{{url('index/shengming')}}">法律声明</a>
                     <span></span>
                   	<a href="#">团队介绍</a>
                     <span></span>
-                  	<a href="{{url('Index/help')}}">帮助中心</a>
+                  	<a href="{{url('index/help')}}">帮助中心</a>
                 </div>
                 <figure></figure>
             	<p>© 2016 北京乐融多源信息技术有限公司 京ICP证12049103号-3 京公网安备11010502025440</p>

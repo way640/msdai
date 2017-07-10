@@ -4,7 +4,7 @@
 <meta name="keywords" content="投资理财, 互联网金融, 网络投融资平台, 网络理财, 互联网理财, 积木盒子, 投资理财, www.jimu.com">
 <meta name="description" content="积木盒子提供安全、有保障的互联网投融资服务。投资理财100元起投，1—12个月项目期限，债权转让灵活。">
 <meta name="author" content="乐融多源(北京)科技有限公司">
-<base href="./../../">
+<base href="{{url('')}}/">
 <meta name="apple-itunes-app" content="app-id=790276804">
 <!-- end: Meta -->
 <meta property="wb:webmaster" content="9fd1b56cebfec3b3">
