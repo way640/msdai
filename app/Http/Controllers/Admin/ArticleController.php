@@ -17,13 +17,13 @@ class ArticleController extends CommonController
     {
 //        $data = Article::orderBy('article_id','desc')->paginate(5);
         $data = Article::orderBy('article_id','asc')->get();
-        return view('admin.article.index',compact('data'));
+        return view('Admin/Article/index',compact('data'));
     }
 
     //get.admin/article/create   添加文章
     public function create()
     {
-        return view('admin.article.add');
+        return view('Admin/Article/add');
     }
     //post.admin/article/store 添加文章提交
     public function store()
@@ -56,7 +56,7 @@ class ArticleController extends CommonController
     public function edit($article_id)
     {
         $field = Article::find($article_id);
-        return view('admin.article.edit',compact('field'));
+        return view('Admin/Article/edit',compact('field'));
     }
 
    //put.article/article/{article/article/}    更新文章

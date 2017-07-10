@@ -27,7 +27,7 @@ class IndexController extends CommonController
      * @Time ：2017-06-12
      * **/
     public function index(){
-        return view('admin.index');
+        return view('Admin/index');
     }
 
     /******************以下是接口类代码******************/

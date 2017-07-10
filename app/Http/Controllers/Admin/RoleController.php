@@ -14,13 +14,13 @@ class RoleController extends CommonController
     public function index()
     {
         $data = Role::orderBy('role_id','asc')->get();
-        return view('admin.role.index',compact('data'));
+        return view('Admin/Role/index',compact('data'));
     }
 
     //get.admin/role/create   添加角色
     public function create()
     {
-        return view('admin.role.add');
+        return view('Admin/Role/add');
     }
 
     //post.admin/article/store 添加角色提交
@@ -52,7 +52,7 @@ class RoleController extends CommonController
     public function edit($role_id)
     {
         $field = Role::find($role_id);
-        return view('admin.role.edit',compact('field'));
+        return view('Admin/Role/edit',compact('field'));
     }
 
     //put.article/article/{article/article/}    更新角色

@@ -19,7 +19,7 @@ class AdminController extends CommonController
 	*/
 	public function emPower(){
 		
-		return view('admin/admin');
+		return view('Admin/admin');
 	}
 	
 	/*
@@ -86,7 +86,7 @@ class AdminController extends CommonController
 	*/
 	public function adminRole(){
 		
-		return view ( 'admin/adminRole' ) ; 
+		return view ( 'Admin/adminRole' ) ; 
 	}
 	
 	/*
