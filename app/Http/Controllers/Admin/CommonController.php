@@ -30,13 +30,13 @@ class CommonController extends Controller
         $checkUserInfo = $this->checkUserInfo(@$_SESSION['admin']['admin_id']);
 		
         if ( !$checkUserInfo ) {
-            echo self::gogo('admin/login/login','您好像还没有登录！！');
+            echo self::gogo('Admin/Login/login','您好像还没有登录！！');
             die();
         }
 		
 		if ( ! $this -> checkUserPriv ( $_SESSION['admin']['admin_id'] ) ) {
 		    
-			echo self::gogo('admin/index/index','没有操作权限！');
+			echo self::gogo('Admin/Index/index','没有操作权限！');
             die();
 		}
 		
@@ -138,6 +138,7 @@ class CommonController extends Controller
             $publicConfig = [
                     //'admin/config/index',
 					'admin/index/adminnav',
+					'admin/index/indexdata',
 					'admin/public/doLogout',
                     ];
             if(in_array($requestUrl,$publicConfig)){
@@ -151,28 +152,35 @@ class CommonController extends Controller
 			
 			$appoPriv = DB::select ( 'select priv_controller, priv_action from zd_privilege where priv_id in ("' . $userData[0]['app_priv'] . '")' ) ;  
 			$appoPriv = $this -> objToArray ( $appoPriv ) ;
-
+            if(count($appoPriv)<0){
+				
+				foreach($appoPriv as $val){
+					$controllerInfo[] = $val['priv_controller'];
+					$actionInfo[] = $val['priv_action'];
+				}
+				if(in_array($controller,$controllerInfo) && in_array($action,$actionInfo)){
+					return true;
+				}
+			
+			}
            // $appoInfo = $this->objToArray(DB::select('select * from zd_appointment where admin_id='.$userId));
-            foreach($appoPriv as $val){
-                $controllerInfo[] = $val['priv_controller'];
-                $actionInfo[] = $val['priv_action'];
-            }
-            if(in_array($controller,$controllerInfo) && in_array($action,$actionInfo)){
-                return true;
-            }
+           
         
 
             //权限控制
             $privInfo = DB::select("select priv_controller,priv_action from zd_admin_role as ar LEFT JOIN zd_role_prive as rp on ar.role_id=rp.role_id LEFT JOIN zd_privilege as pr on rp.priv_id=pr.priv_id where ar.admin_id = '$userId' AND pr.priv_status = '1'");
 //            self::twoFieldArr($privInfo,);
             $privInfo = $this -> objToArray ( $privInfo ) ; 
-            foreach($privInfo as $val){
+			if(count($privInfo)<0){
+				foreach($privInfo as $val){
                 $controllerInfo[] = $val['priv_controller'];
                 $actionInfo[] = $val['priv_action'];
-            }
-            if(in_array($controller,$controllerInfo) && in_array($action,$actionInfo)){
-                return true;
-            }
+				}
+				if(in_array($controller,$controllerInfo) && in_array($action,$actionInfo)){
+					return true;
+				}
+			}
+      
         }
 
         return false;

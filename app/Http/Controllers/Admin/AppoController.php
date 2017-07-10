@@ -18,7 +18,7 @@ class AppoController extends CommonController
      * @author：Way
      * @Time：2017-06-29**/
     public function index(){
-        return view('admin.appo');
+        return view('Admin/appo');
     }
 
     /*
@@ -26,7 +26,7 @@ class AppoController extends CommonController
      * @author：Way
      * @Time：2017-06-29**/
     public function appoAdd(){
-        return view('admin.appoAdd');
+        return view('Admin/appoAdd');
     }
 
     /**************以下是业务接口***************/
