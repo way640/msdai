@@ -87,7 +87,7 @@
                 <li><a href="/lenging/lenging" data-nav="loan"><span>借款</span></a></li>
                 <li><a href="/gold/gold" data-nav="loan"><span>贵金属</span></a></li>
                 <li><a href="/cz/index" data-nav="loan"><span>充值</span></a></li>
-                <li class="pull-right"><a href="/personal/personal" data-nav="account"><span>我的积木</span></a></li>
+                <li class="pull-right"><a href="/personal/personal" data-nav="account"><span>个人中心</span></a></li>
             </ul>
         </div>
     </div>
@@ -113,8 +113,6 @@
                 </ul>
         </div>
     </div>
-
-
     <div class="jimu-account-content-wrap">
         <div class="container">
             <div class="row-fluid">
@@ -157,9 +155,15 @@
 
         </div>
     </div>
+	</body>
+  
+  
+  
+  
+  
+  
+  
 </div>
-
-
 <div class="jm-footer">
     <div class="footer-container">
         <div class="footer-info">
@@ -362,3 +366,4 @@
 <script src="{{ asset('js/init-fc412db349.js') }}" type="text/javascript"></script><script src="{{ asset('js/hm_002.js') }}"></script><script src="{{ asset('js/hm.js') }}"></script>
 
 <script type="text/javascript" async="" src="{{ asset('js/dc.js') }}"></script><script type="text/javascript" async="" src="{{ asset('js/agt.js') }}"></script><script type="text/javascript" async="" src="{{ asset('js/conversion.js') }}"></script><script type="text/javascript" async="" src="{{ asset('js/mvl.js') }}"></script><a id="scrollUp" href="#top" style="display: none; position: fixed; z-index: 1099;"></a><iframe src="{{ asset('css/store.htm') }}" style="display: none;" width="0" height="0"></iframe></body></html>
+

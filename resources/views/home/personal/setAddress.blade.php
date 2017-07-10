@@ -34,6 +34,8 @@
 						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
 						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/setAddress') }}">修改地址</a></li>					    
+                        <li><a data-nav="user-center" class="" href="{{ url('molans/repay') }}">我要还款</a></li>
+                        <li><a data-nav="user-center" class="" href="{{ url('personal/idCard') }}">绑定身份证</a></li>
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">
@@ -102,7 +104,7 @@
                        alert('添加失败， 请重新尝试')
 					} else {
 						alert('添加成功')
-						window.parent.location.href="{{ url('personal/config') }}"
+						window.parent.location.href="{{ url('personal/personal') }}"
 					}
                 }
           });
