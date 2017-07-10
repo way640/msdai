@@ -249,8 +249,9 @@
                     <label for="applyBalance">借款金额</label>
 
                     <div class="controls i-unit">
-                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额" required="" onkeyup="this.value=(this.value.match(/\d+(\.\d{0,2})?/)||[''])[0]">  <span style="color: red;">注意：该金额以万元为单位</span>
+                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额" required="" onkeyup="this.value=(this.value.match(/\d+(\.\d{0,2})?/)||[''])[0]">
                     </div>
+                    <div style="color: red; text-align:center;">注意：该金额以万元为单位</div>
                 </div>
                 <div class="form-control">
                     <label for="applyCity">是否分期</label>
@@ -310,19 +311,6 @@
     </div>
 </div>
 
-<div id="deng" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;"><span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
-    <input id="hiddenName" type="hidden" value="<?php $arr ?>" />
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="nz">+</button>
-        <h3 id="myModalLabel">提示</h3>
-    </div>
-    <div class="modal-body">
-        <p><span class="btn-modal-apply-win">请先实名认证</span></p>
-    </div>
-    <div class="modal-footer">
-        <a href="/user/login" class="btn btn-apply-big btn-modal-apply">去认证</a>
-    </div>
-</div>
 <style type="text/css">
     .contact-us {
         position: relative;
@@ -534,22 +522,6 @@
         $('#prodModal').hide();
     });
 
-    $('#submit').click(function () {
-        var id=$("#hiddenName").val();
-        $.ajax({
-            type:'get',
-            url:'/mloans/approve/'+id,
-            success:function (data) {
-                if(data==0){
-                    $('#deng').show();
-                }
-            }
-        })
-    });
-
-    $('#nz').click(function () {
-        $("#deng").hide();
-    });
 
     //是否分期
     $('#applyCity').change(function () {

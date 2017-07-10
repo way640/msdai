@@ -125,7 +125,7 @@
 
             <div>
                 <?php foreach ($repay as $k=>$v){?>
-                            <input type="hidden" id="amount" value="<?php echo $v->loan_money ?>"/>
+                            <input type="hidden" id="amount" value="<?php echo $v->principal ?>"/>
                             <input type="hidden" id="rate" value="<?php echo $v->loan_interset ?>"/>
                             <input type="hidden" id="period" value="<?php echo $v->loan_long ?>"/>
                             <input type="hidden" id="typ" value="<?php echo $v->lenging_type ?>"/>
