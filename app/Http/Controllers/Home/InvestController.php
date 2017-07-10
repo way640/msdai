@@ -19,7 +19,7 @@ class InvestController extends CommonController
 	public function index(){
         $user_id = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '';
 		$data=DB::table('user_info')->where('user_id','=',$user_id)->get();
-		return view('home/invest/invest',['data'=>$data]);
+		return view('Home/Invest/invest',['data'=>$data]);
 	}
 	
 	/*
@@ -27,6 +27,6 @@ class InvestController extends CommonController
 	*/
 	public function detail(){
 		
-		return view('home/invest/detail');
+		return view('Home/Invest/detail');
 	}
 }
