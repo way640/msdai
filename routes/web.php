@@ -53,6 +53,20 @@ if($urlArr[1] == 'admin'){
         Route::get('/', function () {
             return view('Home/index');
         });
+
+
+        //法律声明
+        Route::get('index/shengming', function(){
+            return view('Home/index/shengming');
+        });
+        //关于我们
+        Route::get('index/about', function(){
+            return view('Home/index/about');
+        });
+        Route::get('index/help', function(){
+            return view('Home/index/help');
+        });
+
             
         Route::get('{name}', function ($name) {
             return view('404');

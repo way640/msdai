@@ -86,7 +86,7 @@
                 <li><a href="/invest/invest" data-nav="venus"><span>轻松投</span></a></li>
                 <li><a href="/lenging/lenging" data-nav="loan"><span>借款</span></a></li>
                 <li><a href="/gold/gold" data-nav="loan"><span>贵金属</span></a></li>
-                <li><a href="/cz/index" data-nav="loan"><span>充值</span></a></li>
+
                 <li class="pull-right"><a href="/personal/personal" data-nav="account"><span>个人中心</span></a></li>
             </ul>
         </div>
