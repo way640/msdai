@@ -40,7 +40,7 @@
             	<li><a href="{{ url('home/borrow/borrow') }}">借款</a></li>
 				<li><a href="{{ asset('home/gold/gold') }}">贵金属</a></li
                 <li class="hot"></li>
-				<li style="float:right;"><a href="{{ asset('home/personal/personal') }}">我的积木</a></li>
+				<li style="float:right;"><a href="{{ asset('home/personal/personal') }}">个人中心</a></li>
         	</ul>
         </div>
     </div>

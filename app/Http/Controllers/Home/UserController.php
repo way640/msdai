@@ -47,7 +47,6 @@ class UserController extends CommonController
 	
 	/*
 	*@Action_name : 新用户注册页面
-
 	*/
 	public function doRegist () {
 
@@ -62,6 +61,7 @@ class UserController extends CommonController
 
 			return $this->error ( '用户名已存在' );
 		} else {
+			
 			$regTime = time();
 			$userAdd = DB::insert( "insert into zd_user ( user_account, user_pwd , user_reg_time ) values ( '$userName', '$userPwd' , '$regTime' )" );
 			$id = DB::getPdo()->lastInsertId();
@@ -69,9 +69,15 @@ class UserController extends CommonController
 		
 		if ( $userAdd ) {
 			
+			//用户注册成功，添加用户，以及用户信息
+		    DB::insert ( "insert into zd_user_login ( login_id, user_id, user_login_time ) values ( '', " . $id . ", " . time() . " )" ) ; 
+			
 			$arr = [ 'username' => $userName, 'user_id' => $id ];
 			
 			$_SESSION[ "user" ] = $arr;
+			$userId = $_SESSION['user']['user_id'] ; 
+			
+			$addImage = DB::insert("insert into zd_user_info( user_id, user_add_time ) values ( $userId, $regTime )");
 			
 			return $this->success (  );
 		} else { 
@@ -137,6 +143,15 @@ class UserController extends CommonController
 			$arr = [ 'username' => $userName, 'user_id' => $userData[0]['user_id'] ];
 			$_SESSION[ "user" ] = $arr; 
 			
+			$info = DB::select ( 'select * from zd_user_login where user_id = ' . $userData[0]['user_id'] ) ;
+			if ( $info ) {
+				
+				DB::update ( 'update zd_user_login set user_login_time = ' . time() . ' where user_id = ' . $_SESSION['user']['user_id'] ) ;
+			} else {
+				
+				DB::insert ( 'insert into zd_user_login ( user_id, user_login_time ) values ( ' . $userData[0]['user_id'] . ', ' . time() . ' )' ) ;
+			}
+			
 			return $this->success (  );
 		}else{
 			
@@ -145,12 +160,68 @@ class UserController extends CommonController
 	}
 	
 	/*
-	*@Action_logout : 用户退出登录
+	*@Action_name : 用户退出登录
 	*/
 	public function logout(){
 		
 		unset( $_SESSION['user'] );
 		
-		return $this->success(  );
+		return $this->success();
 	}
+	
+	/*
+	*@Action_name : 判断用户是否完善信息
+	*/
+    public function more(){
+
+    	$userId = isset ( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '' ; 
+
+    	if ( $userId == '' ) {
+
+    		return $this -> error (  ) ;
+    	} else {
+
+    		$userInfo = DB::select ( 'select * from zd_user where user_id = ' . $userId ) ;
+    		$userInfo = $this -> objToArray ( $userInfo ) ; 
+    		$userData = DB::select ( 'select * from zd_user_info where user_id = ' . $userId ) ; 
+            $userData = $this -> objToArray ( $userData ) ;
+
+            $arr = array() ;
+            if ( $userInfo[0]['user_tel'] == '' ) {
+
+            	$arr[] = "电话" ;
+            }
+
+            if ( $userInfo[0]['user_email'] == '' ) {
+
+            	$arr[] = "邮箱" ;
+            }
+
+            if ( $userData[0]['user_head'] == '' ) {
+
+            	$arr[] = "头像" ;
+            }
+
+            if ( $userData[0]['user_addr'] == '' ) {
+
+            	$arr[] = "地址" ;
+            }
+
+            if ( count ( $arr ) == 0 ) {
+                
+                return $this -> error (  ) ;
+            } else {
+
+            	$str  = "您的" ;
+
+            	$str .= implode(",", $arr) ;
+                
+                $str .= "尚未填写" ; 
+
+                return $this -> success ( $str ) ;
+            }
+    	}
+
+    }
+
 }

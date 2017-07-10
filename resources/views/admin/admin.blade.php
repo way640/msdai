@@ -34,7 +34,7 @@
                 $('.col-sm-3').attr('style','font-size:20px');
                 $.ajax({
                     type:"get",
-                    url:"{{url('admin/admin/getAdmin')}}",
+                    url:"{{url('admin/admin/roleList')}}",
                     data:'',
                     dataType:'json',
                     success:function ( msg ) {

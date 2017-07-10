@@ -22,7 +22,7 @@
                 <h4 class="pull-left">登录</h4>
                 <div class="pull-right">
                     <span>没有账号？</span>
-                    <a href="javascript:void(0);" target="_blank" id="act_login_register">免费注册</a>
+                    <a href="javascript:void(0);" id="act_login_register">免费注册</a>
                 </div>
             </div>
             <div class="padding-c">
@@ -34,7 +34,7 @@
                     <input type="hidden" name="site" value="B662B0F090BE31C1DCB6A13D70E81429">
                     <div class="input-wrap">
                         <span class="input-tip">用户名</span>
-                        <input data-val="true" placeholder="用户名/手机/邮箱" data-left="100" data-val-regex="用户名错误。" data-val-regex-pattern="[A-Za-z0-9_@.-]{6,100}" data-val-required="请填写用户名/手机号/邮箱。" id="username" name="username" tabindex="1" type="text" value="" onfocus="this.parentNode.className=&#39;input-wrap focusin&#39;" onblur="this.parentNode.className=&#39;input-wrap&#39;">
+                        <input data-val="true" placeholder="用户名" data-left="100" data-val-regex="用户名错误。" data-val-regex-pattern="[A-Za-z0-9_@.-]{6,100}" data-val-required="请填写用户名/手机号/邮箱。" id="username" name="username" tabindex="1" type="text" value="" onfocus="this.parentNode.className=&#39;input-wrap focusin&#39;" onblur="this.parentNode.className=&#39;input-wrap&#39;">
                         <span class="help-block"><span class="field-validation-valid" data-valmsg-for="username" data-valmsg-replace="true"></span></span>
                     </div>
                     <div class="input-wrap">
@@ -66,7 +66,6 @@
                     <a class="login-icon" target="_blank" href="https://www.jimubox.com/oauth/login?target=xiaomi" title="使用小米账号登录"><img alt="使用小米账号登录" src="./mi_icon.png"></a>
                     <a class="login-icon" target="_blank" href="https://www.jimubox.com/oauth/login?target=weibo" title="使用新浪微博账号登录"><img alt="使用新浪微博账号登录" src="./weibo_icon.png"></a>
                     <span class="split">|</span>
-                    <a class="forget-pwd" target="_blank" href="{{ url('user/forget') }}">忘记密码？</a>
                 </p>
             </div>
         </div>

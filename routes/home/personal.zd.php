@@ -3,6 +3,9 @@
 /*
 *@Use : 个人中心首页
 */
+if(@$_SESSION['user']){
+
+
 Route::get('personal/personal', 'Home\PersonalController@index') ;
 /*
 *@Use : 个人中心积分首页
@@ -62,5 +65,18 @@ Route::any('personal/setAddress', 'Home\personalController@setAddress') ;
 *@Use : 添加用户地址
 */
 Route::any('personal/addAddress', 'Home\PersonalController@addAddress') ; 
-
-
+/*
+*@Use : 获取用户信息
+*/
+Route::any('personal/getUserInfo', 'Home\PersonalController@getUserInfo') ;
+/*
+*@Use : 验证身份证实名
+*/
+Route::any('personal/idCard', 'Home\PersonalController@bindCard') ; 
+/*
+*@Use : 验证身份证是否正确
+*/
+Route::any('personal/doBandCard', 'Home\PersonalController@doBindCard') ;
+} else {
+Route::get('personal/personal', 'Home\UserController@login') ; 
+}

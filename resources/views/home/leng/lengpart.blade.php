@@ -1,5 +1,4 @@
 <?php $arr = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : ''?>
-<?php //$arr = 10; ?>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://loan.jimu.com/expwy/prod?applyType=401 -->
 <html class="v_scrollbar"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -71,7 +70,7 @@
                 <li><a href="http://www.zdmoney.com/" data-nav="home"><span>首页</span></a></li>
                 <li><a href="/invest/invest" data-nav="venus"><span>轻松投</span></a></li>
                 <li><a href="/lenging/lenging" data-nav="loan" class="active"><span>借款</span></a></li>
-                {{--<li><a href="https://www.jimu.com/Home/About" data-nav="about"><span>关于积木</span></a></li>--}}
+                <li><a href="https://www.jimu.com/Home/About" data-nav="about"><span>关于积木</span></a></li>
                 <li class="pull-right"><a href="https://www.jimu.com/User/AssetOverview" data-nav="account"><span>我的积木</span></a></li>
             </ul>
         </div>
@@ -84,21 +83,24 @@
 
     <div class="container">
         <div class="prod-info">
+            <?php foreach ($data as $k=>$v){?>
             <div class="prod-head">
                 <div class="pull-left">
-                    <img src="{{ asset('image/wzxy2.png') }}" alt="">
-                    <span class="logo-desc">Powered by DUMIAO <br>小微企业智能风控决策引擎</span>
+                    @if($v->user_head!='')
+                        <img src="{{ asset($v->user_head) }}" alt="">
+                    @else
+                        <img src="{{ asset('image/default-6e81850cf7.jpg') }}" alt="">
+                    @endif
                 </div>
                 <div class="head-right">
                     <p class="pull-right">
-                        <span class="i i-folder">无需抵押	</span>
+                        <span class="i i-folder">无需抵押   </span>
                         <span class="i i-calendar">最快3天到账</span>
                     </p>
-                    <h1>读秒·旺仔</h1>
+                    <h1></h1>
                 </div>
             </div>
             <hr class="prod-split">
-            <?php foreach ($data as $k=>$v){?>
             <div class="prod-body">
                 <div class="prod-intro">
                     <dl>
@@ -126,7 +128,7 @@
                     </dl>
                     <dl>
                         <dt>费率说明：</dt>
-                        <dd>月服务费率最低可至<span class="digit">1</span>%</dd>
+                        <dd>月服务费率最低可至<span class="digit">1</span></dd>
                     </dl>
                     <dl>
                         <dt>区域限制：</dt>
@@ -134,9 +136,7 @@
                     </dl>
                 </div>
                 <div class="prod-apply">
-                    <p class="text-center">
-                        <span class="digit-strong f24" data-apply-type="401">5260</span>人已经成功申请
-                    </p>
+
                     @if ( $arr )
                     <a class="btn btn-second"  id="applyLoan">立即申请</a>
                     @else
@@ -230,13 +230,12 @@
             <form class="expwy-form" action="/molans/applyto">
                 <?php foreach($data as $k=>$v){?>
                 <input type="hidden" name="lenging_id"  value="<?php echo $v->lenging_id?>">
-                    <input type="hidden" name="lenging_money"  value="<?php echo $v->lenging_money?>">
                     <?php } ?>
                 <div class="form-control">
                     <label for="applyBalance">借款金额</label>
 
                     <div class="controls i-unit">
-                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额，保留整数位" required="" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+                        <input type="text" name="loan_money" id="applyBalance" placeholder="请填写金额" required="" onkeyup="this.value=(this.value.match(/\d+(\.\d{0,2})?/)||[''])[0]">  <span style="color: red;">注意：该金额以万元为单位</span>
                     </div>
                 </div>
                 <div class="form-control">
@@ -250,6 +249,7 @@
                     </div>
                     <div class="controls" style="display: none " id="stages"><font color="blue">还款为一个自然月</font></div>
                 </div>
+
                 <div class="form-control" style="display: none;" id="applytime">
                     <label for="applyCity">分期时长</label>
                     <div class="controls">
@@ -264,22 +264,7 @@
                         </select>
                     </div>
                 </div>
-                    {{--<input type="hidden" name="applyType" id="applyType" value="301">--}}
 
-                    {{--<div class="form-control">--}}
-                    {{--<label for="mobile">手机号码</label>--}}
-
-                    {{--<div class="controls">--}}
-                    {{--<input type="text" name="mobile" id="mobile" placeholder="请填写手机号码" required="" data-reg="^[1][0-9]{10}$" data-reg-message="请输入正确的手机号码">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                {{--<div class="form-control captcha">--}}
-                    {{--<label for="captcha">验证码</label>--}}
-                    {{--<div class="controls">--}}
-                        {{--<input type="text" name="captcha" id="captcha" placeholder="请填写验证码" required="">--}}
-                        {{--<img src="./【申请借款】- 积木盒子 jimu.com_files/captcha" alt="验证码" data-src="/captcha/captcha?w=120&amp;h=44" title="点击刷新">--}}
-                    {{--</div>--}}
-                {{--</div>--}}
                 <div class="form-control">
                     <label for="recommendCode">借款利率</label>
 
@@ -346,9 +331,8 @@
         z-index: 1002; left: 0px;
         opacity:0.5; -moz-opacity:0.5;
     }
-
     #stages{
-    text-align:center
+        text-align:center
     }
 </style>
 <div class="footer">
@@ -441,7 +425,6 @@
         <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
     </div>
 </div>
-
 <!-- end:ContactUs -->
 <script type="text/javascript">
     var require = {
@@ -533,8 +516,8 @@
     });
 
     $('#zhe').click(function () {
-            $("#mask").hide();
-            $('#prodModal').hide();
+        $("#mask").hide();
+        $('#prodModal').hide();
     });
 
     $('#submit').click(function () {
@@ -587,7 +570,8 @@
             str=(rate*1+10*1)+'%';
         }
         $('#recommendCode').attr('value',str)
-    })
+    });
+
 </script>
 
 <img src="https://cm.g.doubleclick.net/pixel?google_nid=agrantcn&amp;google_cm&amp;ext_data=eyJzcmMiOiJwdiIsImFnZmlkIjoiQm9CeDdaUk9FbWRmdHBQRiIsInQiOiIzMC44MTc0NzkwODM5NTM3NjIyIn0" style="display: none; width: 0px; height: 0px;"><img src="https://cms.tanx.com/t.gif?tanx_nid=42756270&amp;tanx_cm&amp;ext_data=eyJzcmMiOiJwdiIsImFnZmlkIjoiQm9CeDdaUk9FbWRmdHBQRiIsInQiOiIzMC44MTEyNjM0NjA0NzE2ODQyIn0" style="display: none; width: 0px; height: 0px;"><img src="https://cm.e.qq.com/cm.fcg?gdt_dspid=629594&amp;src=pv&amp;agfid=BoBx7ZROEmdftpPF&amp;t=30.3819549824992903" style="display: none; width: 0px; height: 0px;"><img src="{{ asset('image/pv.gif') }}" style="display: none; width: 0px; height: 0px;"><img src="https://cm.pos.baidu.com/pixel?dspid=6666724&amp;ext_data=eyJzcmMiOiJwdiIsImFnZmlkIjoiQm9CeDdaUk9FbWRmdHBQRiIsInQiOiIzMC43MDE5NDI3MjE0NjAyNTA5In0" style="display: none; width: 0px; height: 0px;"><img src="https://cm.pos.baidu.com/pixel?dspid=6666724&amp;ext_data=eyJzcmMiOiJwdiIsImFnZmlkIjoiQm9CeDdaUk9FbWRmdHBQRiIsInQiOiIzMC42OTYyOTI0ODY0MjczMDIzIn0" style="display: none; width: 0px; height: 0px;"></body></html>

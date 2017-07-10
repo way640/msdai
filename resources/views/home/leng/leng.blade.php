@@ -19,11 +19,12 @@
 
                     <?php foreach($data as $v){?>
 <div class="prod-item person" id="DaBaiContent">
-
-
     <div class="pull-left prod-logo">
-        <img src="{{ asset('image/dabai-logo.png') }}" alt="">
-        <p class="logo-desc">Powered by DUMIAO <br>个人智能风控决策引擎</p>
+        @if($v->user_head!='')
+            <img src="{{ asset($v->user_head) }}" alt="">
+        @else
+            <img src="{{ asset('image/default-6e81850cf7.jpg') }}" alt="">
+        @endif
     </div>
     <div class="prod-content">
         <p class="prod-title">
@@ -35,7 +36,7 @@
             <span class="i i-calendar">最快1天到账</span>
         </p>
         <div class="pull-left prod-intro">
-            <h2>读秒大白，通过大数据风控技术，便捷高效的帮用户获得金融机构的服务，最高额度20万，服务多样化、门槛低、费用少</h2>
+            <h2>zdmoney衷心的提醒您,请根据您自己的实际情况酌情考虑您的借款金额，谢谢您的光临</h2>
             <dl class="left">
 
                 <dt>放款金额：</dt>
@@ -67,9 +68,7 @@
         <div class="pull-right prod-info">
             <div class="prod-info-inner">
                 <div class="ck">
-                    <p>
-                        <span class="digit-strong f24" data-apply-type="301">34443</span>人<br>已经成功申请
-                    </p>
+                    
                     <a class="btn btn-primary btn-ps" href="/mloans/lengpart/{{ $v->lenging_id }}">查看详情</a>
 
                 </div>

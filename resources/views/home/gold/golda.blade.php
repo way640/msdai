@@ -28,30 +28,12 @@
                 </div>
                 <div class="prod-items">
                     
-<div class="prod-item person" id="DaBaiContent">
-
-    <div class="prod-content">
-
-        <div class="pull-left prod-intro">
-
-        </div>
-        <div class="pull-right prod-info">
-            <div class="prod-info-inner">
-                <div class="ck">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
 
 
 <div class="prod-item corp" id="TimesContent">
         <p class="prod-title">
             <span class="font-bold">贵金属种类：
-            <select>
+            <select id="JJ_zl" style="height: 30px">
             <option value="">--选择--</option>
                 @foreach ($info as $va)
                     <option value="{{$va->fund_no}}" class='J_zl' >{{$va->fund_name}}</option>
@@ -59,9 +41,10 @@
         </select>
     </span>
         </p>
-            <div id='vbox'>
+            <div id='vbox' style="height: 250px">
                 
             </div>
+            
         </div>
         <div class="pull-right prod-info">     
 			<p><a class="btn btn-primary btn-ps" href="javascript:void(0);">立即买入</a></p>
@@ -73,7 +56,7 @@
 </div>
 </center>
 <script>
-$('.J_zl').on('click',function(){
+$('#JJ_zl').change(function(){
     var fund_no = $(this).val();
     //alert(dian);
     $.ajax({
@@ -88,7 +71,7 @@ $('.J_zl').on('click',function(){
                     var v=msg.result;
                     //alert(v.uptime);
                     str +='<p class="prod-title"></span></p><div class="pull-left prod-intro">';
-                    str +='<h2>'+v.uptime+'</h2>';
+                    str +='<h2>'+v.uptime+'</h2><input type="hidden" id="didden" value='+v.goldid+'" >';
                     str +='<dl class="left"><dt>当前价格：</dt><dd><span class="digit">'+v.last_price+'元</span></dd></dl>';
                     str +='<dl class="right"><dt>买入价格：</dt><dd><span class="digit">'+v.buy_price+'元</span></dd></dl>';
                     str +='<dl class="left"><dt>卖出价格：</dt><dd><span class="digit">'+v.sell_price+'元</span></dd></dl>';

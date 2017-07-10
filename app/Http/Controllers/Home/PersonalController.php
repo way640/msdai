@@ -23,13 +23,6 @@ class PersonalController extends CommonController
 	public function __construct(){
 		
 		parent::__construct();
-	
-        $userId = isset ( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '' ; 
-		
-		if ( empty ( $userId ) ) {
-			
-			 return redirect('');
-		}
 	}
 	
 	/*
@@ -37,7 +30,7 @@ class PersonalController extends CommonController
 	*/
 	public function index(){
 
-	    $userId = $_SESSION['user']['user_id'] ; 
+	    $userId = @$_SESSION['user']['user_id'] ; 
 		
 		$userInfo = DB::select ( "select * from zd_user_info where user_id = $userId" ) ;
         $userInfo = $this -> objToArray ( $userInfo ) ; 		
@@ -124,12 +117,8 @@ class PersonalController extends CommonController
 				
 				if ( $bloon ) {
 					
-					$addImage = DB::update("update zd_user_info set user_head = '$new_file', user_add_time $time where user_id = $userId");
-				} else {
-									
-					$addImage = DB::insert("insert into zd_user_info( user_id, user_head, user_add_time ) values( $userId,'$new_file', $time)");
-				} 
-				
+					$addImage = DB::update("update zd_user_info set user_head = '$new_file', user_add_time = $time where user_id = $userId");
+				}
 
 			    $arr = array("status"=>"1");					
                 echo json_encode($arr);
@@ -272,7 +261,8 @@ class PersonalController extends CommonController
             
 			//邮件参数设置   用户名                          用户邮箱     内容标题      内容详情
 		    $this -> smtp ( $userArr['user_account'], $emailAddress, '激活邮箱', '请在页面点击链接，激活您的邮箱http://www.zdmoney.com/personal/activate?mailbox='.$userData ) ;
-		
+		    
+			return $this -> success (  ) ;
 		}
 	}
 	
@@ -336,6 +326,151 @@ class PersonalController extends CommonController
             $bloon = DB::update ( "update zd_user_info set user_addr = '$address', user_add_time = '$time' where user_id = $userId" ) ;
 		//}
 			
-			$this -> success ( ) ; 
+			return $this -> success ( ) ; 
 	}	
+	
+	/*
+	*Action_name : 获取用户信息
+	*/
+	public function getUserInfo(){
+		
+		$userId = $_SESSION['user']['user_id'] ; 
+		
+		//获取用户个人信息
+		$userMore = DB::select ( 'select * from zd_user where user_id = ' . $userId ) ;
+        $userMore = $this -> objToArray ( $userMore ) ; 		
+		
+		//获取用户登录时间
+		$userInfo = DB::select ( 'select user_login_time from zd_user_login where user_id = ' . $userId ) ;
+        $userInfo = $this -> objToArray ( $userInfo ) ; 
+		
+		//获取用户账户金额，绑定地址
+		$userArr = DB::select ( 'select * from zd_user_info where user_id = ' . $userId ) ; 
+		$userArr = $this -> objToArray ( $userArr ) ; 
+		
+		//获取用户出账，入账信息
+		$userData = DB::select ( 'select roll_money, roll_in, roll_out from zd_roll where user_id = ' . $userId ) ; 
+		$userData = $this -> objToArray ( $userData ) ; 
+		
+		//统计累计充值金额
+		$moneyIn  = '' ; 
+		$moneyOut = '' ; 
+		if ( count ( $userData ) > 1 ) {
+			
+			foreach ( $userData as $k => $v ) {
+				
+				$moneyIn  = $moneyIn  + $v['roll_in'] ; 
+				$moneyOut = $moneyOut + $v['roll_out'] ; 
+			}
+		}
+		
+        if ( empty ( $moneyIn ) ) {
+
+        	$moneyIn = 0 ; 
+        }
+
+        if ( empty ( $moneyOut ) ) {
+
+            $moneyOut = 0 ;
+        }
+
+		$userAddr = $userArr[0]['user_addr'] ;
+		
+		if ( empty ( $userAddr ) ) {
+			
+			$userAddr = '您还未绑定地址';
+		}
+		
+		if ( empty ( $userArr[0]['user_money'] ) ) {
+			
+			$userArr[0]['user_money'] = 0 ; 
+		}
+		
+		$num = 5 ;
+		
+		foreach ( $userMore[0] as $userKey => $userVal ) {
+			
+			if ( $userMore[0][$userKey] == '' ) {
+				
+				$num = $num - 1 ;
+			}
+		}
+		
+		if ( $userArr[0]['user_head'] == ''  ) {
+			
+			$num = $num - 1 ;
+		}
+		
+		if ( $userArr[0]['user_addr'] == '' ) {
+			
+			$num = $num - 1 ;
+		}
+	
+	    $showData['more']            = $num * 20 . "%" ;
+	    $showData['userAddr']        = $userAddr ; 
+		$showData['moneyIn']         = number_format ( $moneyIn, 2 ) ;
+		$showData['moneyOut']        = number_format ( $moneyOut, 2 ) ; 
+		$showData['money']           = number_format ( $userArr[0]['user_money'], 2 ) ;
+		$showData['user_login_time'] = date("Y-m-d H:i:s", $userInfo[0]['user_login_time']) ; 
+	
+		return $this -> success ( $showData );
+	}
+
+	/*
+	*@Action_name : 验证身份证实名
+	*@Author : szt
+	*@Time : 07-08
+	*/
+    public function bindCard(){
+
+    	return view( 'home/personal/bindCard' ) ; 
+    }
+
+	/*
+	*@Action_name : 验证身份证是否正确
+	*@Author : szt
+	*@Time : 07-08
+	*/
+    public function doBindCard(){
+
+        $userId = $_SESSION['user']['user_id'] ; 
+    	$data = $this -> post ; 
+        $name = $data['name'] ; 
+    	$card = strtoupper($data['card']);
+
+        $regx = "/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/"; 
+
+        if(!preg_match($regx, $card)) { 
+
+            return $this -> error() ; 
+        } 
+
+        $url = "http://api.avatardata.cn/IdCardCertificate/Verify?key=fab6dbd889884619a21c1f6dee8e66cd&realname=$name&idcard=$card" ; 
+   
+        $content = file_get_contents( "$url" ) ; 
+
+        $data = json_decode($content, true);
+
+        if ( $data['error_code'] == 0 ) {
+
+        	DB::update ( 'update set zd_user_info user_card = '.$card.', user_name = '.$name.', user_is_loan = 1 where user_id = '.$userId ) ; 
+            $this -> success() ;
+        } else {
+
+        	$thie -> error() ; 
+        }
+
+/*        Array
+(
+    [result] => Array
+        (
+            [code] => 1001
+            [message] => 不一致
+        )
+
+    [error_code] => 0
+    [reason] => Succes
+)*/
+    }
+
 }
