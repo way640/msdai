@@ -271,7 +271,7 @@ class GoldController extends CommonController
 			$alipay->requestPay($out_trade_no, $subject, $total_fee, $body, $show_url='');
 		}else{
 			echo '<script>alert("请先登录")</script>';
-			return view('Gome/User/login');
+			return view('Home/User/login');
 		}
 		
 	}
