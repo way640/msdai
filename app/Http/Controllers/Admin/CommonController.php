@@ -30,13 +30,13 @@ class CommonController extends Controller
         $checkUserInfo = $this->checkUserInfo(@$_SESSION['admin']['admin_id']);
 		
         if ( !$checkUserInfo ) {
-            echo self::gogo('Admin/Login/login','您好像还没有登录！！');
+            echo self::gogo('admin/login/login','您好像还没有登录！！');
             die();
         }
 		
 		if ( ! $this -> checkUserPriv ( $_SESSION['admin']['admin_id'] ) ) {
 		    
-			echo self::gogo('Admin/Index/index','没有操作权限！');
+			echo self::gogo('admin/index/index','没有操作权限！');
             die();
 		}
 		

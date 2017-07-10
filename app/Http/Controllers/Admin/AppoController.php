@@ -42,6 +42,25 @@ class AppoController extends CommonController
             $where .= ' and ap.admin_id ='.$this->get['type'];
         }
         $appoInfo = DB::select('select admin_name,admin_account,ap.admin_id,app_from,app_desc,app_start_time,app_end_time,app_priv,app_id from zd_appointment as ap left join zd_admin as ad on ap.admin_id=ad.admin_id left join zd_admin_info as ai on ap.admin_id=ai.admin_id where '.$where);
+        $privObj = DB::select('select priv_id,priv_name from zd_privilege');
+
+        $privList = array();
+        foreach ($privObj as $key => $value) {
+            $privList[$value->priv_id] = $value->priv_name;
+        }
+        foreach($appoInfo as $k=>$val){
+            $privArr = explode(',',$val->app_priv);
+            $str = '临时权限：';
+            foreach($privArr as $v){
+                if($privList[$v]){
+                    $str .= '-'.$privList[$v];
+                }
+            }
+
+            $appoInfo[$k]->app_priv = $str;
+            $appoInfo[$k]->app_start_time = date('Y-m-d',$val->app_start_time);
+            $appoInfo[$k]->app_end_time = date('Y-m-d',$val->app_end_time);
+        }
         return $this->success($appoInfo);
 
     }
