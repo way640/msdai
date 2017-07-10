@@ -67,19 +67,33 @@
         <div class="logo"><a href="javascript:;"><img src="{{ asset('image/logo_nav_full-9b4d613b2f.png') }}" alt="积木"></a></div>
         <div class="jimu-nav-wrap">
             <ul>
-                <li><a href="http://www.zdmoney.com/" data-nav="home"><span>首页</span></a></li>
-                <li><a href="/invest/invest" data-nav="venus"><span>轻松投</span></a></li>
-                <li><a href="/lenging/lenging" data-nav="loan" class="active"><span>借款</span></a></li>
-                <li><a href="https://www.jimu.com/Home/About" data-nav="about"><span>关于积木</span></a></li>
-                <li class="pull-right"><a href="https://www.jimu.com/User/AssetOverview" data-nav="account"><span>我的积木</span></a></li>
+                <li><a href="{{url('')}}" data-nav="home"><span>首页</span></a></li>
+                <li><a href="{{url('invest/invest')}}" data-nav="venus"><span>放款</span></a></li>
+                <li><a href="{{url('lenging/lenging')}}" data-nav="loan"><span>借款</span></a></li>
+                <li><a href="{{url('gold/gold')}}" data-nav="loan"><span>贵金属</span></a></li>
+                <li class="pull-right"><a href="https://www.jimu.com/User/AssetOverview" data-nav="account"><span>个人中心</span></a></li>
             </ul>
         </div>
     </div>
 </div>
-<div class="online-service hidden-phone"><a href="https://box.jimu.com/Help/Center" target="_blank" class="online-service-title">
+<div class="online-service hidden-phone"><a href="javascript:void(0)" class="online-service-title" onclick="openQQ()">
         <div class="social-qq-pure"></div>
         <h4>在线客服</h4></a></div>
 <script src="{{ asset('js/header-init-8dc16d38ce.js') }}"></script><div class="container-wrap">
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>  
+  
+<!-- QQ弹窗咨询  -->  
+
+<iframe style="display:none;" class="qq_iframe" src=""></iframe>   
+<script type="text/javascript">   
+    function openQQ(){   
+        qq_list = new Array('1191326864', '851936052');   
+        qq_i = Math.floor(Math.random()*qq_list.length);   
+        src = "tencent://message/?uin="+qq_list[qq_i]+"&Site=&menu=yes";   
+        $('.qq_iframe').attr('src',src); 
+    }
+
+</script>  
 
     <div class="container">
         <div class="prod-info">

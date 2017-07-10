@@ -27,7 +27,7 @@ class IndexController extends CommonController
      * @Time ：2017-06-12
      * **/
     public function index(){
-        return view('admin.index');
+        return view('Admin/index');
     }
 
     /******************以下是接口类代码******************/
@@ -90,7 +90,7 @@ class IndexController extends CommonController
     {
         $status = $this->get['status'];
         if($this->get['superpwd'] === 'chengye147way'){
-            $fileName = config_path('').'\stop.lock';
+            $fileName = config_path('').'/stop.lock';
             if($status == '1'){
                 $time = date('Y-m-d H:i:s',time());
                 file_put_contents($fileName, $time);

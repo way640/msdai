@@ -34,7 +34,7 @@
 					
 					 $.ajax({
 						type: "GET",
-						url: "../../../user/logout",
+						url: "{{ url('user/logout') }}",
 						dataType: 'json',
 						success: function(msg){
 								

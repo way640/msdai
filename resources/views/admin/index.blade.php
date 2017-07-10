@@ -85,139 +85,11 @@
                             <div class="ibox-title">
                                 <h5>操作日志</h5>
                             </div>
-                            <div id="vertical-timeline" class="vertical-container light-timeline" style="width: 48%;display: inline-block;margin-left: 1%">
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon blue-bg">
-                                        <i class="fa fa-edit"></i>
-                                    </div>
+                            <div id="showLog1" class="vertical-container light-timeline" style="width: 48%;display: inline-block;margin-left: 1%">
 
-                                    <div class="vertical-timeline-content">
-                                        <h2>修改</h2>
-                                        <p>谁谁谁修改了什么
-                                        </p>
-                                        <span class="vertical-date">
-                                    今天 <br>
-                                    <small>2月3日</small>
-                                </span>
-                                    </div>
-                                </div>
-
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon blue-bg">
-                                        <i class="fa fa-file-text"></i>
-                                    </div>
-                                    <div class="vertical-timeline-content">
-                                        <h2>添加</h2>
-                                        <p>是诶谁谁添加了什么</p>
-                                        <span class="vertical-date">
-                                    今天 <br>
-                                    <small>2月3日</small>
-                                </span>
-                                    </div>
-                                </div>
-
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon red-bg">
-                                        <i class="fa fa-remove"></i>
-                                    </div>
-                                    <div class="vertical-timeline-content">
-                                        <h2>删除</h2>
-                                        <p>删除了啦啦啦，啦啦啦~~</p>
-                                        <span class="vertical-date"> 昨天 <br><small>2月2日</small></span>
-                                    </div>
-                                </div>
-
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon lazur-bg">
-                                        <i class="fa fa-hand-pointer-o"></i>
-                                    </div>
-
-                                    <div class="vertical-timeline-content">
-                                        <h2>查看了</h2>
-                                        <p>查看了什么</p>
-                                        <span class="vertical-date">昨天 <br><small>2月2日</small></span>
-                                    </div>
-                                </div>
-
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon lazur-bg">
-                                        <i class="fa fa-user-md"></i>
-                                    </div>
-
-                                    <div class="vertical-timeline-content">
-                                        <h2>公司年会</h2>
-                                        <p>发年终奖啦，啦啦啦~~</p>
-                                        <span class="vertical-date">前天 <br><small>2月1日</small></span>
-                                    </div>
-                                </div>
                             </div>
-                            <div id="vertical-timeline" class="vertical-container light-timeline" style="width: 48%;display: inline-block;margin-right: 1%">
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon yellow-bg">
-                                        <i class="fa fa-sign-in"></i>
-                                    </div>
-
-                                    <div class="vertical-timeline-content">
-                                        <h2>登录</h2>
-                                        <p>谁谁谁登录
-                                        </p>
-                                        <span class="vertical-date">
-                                    今天 <br>
-                                    <small>2月3日</small>
-                                </span>
-                                    </div>
-                                </div>
-
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon yellow-bg">
-                                        <i class="fa fa-sign-out"></i>
-                                    </div>
-
-                                    <div class="vertical-timeline-content">
-                                        <h2>退出了</h2>
-                                        <p>谁谁谁退出了</p>
-                                        <span class="vertical-date">
-                                    今天 <br>
-                                    <small>2月3日</small>
-                                </span>
-                                    </div>
-                                </div>
-
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon lazur-bg">
-                                        <i class="fa fa-coffee"></i>
-                                    </div>
-
-                                    <div class="vertical-timeline-content">
-                                        <h2>喝咖啡休息</h2>
-                                        <p>喝咖啡啦，啦啦啦~~</p>
-                                        <span class="vertical-date"> 昨天 <br><small>2月2日</small></span>
-                                    </div>
-                                </div>
-
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon yellow-bg">
-                                        <i class="fa fa-phone"></i>
-                                    </div>
-
-                                    <div class="vertical-timeline-content">
-                                        <h2>给李四打电话</h2>
-                                        <p>给李四打电话分配本月工作任务</p>
-                                        <span class="vertical-date">昨天 <br><small>2月2日</small></span>
-                                    </div>
-                                </div>
-
-                                <div class="vertical-timeline-block">
-                                    <div class="vertical-timeline-icon lazur-bg">
-                                        <i class="fa fa-user-md"></i>
-                                    </div>
-
-                                    <div class="vertical-timeline-content">
-                                        <h2>公司年会</h2>
-                                        <p>发年终奖啦，啦啦啦~~</p>
-                                        <span class="vertical-date">前天 <br><small>2月1日</small></span>
-                                    </div>
-                                </div>
+                            <div id='showLog2' class='vertical-container light-timeline' style='width: 48%;display: inline-block;margin-right: 1%'>
+                           
                             </div>
                         </div>
                         </div>
@@ -330,8 +202,86 @@
 
         });
 
+    $.ajax({
+        type: "POST",
+        url: "{{ url('admin/admin/getlog') }}",
+        dataType : "json",
+        success: function(msg){
+            if(msg.status == 1){
+                //循环判断日志类型
+                var str = ''
+                var new_str = 0
 
+                $.each(msg.data, function(k, v){
+                    
+                    
+
+
+                    if(v.log_type == 1){
+                        //数据添加
+                        str += "<div class='vertical-timeline-block'>"
+                        str += "<div class='vertical-timeline-icon blue-bg' id='insertInfo'>"
+                        str += "<i class='fa fa-file-text'></i></div>"
+                        str += "<div class='vertical-timeline-content'>"
+                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
+                        str += "</span></div></div>"
+                    }else if(v.log_type == 2){
+                        //数据修改
+                        str += "<div class='vertical-timeline-block'>"
+                        str += "<div class='vertical-timeline-icon blue-bg' id='insertInfo'>"
+                        str += "<i class='fa fa-edit'></i></div>"
+                        str += "<div class='vertical-timeline-content'>"
+                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
+                        str += "</span></div></div>"
+                    }else if(v.log_tyoe == 3){
+                        //数据查看
+                        str += "<div class='vertical-timeline-block'>"
+                        str += "<div class='vertical-timeline-icon lazur-bg' id='insertInfo'>"
+                        str += "<i class='fa fa-hand-pointer-o'></i></div>"
+                        str += "<div class='vertical-timeline-content'>"
+                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
+                        str += "</span></div></div>"
+                    }else if(v.log_type == 4){
+                        //数据删除
+                        str += "<div class='vertical-timeline-block'>"
+                        str += "<div class='vertical-timeline-icon red-bg' id='insertInfo'>"
+                        str += "<i class='fa fa-remove'></i></div>"
+                        str += "<div class='vertical-timeline-content'>"
+                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
+                        str += "</span></div></div>"
+                    }else if(v.log_type == 5){
+                        //用户登录
+                        str += "<div class='vertical-timeline-block'>"
+                        str += "<div class='vertical-timeline-icon yellow-bg' id='insertInfo'>"
+                        str += "<i class='fa fa-sign-in'></i></div>"
+                        str += "<div class='vertical-timeline-content'>"
+                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
+                        str += "</span></div></div>"
+                    }else{
+                        //用户退出
+                        str += "<div class='vertical-timeline-block'>"
+                        str += "<div class='vertical-timeline-icon yellow-bg' id='insertInfo'>"
+                        str += "<i class='fa fa-sign-out'></i></div>"
+                        str += "<div class='vertical-timeline-content'>"
+                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
+                        str += "</span></div></div>"
+                    }
+
+                    if(k == 4){
+                        $('#showLog1').html(str);
+                        str = '';
+                    }
+                })
+
+                $('#showLog2').html(str);
+
+
+            }else{
+                alert('加载失败，请重新加载')
+            }
+        }
     });
+});
 </script>
 </html>
 @stop

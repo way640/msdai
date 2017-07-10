@@ -79,7 +79,7 @@ class CreditController extends Controller
     public function lengpart($id)
     {
         $data=DB::table('lenging')->leftjoin('user_info','lenging.user_id','=','user_info.user_id')->where('lenging_id','=',$id)->get();
-        $read=DB::table('config')->where('config_type',1)->get();;
+        $read=DB::table('config')->where('config_type',1)->get();
         return view('Home/leng/lengpart',['data'=>$data,'read'=>$read]);
     }
 
@@ -148,21 +148,23 @@ class CreditController extends Controller
     //用户借款交易安全协议
     public function agr()
     {
-        return view('Home/ransaction security/Agreement');
+        return view('Home/Transaction security/Agreement');
     }
 
     //用户还款页面
     public function repay()
     {
-        $user_id=$_SESSION['user']['user_id'];
+        $user_id = $_SESSION['user']['user_id'];
 
         $repay = DB::table('loan')
             ->Join('lenging', 'loan.lenging_id', '=', 'lenging.lenging_id')
             ->join('back', 'loan.loan_id', '=', 'back.loan_id')
-            ->where('loan.user_id',$user_id)
+            ->where('loan.user_id', $user_id)
             ->get();
-        return view('Home/repay/repayment',['repay'=>$repay]);
+
+        return view('Home/repay/repayment', ['repay' => $repay]);
     }
+
 
 
     //用户还款

@@ -16,13 +16,13 @@ class UserController extends CommonController
     public function index()
     {
        $data = User::orderBy('admin_id','asc')->get();
-       return view('admin.lists',compact('data'));
+       return view('Admin/lists',compact('data'));
     }
 
     //get.admin/user/create   添加管理员
     public function create()
     {
-        return view('admin.add');
+        return view('Admin/add');
     }
     //post.admin/user/store   添加管理员提交
     public function store()

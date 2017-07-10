@@ -4,8 +4,7 @@
 <meta name="keywords" content="投资理财, 互联网金融, 网络投融资平台, 网络理财, 互联网理财, 积木盒子, 投资理财, www.jimu.com">
 <meta name="description" content="积木盒子提供安全、有保障的互联网投融资服务。投资理财100元起投，1—12个月项目期限，债权转让灵活。">
 <meta name="author" content="乐融多源(北京)科技有限公司">
->>>>>>> f9ea0354d9dda3710dfa4d67b2be9519e2798d43
-<base href="./../../">
+<base href="{{url('')}}/">
 <meta name="apple-itunes-app" content="app-id=790276804">
 <!-- end: Meta -->
 <meta property="wb:webmaster" content="9fd1b56cebfec3b3">
@@ -35,6 +34,8 @@
 						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
 						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/setAddress') }}">修改地址</a></li>					    
+                        <li><a data-nav="user-center" class="" href="{{ url('molans/repay') }}">我要还款</a></li>
+                        <li><a data-nav="user-center" class="" href="{{ url('personal/idCard') }}">绑定身份证</a></li>
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">
@@ -103,7 +104,7 @@
                        alert('添加失败， 请重新尝试')
 					} else {
 						alert('添加成功')
-						window.parent.location.href="{{ url('personal/config') }}"
+						window.parent.location.href="{{ url('personal/personal') }}"
 					}
                 }
           });

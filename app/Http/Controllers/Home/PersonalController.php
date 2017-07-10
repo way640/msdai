@@ -35,7 +35,7 @@ class PersonalController extends CommonController
 		$userInfo = DB::select ( "select * from zd_user_info where user_id = $userId" ) ;
         $userInfo = $this -> objToArray ( $userInfo ) ; 		
 		
-		return view('home/personal/personal', [ 'userInfo' => $userInfo[0] ]);
+		return view('Home/Personal/personal', [ 'userInfo' => $userInfo[0] ]);
 	}
 	
 	/*
@@ -43,7 +43,7 @@ class PersonalController extends CommonController
 	*/
 	public function points(){
 		
-		return view('home/personal/points');
+		return view('Home/Personal/points');
 	}
 
 	/*
@@ -61,7 +61,7 @@ class PersonalController extends CommonController
 		$data = DB::select("select * from zd_user where user_id = $userId") ;
 		$data = $this -> objToArray ( $data ) ;
 		
-		return view( 'home/personal/config', [ 'data' => $arr[0], 'arr' => $data[0] ] );
+		return view( 'Home/Personal/config', [ 'data' => $arr[0], 'arr' => $data[0] ] );
 	}
 	
 	/*
@@ -71,7 +71,7 @@ class PersonalController extends CommonController
 	*/
 	public function image(){
 	
-		return view('home/personal/image');
+		return view('Home/Personal/image');
 	}
 	
 	/*
@@ -81,7 +81,7 @@ class PersonalController extends CommonController
 	*/
 	public function changePwd(){
 		
-		return view('home/personal/changePwd');
+		return view('Home/Personal/changePwd');
 	}
 	
     /*
@@ -169,7 +169,7 @@ class PersonalController extends CommonController
 	*/
 	public function setNumber(){
 		
-		return view('home/personal/setNumber') ;
+		return view('Home/Personal/setNumber') ;
 	}
 	
 	/*
@@ -234,7 +234,7 @@ class PersonalController extends CommonController
 	*/
 	public function bindEmail(){
 		
-		return view ( 'home/personal/bindemail' ) ; 
+		return view ( 'Home/Personal/bindemail' ) ; 
 	}
 	
 	/*
@@ -294,7 +294,7 @@ class PersonalController extends CommonController
 				$status = 0 ;
 			}
 			
-			return view ( 'home/personal/activEmail', [ 'status' => $status ]) ;
+			return view ( 'Home/Personal/activEmail', [ 'status' => $status ]) ;
 		}
 	}
 	
@@ -306,7 +306,7 @@ class PersonalController extends CommonController
 	public function setAddress(){
 		
 		
-        return view ( 'home/personal/setAddress' ) ;
+        return view ( 'Home/Personal/setAddress' ) ;
 	}
 	
 	/*
@@ -415,4 +415,62 @@ class PersonalController extends CommonController
 	
 		return $this -> success ( $showData );
 	}
+
+	/*
+	*@Action_name : 验证身份证实名
+	*@Author : szt
+	*@Time : 07-08
+	*/
+    public function bindCard(){
+
+    	return view( 'Home/Personal/bindCard' ) ; 
+    }
+
+	/*
+	*@Action_name : 验证身份证是否正确
+	*@Author : szt
+	*@Time : 07-08
+	*/
+    public function doBindCard(){
+
+        $userId = $_SESSION['user']['user_id'] ; 
+    	$data = $this -> post ; 
+        $name = $data['name'] ; 
+    	$card = strtoupper($data['card']);
+
+        $regx = "/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/"; 
+
+        if(!preg_match($regx, $card)) { 
+
+            return $this -> error() ; 
+        } 
+
+        $url = "http://api.avatardata.cn/IdCardCertificate/Verify?key=fab6dbd889884619a21c1f6dee8e66cd&realname=$name&idcard=$card" ; 
+   
+        $content = file_get_contents( "$url" ) ; 
+
+        $data = json_decode($content, true);
+
+        if ( $data['error_code'] == 0 ) {
+
+        	DB::update ( 'update set zd_user_info user_card = '.$card.', user_name = '.$name.', user_is_loan = 1 where user_id = '.$userId ) ; 
+            $this -> success() ;
+        } else {
+
+        	$thie -> error() ; 
+        }
+
+/*        Array
+(
+    [result] => Array
+        (
+            [code] => 1001
+            [message] => 不一致
+        )
+
+    [error_code] => 0
+    [reason] => Succes
+)*/
+    }
+
 }

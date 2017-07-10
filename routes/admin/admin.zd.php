@@ -39,3 +39,7 @@ Route::any('admin/amin/roleList', 'Admin\AdminController@roleList') ;
 *@Use : 添加管理员赋予角色
 */
 Route::any('admin/admin/addAdminRole', 'Admin\AdminController@addAdminRole') ; 
+/*
+*@Use : 获取日志信息
+*/
+Route::any('admin/admin/getlog', 'Admin\AdminController@getLog') ;

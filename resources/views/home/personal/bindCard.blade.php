@@ -1,4 +1,5 @@
-<?php $__env->startSection('content'); ?>
+@extends('home.title')
+@section('content')
 
 <title>积木盒子 jimu.com - 智能综合理财平台</title>
 <meta name="keywords" content="投资理财, 互联网金融, 网络投融资平台, 网络理财, 互联网理财, 积木盒子, 投资理财, www.jimu.com">
@@ -26,13 +27,15 @@
             <div class="jimu-leftnav" data-version="4">
 				<ul>
 					<ul class="jimu-leftsecnav">
-						<li><a data-nav="user-center" class="" href="<?php echo e(url('personal/personal')); ?>">安全设置</a></li>
-					    <li><a data-nav="user-center" class="active highlight asset-overview" href="<?php echo e(url('cz/index')); ?>">账户充值</a></li>
-					    <li><a data-nav="user-center" class="" href="<?php echo e(url('personal/addImage')); ?>">添加头像</a></li>
-						<li><a data-nav="user-center" class="" href="<?php echo e(url('personal/changePwd')); ?>">修改密码</a></li>
-						<li><a data-nav="user-center" class="" href="<?php echo e(url('personal/setNumber')); ?>">认证手机</a></li>
-						<li><a data-nav="user-center" class="" href="<?php echo e(url('personal/bindEmail')); ?>">绑定邮箱</a></li>
-						<li><a data-nav="user-center" class="" href="<?php echo e(url('personal/setAddress')); ?>">添加地址</a></li>					    
+						<li><a data-nav="user-center" class="" href="{{ url('personal/personal') }}">安全设置</a></li>
+					    <li><a data-nav="user-center" class="" href="{{ url('cz/index') }}">账户充值</a></li>
+					    <li><a data-nav="user-center" class="" href="{{ url('personal/addImage') }}">添加头像</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/changePwd') }}">修改密码</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
+						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">修改地址</a></li>					    
+                        <li><a data-nav="user-center" class="" href="{{ url('molans/repay') }}">我要还款</a></li>
+                        <li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/idCard') }}">绑定身份证</a></li>
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">
@@ -51,43 +54,72 @@
 				</ul>
 			</div>
 </div>
-  
-<div class="register-main">
-    <h4>充值</h4>
-    <hr>
-    <form action="/cz/add" method='post'>
-        <div class="row-fluid">
-            <div class="control-group">
-                <label class="control-label" for="oldLoginPass">名称</label>
-                <div class="controls">
-                    <input type="text" name='name'>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="newLoginPass">金额</label>
-                <div class="controls">
-                    <input type="text" name='price'>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="newLoginPass2">描述</label>
-
-                <div class="controls">
-                    <textarea name="desc" id="" cols="40" rows="2"></textarea>
-                </div>
-                <span class="help-block"><span class="field-validation-valid" data-valmsg-for="newLoginPass2" data-valmsg-replace="true"></span></span>
-            </div>
+  <div class="container register" data-site-phone="400-628-1176">
+         <div class="register-main">
+            <h4>绑定身份证</h4>
             <hr>
-            <button type="submit" class="btn btn-primary span12" style="margin-left: 0">确认</button>
-        </div>
-    </form>
-</div>
-		
-		
-		
-    </div>
-		</div>
+            <form>
+                <div class="row-fluid">
+                    <div class="control-group">
+                        <label class="control-label" for="oldLoginPass" >身份证号</label>
+                        <div class="controls">
+                            <input class="span12 valid" type="text" id="bindCard" name="oldLoginPass" data-val="true" data-val-required="请填写原密码。" data-val-regex="密码只能为 6 - 32 位数字，字母及常用符号组成。" data-val-regex-pattern="^[A-Za-z0-9\^$\.\+\*_@!#%&amp;~=-]{6,32}$">
+                        </div>
+                        <span class="help-block"><span class="field-validation-valid" data-valmsg-for="oldLoginPass" data-valmsg-replace="true"></span></span>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="newLoginPass">姓名</label>
 
+                        <div class="controls">
+                            <input class="span12 valid" type="text" id="bindName" name="newLoginPass" data-val="true" data-val-required="请填写新密码。" data-val-regex="密码由 8 - 32 位数字、字母或常用符号组成，且必须同时包含数字和字母。" data-val-regex-pattern="^(?=.*[a-zA-Z].*)(?=.*[0-9].*)[A-Za-z0-9\^$\.\+\*_@!#%&amp;~=-]{8,32}$">
+                        </div>
+                        <span class="help-block"><span class="field-validation-valid" data-valmsg-for="newLoginPass" data-valmsg-replace="true"></span></span>
+                    </div>
+
+                    <hr>
+                    <button type="button" class="btn btn-primary span12" id="checkOut" style="margin-left: 0">确认</button>
+                </div>
+            </form>
+        </div>
+		 
+  
+<script>
+	$('#checkOut').on('click', function(){
+
+        
+		var card = $('#bindCard').val()
+		var name = $('#bindName').val()
+
+		var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if(!reg.test(card)){
+
+            alert('请输入正确的身份证号码')
+            return false;
+		}
+
+    $.ajax({
+        type: "POST",
+        url: "{{ url('personal/doBandCard') }}",
+        data: "card="+card+"&name="+name,
+        dataType: "json",
+        success: function(msg){
+
+            if ( msg.status == 0 ) {
+
+            	alert('绑定失败，请重新验证')
+            } else {
+
+            	alert('身份证绑定成功')
+            	window.parent.location.href="{{ url('personal/personal') }}"
+            }
+        }
+    });
+
+    
+})
+</script>
+  
+  
   
 </div>
     
@@ -104,50 +136,12 @@
             location.reload();
         });
     </script>
-    
-	<script>
-	    $('#checkOut').on('click', function(){
-			var data = {};
-			data.oldpwd = $('#oldLoginPass').val()
-			data.newpwd = $('#newLoginPass').val()
-			data.checkpwd  = $('#newLoginPass2').val()
-			
-           $.ajax({
-                type: "POST",
-                url: "<?php echo e(url('personal/setNew')); ?>",
-                data: data,
-                success: function(msg){
-
-                  if ( msg.status == 0 ) {
-						
-						alert(msg.msg)
-					} else {
-						
-						alert('密码修改成功')
-						
-						window.parent.location.href="<?php echo e(url('user/login')); ?>"
-					}
-                }
-});
-		})
-	</script>
-	
-	<script src="js/font_hxuxey0tud81714i.js" type="text/javascript"></script>
+<script src="js/font_hxuxey0tud81714i.js" type="text/javascript"></script>
     <script src="js/font_2vki31oofhudte29.js" type="text/javascript"></script>
     <script src="js/settings-88ea31cf32.js" type="text/javascript"></script>
     <script src="js/init-fc412db349.js" type="text/javascript"></script>
 	<script src="js/hm.js"></script>
 	<script src="js/hm.js(1)"></script>
-	
-    <script src="js/bootstrap-fb24c92ad4.min.js" type="text/javascript"></script>
-    <script src="js/jquery-640f2d52cc.scrollUp.min.js" type="text/javascript"></script>
-    <script src="js/eden-20ce50b66d.ui.helper.js" type="text/javascript"></script>
-    <script src="js/jquery-b23540f87a.easing.min.js" type="text/javascript"></script>
-    <script src="js/jquery-0abadbaab5.validate.min.js" type="text/javascript"></script>
-    <script src="js/jquery-db3fe95623.validate.unobtrusive.min.js" type="text/javascript"></script>
-    <script src="js/eden-e72ac904d3.ui.patch.js" type="text/javascript"></script>
-    <script src="js/font_hxuxey0tud81714i.js" type="text/javascript"></script>
-
 
 <script type="text/javascript" async="" src="js/dc.js"></script>
 <script type="text/javascript" async="" src="js/agt.js"></script>
@@ -155,5 +149,4 @@
 <script type="text/javascript" async="" src="js/mvl.js"></script>
 <img src="file/pv" style="display: none; width: 0px; height: 0px;">
 </body></html>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('home.title', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@stop

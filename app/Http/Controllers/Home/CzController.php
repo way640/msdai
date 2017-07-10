@@ -24,12 +24,12 @@ class CzController extends CommonController
 	{
 		if (@$_SESSION['user'])
 		{
-			return view('home/cz/index');
+			return view('Home/Cz/index');
 		}
 		else
 		{
 			echo '<script>alert("请您登录")</script>';
-			return view('home/user/login');
+			return view('Home/User/login');
 		}
 		
 	}
@@ -81,21 +81,21 @@ class CzController extends CommonController
 					//echo '钱没到账,又给那小子了';
 					echo '<script>alert("成功")</script>';
 					//个人中心账户页面
-					return view('home/personal/personal');
+					return view('Home/Personal/personal');
 				}else{
 					//echo '充值失败';
-					return view('home/cz/index');
+					return view('Home/Cz/index');
 				}				
 			}
 			else
 			{
-				return view('home/cz/index');
+				return view('Home/Cz/index');
 			}
 		}
 		else
 		{
 			//echo '签名失败';
-			return view('home/cz/index');
+			return view('Home/Cz/index');
 		}
 	}
 }

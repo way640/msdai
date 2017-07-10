@@ -29,10 +29,10 @@ class GoldController extends CommonController
 		// echo '<pre>';
 		// print_r($arr);
 		//传过去的网页直接掉接口 返回数据
-		//return view('home/gold/gold',['info'=>$info]);
+		//return view('Home/Gold/gold',['info'=>$info]);
 
 		//传过去的页面ajax请求本地 本地调用接口缓冲 在返回数据
-		return view('home/gold/golda',['info'=>$info]);
+		return view('Home/Gold/golda',['info'=>$info]);
 	}
 	//  调用本地页面的时候
 	public function getlist()
@@ -150,7 +150,7 @@ class GoldController extends CommonController
 					}
 				}
 	 			ob_start();  
-	 			echo  "$callback(".json_encode($arr).")";
+	 			echo  "$callback(".json_encode($arr).");";
 				$content = ob_get_contents();								//把详情页内容赋值给$content变量
 				file_put_contents($goods_statis_file, $content);			//写入内容到对应静态文件中
 				ob_end_flush();												// 冲刷出（送出）输出缓冲区内容并关闭缓冲
@@ -182,7 +182,7 @@ class GoldController extends CommonController
 				}
 			}
  			ob_start();  
- 			echo  "$callback(".json_encode($arr).")";
+ 			echo  "$callback(".json_encode($arr).");";
 			$content = ob_get_contents();								//把详情页内容赋值给$content变量
 			file_put_contents($goods_statis_file, $content);			//写入内容到对应静态文件中
 			ob_end_flush();												// 冲刷出（送出）输出缓冲区内容并关闭缓冲
@@ -223,7 +223,7 @@ class GoldController extends CommonController
 				$content = ob_get_contents();					//把详情页内容赋值给$content变量
 				file_put_contents($fund, $content);				//写入内容到对应静态文件中
 				ob_end_clean();									//输出缓冲区的内容并关闭这个缓冲区
-				echo  "$callback(".$data.")";
+				echo  "$callback(".$data.");";
 			}
 		}
 		else
@@ -238,7 +238,7 @@ class GoldController extends CommonController
 			$content = ob_get_contents();					//把详情页内容赋值给$content变量
 			file_put_contents($fund, $content);				//写入内容到对应静态文件中
 			ob_end_clean();									//输出缓冲区的内容并关闭这个缓冲区
-			echo  "$callback(".$data.")";
+			echo  "$callback(".$data.");";
 		}
 	}
 	public function addgold()
@@ -248,7 +248,7 @@ class GoldController extends CommonController
 		$goods_statis_file = public_path('file')."\\goods_file_".$goldid.".html";
 		$data = file_get_contents($goods_statis_file);
 		$info = json_decode($data,true)['result'];
-		return view('home/gold/addgold',['data'=>$info]);
+		return view('Home/Gold/addgold',['data'=>$info]);
 	}
 	//购买基金
 	public function numprice()
@@ -271,7 +271,7 @@ class GoldController extends CommonController
 			$alipay->requestPay($out_trade_no, $subject, $total_fee, $body, $show_url='');
 		}else{
 			echo '<script>alert("请先登录")</script>';
-			return view('home/user/login');
+			return view('Home/User/login');
 		}
 		
 	}
