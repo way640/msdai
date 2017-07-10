@@ -22,7 +22,7 @@ class UserController extends CommonController
 	*/
 	public function index(){
 		
-		return view('home/user/login');
+		return view('Home/User/login');
 	}
 	
 	/*
@@ -30,7 +30,7 @@ class UserController extends CommonController
 	*/
 	public function showLogin(){
 		
-		return view('home/user/loginForm');
+		return view('Home/User/loginForm');
 	}
 	
 	
@@ -42,7 +42,7 @@ class UserController extends CommonController
 	
 	public function regist(){
 		
-		return view ( 'home/user/regist' );
+		return view ( 'Home/User/regist' );
 	}
 	
 	/*
@@ -100,7 +100,7 @@ class UserController extends CommonController
 	*@Action_name : 设置验证码
 	*/
 	public function captcha(){
-		return view('home/web/StartCaptchaServlet');
+		return view('Home/Web/StartCaptchaServlet');
 	}
 
 	/*
@@ -108,7 +108,7 @@ class UserController extends CommonController
 	*/
 	public function login(){
 		
-		return view('home/user/login');
+		return view('Home/User/login');
 	}
 	
 	/*

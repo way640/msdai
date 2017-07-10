@@ -50,6 +50,6 @@ class IndexController extends CommonController
 		//查询文章详情
 		$info = DB::table('article')->where('article_id',$id)->first();
 		//print_r($info);
-		return view('home.gold.article',['info'=>$info]);
+		return view('Home/Gold/article',['info'=>$info]);
 	}
 }
