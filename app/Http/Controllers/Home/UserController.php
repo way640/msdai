@@ -214,7 +214,7 @@ class UserController extends CommonController
 
             	$str  = "您的" ;
 
-            	$str .= implode(",", $str) ;
+            	$str .= implode(",", $arr) ;
                 
                 $str .= "尚未填写" ; 
 

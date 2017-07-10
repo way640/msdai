@@ -69,6 +69,14 @@ Route::any('personal/addAddress', 'Home\PersonalController@addAddress') ;
 *@Use : 获取用户信息
 */
 Route::any('personal/getUserInfo', 'Home\PersonalController@getUserInfo') ;
+/*
+*@Use : 验证身份证实名
+*/
+Route::any('personal/idCard', 'Home\PersonalController@bindCard') ; 
+/*
+*@Use : 验证身份证是否正确
+*/
+Route::any('personal/doBandCard', 'Home\PersonalController@doBindCard') ;
 } else {
 Route::get('personal/personal', 'Home\UserController@login') ; 
 }
