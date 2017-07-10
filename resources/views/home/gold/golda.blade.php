@@ -32,14 +32,22 @@
 
 <div class="prod-item corp" id="TimesContent">
         <p class="prod-title">
-            <span class="font-bold">贵金属种类：
-            <select id="JJ_zl" style="height: 30px">
-            <option value="">--选择--</option>
-                @foreach ($info as $va)
-                    <option value="{{$va->fund_no}}" class='J_zl' >{{$va->fund_name}}</option>
-                @endforeach
-        </select>
-    </span>
+            <table>
+                <tr>
+                    <td>贵金属种类：</td>
+                    <td>
+                        <select id="JJ_zl" style="height:30px">
+                            <option value="" style='width:90px'>--选择--</option>
+                                @foreach ($info as $va)
+                                    <option value="{{$va->fund_no}}" class='J_zl' >{{$va->fund_name}}</option>
+                                @endforeach
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            
+                
+            
         </p>
             <div id='vbox' style="height: 250px">
                 
