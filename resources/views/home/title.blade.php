@@ -58,7 +58,7 @@
                   <div id='box'>
                       
                   </div>
-				  <li style="float:right;"><a href="{{ asset('Personal/personal') }}">个人中心</a></li>
+				  <li style="float:right;"><a href="{{ asset('personal/personal') }}">个人中心</a></li>
         	</ul>
         </div>
     </div>
