@@ -1,6 +1,6 @@
 @extends('Home.title')
 @section('content')
-		<link href="{{ asset('css/index_lib.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/index_lib.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/index_main.min.css') }}" rel="stylesheet">
 
 	<link href="{{ asset('css/index-ef3dfa649d.css') }}" rel="stylesheet">
@@ -36,6 +36,7 @@
             <span class="i i-calendar">最快1天到账</span>
         </p>
         <div class="pull-left prod-intro">
+
             <h2>zdmoney衷心的提醒您,请根据您自己的实际情况酌情考虑您的借款金额，谢谢您的光临</h2>
             <dl class="left">
 
