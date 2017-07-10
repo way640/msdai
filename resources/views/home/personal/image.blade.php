@@ -87,7 +87,7 @@
 		</div>
 
 		<div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lg" style="width: 1050px;"	>
 				<div class="modal-content">
 					<!--<form class="avatar-form" action="upload-logo.php" enctype="multipart/form-data" method="post">-->
 					<form class="avatar-form">
@@ -114,7 +114,7 @@
 								<div class="avatar-preview preview-sm"></div>-->
 									</div>
 								</div>
-								<div class="row avatar-btns">
+								<div class="row avatar-btns" style="height: 100px;">
 									<div class="col-md-4">
 										<div class="btn-group">
 											<button class="btn btn-danger fa fa-undo" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees"> 向左旋转</button>

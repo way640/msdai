@@ -27,11 +27,11 @@ if($namespace&&$controller&&$action){
 function Autoload($path){
     $arr = opendir($path);
     while($info = readdir($arr)){
-        if (is_dir($path.'\\'.$info) && $info != '.' && $info != '..') {
-            Autoload($path.'\\'.$info);
+        if (is_dir($path.'/'.$info) && $info != '.' && $info != '..') {
+            Autoload($path.'/'.$info);
         }
         if(substr($info,-6,-4) == 'zd'){
-            include $path.'\\'.$info;
+            include $path.'/'.$info;
         }
     }
 }
@@ -43,15 +43,15 @@ if(count($urlArr) > 5){
     echo "<script>location='".url('')."'</script>";
 }
 if($urlArr[1] == 'admin'){
-    Autoload(__DIR__.'\admin');
+    Autoload(__DIR__.'/admin');
 }else{
     if(is_file(config_path('').'\stop.lock')){
         Route::get('/', function () { return view('stop'); });
     }else{
-        Autoload(__DIR__.'\home');
+        Autoload(__DIR__.'/home');
         //默认访问首页
         Route::get('/', function () {
-            return view('home.index');
+            return view('Home/index');
         });
 
 
@@ -83,11 +83,11 @@ if($urlArr[1] == 'admin'){
     }
 }
 Route::get('admin/{name}', function () {
-    return view('admin.login');
+    return view('Admin/login');
 });
 
 Route::get('admin/{name}/{id}', function () {
-    return view('admin.login');
+    return view('Admin/login');
 });
 
 
