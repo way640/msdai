@@ -17,6 +17,6 @@ class ActivityController extends CommonController
 	*/
 	public function index()
     {
-		return view('home/activity');
+		return view('Home/activity');
 	}
 }

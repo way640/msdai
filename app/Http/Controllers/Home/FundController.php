@@ -79,6 +79,6 @@ class FundController extends CommonController
     $lastpage=$data->currentPage()-1 <   0  ?   1  : $data->currentPage()-1 ;
     $data->next=$nextpage;
     $data->last=$lastpage;
-    return view('home/gold/fund',['data'=>$data]);
+    return view('Home/Gold/fund',['data'=>$data]);
 	}
 }
