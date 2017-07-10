@@ -14,14 +14,14 @@ class SystemController extends CommonController
      * @author：Way
      * @Time：2017-06-17**/
     public function index ( ) {
-        return view('admin.system');
+        return view('Admin/system');
     }
     /*
      * @action_name：配置列表添加页面
      * @author：Way
      * @Time：2017-06-17**/
     public function add ( ) {
-        return view('admin.systemAdd');
+        return view('Admin/systemAdd');
     }
 
 

@@ -70,6 +70,6 @@ class LoginController extends Controller
 		
       //  return redirect('admin/index/index');
     
-      return view('admin.login');
+      return view('Admin/login');
     }
 }

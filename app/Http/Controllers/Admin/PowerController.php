@@ -14,14 +14,14 @@ class  PowerController extends CommonController
     public function index()
     {
         $data = Power::orderBy('priv_id','asc')->get();
-        return view('admin.power.index' ,compact('data'));
+        return view('Admin/Power/index' ,compact('data'));
     }
 
     //get.admin/article/create   添加权限
     public function create()
     {
         $data = (new Power)->tree();
-        return view('admin.power.add',compact('data'));
+        return view('Admin/Power/add',compact('data'));
     }
 
     //post.admin/article/store 添加权限提交
@@ -54,7 +54,7 @@ class  PowerController extends CommonController
     public function edit($priv_id)
     {
         $field = Power::find($priv_id);
-        return view('admin.power.edit',compact('field'));
+        return view('Admin/Power/edit',compact('field'));
     }
 
     //put.article/article/{article/article/}    更新文章

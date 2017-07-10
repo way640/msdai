@@ -14,28 +14,28 @@ class ConfigController extends CommonController
      * @author：Way
      * @Time：2017-06-14**/
     public function index ( ) {
-        return view('admin.config');
+        return view('Admin/config');
     }
     /*
      * @action_name：配置列表添加页面
      * @author：Way
      * @Time：2017-06-14**/
     public function add ( ) {
-        return view('admin.configAdd');
+        return view('Admin/configAdd');
     }
     /*
      * @action_name：配置类型展示页面
      * @author：Way
      * @Time：2017-06-14**/
     public function typeIndex ( ) {
-        return view('admin.configType');
+        return view('Admin/configType');
     }
     /*
      * @action_name：配置类型添加页面
      * @author：Way
      * @Time：2017-06-14**/
     public function typeAdd ( ) {
-        return view('admin.configTypeAdd');
+        return view('Admin/configTypeAdd');
     }
 
     /*************以下是数据接口*************/

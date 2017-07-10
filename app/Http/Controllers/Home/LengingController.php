@@ -27,7 +27,7 @@ class LengingController extends CommonController
         $lastpage=$data->currentPage()-1 <0 ? 1 : $data->currentPage()-1 ;
         $data->next=$nextpage;
         $data->last=$lastpage;
-        return view('home/leng/leng',['data'=>$data]);
+        return view('Home/Leng/leng',['data'=>$data]);
 
     }
 }

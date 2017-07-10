@@ -29,10 +29,10 @@ class GoldController extends CommonController
 		// echo '<pre>';
 		// print_r($arr);
 		//传过去的网页直接掉接口 返回数据
-		//return view('home/gold/gold',['info'=>$info]);
+		//return view('Home/Gold/gold',['info'=>$info]);
 
 		//传过去的页面ajax请求本地 本地调用接口缓冲 在返回数据
-		return view('home/gold/golda',['info'=>$info]);
+		return view('Home/Gold/golda',['info'=>$info]);
 	}
 	//  调用本地页面的时候
 	public function getlist()
@@ -248,7 +248,7 @@ class GoldController extends CommonController
 		$goods_statis_file = public_path('file')."\\goods_file_".$goldid.".html";
 		$data = file_get_contents($goods_statis_file);
 		$info = json_decode($data,true)['result'];
-		return view('home/gold/addgold',['data'=>$info]);
+		return view('Home/Gold/addgold',['data'=>$info]);
 	}
 	//购买基金
 	public function numprice()
@@ -271,7 +271,7 @@ class GoldController extends CommonController
 			$alipay->requestPay($out_trade_no, $subject, $total_fee, $body, $show_url='');
 		}else{
 			echo '<script>alert("请先登录")</script>';
-			return view('home/user/login');
+			return view('Home/User/login');
 		}
 		
 	}
