@@ -150,7 +150,7 @@ class GoldController extends CommonController
 					}
 				}
 	 			ob_start();  
-	 			echo  "$callback(".json_encode($arr).")";
+	 			echo  "$callback(".json_encode($arr).");";
 				$content = ob_get_contents();								//把详情页内容赋值给$content变量
 				file_put_contents($goods_statis_file, $content);			//写入内容到对应静态文件中
 				ob_end_flush();												// 冲刷出（送出）输出缓冲区内容并关闭缓冲
@@ -182,7 +182,7 @@ class GoldController extends CommonController
 				}
 			}
  			ob_start();  
- 			echo  "$callback(".json_encode($arr).")";
+ 			echo  "$callback(".json_encode($arr).");";
 			$content = ob_get_contents();								//把详情页内容赋值给$content变量
 			file_put_contents($goods_statis_file, $content);			//写入内容到对应静态文件中
 			ob_end_flush();												// 冲刷出（送出）输出缓冲区内容并关闭缓冲
@@ -223,7 +223,7 @@ class GoldController extends CommonController
 				$content = ob_get_contents();					//把详情页内容赋值给$content变量
 				file_put_contents($fund, $content);				//写入内容到对应静态文件中
 				ob_end_clean();									//输出缓冲区的内容并关闭这个缓冲区
-				echo  "$callback(".$data.")";
+				echo  "$callback(".$data.");";
 			}
 		}
 		else
@@ -238,7 +238,7 @@ class GoldController extends CommonController
 			$content = ob_get_contents();					//把详情页内容赋值给$content变量
 			file_put_contents($fund, $content);				//写入内容到对应静态文件中
 			ob_end_clean();									//输出缓冲区的内容并关闭这个缓冲区
-			echo  "$callback(".$data.")";
+			echo  "$callback(".$data.");";
 		}
 	}
 	public function addgold()
@@ -271,7 +271,7 @@ class GoldController extends CommonController
 			$alipay->requestPay($out_trade_no, $subject, $total_fee, $body, $show_url='');
 		}else{
 			echo '<script>alert("请先登录")</script>';
-			return view('Gome/User/login');
+			return view('Home/User/login');
 		}
 		
 	}
