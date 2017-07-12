@@ -52,7 +52,7 @@
 
 	<div class="header">
     	<div class="head">
-        	<a class="logo" href="http://www.zdmoney.com"><img src="{{ asset('image/logo-bg.png') }}" /></a>
+        	<a class="logo" href="{{url('')}}"><img src="{{ asset('image/logo-bg.png') }}" /></a>
           	<ul>
 
                   <div id='box'>
@@ -67,13 +67,13 @@
 jQuery(document).ready(function(){
 
 //导航栏 jsonp请求
-var van = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
+var van = "{{url('')}}/index/nav?code=CA1998&callback=localHandler";
     $.ajax({
         type: "get",
         async: false, 
         url: van,
         dataType: "jsonp",
-        jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+        jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
         jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
         success: function(msg){
             var str ='';
@@ -89,13 +89,13 @@ var van = "http://www.zdmoney.com/index/nav?code=CA1998&callback=localHandler";
     });
 //锦囊妙计 4条最新添加的要知道的小知识
 
-var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
+var url = "{{url('')}}/index/silk?code=CA1998&callback=localHandler";
     $.ajax({
         type: "get",
         async: false,
         url: url,
         dataType: "jsonp",
-        jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+        jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
         jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
         success: function(msg){
             var str0 ='';
@@ -111,16 +111,16 @@ var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
                     //alert(v.article_content);
                     // var content = v.article_content;
                     // alert(content.substring(0,50)+"...");
-                    str0 +='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
+                    str0 +='<a href="{{url('')}}/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }else if(k==1){
                     //alert(2);
-                    str1 +='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
+                    str1 +='<a href="{{url('')}}/index/silk_list?id='+v.article_id+'" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }else if(k==2){
                     //alert(3);
-                    str2+='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
+                    str2+='<a href="{{url('')}}/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }else{
                     //alert(4);
-                    str3 +='<a href="http://www.zdmoney.com/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
+                    str3 +='<a href="{{url('')}}/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
                 }
             })
 
@@ -132,13 +132,13 @@ var url = "http://www.zdmoney.com/index/silk?code=CA1998&callback=localHandler";
     }); 
 
 //友情链接 jsonp接口
-var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler";
+var link = "{{url('')}}/index/link?code=CA1998&callback=localHandler";
     $.ajax({
         type: "get",
         async: false,
         url: link,
         dataType: "jsonp",
-        jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+        jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
         jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
         success: function(msg){
             //alert(msg);
@@ -154,13 +154,13 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
         }
     }); 
     //基金
-        var fund = "http://www.zdmoney.com/gold/fund?code=CA1998&callback=localHandler";
+        var fund = "{{url('')}}/gold/fund?code=CA1998&callback=localHandler";
             $.ajax({
                 type: "get",
                 async: false,
                 url: fund,
                 dataType: "jsonp",
-                jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+                jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
                 jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
                 success: function(fund){
                     //alert(fund.result);
@@ -180,13 +180,13 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                 }
             }); 
     //贵金属
-    var link = "http://www.zdmoney.com/gold/getgo?code=CA1998&callback=localHandler";
+    var link = "{{url('')}}/gold/getgo?code=CA1998&callback=localHandler";
         $.ajax({
             type: "get",
             async: false,
             url: link,
             dataType: "jsonp",
-            jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+            jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
             jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
             success: function(msg){
                 //alert(msg);
@@ -206,7 +206,7 @@ var link = "http://www.zdmoney.com/index/link?code=CA1998&callback=localHandler"
                             +v.buy_price+'&nbsp;&nbsp;<br>成交量：'
                             +v.volume+'</p><div class="earnings"><h2>最高价</h2><h2 style="color:green;">最低价</h2><h3>'
                             +v.high_price+'</h3><h3>'
-                            +v.low_price+'</h3></div><a class="purchase" href="http://www.zdmoney.com/gold/addgold?goldid='+v.goldid+'">立即购买</a></li>';
+                            +v.low_price+'</h3></div><a class="purchase" href="{{url('')}}/gold/addgold?goldid='+v.goldid+'">立即购买</a></li>';
                 })
                 //alert(str);
                 $('#goldbox').html(str);
@@ -245,13 +245,13 @@ jQuery(document).ready(function(){
     	<div class="foot">
         	<article>
             	<div class="friend">
-                	<a href="{{url('index/about')}}">关于我们</a>
+                	<a href="{{url('Index/about')}}">关于我们</a>
                   	<span></span>
-                 	<a href="{{url('index/shengming')}}">法律声明</a>
+                 	<a href="{{url('Index/shengming')}}">法律声明</a>
                     <span></span>
                   	<a href="#">团队介绍</a>
                     <span></span>
-                  	<a href="{{url('index/help')}}">帮助中心</a>
+                  	<a href="{{url('Index/help')}}">帮助中心</a>
                 </div>
                 <figure></figure>
             	<p>© 2016 北京乐融多源信息技术有限公司 京ICP证12049103号-3 京公网安备11010502025440</p>

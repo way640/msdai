@@ -1,4 +1,4 @@
-@extends('home.title')
+@extends('Home.title')
 @section('content')
 
 <title>积木盒子 jimu.com - 智能综合理财平台</title>
@@ -11,7 +11,7 @@
 <meta property="wb:webmaster" content="9fd1b56cebfec3b3">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <!-- start: Fav Icon -->
-<link href="https://www.jimu.com/favicon.ico?1497424941341" rel="shortcut icon" type="image/x-icon">
+<link href="{{url('')}}" rel="shortcut icon" type="image/x-icon">
 <link href="css/general-541378b38b.css" rel="stylesheet">
 <link href="css/center-4329d01fb4.css" rel="stylesheet">
 <link href="css/bindMobile-2cd06feba4.css" rel="stylesheet">
@@ -28,7 +28,7 @@
 				<ul>
 					<ul class="jimu-leftsecnav">
 						<li><a data-nav="user-center" class="" href="{{ url('personal/personal') }}">安全设置</a></li>
-					    <li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('cz/index') }}">账户充值</a></li>
+					    <li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('Cz/index') }}">账户充值</a></li>
 					    <li><a data-nav="user-center" class="" href="{{ url('personal/addImage') }}">添加头像</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/changePwd') }}">修改密码</a></li>
 						<li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>

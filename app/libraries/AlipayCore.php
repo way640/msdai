@@ -10,7 +10,6 @@
  */
 
 namespace App\Libraries;
-
 class AlipayCore {
 
     /**

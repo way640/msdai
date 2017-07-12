@@ -1,4 +1,4 @@
-@extends('home.title')
+@extends('Home.title')
 @section('content')
 <center>
 <meta http-equiv="refresh" content="3;url={{ url('') }}" />
