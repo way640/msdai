@@ -24,7 +24,7 @@
     <!-- end: Style -->
 
     <!-- start: Script -->
-    <script type="text/javascript" src="{{ asset('jeDate/jedate.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('jedate/jedate.js') }}"></script>
     <script  type="text/javascript" src="{{ asset('js/jquery-1.3.2.min.js') }}"></script>
 
     <script src="{{ asset('js/hm.js') }}"></script><div class="container venus-container">
@@ -52,9 +52,14 @@
                             </tr>
 
                             <tr>
+                                <th>放款年利率：</th>
+                                <td><input class="common-text" name="lenging_interest" size="50" value="" type="text" id="inter" required onkeyup='this.value=this.value.replace(/\D/gi,"")'></td>
+                            </tr>
+
+                            <tr>
                                 <th>放款开始时间：</th>
                                 <td>
-                                    <p class="datep"><input class="datainp" id="dateinfo" type="text" name="lenging_start_time"  placeholder="请选择" readonly  required></p>
+                                    <p class="datep"><input class="datainp" id="dateinfo" type="text" name="lenging_start_time"  placeholder="请选择" readonly  req="==========================================================================================================】"uired></p>
                                     <div class="start"></div>
                                 </td>
                             </tr>
@@ -65,11 +70,6 @@
                                     <p class="datep"><input class="datainp" id="dateinfo2" type="text" name="lenging_end_time"  placeholder="请选择"  readonly  required></p>
                                     <div class="end"></div>
                                 </td>
-                            </tr>
-
-                            <tr>
-                                <th>放款年利率：</th>
-                                <td><input class="common-text" name="lenging_interest" size="50" value="" type="text" id="inter" required onkeyup='this.value=this.value.replace(/\D/gi,"")'></td>
                             </tr>
 
                             <tr>
@@ -126,6 +126,32 @@
                     <a href="/user/login" class="btn btn-apply-big btn-modal-apply">登录</a>
                 </div>
             </div>
+
+
+            {{--<div class="modal hide fade in" id="paym">--}}
+                {{--<br><br><br>--}}
+                {{--<form action="" method="post" name="payPassword" id="form_paypsw">--}}
+                    {{--<div id="payPassword_container" class="alieditContainer clearfix" data-busy="0">--}}
+                        {{--<label for="i_payPassword" class="i-block">支付密码：</label>--}}
+                        {{--<div class="i-block" data-error="i_error">--}}
+                            {{--<div class="i-block six-password">--}}
+                                {{--<input class="i-text sixDigitPassword" id="payPassword_rsainput" type="password" autocomplete="off" required="required" value="" name="payPassword_rsainput" data-role="sixDigitPassword" tabindex="" maxlength="6" minlength="6" aria-required="true">--}}
+                                {{--<div tabindex="0" class="sixDigitPassword-box" style="width: 180px;">--}}
+                                    {{--<i style="width: 29px; border-color: transparent;" class=""><b style="visibility: hidden;"></b></i>--}}
+                                    {{--<i style="width: 29px;"><b style="visibility: hidden;"></b></i>--}}
+                                    {{--<i style="width: 29px;"><b style="visibility: hidden;"></b></i>--}}
+                                    {{--<i style="width: 29px;"><b style="visibility: hidden;"></b></i>--}}
+                                    {{--<i style="width: 29px;"><b style="visibility: hidden;"></b></i>--}}
+                                    {{--<i style="width: 29px;"><b style="visibility: hidden;"></b></i>--}}
+                                    {{--<span style="width: 29px; left: 0px; visibility: hidden;" id="cardwrap" data-role="cardwrap"></span>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<span>请输入6位支付密码( 数字！)</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<input type="submit" value="提交">--}}
+                {{--</form>--}}
+            {{--</div>--}}
             <style type="text/css">
                 .contact-us .qrcode img {
                     width: 100%;
@@ -152,12 +178,7 @@
                     var uid=$('#uid').val();
                     var num=$('#money').val();
                     var inter=$('#inter').val();
-                        if(num<1000)
-                        {
-                            $('.tbody').html("<font color='red' size='2px'>最低加入金额 1,000元，上限500,000元</font>");
-                            return false;
-                        }
-                        else if(num>=1000)
+                         if(num>=1000)
                         {
                             $.ajax({
                                 type:"post",
@@ -178,7 +199,7 @@
                                        $('#money').val('');
                                         $('#zui').val('');
                                         $('#ed').val(quota);
-
+                                        alert('您的可用金额为'+quota);
                                     }else{
                                         if(uid=='')
                                         {
@@ -222,18 +243,21 @@
 
                 $('#butt').click(function ()
                 {
+                    var num=$('#money').val();
                     var dateinfo=$('#dateinfo').val();
                     var dateinfo2=$('#dateinfo2').val();
-                    if(dateinfo=='')
+                    if(num<1000){
+                        $('.tbody').html("<font color='red' size='2px'>最低加入金额 1,000元，上限500,000元</font>");
+                    }
+                    else if(dateinfo=='')
                     {
                         $('.start').html('<font color="red" size="2px">请选择放款开始时间</font>');
-                        return false;
                     }
-                    if(dateinfo2=='')
+                    else  if(dateinfo2=='')
                     {
                         $('.end').html('<font color="red" size="2px">请选择放款结束时间</font>');
-                        return false;
                     }
+
                 });
 
 
