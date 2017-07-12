@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends('Admin.main')
 @section('content')
     <script src="{{URL::asset('')}}admin/js/jquery.min.js"></script>
     <div style="padding: 50px 300px 0 300px">

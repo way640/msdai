@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends('Admin.main')
 @section('content')
 <div class="col-md-12" style=" width: 650px">
 <form action="{{url('admin/power/update/'.$field->priv_id)}}" method="post">

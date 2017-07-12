@@ -14,8 +14,11 @@ Route::get('gold/fund', 'Home\GoldController@fund');
 Route::get('gold/fundlist', 'Home\FundController@fundlist');
 //购买基金
 Route::get('gold/addgold', 'Home\GoldController@addgold');
-
+//
 Route::post('gold/numprice', 'Home\GoldController@numprice');
+//文章更多展示
+Route::get('fund/artlist', 'Home\FundController@artlist');
+
 
 
 

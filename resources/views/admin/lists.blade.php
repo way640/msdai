@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends('Admin.main')
 @section('content')
 <!DOCTYPE html>
 <html>
