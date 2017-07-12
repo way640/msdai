@@ -71,7 +71,7 @@
                 <li><a href="{{url('invest/invest')}}" data-nav="venus"><span>放款</span></a></li>
                 <li><a href="{{url('lenging/lenging')}}" data-nav="loan"><span>借款</span></a></li>
                 <li><a href="{{url('gold/gold')}}" data-nav="loan"><span>贵金属</span></a></li>
-                <li class="pull-right"><a href="https://www.jimu.com/User/AssetOverview" data-nav="account"><span>个人中心</span></a></li>
+                <li class="pull-right"><a href="{{url('personal/personal')}}" data-nav="account"><span>个人中心</span></a></li>
             </ul>
         </div>
     </div>

@@ -41,7 +41,7 @@
             <dl class="left">
 
                 <dt>放款金额：</dt>
-                    <dd><span class="digit"><?php echo $v->lenging_money?></span></dd>
+                    <dd><span class="digit"><?php echo $v->lenging_borrow?></span></dd>
             </dl>
             <dl class="right">
                 <dt>放款期限：</dt>
@@ -69,7 +69,7 @@
         <div class="pull-right prod-info">
             <div class="prod-info-inner">
                 <div class="ck">
-                    
+
                     <a class="btn btn-primary btn-ps" href="/mloans/lengpart/{{ $v->lenging_id }}">查看详情</a>
 
                 </div>
@@ -78,9 +78,8 @@
     </div>
 
 </div>
+<?php } ?>
 
-                        <?php } ?>
-                        {{--{!! $data->render() !!}--}}
 @if ($data->LastPage() > 1)
 
     <a href="{{ $data->Url(1) }}" class="item{{ ($data->CurrentPage() == 1) ? ' disabled' : '' }}">

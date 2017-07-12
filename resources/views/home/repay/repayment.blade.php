@@ -98,19 +98,32 @@
 <script src="{{ asset('js/header-init-8dc16d38ce.js') }}"></script><div class="container jimu-account-container">
     <div class="jimu-account-nav-wrap">
         <div class="jimu-leftnav" data-version="4">
-
+            <ul>
                 <ul class="jimu-leftsecnav">
-                    <li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/personal') }}">安全设置</a></li>
+                    <li><a data-nav="user-center" class="" href="{{ url('personal/personal') }}">安全设置</a></li>
                     <li><a data-nav="user-center" class="" href="{{ url('cz/index') }}">账户充值</a></li>
                     <li><a data-nav="user-center" class="" href="{{ url('personal/addImage') }}">添加头像</a></li>
                     <li><a data-nav="user-center" class="" href="{{ url('personal/changePwd') }}">修改密码</a></li>
                     <li><a data-nav="user-center" class="" href="{{ url('personal/setNumber') }}">认证手机</a></li>
                     <li><a data-nav="user-center" class="" href="{{ url('personal/bindEmail') }}">绑定邮箱</a></li>
                     <li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">添加地址</a></li>
-                    <ul class="jimu-leftsecnav">
-                    <li><a data-nav="p2p-repayment-plan" class="active" href="{{ url('molans/repay') }}">我要还款</a></li>
-                    </ul>
+                    <li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('molans/repay') }}">我要还款</a></li>
+                    <li><a data-nav="user-center" class="" href="{{ url('personal/idCard') }}">绑定身份证</a></li>
                 </ul>
+                <ul class="jimu-leftsecnav">
+                    <li>
+                    </li>
+                </ul>
+
+                <ul class="jimu-leftsecnav">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+            </ul>
         </div>
     </div>
     <div class="jimu-account-content-wrap">
