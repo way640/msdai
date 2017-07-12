@@ -41,7 +41,7 @@ class GoldController extends CommonController
 		$fund_no = $_GET['fund_no']; 
 
 		//到public目录		public_path('')
-		$goods_statis_file = public_path('file')."\\goods_file_".$fund_no.".html";
+		$goods_statis_file = public_path('file')."/goods_file_".$fund_no.".html";
 		//对应静态页文件
 		$expr = 60*60; 												//静态文件有效期1小时
 
@@ -110,7 +110,7 @@ class GoldController extends CommonController
 				1051,1052,1056,1058
 		];
 
-		$goods_statis_file = public_path('file\goods_file.html');
+		$goods_statis_file = public_path('file/goods_file.html');
 
 
 		$expr = 60*60*5; 												//静态文件有效期5小时
@@ -245,7 +245,7 @@ class GoldController extends CommonController
 	{
 		//返回基金
 		$goldid = $_GET['goldid'];
-		$goods_statis_file = public_path('file')."\\goods_file_".$goldid.".html";
+		$goods_statis_file = public_path('file')."/goods_file_".$goldid.".html";
 		$data = file_get_contents($goods_statis_file);
 		$info = json_decode($data,true)['result'];
 		return view('Home/Gold/addgold',['data'=>$info]);
@@ -255,7 +255,7 @@ class GoldController extends CommonController
 	{
 		if (@$_SESSION['user']) {
 			$goldid = $_POST['id'];
-			$goods_statis_file = public_path('file')."\\goods_file_".$goldid.".html";
+			$goods_statis_file = public_path('file')."/goods_file_".$goldid.".html";
 			$data = file_get_contents($goods_statis_file);
 			$info = json_decode($data,true)['result'];
 			$price = $info['open_price'];

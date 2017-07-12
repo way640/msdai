@@ -1,4 +1,4 @@
-@extends('home.title')
+@extends('Home.title')
 @section('content')
 <title>积木盒子 jimu.com - 智能综合理财平台</title>
 <meta name="keywords" content="投资理财, 互联网金融, 网络投融资平台, 网络理财, 互联网理财, 积木盒子, 投资理财, www.jimu.com">
@@ -36,6 +36,7 @@
 						<li><a data-nav="user-center" class="active highlight asset-overview" href="{{ url('personal/setAddress') }}">修改地址</a></li>					    
                         <li><a data-nav="user-center" class="" href="{{ url('molans/repay') }}">我要还款</a></li>
                         <li><a data-nav="user-center" class="" href="{{ url('personal/idCard') }}">绑定身份证</a></li>
+                        <li><a data-nav="user-center" class="" href="{{ url('personal/payPwd') }}">设置支付密码</a></li>
 					</ul>
                         <li></li>
 					<ul class="jimu-leftsecnav">

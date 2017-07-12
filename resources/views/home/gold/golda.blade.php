@@ -1,4 +1,4 @@
-@extends('home.title')
+@extends('Home.title')
 @section('content')
 	
 	<link href="{{ asset('css/index_main.min.css') }}" rel="stylesheet">

@@ -5,6 +5,7 @@ use App\Http\home;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use DB;
+use Request;
 
 class CreditController extends Controller
 {
@@ -12,8 +13,13 @@ class CreditController extends Controller
     {
         //轻松投放款
        $user_id=$_SESSION['user']['user_id'];
+
+//        $rae=DB::table('user')->where('user_id','=',$user_id)->get();
+//        foreach ($rae as $k=>$v){
+//            $use_pay=$v->user_paypwd;
+//        }
        $lenging_no=time().rand(1000,9999);
-        $input = Input::all();
+        $input = Request::all();
         unset($input['_token']);
         $input['user_id']=$user_id;
         $input['lenging_no']=$lenging_no;
@@ -22,40 +28,49 @@ class CreditController extends Controller
         $input['lenging_total']=$input['lenging_money']+$input['lenging_money']*($input['lenging_interest']/100);
         $yu=$input['user_money']-$input['lenging_money'];
         $input['lenging_interest']=$input['lenging_interest'].'%';
+        $input['lenging_borrow']=$input['lenging_money'];
         unset($input['user_money']);
 
-        //判断结束时间是否大于开始时间
-        if($input['lenging_start_time']>$input['lenging_end_time'])
-        {
-            echo "<script>alert('开始时间不能大于结束时间');location.href='/invest/invest'</script>";
-        }
-        else
+        //判断用户是否有支付密码
+//        if(empty($use_pay))
+//        {
+//            return 1;
+//        }
+//        else
+//        {
+            //判断结束时间是否大于开始时间
+            if($input['lenging_start_time']>$input['lenging_end_time'])
             {
-            $res=DB::table('lenging')->insert(
-                $input
-            );
-            if($res)
+                echo "<script>alert('请选择正确的结束时间');location.href='/invest/invest'</script>";
+//                header("Refresh:3;url=/invest/invest");
+            }
+            else
             {
-                if($yu<0)
+                $res=DB::table('lenging')->insert(
+                    $input
+                );
+                if($res)
                 {
-                    echo "<script>alert('您的余额不足');location.href='/invest/invest'</script>";
+                    if($yu<0)
+                    {
+                        echo "<script>alert('您的余额不足');location.href='/invest/invest'</script>";
 
-                }
-                else
-                {
-                    $update=DB::table('user_info')
-                        ->where('user_id', $user_id)
-                        ->update(['user_money' =>$yu ]);
-                }
+                    }
+                    else
+                    {
+                        $update=DB::table('user_info')
+                            ->where('user_id', $user_id)
+                            ->update(['user_money' =>$yu ]);
+                    }
 
-                if($update)
-                {
-                    echo "<script>alert('放款成功，正在返回放款页面......');location.href='/invest/invest'</script>";
+                    if($update)
+                    {
+                        echo "<script>alert('放款成功，正在返回放款页面......');location.href='/invest/invest'</script>";
+                    }
                 }
             }
         }
-
-    }
+//    }
 
 
     //轻松投计算用户最终收益
@@ -82,6 +97,7 @@ class CreditController extends Controller
         $read=DB::table('config')->where('config_type',1)->get();
         return view('Home/leng/lengpart',['data'=>$data,'read'=>$read]);
     }
+
 
     //用户申请借款
     public function applyto()
@@ -111,7 +127,7 @@ class CreditController extends Controller
             //还款结束时间
             $data['loan_end_time']=strtotime('+'.$data['loan_long'].'Month',$data['loan_time']);
 
-
+            //print_r($data['lenging_id']);exit;
             $res=DB::table('loan')->insertGetId(
                 $data
             );
@@ -138,7 +154,19 @@ class CreditController extends Controller
 
             if($re)
             {
-                echo "<script>alert('您以成功借款');location.href='/personal/personal'</script>";
+                $rae=DB::table('lenging')->where('lenging_id','=',$data['lenging_id'])->get();
+                foreach ($rae as $k=>$v){
+                    $money=$v->lenging_money;
+                }
+                $borrow=$money-$data['loan_money'];
+                $upda=DB::table('lenging')
+                    ->where('lenging_id', $data['lenging_id'])
+                    ->update(['lenging_borrow'=>$borrow]);
+
+                if($upda){
+                    //计算
+                    echo "<script>alert('您以成功借款');location.href='/personal/personal'</script>";
+                }
             }
         }
 

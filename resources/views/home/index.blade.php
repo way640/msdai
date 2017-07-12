@@ -51,7 +51,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
         <div class="title">
             <h1>基金理财</h1>
             <p>盒子正在努力审核项目，预计项目发布时间 <span>10:00</span> , <span>13:00</span> , <span>16:00</span> , <span>20:00</span>，其余时间与周末随机发标。</p>
-            <a href="http://www.zdmoney.com/gold/fundlist">更多</a>
+            <a href="{{url('gold/fundlist')}}">更多</a>
         </div>
         <div class="regular">
             <a class="regular-thear" href="#">
@@ -71,7 +71,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
         
         <div class="title">
             <h1>贵金属</h1>
-            <a href="http://www.zdmoney.com/gold/gold">更多</a>
+            <a href="{{url('gold/gold')}}">更多</a>
         </div>
         <div class="fund" >
             <a class="fund-thear" href="#">
@@ -92,7 +92,7 @@ document.getElementById("banner").onmouseout=function(){timer=setInterval("AutoP
 
         <div class="title">
             <h1>锦囊</h1>
-            <a href="#">更多</a>
+            <a href="{{url('fund/artlist')}}">更多</a>
         </div>
         <div class="pocket">
             <a class="pocket-thear" href="#">

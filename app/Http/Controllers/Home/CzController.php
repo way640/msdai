@@ -61,7 +61,7 @@ class CzController extends CommonController
 				$user_id = $_SESSION['user']['user_id'];
 				//$user_id = 1;
 				//查询原来的余额
-				 $info = DB::table('user_info')->where('user_id',$user_id)->first();
+				$info = DB::table('user_info')->where('user_id',$user_id)->first();
 				//修改余额 = 原来的余额加上充值的金额
 				DB::table('user_info')->where('user_id',$user_id)->update(['user_money'=> ($info->user_money+$price)]);
 				//给日志表添加数据
@@ -80,8 +80,6 @@ class CzController extends CommonController
 				{
 					//echo '钱没到账,又给那小子了';
 					echo '<script>alert("成功")</script>';
-					//个人中心账户页面
-					return view('Home/Personal/personal');
 				}else{
 					//echo '充值失败';
 					return view('Home/Cz/index');

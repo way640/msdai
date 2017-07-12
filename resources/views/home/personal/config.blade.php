@@ -1,5 +1,5 @@
 
-@extends('home.title')
+@extends('Home.title')
 @section('content')
 <!DOCTYPE html>
 <!-- saved from url=(0036)https://www.jimu.com/User/UserCenter -->

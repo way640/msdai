@@ -51,13 +51,13 @@ class AlipayPay {
      * @var String 服务器异步通知页面路径
      * 需http://格式的完整路径，不能加?id=123这类自定义参数
      */
-    public $notify_url = "http://www.zdmoney.com/cz/yb";
+    public $notify_url = "{{url('cz/yb')}}";
 
     /**
      * @var String 页面跳转同步通知页面路径
      * 需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
      */
-    public $return_url = 'http://www.zdmoney.com/cz/hd';
+    public $return_url = "{{url('cz/hd')}}";
     public $extra_common_param = '';
 
     /**

@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Session;
 ?>
-@extends('home.title')
+@extends('Home.title')
 @section('content')
 <head>
     <meta charset="utf-8">
