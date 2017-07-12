@@ -43,6 +43,7 @@
 						<li><a data-nav="user-center" class="" href="{{ url('personal/setAddress') }}">添加地址</a></li>
                         <li><a data-nav="user-center" class="" href="{{ url('molans/repay') }}">我要还款</a></li>
                         <li><a data-nav="user-center" class="" href="{{ url('personal/idCard') }}">绑定身份证</a></li>
+                        <li><a data-nav="user-center" class="" href="{{ url('personal/payPwd') }}">设置支付密码</a></li>
 					</ul>
 					<ul class="jimu-leftsecnav">
                         <li>

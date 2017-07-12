@@ -20,7 +20,6 @@ class LengingController extends CommonController
         //借款首页分页
 
         $data = DB::table('lenging')->leftjoin('user_info','lenging.user_id','=','user_info.user_id')->orderBy('lenging_interest','asc')->paginate(5);     //每页显示3条
-        //print_r($data);
         $data->setPath('lenging');                      //v层中的借款前台页面
         $num=$data->lastPage();
         $nextpage=$num-$data->currentPage() ==0 ? $num : $data->currentPage()+1 ;

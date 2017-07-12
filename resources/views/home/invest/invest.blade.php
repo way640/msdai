@@ -155,6 +155,7 @@
                         if(num<1000)
                         {
                             $('.tbody').html("<font color='red' size='2px'>最低加入金额 1,000元，上限500,000元</font>");
+                            return false;
                         }
                         else if(num>=1000)
                         {
@@ -247,9 +248,8 @@
                     if(dateinfo2!=''){
                         $('.end').hide();
                     }
-                })
+                });
             </script>
-
                 </div>
         </div>
     </div>
