@@ -1,4 +1,4 @@
-@extends('home.title')
+@extends('Home.title')
 @section('content')
 <title>积木盒子 jimu.com - 智能综合理财平台</title>
 <meta name="keywords" content="投资理财, 互联网金融, 网络投融资平台, 网络理财, 互联网理财, 积木盒子, 投资理财, www.jimu.com">

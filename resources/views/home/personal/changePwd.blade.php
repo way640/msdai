@@ -1,4 +1,4 @@
-@extends('home.title')
+@extends('Home.title')
 @section('content')
 
 <title>积木盒子 jimu.com - 智能综合理财平台</title>

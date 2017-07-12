@@ -33,9 +33,9 @@
 <!--main-------------------------------------------------------------------------------------------------------------->
 	<div class="header">
     	<div class="head">
-        	<a class="logo" href="http://www.zdmoney.com"><img src="{{ asset('image/logo-bg.png') }}" /></a>
+        	<a class="logo" href="{{url('')}}"><img src="{{ asset('image/logo-bg.png') }}" /></a>
           	<ul>
-        		<li><a href="http://www.zdmoney.com" >首页</a></li>
+        		<li><a href="{{url('')}}" >首页</a></li>
             	<li><a href="{{ url('home/invest/invest') }}">轻松投</a></li>
             	<li><a href="{{ url('home/borrow/borrow') }}">借款</a></li>
 				<li><a href="{{ asset('home/gold/gold') }}">贵金属</a></li

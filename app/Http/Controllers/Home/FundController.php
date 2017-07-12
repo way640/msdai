@@ -81,4 +81,19 @@ class FundController extends CommonController
     $data->last=$lastpage;
     return view('Home/Gold/fund',['data'=>$data]);
 	}
+
+    //锦囊更多的展示列表
+    public function artlist()
+    {
+        $data = DB::table('article')->paginate(4);
+        //print_r($data);
+        //要指向的页面
+        $data->setPath('artlist');
+        $num=$data->lastPage();
+        $nextpage=$num-$data->currentPage() ==0 ? $num : $data->currentPage()+1 ;
+        $lastpage=$data->currentPage()-1 <0 ? 1 : $data->currentPage()-1 ;
+        $data->next=$nextpage;
+        $data->last=$lastpage;
+        return view('Home/Gold/articlelist',['data'=>$data]);
+    }
 }
