@@ -51,7 +51,7 @@ if($urlArr[1] == 'admin'){
         Autoload(__DIR__.'/home');
         //默认访问首页
         Route::get('/', function () {
-            return view('Home/index');
+            return view('Home1/index');
         });
 
 
