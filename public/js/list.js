@@ -1,1 +1,0 @@
-require(["domReady!","jquery","scrollup","ui-helper","common"],function(E,n,i,o,r){!function(){EDEN_UI_HELPER.InitWidgets(),EDEN_UI_HELPER.isAndroid()&&EDEN_UI_HELPER.showAndroidSmartBanner(),r()}()});
