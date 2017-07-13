@@ -3,11 +3,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>首页</title>
+    <base href="{{url('')}}">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/all.js"></script>
     <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-
 </head>
 <body>
 <div class="gy_box">
@@ -29,8 +29,9 @@
         <div class="gy_nav px1000 clearfix">
             <div class="gy_nav_l fl"><img src="images/gy_logo.png" alt=""></div>
             <ul class="gy_nav_c fr clearfix">
+                <li><a href="{{url('')}}">首页</a></li>
                 <li class="gy_nav_c_ts" style="z-index:1000;">
-                    <a href=""> 我要投资</a>
+                    <a href="{{url('invest/index')}}"> 我要投资</a>
                     <ul class="gycf_perinfo">
                         <div class="gy_nav_c_cp"><img src="images/gy_down_cpr.png"></div>
                         <div class="gycf_perinfo_pic">
@@ -41,11 +42,10 @@
                         <li><a href="">新手专享</a></li>
                     </ul>
                 </li>
-                <li><a href="">产品特色</a></li>
                 <li><a href="">活动专区</a></li>
                 <li><a href="">业务模式</a></li>
-                <li><a href="">安全保障</a></li>
-                <li><a href="">关于我们</a></li>
+                <li><a href="safe/index">安全保障</a></li>
+                <li><a href="{{url('aboutus/index')}}">关于我们</a></li>
             </ul>
         </div>
     </div>

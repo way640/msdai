@@ -67,7 +67,7 @@ if($urlArr[1] == 'admin'){
             return view('Home/index/help');
         });
 
-            
+
         Route::get('{name}', function ($name) {
             return view('404');
         });

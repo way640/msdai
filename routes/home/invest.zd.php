@@ -1,10 +1,8 @@
 <?php
 /*
-*@Use : 轻松投产品列表页
+*@Use : 首页我要投资页面
 */
-Route::get('invest/invest', 'Home\InvestController@index');
-/*
-*@Use : 轻松投产品详情页
-*/
+//我要投资主页
+Route::get('invest/index', 'Home\InvestController@index');
+//我要投资详情
 Route::get('invest/detail', 'Home\InvestController@detail');
-

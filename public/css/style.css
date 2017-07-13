@@ -1770,9 +1770,9 @@ background: url(../images/gy_guide_gove_gd_zfdz.png) no-repeat left center;
 .gy_guide_announcement_rigth_cpup img{padding-top: 30px;}
 .gy_guide_announcement_rigth_cpdown img{padding:35px 0px 0px 20px;}
 .gy_guide_announcement_vision{text-align:center;font-size:16px;color:#29A7E1;width:680px;height: 30px;border: 1px solid #29A7E1;position: relative;margin-bottom: 30px;}
-.gy_guide_announcement_vision img{position: absolute; left:120px;top: 6px;}
+.gy_guide_announcement_vision img{position: absolute; left:110px;top: 6px;}
 .gy_guide_announcement_vision_bg_wz{padding: 0px 30px;}
-.gy_guide_announcement_vision_bg{color: #FFFFFF;background: #29A7E1;padding: 1px 15px 9px 27px;}
+.gy_guide_announcement_vision_bg{color: #FFFFFF; background: #29A7E1; padding: 1px 16px 8px 18px;  }
 .gy_guide_announcement_affiliation{width:700px;font-size:16px;border-bottom:1px solid #EEEEEE;margin-top: 20px;}
 .gy_guide_announcement_affiliation_main{padding-left: 20px;}
 .gy_guide_announcement_affiliation_main a,.gy_guide_announcement_affiliation_main span{color:#29A7E1;}
