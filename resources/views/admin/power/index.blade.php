@@ -1,167 +1,91 @@
-@extends('Admin.main')
-@section('content')
-    <!DOCTYPE html>
-    <html>
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="{{asset('admin/lib/html5.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/lib/respond.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/lib/PIE_IE678.js')}}"></script>
+<![endif]-->
+<link href="{{asset('admin/css/H-ui.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('admin/css/H-ui.admin.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('admin/css/style.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('admin/lib/Hui-iconfont/1.0.1/iconfont.css')}}" rel="stylesheet" type="text/css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>权限管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 权限管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+	<div class="text-c">
+		<form class="Huiform" method="post" action="" target="_self">
+			<input type="text" class="input-text" style="width:250px" placeholder="权限名称" id="" name="">
+			<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜权限节点</button>
+		</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> </span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<table class="table table-border table-bordered table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="7">权限节点</th>
+			</tr>
+			<tr class="text-c">
+				<th width="25"><input type="checkbox" name="" value=""></th>
+				<th width="40">ID</th>
+				<th width="200">权限名称</th>
+				<th>字段名</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-c">
+				<td><input type="checkbox" value="1" name=""></td>
+				<td>1</td>
+				<td>栏目添加</td>
+				<td></td>
+				<td> <a title="删除" href="javascript:;" onclick="admin_permission_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript" src="{{asset('admin/lib/jquery/1.9.1/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/lib/layer/1.9.3/layer.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/lib/laypage/1.2/laypage.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/lib/My97DatePicker/WdatePicker.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/js/H-ui.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/js/H-ui.admin.js')}}"></script>
+<script type="text/javascript">
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+/*管理员-权限-添加*/
+function admin_permission_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-权限-编辑*/
+function admin_permission_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
 
-    <head>
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-        <title> - 数据表格</title>
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-
-        <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-        <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
-        <!-- Data Tables -->
-        <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
-        <link href="css/animate.css" rel="stylesheet">
-        <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
-    </head>
-
-    <body class="gray-bg">
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>管理员列表</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a href="{{url('admin/power/create')}}">添加</a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="table_data_tables.html#">选项1</a>
-                                </li>
-                                <li><a href="table_data_tables.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-
-                        <table class="table table-striped table-bordered table-hover dataTables-example">
-                            <thead>
-                            <tr>
-                                <th>权限名称</th>
-                                <th>权限控制器</th>
-                                <th>权限行为</th>
-                                <th>权限状态</th>
-                                <th>权限描述</th>
-                                <th>权限层级</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            @foreach($data as $v)
-                                <tr>
-                                    <th>{{$v->priv_name}}</th>
-                                    <th>{{$v->priv_controller}}</th>
-                                    <th>{{$v->priv_action}}</th>
-                                    <th>{{$v->priv_status}}</th>
-                                    <th>{{$v->priv_desc}}</th>
-                                    <th>{{$v->priv_level}}</th>
-                                    <th>
-                                        <a href="{{url('admin/power/edit/'.$v->priv_id.'/edit')}}">修改</a>
-                                        <a href="javascript:;" onclick="delArt({{$v->priv_id}})">删除</a>
-                                    </th>
-                                </tr>
-                                @endforeach
-                            </tfoot>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 全局js -->
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
-
-
-
-    <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
-
-    <!-- Data Tables -->
-    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
-
-    <!-- 自定义js -->
-    <script src="js/content.js?v=1.0.0"></script>
-
-
-    <!-- Page-Level Scripts -->
-    <script>
-
-        /**
-         * 删除单个管理员
-         * */
-        function delArt(priv_id) {
-            layer.confirm('您确定要删除这篇文章吗？', {
-                btn: ['确定','取消'] //按钮
-            }, function(){
-                $.post("{{url('admin/power/destroy/')}}/"+priv_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
-                    if(data.status==0){
-                        location.href = location.href;
-                        layer.msg(data.msg, {icon: 6});
-                    }else{
-                        layer.msg(data.msg, {icon: 5});
-                    }
-                });
-//            layer.msg('的确很重要', {icon: 1});
-            }, function(){
-
-            });
-        }
-
-        $(document).ready(function () {
-            $('.dataTables-example').dataTable();
-
-            /* Init DataTables */
-            var oTable = $('#editable').dataTable();
-
-            /* Apply the jEditable handlers to the table */
-            oTable.$('td').editable('../example_ajax.php', {
-                "callback": function (sValue, y) {
-                    var aPos = oTable.fnGetPosition(this);
-                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-                },
-                "submitdata": function (value, settings) {
-                    return {
-                        "row_id": this.parentNode.getAttribute('id'),
-                        "column": oTable.fnGetPosition(this)[2]
-                    };
-                },
-
-                "width": "90%",
-                "height": "100%"
-            });
-
-
-        });
-
-        function fnClickAddRow() {
-            $('#editable').dataTable().fnAddData([
-                "Custom row",
-                "New row",
-                "New row",
-                "New row",
-                "New row"]);
-
-        }
-    </script>
-    </body>
-
-    </html>
-@stop
+/*管理员-权限-删除*/
+function admin_permission_del(obj,id){
+	layer.confirm('角色删除须谨慎，确认要删除吗？',function(index){
+		$(obj).parents("tr").remove();
+		layer.msg('已删除!',{icon:1,time:1000});
+	});
+}
+</script>
+</body>
+</html>
