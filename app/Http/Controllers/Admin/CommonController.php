@@ -24,9 +24,20 @@ class CommonController extends Controller
      * @return ：json
      * @author ：Way**/
     public function __construct() {
-        $this->get = $_GET;
-        $this->post = $_POST;
-    //  session(['admin'=>['admin_id'=>'1','admin_name'=>'name']]);//方便测试跳过登录检测
+        if($_GET){
+            foreach($_GET as $key=>$val){
+                $get[$key] = (string) $val;
+            }
+            $this->get = $get;
+        }
+        if($_POST){
+            foreach($_POST as $key=>$val){
+                $post[$key] = (string) $val;
+            }
+            $this->post = $post;
+        }
+
+        $_SESSION['admin'] = ['admin_id'=>'14','admin_name'=>'name'];//方便测试跳过登录检测
         $checkUserInfo = $this->checkUserInfo(@$_SESSION['admin']['admin_id']);
 		
         if ( !$checkUserInfo ) {
@@ -84,6 +95,23 @@ class CommonController extends Controller
                 $val['level'] = $level;
                 $result[] = $val;
                 $this->dataBack( $data , $field , $p_field , $val[$field] , $level+1);
+            }
+        }
+        return $result;
+    }
+
+    /*
+     * @action_name ： 递归父子级
+     * @param：需排序的数组 array  排序字段  父级id字段  排序标识
+     * @return ：array
+     * @author ：Way**/
+    protected function dataLevel ( $data , $field , $p_field , $level = 0) {
+        $result = '';
+        foreach ( $data as $key => $val) {
+            if($val[$p_field] == $level){
+                unset($data[$key]);
+                $val['level'] = $this->dataLevel ($data,$field,$p_field,$val[$field]);
+                $result[$key] = $val;
             }
         }
         return $result;

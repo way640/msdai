@@ -1,287 +1,160 @@
-@extends('Admin.main')
-@section('content')
-<!DOCTYPE html>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!--360浏览器优先以webkit内核解析-->
-
-
-    <title> - 主页示例</title>
-    <base href="{{URL::asset('')}}admin/">
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<base href="{{url('')}}/admin/">
+<LINK rel="Bookmark" href="/favicon.ico" >
+<LINK rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<![endif]-->
+<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+<link href="skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
+<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/ms_ajax.js"></script>
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>H-ui.admin v2.3</title>
+<meta name="keywords" content="H-ui.admin v2.3,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+<meta name="description" content="H-ui.admin v2.3，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
+<body>
+<header class="Hui-header cl"> <a class="Hui-logo l" title="H-ui.admin v2.3" href="/">H-ui.admin</a> <a class="Hui-logo-m l" href="/" title="H-ui.admin">H-ui</a> <span class="Hui-subtitle l">V2.3</span>
+	<nav class="mainnav cl" id="Hui-nav">
+		<ul>
+			<li class="dropDown dropDown_click"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
+				<ul class="dropDown-menu radius box-shadow">
+					<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
+					<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
+					<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
+					<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<ul class="Hui-userbar">
+		<li>超级管理员</li>
+		<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+			<ul class="dropDown-menu radius box-shadow">
+				<li><a href="#">个人信息</a></li>
+				<li><a href="#">切换账户</a></li>
+				<li><a href="#">退出</a></li>
+			</ul>
+		</li>
+		<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+		<li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+			<ul class="dropDown-menu radius box-shadow">
+				<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+				<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+				<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+				<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+				<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+				<li><a href="javascript:;" data-val="orange" title="绿色">橙色</a></li>
+			</ul>
+		</li>
+	</ul>
+	<a aria-hidden="false" class="Hui-nav-toggle" href="#"></a> </header>
+<aside class="Hui-aside">
+	<input runat="server" id="divScrollValue" type="hidden" value="" />
+	<div class="menu_dropdown bk_2">
+		<dl><dt><i class="Hui-iconfont">&#xe625;</i>首页</dt></dl>
+		<?php
 
-<body class="gray-bg">
-<input type="hidden" name="_token" value="{{ csrf_token() }}" />
-    <div class="wrapper wrapper-content">
-        <div class="row">
-            <div class="col-sm-10">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="row row-sm text-center" id="dataInfo" style="padding-top: 2%">
-                            <div class="col-xs-6">
-                                <div class="panel padder-v item">
-                                    <div class="h1 text-info font-thin h1">521</div>
-                                    <span class="text-muted text-xs">同比增长</span>
-                                    <div class="top text-right w-full">
-                                        <i class="fa fa-caret-up text-warning m-r-sm"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="panel padder-v item bg-info">
-                                    <div class="h1 text-fff font-thin h1">521</div>
-                                    <span class="text-muted text-xs">今日访问</span>
-                                    <div class="top text-right w-full">
-                                        <i class="fa fa-caret-up text-warning m-r-sm"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="panel padder-v item bg-primary">
-                                    <div class="h1 text-fff font-thin h1">521</div>
-                                    <span class="text-muted text-xs">销售数量</span>
-                                    <div class="top text-right w-full">
-                                        <i class="fa fa-caret-up text-warning m-r-sm"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="panel padder-v item">
-                                    <div class="font-thin h1">$129</div>
-                                    <span class="text-muted text-xs">近日盈利</span>
-                                    <div class="top text-right w-full">
-                                        <i class="fa fa-caret-up text-warning m-r-sm"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title" style="border-bottom:none;background:#fff;">
-                                <h5>服务器状态</h5>
-                            </div>
-                            <div class="ibox-content" style="border-top:none;">
-                                <table class="table table-hover">
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div style="padding: 0 1%">
-                        <div class="ibox float-e-margins">
-                        <div class="" id="ibox-content">
-                            <div class="ibox-title">
-                                <h5>操作日志</h5>
-                            </div>
-                            <div id="showLog1" class="vertical-container light-timeline" style="width: 48%;display: inline-block;margin-left: 1%">
+			$sysInfo = DB::select('select * from zd_system where sys_type = "1" and sys_status = "1"');
+			$str = '';
+			foreach($sysInfo as $val){
+				if($val->sys_desc == 0){
+					$str.= '<dl><dt><i class="Hui-iconfont">'.$val->sys_img.'</i>'.$val->sys_content.'<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt><dd><ul>';
+					foreach($sysInfo as $v){
+						if($v->sys_desc == $val->sys_id){
+							$str.= '<li><a _href="'.url($v->sys_link).'" href="javascript:void(0)">'.$v->sys_content.'</a></li>';
+						}
+					}
+					$str.= '</ul></dd></dl>';
+				}
+			}
+			echo $str;
+		?>
 
-                            </div>
-                            <div id='showLog2' class='vertical-container light-timeline' style='width: 48%;display: inline-block;margin-right: 1%'>
-                           
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="ibox float-e-margins" style="display:block;height: 1180px">
-                    <div class="ibox-title">
-                        <h5>任务列表</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <ul class="todo-list m-t small-list ui-sortable" >
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-check-square"></i> </a>
-                                <span class="m-l-xs todo-completed">吃饭</span>
 
-                            </li>
-                            <li>
-                                <a href="widgets.html#" class="check-link"><i class="fa fa-square-o"></i> </a>
-                                <span class="m-l-xs">睡觉</span>
-                                <small class="label label-primary"><i class="fa fa-clock-o"></i> 1小时</small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 全局js -->
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="js/plugins/layer/layer.min.js"></script>
-    <!-- Flot -->
-    <script src="js/plugins/flot/jquery.flot.js"></script>
-    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
-    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
-    <!-- 自定义js -->
-    <script src="js/content.js"></script>
-    <!--flotdemo-->
+	</div>
+</aside>
+<div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<section class="Hui-article-box">
+	<div id="Hui-tabNav" class="Hui-tabNav">
+		<div class="Hui-tabNav-wp">
+			<ul id="min_title_list" class="acrossTab cl">
+				<li class="active"><span title="我的桌面" data-href="welcome.html">我的桌面</span><em></em></li>
+			</ul>
+		</div>
+		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+	</div>
+	<div id="iframe_box" class="Hui-article">
+		<div class="show_iframe">
+			<div style="display:none" class="loading"></div>
+			<iframe scrolling="yes" frameborder="0" src="{{url('admin/index/welcome')}}"></iframe>
+		</div>
+	</div>
+</section>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+<script type="text/javascript" src="js/H-ui.js"></script> 
+<script type="text/javascript" src="js/H-ui.admin.js"></script> 
+<script type="text/javascript">
+/*资讯-添加*/
+function article_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*图片-添加*/
+function picture_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*产品-添加*/
+function product_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+</script> 
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s)})();
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
 
 </body>
-<script type="text/javascript">
-    $(function(){
-        $.ajax({
-            type:"get",
-            url:"{{url('admin/index/indexdata')}}",
-            dataType:'json',
-            success:function ( msg ) {
-                var strHtml = '';
-                $.each(msg.data.dataInfo,function(k,v){
-                    strHtml += '<div class="col-xs-6"><div class="panel padder-v item">';
-                    strHtml += '<div class="h1 text-info font-thin h1">'+v.data+'</div>';
-                    strHtml += '<span class="text-muted text-xs">'+v.info+'</span>';
-                    strHtml += '<div class="top text-right w-full">';
-                    strHtml += '<i class="fa fa-caret-up text-warning m-r-sm"></i>';
-                    strHtml += '</div></div></div>';
-                });
-                $('#dataInfo').html(strHtml);
-                strHtml = '';
-                $.each(msg.data.system,function(k,v){
-                    if(k == 'status' ){
-                        if(v.data == '1'){
-                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" status="1"><i class="glyphicon glyphicon-ok"></i></button><font color="green" size="4">前台正常开启</font>';
-                        }else{
-                            v.data = '<button class="btn btn-outline btn-primary dim" type="button" status="0"><i class="glyphicon glyphicon-remove"></i></button><font color="red" size="4">前台已关闭访问</font>';
-                        }
-                    }else if (k == 'start_time' ){
-                        v.data = '<input type="hidden" value="'+v.data+'"><span><embed style="width:50%;height:35%;margin-left:-13%" wmode="transparent" src="{{url("image/time.swf")}}" quality="high" bgcolor="#ffffff" name="honehoneclock" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" height="140" width="320"></span>';
-                    }
-                    strHtml += '<tr><td>';
-                    strHtml += v.info+'：</td><td id="';
-                    strHtml += k+'">';
-                    strHtml += v.data+'</td></tr>';
-                });
-                $('.table').html(strHtml);
-            }
-        })
-        $('.table').delegate('button','click',function(){
-            var rand = parseInt(Math.random()*10000);
-            var pwd = prompt('请输入验证码：'+rand);
-            if(pwd == rand){
-                var superpwd = prompt('请输入管理密码：')
-                if(superpwd != ''){
-                    var obj  = $(this);
-                    var status = obj.attr('status');
-                    $.ajax({
-                        type:"get",
-                        url:"{{url('admin/index/checkstatus')}}",
-                        data:'status='+status+'&superpwd='+superpwd,
-                        dataType:'json',
-                        success:function ( msg ) {
-                            if(msg.status == '1'){
-                                if(status == '0'){
-                                    obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" status="1"><i class="glyphicon glyphicon-ok"></i></button><font color="green" size="4">前台正常开启</font>');
-                                }else{
-                                    obj.parent().html('<button class="btn btn-outline btn-primary dim" type="button" status="0"><i class="glyphicon glyphicon-remove"></i></button><font color="red" size="4">前台已关闭访问</font>');
-                                }
-                            }else{
-                                alert('管理密码认证失败');
-                            }
-                        }
-                    })
-                }
-            }else{
-                alert('验证码填错了');
-            }
-
-        });
-
-    $.ajax({
-        type: "POST",
-        url: "{{ url('admin/admin/getlog') }}",
-        dataType : "json",
-        success: function(msg){
-            if(msg.status == 1){
-                //循环判断日志类型
-                var str = ''
-                var new_str = 0
-
-                $.each(msg.data, function(k, v){
-                    
-                    
-
-
-                    if(v.log_type == 1){
-                        //数据添加
-                        str += "<div class='vertical-timeline-block'>"
-                        str += "<div class='vertical-timeline-icon blue-bg' id='insertInfo'>"
-                        str += "<i class='fa fa-file-text'></i></div>"
-                        str += "<div class='vertical-timeline-content'>"
-                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
-                        str += "</span></div></div>"
-                    }else if(v.log_type == 2){
-                        //数据修改
-                        str += "<div class='vertical-timeline-block'>"
-                        str += "<div class='vertical-timeline-icon blue-bg' id='insertInfo'>"
-                        str += "<i class='fa fa-edit'></i></div>"
-                        str += "<div class='vertical-timeline-content'>"
-                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
-                        str += "</span></div></div>"
-                    }else if(v.log_tyoe == 3){
-                        //数据查看
-                        str += "<div class='vertical-timeline-block'>"
-                        str += "<div class='vertical-timeline-icon lazur-bg' id='insertInfo'>"
-                        str += "<i class='fa fa-hand-pointer-o'></i></div>"
-                        str += "<div class='vertical-timeline-content'>"
-                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
-                        str += "</span></div></div>"
-                    }else if(v.log_type == 4){
-                        //数据删除
-                        str += "<div class='vertical-timeline-block'>"
-                        str += "<div class='vertical-timeline-icon red-bg' id='insertInfo'>"
-                        str += "<i class='fa fa-remove'></i></div>"
-                        str += "<div class='vertical-timeline-content'>"
-                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
-                        str += "</span></div></div>"
-                    }else if(v.log_type == 5){
-                        //用户登录
-                        str += "<div class='vertical-timeline-block'>"
-                        str += "<div class='vertical-timeline-icon yellow-bg' id='insertInfo'>"
-                        str += "<i class='fa fa-sign-in'></i></div>"
-                        str += "<div class='vertical-timeline-content'>"
-                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
-                        str += "</span></div></div>"
-                    }else{
-                        //用户退出
-                        str += "<div class='vertical-timeline-block'>"
-                        str += "<div class='vertical-timeline-icon yellow-bg' id='insertInfo'>"
-                        str += "<i class='fa fa-sign-out'></i></div>"
-                        str += "<div class='vertical-timeline-content'>"
-                        str += "<h2>"+v.type_name+"</h2><p>"+v.log_operation+"</p><span class='vertical-date'><br><small>"+v.time+"</small>"
-                        str += "</span></div></div>"
-                    }
-
-                    if(k == 4){
-                        $('#showLog1').html(str);
-                        str = '';
-                    }
-                })
-
-                $('#showLog2').html(str);
-
-
-            }else{
-                alert('加载失败，请重新加载')
-            }
-        }
-    });
-});
-</script>
 </html>
-@stop

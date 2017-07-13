@@ -1,5 +1,4 @@
-@extends('Admin.main')
-@section('content')
+
 <div class="col-md-12" style=" width: 650px">
     <form action="{{url('admin/user/store')}}" method="post">
         <div class="form-group">
@@ -34,4 +33,3 @@
         </div>
     </form>
 </div>
-@stop
