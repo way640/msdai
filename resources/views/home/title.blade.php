@@ -1,376 +1,250 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html <!doctype html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
-<script type="text/javascript" src="{{ asset('js/javasrcipt.js') }}"></script>
+<base href="{{ url('') }}">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<title>首页</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">	
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/all.js"></script>
+<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
 
-<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
-<script type="text/javascript" src="http://developer.baidu.com/wiki/index.php?title=docs/cplat/libs#jQuery"></script>
-<title>积木</title>
+<!-- JS -->
+
+<script src='js/elevator.min.js'></script>
+
+
+
+<!-- CSS -->
+
+
 </head>
+<body>
+<div class="gy_box">
+	<!-- header start -->
+	<div id="gy_top_wper">
+	 	 <div class="gy_top px1000 clearfix">
+	  	    <div class="gy_top_l fl"><img src="images/service_pic.png" alt=""><span style="color:#999999;padding-left:10px;">在线客服:</span><img style="padding-left:10px;" src="images/service_photo.png" alt=""><span style="color: #5DB9E9;padding-left:10px;">客服热线：400-660-8612</span></div>
+	  	   	<div class="gy_top_r fr clearfix">
+	  	    	<a href="{{ url('user/login') }}">登录</a><span>|</span>
+                <a href="{{ url('user/regist') }}">注册</a><span>|</span>
+                <a href="">新手指导</a><span>|</span>
+                <a href="">帮助</a>
+	  	    </div>
+	  </div>
+	</div>
+	<!-- end top -->
 
-<body style="height:100%">
-
-	<div class="top">
-    	<div class="top-server">
-    		<h1>欢迎致电：<span>400-068-1176</span> 服务时间：9:00 - 21:00</h1>
-               <span id="getMore" style="font-size:15px;color:red;display:inline-block;margin-top:10px"></span>
-            <ul>
-				<?php $arr = isset( $_SESSION['user'] ) ? $_SESSION['user'] : ''?>
-				@if ( $arr )
-					<li><a href="javascript:void(0);"><?php echo $_SESSION['user']['username'];?>, 您好, 欢迎登陆</a></li>
-					<li style="border-right:none;"><a href="javascript:void(0);" class="userLogout">注销</a></li>
-				@else
-					<li><a href="{{ url('user/login') }}">登录</a></li>
-
-					<li style="border-right:none;"><a href="{{ url('user/regist') }}">注册</a></li>
-
-				@endif 
-            </ul>
-			<script>
-				$('.userLogout').on('click', function(){
-					
-					 $.ajax({
-						type: "GET",
-						url: "{{ url('user/logout') }}",
-						dataType: 'json',
-						success: function(msg){
-								
-							alert('退出成功')
-							window.location.href="{{ url('user/login') }}"
-						}
-					});
-				})
-			</script>	
-        </div>
-    </div>
-
-
-
-
-	<div class="header">
-    	<div class="head">
-        	<a class="logo" href="{{url('')}}"><img src="{{ asset('image/logo-bg.png') }}" /></a>
-          	<ul>
-
-                  <div id='box'>
-                      
-                  </div>
-				  <li style="float:right;"><a href="{{ asset('personal/personal') }}">个人中心</a></li>
-        	</ul>
-        </div>
-    </div>
-    <script src='{{ asset('js/jquery.min.js') }}'></script>
-    <script>
-jQuery(document).ready(function(){
-
-//导航栏 jsonp请求
-var van = "{{url('')}}/index/nav?code=CA1998&callback=localHandler";
-    $.ajax({
-        type: "get",
-        async: false, 
-        url: van,
-        dataType: "jsonp",
-        jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-        jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-        success: function(msg){
-            var str ='';
-            $.each(msg,function(k,v){
-                // alert(v.config_info);
-                str +='<li><a href="{{url('')}}/'+v.config_link+'" >'+v.config_info+'</a></li>'; 
-            })
-			$('#box').append(str);
-        },
-        error: function(){
-            //alert('fail');
-        }
-    });
-//锦囊妙计 4条最新添加的要知道的小知识
-
-var url = "{{url('')}}/index/silk?code=CA1998&callback=localHandler";
-    $.ajax({
-        type: "get",
-        async: false,
-        url: url,
-        dataType: "jsonp",
-        jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-        jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-        success: function(msg){
-            var str0 ='';
-            var str1 ='';
-            var str2 ='';
-            var str3 ='';
-            $.each(msg,function(k,v){
-                //如果内容超过50个字就截取前50个字
-                var content = v.article_content;
-                var new_content = content.substring(0,50)+"...";
-                if(k==0){
-                    // alert(1);
-                    //alert(v.article_content);
-                    // var content = v.article_content;
-                    // alert(content.substring(0,50)+"...");
-                    str0 +='<a href="{{url('')}}/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5; border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
-                }else if(k==1){
-                    //alert(2);
-                    str1 +='<a href="{{url('')}}/index/silk_list?id='+v.article_id+'" style="border-bottom:solid 1px #E5E5E5;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
-                }else if(k==2){
-                    //alert(3);
-                    str2+='<a href="{{url('')}}/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-yplan.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
-                }else{
-                    //alert(4);
-                    str3 +='<a href="{{url('')}}/index/silk_list?id='+v.article_id+'" style="border-right:solid 1px #E5E5E5;;"><article><img src="image/icon-zplay.png"/><figcaption>'+v.article_author+'</figcaption></article><aside><h2 title="'+v.article_title+'">'+v.article_title+'</h2><p>'+new_content+'</p></aside></a>';
-                }
-            })
-
-			$('#pbox').html(str0+str1+str2+str3);
-        },
-        error: function(){
-            //alert('fail');
-        }
-    }); 
-
-//友情链接 jsonp接口
-var link = "{{url('')}}/index/link?code=CA1998&callback=localHandler";
-    $.ajax({
-        type: "get",
-        async: false,
-        url: link,
-        dataType: "jsonp",
-        jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-        jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-        success: function(msg){
-            //alert(msg);
-            var str = '';
-            $.each(msg,function(k,v){
-                //alert(v.config_desc)
-                str +='<a href="'+v.config_link+'" ><img id="roll'+(k+1)+'" src="{{ asset('')}}/'+v.config_desc+'" /></a>';
-            })
-            $('#linkbox').html(str);
-        },
-        error: function(){
-            //alert('fail');
-        }
-    }); 
-    //基金
-        var fund = "{{url('')}}/gold/fund?code=CA1998&callback=localHandler";
-            $.ajax({
-                type: "get",
-                async: false,
-                url: fund,
-                dataType: "jsonp",
-                jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-                jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-                success: function(fund){
-                    //alert(fund.result);
-                    var strfund = '';
-                    $.each(fund.result,function(k,v){
-                        if (k<4) {
-                            // alert(k);
-                             strfund +='<li><a href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">'+v.name+'</a><br>';
-                             strfund +='<p>创建时间:'+v.clrq+'<br><br>';
-                             strfund +=v.CompanyName+'<br><br>基金规模：<font color="green" >'
-                             strfund +=v.jjgm+'(亿元)</font>&nbsp;&nbsp;<br></p><div class="earnings" style="margin-top:20px">';
-                             strfund +='<h2>'+v.dwjz+'</h2><h2>'+v.ljjz+'</h2><h3>单位净值</h3><h3>累计净值</h3></div><a class="tender" href="http://finance.sina.com.cn/fund/quotes/'+v.symbol+'/bc.shtml">立即购买</a></li>';
-                        };   
-                    })
-                    //alert(strfund);
-                    $('#fundbox').html(strfund);
-                }
-            }); 
-    //贵金属
-    var link = "{{url('')}}/gold/getgo?code=CA1998&callback=localHandler";
-        $.ajax({
-            type: "get",
-            async: false,
-            url: link,
-            dataType: "jsonp",
-            jsonp: "success_jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-            jsonpCallback:"localHandler",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-            success: function(msg){
-                //alert(msg);
-                var str = '';
-                $.each(msg,function(k,v){
-                    //alert(v.goldid)
-                    str += '<li><p><span>指数</span>&nbsp;&nbsp;';
-                            if(v.change_price>0){
-                                str += '涨幅&nbsp;<font color="red" >↑↑&nbsp;';
-                            }else{
-                                str += '跌幅&nbsp;<font color="green" >↓↓&nbsp;';
-                            }
-                    str +=  v.change_price+'&nbsp;&nbsp;'+v.change_margin+'</font></p><font>'
-                            +v.varietynm+'&nbsp;&nbsp;'
-                            +v.goldid+'</font><p style="color:#8A8A8A;">当前价格：'
-                            +v.last_price+'<br>买入价格：'
-                            +v.buy_price+'&nbsp;&nbsp;<br>成交量：'
-                            +v.volume+'</p><div class="earnings"><h2>最高价</h2><h2 style="color:green;">最低价</h2><h3>'
-                            +v.high_price+'</h3><h3>'
-                            +v.low_price+'</h3></div><a class="purchase" href="{{url('')}}/gold/addgold?goldid='+v.goldid+'">立即购买</a></li>';
-                })
-                //alert(str);
-                $('#goldbox').html(str);
-            }
-        });
-}); 
-</script>
-<script>
-jQuery(document).ready(function(){
-	
-    $.ajax({
-        type: "POST",
-        url: "{{ url ( 'user/more' ) }}",
-        dataType: "json",
-        success: function(msg){
-         
-
-         if ( msg.status == 1 ){
-
-            $('#getMore').html( msg.msg )
-         } else {
-            
-            var str = "<span style='color:blue'>欢迎使用挣点钱金融网站！！！</span>"
-
-            $('#getMore').html( str )
-             
-         }
-		    
-        }
-});
-})
-</script>
+	<div id="gy_nav_wper">
+		  <div class="gy_nav px1000 clearfix">
+		  	    <div class="gy_nav_l fl"><img src="images/msdai.png" alt=""></div>
+		  	     <ul class="gy_nav_c fr clearfix">
+		  	         <li class="gy_nav_c_ts" style="z-index:1000;">
+		  	         	<a href=""> 我要投资</a>     			
+					 	<ul class="gycf_perinfo">
+					 		<div class="gy_nav_c_cp"><img src="images/gy_down_cpr.png"></div>
+					 		<div class="gycf_perinfo_pic">
+					 			<img src="images/gy_cp_footer_wper_xiala_bor.png"></div>
+					 		<li><a href="">PPP信投</a></li>
+					 		<li><a href="">政府（存量）债</a></li>
+					 		<li><a href="">新手专享</a></li>
+					 		<li><a href="">新手专享</a></li>
+					 	</ul>
+		  	         </li>	
+		  	         <li><a href="">产品特色</a></li>	
+		  	         <li><a href="">活动专区</a></li>	
+		  	         <li><a href="">业务模式</a></li>	
+		  	         <li><a href="">安全保障</a></li>
+		  	         <li><a href="">关于我们</a></li>	
+		  	    </ul>
+		  </div>
+	</div>
 	@yield('content')
-<!--footer-->	
-	<div class="footer" style="">
-    	<div class="foot">
-        	<article>
-            	<div class="friend">
-                	<a href="{{url('Index/about')}}">关于我们</a>
-                  	<span></span>
-                 	<a href="{{url('Index/shengming')}}">法律声明</a>
-                    <span></span>
-                  	<a href="#">团队介绍</a>
-                    <span></span>
-                  	<a href="{{url('Index/help')}}">帮助中心</a>
+            <div class="do-the-thing">
+
+                <div class="elevator">
+
+                    <svg class="sweet-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" height="100px" width="100px">
+
+                        <path d="M70,47.5H30c-1.4,0-2.5,1.1-2.5,2.5v40c0,1.4,1.1,2.5,2.5,2.5h40c1.4,0,2.5-1.1,2.5-2.5V50C72.5,48.6,71.4,47.5,70,47.5z   M47.5,87.5h-5v-25h5V87.5z M57.5,87.5h-5v-25h5V87.5z M67.5,87.5h-5V60c0-1.4-1.1-2.5-2.5-2.5H40c-1.4,0-2.5,1.1-2.5,2.5v27.5h-5  v-35h35V87.5z"/>
+
+                        <path d="M50,42.5c1.4,0,2.5-1.1,2.5-2.5V16l5.7,5.7c0.5,0.5,1.1,0.7,1.8,0.7s1.3-0.2,1.8-0.7c1-1,1-2.6,0-3.5l-10-10  c-1-1-2.6-1-3.5,0l-10,10c-1,1-1,2.6,0,3.5c1,1,2.6,1,3.5,0l5.7-5.7v24C47.5,41.4,48.6,42.5,50,42.5z"/>
+
+                    </svg>
+
+                    Back to Top
+
                 </div>
-                <figure></figure>
-            	<p>© 2016 北京乐融多源信息技术有限公司 京ICP证12049103号-3 京公网安备11010502025440</p>
-           		<div class="certificate"></div>
-			</article>
-            <aside>
-            	<p>联系我们 <span>9:00 - 21:00</span> </p>
-              	<h1>400-068-1176</h1>
-				<div class="customer"><a href="javaScript:void(0)" onclick="openQQ()">在线客服</a></div>
-              	<div class="customer"><a href="javaScript:void(0)">客服邮箱</a></div>
-            </aside>
-        </div>
-    </div>
-</body>
-<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>  
-  
-<!-- QQ弹窗咨询  -->  
 
-<iframe style="display:none;" class="qq_iframe" src=""></iframe>   
-<script type="text/javascript">   
-    function openQQ(){   
-        qq_list = new Array('1191326864', '851936052');   
-        qq_i = Math.floor(Math.random()*qq_list.length);   
-        src = "tencent://message/?uin="+qq_list[qq_i]+"&Site=&menu=yes";   
-        $('.qq_iframe').attr('src',src); 
-    }
+            </div>
 
-</script>  
-</html>
+	<!--gy_guide_about_us -->
+	<div id="gy_guide_about_us">
+		<div class="px1000 clearfix">
+			<div class="gy_guide_aus_left fl">
+				<div class="gy_guide_aus_block fl">
+					<p class="gy_guide_aus_ccp"><b>关于我们</b></p>
+					<ul>
+						<li><a href="">荣誉奖项</a></li>
+						<li><a href="">发展历程</a></li>
+						<li><a href="">招贤纳士</a></li>
+						<li><a href="">联系我们</a></li>
+					</ul>
+				</div>
+				<div class="gy_guide_aus_block fl">
+					<p class="gy_guide_aus_ccp"><b>金融资讯</b></p>
+					<ul>
+						<li><a href="">金融帮助</a></li>
+						<li><a href="">行业资讯</a></li>
+					</ul>
+				</div>
+				<div class="gy_guide_aus_block fl">
+					<p class="gy_guide_aus_ccp"><b>业务信息</b></p>
+					<ul>
+						<li><a href="">我要投资</a></li>
+						<li><a href="">我要借款</a></li>
+					</ul>
+				</div>
+				<div class="gy_guide_aus_block fl">
+					<p class="gy_guide_aus_ccp"><b>帮助中心</b></p>
+					<ul>
+						<li><a href="">新手指引</a></li>
+						<li><a href="">安全保障</a></li>
+						<li><a href="">融资借款</a></li>
+						<li><a href="">实时财务</a></li>
+					</ul>
+				</div>
+			</div>
+		
+			<div class="gy_guide_aus_right fl">
+				<div class="fl gy_guide_aus_r_le">
+					<div class="gy_guide_aus_r_ewm"><img src="images/gy_guide_aus_right_ewm.png"></div>
+					<div style="padding-left:20px;"><img src="images/gy_guide_aus_right_sys.png"></div>
+				</div>
+				<div class="fl gy_guide_aus_r_re">
+					<p class="gy_guide_aus_r_pad" style="font-size:20px"><b>客服热线</b></p>
+					<p class="gy_guide_aus_r_pad" style="font-size:24.26px;color:#29a7e1;">400-678-7677</p>
+					<p class="gy_guide_aus_r_pad" style="font-size:14px">(周一至周日 08:00 - 22:00)</p>
+					<p class="gy_guide_aus_r_pad">
+						<span>
+							<a href=""><img src="images/gy_guide_aus_right_xlwb.png"></a>
+							<a href=""><img src="images/gy_guide_aus_right_wx.png"></a>
+							<a href=""><img src="images/gy_guide_aus_right_zxkf.png"></a>
+						</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<div>
-
-    <script type="text/template" id="DaBaiTpl">
-            <option value="北京">北京</option>
-            <option value="上海">上海</option>
-            <option value="深圳">深圳</option>
-            <option value="苏州">苏州</option>
-            <option value="成都">成都</option>
-            </script>
-    <script type="text/template" id="WangZaiXinYongTpl">
-            <option value="北京">北京</option>
-            <option value="上海">上海</option>
-            <option value="深圳">深圳</option>
-            <option value="苏州">苏州</option>
-            <option value="成都">成都</option>
-            <option value="重庆">重庆</option>
-            <option value="合肥">合肥</option>
-            <option value="广州">广州</option>
-            <option value="南宁">南宁</option>
-            <option value="贵阳">贵阳</option>
-            <option value="海口">海口</option>
-            <option value="廊坊">廊坊</option>
-            <option value="郑州">郑州</option>
-            <option value="长沙">长沙</option>
-            <option value="南昌">南昌</option>
-            <option value="太原">太原</option>
-            <option value="西安">西安</option>
-            <option value="天津">天津</option>
-            <option value="大理">大理</option>
-            <option value="杭州">杭州</option>
-            </script>
-    <script type="text/template" id="TimesTpl">
-            <option value="安庆">安庆</option>
-            <option value="兰州">兰州</option>
-            <option value="广州">广州</option>
-            <option value="惠州">惠州</option>
-            <option value="茂名">茂名</option>
-            <option value="顺德">顺德</option>
-            <option value="中山">中山</option>
-            <option value="柳州">柳州</option>
-            <option value="任丘">任丘</option>
-            <option value="仙桃">仙桃</option>
-            <option value="长沙">长沙</option>
-            <option value="无锡">无锡</option>
-            <option value="镇江">镇江</option>
-            <option value="瑞金">瑞金</option>
-            <option value="本溪">本溪</option>
-            <option value="凤城">凤城</option>
-            <option value="青秀">青秀</option>
-            <option value="兴宁">兴宁</option>
-            <option value="青岛">青岛</option>
-            <option value="诸城">诸城</option>
-            <option value="渭南">渭南</option>
-            <option value="大理">大理</option>
-            <option value="嘉兴">嘉兴</option>
-            <option value="荥阳">荥阳</option>
-            <option value="赣州">赣州</option>
-            <option value="南阳">南阳</option>
-            <option value="东莞">东莞</option>
-            <option value="东港">东港</option>
-            <option value="江门">江门</option>
-            <option value="中牟">中牟</option>
-            <option value="桂林">桂林</option>
-            <option value="海城">海城</option>
-            <option value="湘潭">湘潭</option>
-            <option value="阳江">阳江</option>
-            </script>
-    <script type="text/template" id="DiYaTpl">
-            <option value="北京">北京</option>
-            <option value="上海">上海</option>
-            <option value="大连">大连</option>
-            <option value="青岛">青岛</option>
-            <option value="苏州">苏州</option>
-            <option value="昆明">昆明</option>
-            <option value="武汉">武汉</option>
-            <option value="成都">成都</option>
-            <option value="重庆">重庆</option>
-            </script>
-    <script type="text/template" id="BaiJuZuLinTpl">
-            <option value="北京">北京</option>
-            <option value="台州">台州</option>
-            <option value="苏州">苏州</option>
-            <option value="南京">南京</option>
-            <option value="西安">西安</option>
-            </script>
-    <style type="text/css">
-
-	
+	<!--- footer start -->
+	<div id="gy_footer_wper">
+		 <div class="gy_footer_xy px1000 clearfix">
+		 	  <div class="gy_footer_xy_picp">
+		 	  	<img src="images/gy_cp_footer_wper_up01.jpg">
+		 	  	<img src="images/gy_cp_footer_wper_up02.png">
+		 	  	<img src="images/gy_cp_footer_wper_up03.png">
+		 	  	<img src="images/gy_cp_footer_wper_up04.png">
+		 	  	<img src="images/gy_cp_footer_wper_up05.png">
+		 	  	<img src="images/gy_cp_footer_wper_up06.png">
+		 	  </div>
+			  
+			  
+			  
+		 	  <div class="gy_footer_xy_fonts">
+		 	  		<p>©2014 亘元投资 All rights reserved 亘元投资金融有限公司 辽ICP备11046595号-6</p>
+		 	  </div>
+		 	  <div class="gy_footer_youqlj">
+		 	  	<div class="fl">友情链接:</div>
+		 	  	<div class="fl">
+				 	  	<ul class="gy_footer_youqlj_one">
+				 	  		<li><a href="">证券之星</a></li>
+				 	  		<li><a href="">南方财富网</a></li>
+				 	  		<li><a href="">蚂蚁财经</a></li>
+				 	  		<li><a href="">卡盟网</a></li>
+				 	  		<li><a href="" style="color:#5DB0D7">外汇理财</a></li>
+				 	  		<li><a href="">股市行情</a></li>
+				 	  		<li><a href="">P2P理财</a></li>
+				 	  		<li><a href="">白银理财</a></li>
+				 	  	</ul><br>
+				 	  	<ul id="unfold_show" class="gy_footer_youqlj_two" style="display:none;">
+				 	  		<li><a href="">证券之星</a></li>
+				 	  		<li><a href="">南方财富网</a></li>
+				 	  		<li><a href="">蚂蚁财经</a></li>
+				 	  		<li><a href="">卡盟网</a></li>
+				 	  		<li><a href="">外汇理财</a></li>
+				 	  		<li><a href="">股市行情</a></li>
+				 	  		<li><a href="">P2P理财</a></li>
+				 	  		<li><a href="">白银理财</a></li>
+				 	  	</ul><br>
+				 	  	<ul id="unfold_show" class="gy_footer_youqlj_three" style="display:none;">
+				 	  		<li><a href="">证券之星</a></li>
+				 	  		<li><a href="">南方财富网</a></li>
+				 	  		<li><a href="">蚂蚁财经</a></li>
+				 	  		<li><a href="">卡盟网</a></li>
+				 	  		<li><a href="">外汇理财</a></li>
+				 	  		<li><a href="">股市行情</a></li>
+				 	  		<li><a href="">P2P理财</a></li>
+				 	  		<li><a href="">白银理财</a></li>
+				 	  	</ul>
+				</div>
+		 	  	<div id="unfold" class="fl">
+		 	  		<span>展开</span>
+		 	  		<span><img src="images/gy_cp_footer_wper_down_zk.png"></span>
+		 	  	</div>
+			 </div>
+		</div>   
+	</div>
 </div>
+
+
+<script type="text/javascript">
+	function guideone(){
+		document.getElementById("gy_guide_staten_xkds2").style.display="block";
+		document.getElementById("gy_guide_staten_xkds5").style.display="none";
+		document.getElementById("gy_guide_sarter1").style.background="url(images/gy_guide_sarter1.png) no-repeat";
+		document.getElementById("gy_guide_sarter2").style.background="url(images/gy_guide_sarter2.png) no-repeat";
+		document.getElementById("gy_guide_sarter1").style.color="#089ADC";
+		document.getElementById("gy_guide_sarter2").style.color="#A2A2A2";
+		document.getElementById("gy_guide_sarter1").style.padding="12px 35px 2px 35px";
+		document.getElementById("gy_guide_sarter2").style.padding="12px 35px 1px 35px";
+	}
+	function guidetwo(){
+		document.getElementById("gy_guide_staten_xkds2").style.display="none";
+		document.getElementById("gy_guide_staten_xkds5").style.display="block";
+		document.getElementById("gy_guide_sarter1").style.background="url(images/gy_guide_sarter2.png) no-repeat";
+		document.getElementById("gy_guide_sarter2").style.background="url(images/gy_guide_sarter1.png) no-repeat";
+		document.getElementById("gy_guide_sarter2").style.color="#089ADC";
+		document.getElementById("gy_guide_sarter1").style.color="#A2A2A2";
+		document.getElementById("gy_guide_sarter2").style.padding="12px 35px 2px 35px";
+		document.getElementById("gy_guide_sarter1").style.padding="12px 35px 1px 35px";
+	}
+</script>
+
+		<script>
+
+
+
+			// Simple elevator usage.
+
+			var elementButton = document.querySelector('.elevator');
+
+			var elevator = new Elevator({
+
+				element: elementButton,
+
+				mainAudio: 'music/elevator-music.mp3', // Music from http://www.bensound.com/
+
+				endAudio:  'music/ding.mp3'
+
+			});
+
+
+
+		</script>
+
+</body>
+</html>
 
 
 
