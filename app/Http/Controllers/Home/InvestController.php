@@ -17,9 +17,9 @@ class InvestController extends CommonController
 	*@Use : 轻松投默认首页
 	*/
 	public function index(){
-        $user_id = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '';
-		$data=DB::table('user_info')->where('user_id','=',$user_id)->get();
-		return view('Home/Invest/invest',['data'=>$data]);
+//        $user_id = isset( $_SESSION['user']['user_id'] ) ? $_SESSION['user']['user_id'] : '';
+//		$data=DB::table('user_info')->where('user_id','=',$user_id)->get();
+		return view('Home1/Invest/invest');
 	}
 	
 	/*
@@ -27,6 +27,6 @@ class InvestController extends CommonController
 	*/
 	public function detail(){
 		
-		return view('Home/Invest/detail');
+		return view('Home1/Invest/detail');
 	}
 }

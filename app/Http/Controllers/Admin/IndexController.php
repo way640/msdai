@@ -30,6 +30,15 @@ class IndexController extends CommonController
         return view('Admin/index');
     }
 
+    /*
+     * @Action_name : 首页数据展示
+     * @Author ：Way
+     * @Time ：2017-06-12
+     * **/
+    public function welcome(){
+        return view('Admin/welcome');
+    }
+
     /******************以下是接口类代码******************/
     /*
      * @Action_name ：后台首页左侧导航栏
@@ -40,7 +49,7 @@ class IndexController extends CommonController
      * **/
     public function adminNav ( ) {
         $sysInfo = $this->objToArray(DB::select('select * from zd_system where sys_type = "1" and sys_status = "1"'));
-        $sysInfo = $this->dataBack($sysInfo,'sys_id','sys_desc');
+        $sysInfo = $this->dataLevel($sysInfo,'sys_id','sys_desc');
         return $this->success($sysInfo);
     }
 
