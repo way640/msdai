@@ -79,9 +79,6 @@
 */
 /*管理员-增加*/
 
-$(function(){
-
-})
 function admin_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
