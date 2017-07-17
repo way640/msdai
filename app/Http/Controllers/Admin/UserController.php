@@ -12,48 +12,27 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends CommonController
 {
-    //get.admin/user/user  全部管理员列表
+    //get.admin/user/user  管理员列表展示页
     public function index()
     {
-       $data = User::orderBy('admin_id','asc')->get();
-       return view('Admin/lists',compact('data'));
+       return view('Admin/Admins/index');
     }
 
     //get.admin/user/create   添加管理员
     public function create()
     {
-        return view('Admin/add');
+        return view('Admin/Admins/add');
     }
-    //post.admin/user/store   添加管理员提交
-    public function store()
+
+/**   - - - - - - -         以下是数据接口   - - - - - - - -        */
+    /**
+     *@action_name：管理员数据列表接口
+     *@author：Zr
+     *Time：2017-07-13
+     */
+    public function indexList()
     {
-        $admin_account = Input::get('admin_account');
-
-        $admin_pwd = md5(Input::get('admin_pwd'));
-
-            $bool=DB::insert("insert into zd_admin(admin_account,admin_pwd) values ('$admin_account','$admin_pwd')");
-
-            if($bool){
-                return redirect('admin/user/user');
-            }else {
-                return back()->with('errors', '管理员添加失败，请稍后重试！');
-            }
-    }
-    //delete.admin/user/user{links}   删除单个管理员
-    public function destroy($admin_id)
-    {
-        $re = User::where('admin_id',$admin_id)->delete();
-        if($re){
-            $data = [
-                'status' => 0,
-                'msg' => '管理员删除成功！',
-            ];
-        }else{
-            $data = [
-                'status' => 1,
-                'msg' => '管理员删除失败，请稍后重试！',
-            ];
-        }
-        return $data;
+       $adminInfo = $this->objToArray(DB::select('select * from zd_admin'));
+       return $this->success($adminInfo);
     }
 }

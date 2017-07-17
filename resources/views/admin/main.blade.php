@@ -68,7 +68,7 @@
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:void(0);">
-                               <?php echo $_SESSION['admin']['admin_account']?>，您好
+                               <?php echo @$_SESSION['admin']['admin_account']?>，您好
                             </a>
                         </li>
 	                   <li class="dropdown">

@@ -1,132 +1,80 @@
-@extends('admin.main')
-@section('content')
-<!DOCTYPE html>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> - 数据表格</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <!-- Data Tables -->
-    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="{{asset('admin/lib/html5.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/lib/respond.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/lib/PIE_IE678.js')}}"></script>
+<![endif]-->
+<link href="{{asset('admin/css/H-ui.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('admin/css/H-ui.admin.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('admin/css/style.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('admin/lib/Hui-iconfont/1.0.1/iconfont.css')}}" rel="stylesheet" type="text/css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>角色管理</title>
 </head>
-<body class="gray-bg">
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>管理员列表</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a href="{{url('admin/role/create')}}">添加</a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="table_data_tables.html#">选项1</a>
-                            </li>
-                            <li><a href="table_data_tables.html#">选项2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-
-                    <table class="table table-striped table-bordered table-hover dataTables-example">
-                        <thead>
-                        <tr>
-                            <th>角色名称</th>
-                            <th>角色简介</th>
-                            <th>角色状态</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        @foreach($data as $v)
-                        <tr>
-                            <th>{{$v->role_name}}</th>
-                            <th>{{$v->role_desc}}</th>
-                            <th>{{$v->role_status}}</th>
-                            <th>
-                                <a href="{{url('admin/role/edit/'.$v->role_id.'/edit')}}">修改</a>
-                                <a href="javascript:;" onclick="delArt({{$v->role_id}})">删除</a>
-                            </th>
-                        </tr>
-                            @endforeach
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 角色管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+	<div class="cl pd-5 bg-1 bk-gray"> <span class="l"> <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('添加角色','{{url('admin/role/create')}}','800')"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a> </span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<table class="table table-border table-bordered table-hover table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="6">角色管理</th>
+			</tr>
+			<tr class="text-c">
+				<th width="25"><input type="checkbox" value="" name=""></th>
+				<th width="40">ID</th>
+				<th width="200">角色名</th>
+				<th>用户列表</th>
+				<th width="300">描述</th>
+				<th width="70">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-c">
+				<td><input type="checkbox" value="" name=""></td>
+				<td>1</td>
+				<td>超级管理员</td>
+				<td><a href="#">admin</a></td>
+				<td>拥有至高无上的权利</td>
+				<td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_role_edit('角色编辑','{{url('admin/role/create')}}','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-<!-- 全局js -->
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/plugins/jeditable/jquery.jeditable.js"></script>
-<!-- Data Tables -->
-<script src="js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
-<!-- 自定义js -->
-<script src="js/content.js?v=1.0.0"></script>
-<!-- Page-Level Scripts -->
-<script>
-/**
- * 删除单个管理员
- * */
-    function delArt(role_id) {
-        layer.confirm('您确定要删除这个角色吗？', {
-            btn: ['确定','取消'] //按钮
-        }, function(){
-            $.post("{{url('admin/role/destroy/')}}/"+role_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
-                if(data.status==0){
-                    location.href = location.href;
-                    layer.msg(data.msg, {icon: 6});
-                }else{
-                    layer.msg(data.msg, {icon: 5});
-                }
-            });
-//            layer.msg('的确很重要', {icon: 1});
-        }, function(){
-      });
-    }
-    $(document).ready(function () {
-        $('.dataTables-example').dataTable();
-        /* Init DataTables */
-        var oTable = $('#editable').dataTable();
-        /* Apply the jEditable handlers to the table */
-        oTable.$('td').editable('../example_ajax.php', {
-            "callback": function (sValue, y) {
-                var aPos = oTable.fnGetPosition(this);
-                oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-            },
-            "submitdata": function (value, settings) {
-                return {
-                    "row_id": this.parentNode.getAttribute('id'),
-                    "column": oTable.fnGetPosition(this)[2]
-                };
-            },
-            "width": "90%",
-            "height": "100%"
-        });
-    });
-    function fnClickAddRow() {
-        $('#editable').dataTable().fnAddData([
-            "Custom row",
-            "New row",
-            "New row",
-            "New row",
-            "New row"]);
-    }
+<script type="text/javascript" src="{{asset('admin/lib/jquery/1.9.1/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/lib/layer/1.9.3/layer.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/lib/My97DatePicker/WdatePicker.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/js/H-ui.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/js/H-ui.admin.js')}}"></script>
+<script type="text/javascript">
+/*管理员-角色-添加*/
+function admin_role_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-角色-编辑*/
+function admin_role_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-角色-删除*/
+function admin_role_del(obj,id){
+	layer.confirm('角色删除须谨慎，确认要删除吗？',function(index){
+		//此处请求后台程序，下方是成功后的前台处理……
+		
+		
+		$(obj).parents("tr").remove();
+		layer.msg('已删除!',{icon:1,time:1000});
+	});
+}
 </script>
 </body>
 </html>
-@stop
